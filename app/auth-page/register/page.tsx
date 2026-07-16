@@ -7,28 +7,70 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff, Loader2, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!agreedToTerms) return;
+    if (!agreedToTerms) {
+      toast.error("Please agree to the Terms and Condition");
+      return;
+    }
+
+    const formData = new FormData(e.currentTarget);
+    const username = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
 
     setIsLoading(true);
 
-    // Mocking frontend interaction loading state
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          confirmPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message);
+        setTimeout(() => {
+          router.push("/auth-page/login");
+        }, 2000);
+      } else {
+        toast.error(data.error || "Registration failed");
+      }
+    } catch (error) {
+      toast.error("An error occurred during registration");
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
-      <main className="flex-grow flex items-center justify-center px-4 py-16 md:py-10">
+      <main className="flex-grow flex items-center justify-center px-4 py-10 md:py-10">
         <div className="w-full max-w-md">
           {/* Brutalist Card: No rounded corners, solid thick border, and strong offset shadow */}
           <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
@@ -161,11 +203,7 @@ export default function SignupPage() {
                     >
                       I agree to the{" "}
                       <Link href="#" className="text-white underline underline-offset-4 font-black">
-                        Terms of Service
-                      </Link>{" "}
-                      and{" "}
-                      <Link href="#" className="text-white underline underline-offset-4 font-black">
-                        Privacy Policy
+                        Terms and Condition
                       </Link>
                     </Label>
                   </div>

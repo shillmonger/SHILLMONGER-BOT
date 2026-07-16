@@ -95,7 +95,7 @@ export default function FeaturesSection() {
       {/* ── MOBILE LAYOUT (< lg) ── */}
       <div className="lg:hidden relative z-10 px-4 flex flex-col items-center gap-2">
         {/* Center Phone Wrapper with sharp border */}
-        <div className="relative flex justify-center p-6 w-full max-w-[320px]">
+        <div className="relative flex justify-center p-6 w-full max-w-[400px]">
           <Image
             src="/Trade.png"
             alt="SHILLMONGER App"

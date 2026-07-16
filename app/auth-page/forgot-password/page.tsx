@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function ForgotPasswordPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
   const otpRefs = [
     useRef<HTMLInputElement>(null),
@@ -45,23 +47,90 @@ export default function ForgotPasswordPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (step === 3 && !agreedToTerms) return;
+    if (step === 3 && !agreedToTerms) {
+      toast.error("Please agree to the Terms and Condition");
+      return;
+    }
 
     setIsLoading(true);
 
-    // Mocking frontend step-by-step progress
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
       if (step === 1) {
-        setStep(2);
+        // Send OTP email
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+        const email = formData.get("email") as string;
+        setUserEmail(email);
+
+        const response = await fetch("/api/auth/forgot-password", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          toast.success(data.message);
+          setStep(2);
+        } else {
+          toast.error(data.error || "Failed to send reset code");
+        }
       } else if (step === 2) {
+        // Verify OTP (just move to step 3 for password reset)
+        const otpCode = otp.join("");
+        if (otpCode.length !== 4) {
+          toast.error("Please enter the complete 4-digit code");
+          setIsLoading(false);
+          return;
+        }
         setStep(3);
       } else if (step === 3) {
-        router.push("/auth-page/login");
+        // Reset password
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+        const newPassword = formData.get("password") as string;
+        const confirmPassword = formData.get("confirmPassword") as string;
+
+        if (newPassword !== confirmPassword) {
+          toast.error("Passwords do not match");
+          setIsLoading(false);
+          return;
+        }
+
+        const otpCode = otp.join("");
+
+        const response = await fetch("/api/auth/reset-password", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: userEmail,
+            otp: otpCode,
+            newPassword,
+            confirmPassword,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          toast.success(data.message);
+          setTimeout(() => {
+            router.push("/auth-page/login");
+          }, 1500);
+        } else {
+          toast.error(data.error || "Failed to reset password");
+        }
       }
-    }, 1200);
+    } catch (error) {
+      toast.error("An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -209,19 +278,15 @@ export default function ForgotPasswordPage() {
                         >
                           {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
                         </button>
-                        <Label
-                          htmlFor="terms"
-                          className="text-xs font-bold text-neutral-400 select-none leading-tight cursor-pointer"
-                        >
-                          I agree to the{" "}
-                          <Link href="#" className="text-white underline underline-offset-4 font-black">
-                            Terms of Service
-                          </Link>{" "}
-                          and{" "}
-                          <Link href="#" className="text-white underline underline-offset-4 font-black">
-                            Privacy Policy
-                          </Link>
-                        </Label>
+                        <Label 
+                      htmlFor="terms" 
+                      className="text-xs font-bold text-neutral-400 select-none leading-tight cursor-pointer"
+                    >
+                      I agree to the{" "}
+                      <Link href="#" className="text-white underline underline-offset-4 font-black">
+                        Terms and Condition
+                      </Link>
+                    </Label>
                       </div>
                     </div>
                   )}
