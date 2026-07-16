@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "XAUUSD BOT",
-  description: "Automated XAUUSD Bot",
+  title: "TRADING BOT",
+  description: "Automated Trading Bot",
 };
 
 export default function RootLayout({
