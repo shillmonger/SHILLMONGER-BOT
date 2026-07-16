@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
-export default function ConfirmEmailPage() {
+function ConfirmEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading");
@@ -99,5 +99,21 @@ export default function ConfirmEmailPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ConfirmEmailPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
+        <main className="flex-grow flex items-center justify-center px-4 py-16">
+          <div className="w-full max-w-md text-center">
+            <Loader2 className="h-16 w-16 animate-spin text-neutral-950 mx-auto" />
+          </div>
+        </main>
+      </div>
+    }>
+      <ConfirmEmailContent />
+    </Suspense>
   );
 }
