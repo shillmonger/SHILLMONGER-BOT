@@ -76,6 +76,7 @@ export async function POST(request: NextRequest) {
       username,
       email,
       password: hashedPassword,
+      role: 'user',
       verificationToken,
       verificationTokenExpires,
       isVerified: false,

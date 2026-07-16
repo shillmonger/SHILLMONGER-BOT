@@ -8,8 +8,9 @@ import CookieConsent from "@/components/LandingPage/CookieConsent";
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname?.startsWith("/auth-page");
+  const isDashboard = pathname?.startsWith("/user-dashboard");
 
-  if (isAuthPage) {
+  if (isAuthPage || isDashboard) {
     return <>{children}</>;
   }
 
