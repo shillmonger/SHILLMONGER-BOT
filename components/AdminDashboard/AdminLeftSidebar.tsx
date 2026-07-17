@@ -6,28 +6,22 @@ import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
   LayoutDashboard,
-  BarChart3,
-  BadgeCheck,
-  Package,
-  MessagesSquare,
-  ChartColumnBig,
-  Landmark,
-  ArrowRightLeft,
-  Trophy,
-  Gift,
+  Radio,
+  CandlestickChart,
   History,
-  ArrowUpRight,
-  PieChart,
-  Gem,
   Users,
+  Landmark,
+  MessageCircle,
+  UserRound,
+  BarChart3,
+  ScrollText,
+  Server,
   Settings,
+  HelpCircle,
+  FileText,
   LogOut,
-  BadgeDollarSign,
   ChevronDown,
-  PartyPopper,
   X,
-  Info,
-  Lightbulb,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -52,12 +46,12 @@ export default function UserSidebar({
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
 
+  // Group status tracking for collapsible panels
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
-    "Fund Account": true,
-    "Earn Free USDT": true,
-    Account: true,
-    Withdrawals: true,
-    Community: true,
+    MAIN: true,
+    ACCOUNT: true,
+    ANALYTICS: true,
+    SYSTEM: true,
   });
 
   const basePath = "/user-dashboard";
@@ -77,93 +71,40 @@ export default function UserSidebar({
   }, [showLogoutConfirm, countdown]);
 
   const navItems: NavItem[] = [
+    // === MAIN ===
     { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
+    { name: "Live Signals", icon: Radio, href: `${basePath}/live-signals` },
+    { name: "Open Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
+    { name: "Trade History", icon: History, href: `${basePath}/trade-history` },
+    { name: "Providers", icon: Users, href: `${basePath}/providers` },
+
+    // === ACCOUNT ===
     {
-      name: "Fund Account",
-      icon: WalletReplacement,
-      children: [
-        {
-          name: "Crypto Deposit",
-          icon: BadgeDollarSign,
-          href: `${basePath}/deposit`,
-        },
-        {
-          name: "Gift Card Deposit",
-          icon: Gift,
-          href: `${basePath}/gift-card`,
-        },
-      ],
-    },
-    { name: "Start Investing", icon: BarChart3, href: `${basePath}/invest` },
-    {
-      name: "My Portfolio",
-      icon: Package,
-      href: `${basePath}/my-investments`,
+      name: "MT5 Accounts",
+      icon: Landmark,
+      href: `${basePath}/mt5-accounts`,
     },
     {
-      name: "Withdrawals",
-      icon: ArrowUpRight,
-      children: [
-        {
-          name: "Crypto Withdrawal",
-          icon: WalletReplacement,
-          href: `${basePath}/withdraw`,
-        },
-        {
-          name: "Other Withdrawals",
-          icon: Landmark,
-          href: `${basePath}/other-withdrawals`,
-        },
-      ],
-    },
-    { name: "Transactions", icon: History, href: `${basePath}/transactions` },
-    { name: "Trade Analytics", icon: PieChart, href: `${basePath}/analytics` },
-    {
-      name: "Earn Free USDT",
-      icon: ChartColumnBig,
-      children: [
-        {
-          name: "Daily Streak",
-          icon: PartyPopper,
-          href: `${basePath}/daily-streak`,
-        },
-        { name: "Achievements", icon: Gem, href: `${basePath}/achievements` },
-        {
-          name: "Predict Market",
-          icon: ChartColumnBig,
-          href: `${basePath}/predict`,
-        },
-      ],
+      name: "Telegram Sources",
+      icon: MessageCircle,
+      href: `${basePath}/telegram-sources`,
     },
     {
-      name: "Redeem XP",
-      icon: ArrowRightLeft,
-      href: `${basePath}/redeem-xp`,
+      name: "Subscribers",
+      icon: UserRound,
+      href: `${basePath}/subscribers`,
     },
-    {
-      name: "Community",
-      icon: Users,
-      children: [
-        { name: "Chat with Agent", icon: MessagesSquare, href: `${basePath}/live-chat` },
-        { name: "Learn More", icon: Lightbulb, href: `${basePath}/learn-more` },
-        { name: "Leaderboard", icon: Trophy, href: `${basePath}/leaderboard` },
-      ],
-    },
-    {
-      name: "Account",
-      icon: Settings,
-      children: [
-        {
-          name: "Settings & Profile",
-          icon: Settings,
-          href: `${basePath}/user-settings`,
-        },
-        { name: "KYC Verification", icon: BadgeCheck, href: `${basePath}/kyc` },
-      ],
-    },
+
+    // === ANALYTICS ===
+    { name: "Analytics", icon: BarChart3, href: `${basePath}/analytics` },
+    { name: "Activity Logs", icon: ScrollText, href: `${basePath}/activity-logs` },
+
+    // === SYSTEM ===
+    { name: "System Status", icon: Server, href: `${basePath}/system-status` },
+    { name: "Settings", icon: Settings, href: `${basePath}/settings` },
   ];
 
-  // Auto-expand groups containing active pathnames
+  // Auto-expand groups containing active pathnames (if any deep routes matching are ever configured as nested children)
   useEffect(() => {
     navItems.forEach((item) => {
       if ("children" in item) {
@@ -282,8 +223,28 @@ export default function UserSidebar({
           })}
         </nav>
 
-        {/* Logout */}
-        <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2">
+        {/* Footer Links (Support, Documentation, Logout) */}
+        <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 space-y-1">
+          <Link
+            href={`${basePath}/support`}
+            className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+          >
+            <HelpCircle className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+            <span className="text-[12px] font-black uppercase tracking-widest">
+              Support
+            </span>
+          </Link>
+
+          <Link
+            href={`${basePath}/documentation`}
+            className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+          >
+            <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+            <span className="text-[12px] font-black uppercase tracking-widest">
+              Documentation
+            </span>
+          </Link>
+
           <button
             onClick={() => setShowLogoutConfirm(true)}
             className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
@@ -411,8 +372,30 @@ export default function UserSidebar({
               })}
             </nav>
 
-            {/* Mobile Logout */}
-            <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2">
+            {/* Mobile Footer Links */}
+            <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 space-y-1">
+              <Link
+                href={`${basePath}/support`}
+                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+                onClick={() => setSidebarOpen(false)}
+              >
+                <HelpCircle className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                <span className="text-[12px] font-black uppercase tracking-widest">
+                  Support
+                </span>
+              </Link>
+
+              <Link
+                href={`${basePath}/documentation`}
+                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+                onClick={() => setSidebarOpen(false)}
+              >
+                <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                <span className="text-[12px] font-black uppercase tracking-widest">
+                  Documentation
+                </span>
+              </Link>
+
               <button
                 onClick={() => {
                   setSidebarOpen(false);
@@ -488,26 +471,5 @@ export default function UserSidebar({
         </div>
       )}
     </>
-  );
-}
-
-// Fallback Wallet Icon component mapping to replace undefined imports dynamically
-function WalletReplacement(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1" />
-      <path d="M19 12v2" />
-    </svg>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import UserHeader from "@/components/UserDashboard/UserHeader";
+import { usePathname } from "next/navigation";
+import UserRightSidebar from "@/components/UserDashboard/UserRightSidebar";
 import UserNav from "@/components/UserDashboard/UserNav";
-import UserSidebar from "@/components/UserDashboard/UserSidebar";
+import UserLeftSidebar from "@/components/UserDashboard/UserLeftSidebar";
 
 export default function UserDashboardLayout({
   children,
@@ -11,20 +12,22 @@ export default function UserDashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  const hideRightSidebar = pathname === "/user-dashboard/subscription" || pathname === "/user-dashboard/";
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <UserHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
       <div className="flex">
         {/* Sidebar - Desktop */}
-        <UserSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <UserLeftSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 md:ml-[280px] lg:ml-[320px] pb-20 lg:pb-0">
+        <main className="flex-1 px-4 py-5 pb-30 lg:pb-0">
           {children}
         </main>
+
+        {/* Right Sidebar - Desktop */}
+        {!hideRightSidebar && <UserRightSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
       </div>
 
       {/* Bottom Navigation - Mobile */}
