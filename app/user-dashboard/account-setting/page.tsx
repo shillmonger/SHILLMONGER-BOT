@@ -206,7 +206,7 @@ export default function UserSettingsPage() {
             {/* Header Banner */}
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-black pb-3 mb-6">
               <div>
-                <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
+                <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950">
                   Account Settings
                 </h1>
                 <p className="text-sm text-neutral-600 font-semibold max-w-xl leading-relaxed">
@@ -225,7 +225,7 @@ export default function UserSettingsPage() {
                     <User className="w-4 h-4 text-neutral-400" /> Profile Identity
                   </h3>
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-30 h-30 rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4 flex items-center justify-center">
+                    <div className="w-25 h-25 rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4 flex items-center justify-center">
                       {personalInfo.profileImage ? (
                         <img 
                           src={personalInfo.profileImage} 

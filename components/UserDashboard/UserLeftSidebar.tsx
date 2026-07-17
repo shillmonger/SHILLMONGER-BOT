@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
   LayoutDashboard,
-  Landmark,
+  HeartPlus,
   Users,
   Info,
   Lightbulb,
@@ -94,7 +94,7 @@ export default function UserSidebar({
           href: `${basePath}/mt5-accounts/manage`,
         },
         {
-          name: "How to Connect",
+          name: "MT5 Setup",
           icon: LinkIcon,
           href: `${basePath}/mt5-accounts/details`,
         },
@@ -114,14 +114,14 @@ export default function UserSidebar({
     name: "Community",
     icon: Users,
     children: [
-      { name: "TG Channel", icon: UsersRound, href: `${basePath}/leaderboard` },
+      { name: "TG Channel", icon: UsersRound, href: `#` },
+      { name: "Refer users", icon: HeartPlus, href: `${basePath}/referal` },
       { name: "Leaderboard", icon: Trophy, href: `${basePath}/leaderboard` },
-      { name: "Learn More", icon: Lightbulb, href: `${basePath}/learn-more` },
     ],
   },
      { name: "Notifications", icon: Bell, href: `${basePath}/notifications` },
      { name: "Help Center", icon: HandFist, href: `${basePath}/help-center` },
-     { name: "Account Setting", icon: Settings, href: `${basePath}/account-setting` },
+     { name: "Account Settings", icon: Settings, href: `${basePath}/account-setting` },
   ];
 
   // Auto-expand groups containing active pathnames
@@ -145,7 +145,7 @@ export default function UserSidebar({
       {/* Desktop Sidebar */}
       <aside
         className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-20" : "w-70"
+          isCollapsed ? "w-15" : "w-65"
         }`}
       >
         {/* Header */}

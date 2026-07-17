@@ -13,7 +13,7 @@ export default function UserDashboardLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const hideRightSidebar = pathname === "/user-dashboard/subscription" || pathname === "/user-dashboard/";
+  const hideRightSidebar = pathname === "/user-dashboard/" || pathname === "/user-dashboard/";
 
   return (
     <div className="min-h-screen bg-background">

@@ -59,7 +59,7 @@ export default function SubscriptionPage() {
     {
       amount: 50,
       type: "Pro Plan",
-      accountSize: "$500 – $1,000",
+      accountSize: "$500 – $1K",
       duration: "1 Month",
       lotSize: "0.03",
       maxTrades: 10,

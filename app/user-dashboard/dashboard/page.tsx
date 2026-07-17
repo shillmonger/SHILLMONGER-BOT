@@ -145,7 +145,7 @@ export default function DashboardPage() {
                 SECTION 3: TRADING ENGINE STATUS (1 Column Wide)
                ==================================================== */}
             <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-              <CardContent className="p-6 space-y-6">
+              <CardContent className="px-6 space-y-6">
                 <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                   <h2 className="text-lg font-black uppercase tracking-tighter">
                     Trading Engine Status
@@ -194,7 +194,7 @@ export default function DashboardPage() {
                   EXTRA: PERFORMANCE SUMMARY
                  ==================================================== */}
               <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                <CardContent className="p-6">
+                <CardContent className="px-6">
                   <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
                     <h2 className="text-sm font-black uppercase tracking-tighter">
                       Performance Metrics
@@ -239,7 +239,7 @@ export default function DashboardPage() {
                ==================================================== */}
             <div className="lg:col-span-2 space-y-6">
               <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                <CardContent className="p-6">
+                <CardContent className="px-6">
                   <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
                     <h2 className="text-lg font-black uppercase tracking-tighter">
                       Recent Trading Activity
