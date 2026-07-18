@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Image from "next/image";
 import {
   User,
   Terminal,
@@ -111,20 +110,17 @@ export default function UserRightSidebar({
       {/* SECTION 1: Dynamic User Profile Details */}
       <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
         <div className="flex items-center gap-4">
-          <div className="relative w-15 h-15 bg-neutral-800 border-2 border-neutral-700 flex-shrink-0 shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)] overflow-hidden">
-            {userDb?.profileImage ? (
-              <Image
-                src={userDb.profileImage}
-                alt={userDb.username}
-                fill
-                className="object-cover"
-                sizes="56px"
-                priority
-              />
-            ) : (
-              <User className="w-6 h-6 text-neutral-400 m-auto mt-3" />
-            )}
-          </div>
+          {userDb?.profileImage ? (
+            <img 
+              src={userDb.profileImage} 
+              alt={userDb.username}
+              className="w-15 h-15 border-2 border-neutral-700 object-cover shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]"
+            />
+          ) : (
+            <div className="w-15 h-15 bg-neutral-800 border-2 border-neutral-700 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]">
+              <User className="w-6 h-6 text-neutral-400" />
+            </div>
+          )}
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
               <h2 className="text-sm font-black uppercase tracking-wider text-neutral-50 truncate">

@@ -126,9 +126,11 @@ export default function UserRightSidebar({
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Signals Today</span> <span className="font-mono">14 Signals</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Last Signal</span> <span className="font-mono text-neutral-400">14:32:01 UTC</span></div>
         </div>
+        <Link href="/admin-dashboard/providers">
         <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
           Manage Telegram
         </button>
+        </Link>
       </div>
 
       {/* SECTION 8: Quick Actions */}
