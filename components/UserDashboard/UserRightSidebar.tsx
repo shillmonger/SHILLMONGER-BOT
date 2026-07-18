@@ -35,16 +35,27 @@ export default function UserRightSidebar({
   const router = useRouter();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [userDb, setUserDb] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Mocked database object based on your provided schema structure
-  const userDb = {
-    username: "shillmonger",
-    email: "shillmonger0@gmail.com",
-    role: "user",
-    isVerified: true,
-    profileImage: "/PFP_IMG/14.jfif",
-    createdAt: "2026-07-16T21:27:18.458Z",
-  };
+  // Fetch user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/user/me');
+        if (response.ok) {
+          const data = await response.json();
+          setUserDb(data.user);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const basePath = "/user-dashboard";
 
@@ -101,7 +112,7 @@ export default function UserRightSidebar({
       <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
         <div className="flex items-center gap-4">
           <div className="relative w-15 h-15 bg-neutral-800 border-2 border-neutral-700 flex-shrink-0 shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)] overflow-hidden">
-            {userDb.profileImage ? (
+            {userDb?.profileImage ? (
               <Image
                 src={userDb.profileImage}
                 alt={userDb.username}
@@ -117,27 +128,27 @@ export default function UserRightSidebar({
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
               <h2 className="text-sm font-black uppercase tracking-wider text-neutral-50 truncate">
-                {userDb.username}
+                {loading ? 'Loading...' : userDb?.username || 'User'}
               </h2>
-              {userDb.isVerified && (
+              {userDb?.isVerified && (
                 <BadgeCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               )}
             </div>
             <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mt-0.5">
-              Role: <span className="text-neutral-300">{userDb.role}</span>
+              Role: <span className="text-neutral-300">{loading ? '...' : userDb?.role || 'user'}</span>
             </p>
           </div>
         </div>
 
         <div className="border-t border-neutral-800/60 pt-3 space-y-2 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <span className="text-neutral-500 flex items-center gap-1.5 font-semibold">
               <Mail className="w-3.5 h-3.5" /> Email
             </span>
             <span className="text-neutral-300 truncate max-w-[150px]">
               {userDb.email}
             </span>
-          </div>
+          </div> */}
 
           <div className="flex items-center justify-between">
             <span className="text-neutral-500 flex items-center gap-1.5 font-semibold">
@@ -145,12 +156,12 @@ export default function UserRightSidebar({
             </span>
             <span
               className={`text-[9px] px-1.5 py-0.5 font-black border ${
-                userDb.isVerified
+                userDb?.isVerified
                   ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
                   : "bg-amber-500/10 text-amber-500 border-amber-500/20"
               }`}
             >
-              {userDb.isVerified ? "VERIFIED" : "UNVERIFIED"}
+              {loading ? '...' : userDb?.isVerified ? "VERIFIED" : "UNVERIFIED"}
             </span>
           </div>
 
@@ -159,10 +170,10 @@ export default function UserRightSidebar({
               <Calendar className="w-3.5 h-3.5" /> Joined
             </span>
             <span className="text-neutral-300">
-              {new Date(userDb.createdAt).toLocaleDateString("en-US", {
+              {loading ? '...' : userDb?.createdAt ? new Date(userDb.createdAt).toLocaleDateString("en-US", {
                 month: "short",
                 year: "numeric",
-              })}
+              }) : 'N/A'}
             </span>
           </div>
         </div>
@@ -173,12 +184,10 @@ export default function UserRightSidebar({
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">System Overview</h3>
         <div className="grid grid-cols-2 gap-2">
           {[
-            { label: "Email Check", value: "Verified", active: true },
             { label: "MT5 Connection", value: "Connected", active: true },
             { label: "Telegram Conn.", value: "Connected", active: true },
             { label: "Database", value: "Online", active: true },
-            { label: "Trade Copier", value: "Running", active: true },
-            { label: "System Health", value: "Healthy", active: true },
+            { label: "Trading Bot", value: "Running", active: true },
           ].map((status, index) => (
             <div key={index} className="border border-neutral-800 bg-neutral-900/20 p-2.5 flex flex-col justify-between">
               <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
@@ -217,6 +226,7 @@ export default function UserRightSidebar({
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acc No.</span> <span className="font-mono">8273641</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Server</span> <span className="font-mono">Live-03</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Leverage</span> <span>1:500</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acct Type</span> <span>DEMO</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
           <div className="flex justify-between">
@@ -239,11 +249,13 @@ export default function UserRightSidebar({
               <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
                 <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
               </button>
-              <Link href="/admin-dashboard/dashboard">
-                <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-                  <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
-                </button>
-              </Link>
+              {userDb?.role === 'admin' && (
+                <Link href="/admin-dashboard/dashboard">
+                  <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+                    <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
+                  </button>
+                </Link>
+              )}
             </div>
 
     </div>

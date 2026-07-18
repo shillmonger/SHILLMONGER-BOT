@@ -35,6 +35,27 @@ export default function UserRightSidebar({
   const router = useRouter();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  const [userData, setUserData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/user/me');
+        if (response.ok) {
+          const data = await response.json();
+          setUserData(data.user);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   // Modal Auto-Close Countdown Logic
   useEffect(() => {
@@ -56,26 +77,42 @@ export default function UserRightSidebar({
       {/* SECTION 1: Profile Summary */}
       <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-neutral-800 border-2 border-neutral-700 flex items-center justify-center font-black text-lg text-neutral-50 uppercase shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]">
-            JD
-          </div>
+          {userData?.profileImage ? (
+            <img 
+              src={userData.profileImage} 
+              alt="Profile" 
+              className="w-15 h-15 border-2 border-neutral-700 object-cover shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]"
+            />
+          ) : (
+            <div className="w-12 h-12 bg-neutral-800 border-2 border-neutral-700 flex items-center justify-center font-black text-lg text-neutral-50 uppercase shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]">
+              {loading ? '...' : userData?.username?.substring(0, 2).toUpperCase() || 'US'}
+            </div>
+          )}
           <div>
-            <h2 className="text-sm font-black uppercase tracking-wider text-neutral-50">John Doe</h2>
-            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">Professional Plan</p>
+            <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
+              {loading ? '...' : userData?.role || 'user'}
+            </p>
+            <h2 className="text-sm font-black uppercase tracking-wider text-neutral-50">
+              {loading ? 'Loading...' : userData?.username || 'User'}
+            </h2>
           </div>
         </div>
         <div className="space-y-1.5 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
           <div className="flex justify-between">
             <span className="text-neutral-500">Email</span>
-            <span className="text-neutral-300">john@email.com</span>
+            <span className="text-neutral-300">
+              {loading ? '...' : userData?.email ? userData.email.split('@')[0] + '@.....' : 'N/A'}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">Joined</span>
-            <span className="text-neutral-300">July 2026</span>
+            <span className="text-neutral-300">
+              {loading ? '...' : userData?.createdAt ? new Date(userData.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'N/A'}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="text-neutral-500">ID</span>
-            <span className="text-neutral-300 font-mono">USR-000231</span>
+            <span className="text-neutral-300 font-mono">{loading ? '...' : userData?.referralId || 'N/A'}</span>
           </div>
         </div>
       </div>
