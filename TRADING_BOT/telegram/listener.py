@@ -1,10 +1,11 @@
-import json
-
 from telethon import TelegramClient
 from telethon import events
+import os
+from pathlib import Path
 
 from config import *
 from core.logger import logger
+from core.database import db
 from telegram.parser import SignalParser
 from core.validator import SignalValidator
 from mt5.connector import MT5Connector
@@ -16,15 +17,22 @@ class TelegramListener:
 
     def __init__(self):
 
+        # Get the directory where this script is located
+        script_dir = Path(__file__).parent.parent
+        session_path = script_dir / "sessions" / "tradingbot"
+
         self.client = TelegramClient(
-            "sessions/tradingbot",
+            str(session_path),
             API_ID,
             API_HASH
         )
 
-        with open("data/groups.json") as f:
+        # Connect to database
+        if not db.connect():
+            raise RuntimeError("Failed to connect to database")
 
-            self.groups = [int(gid) for gid in json.load(f)]
+        # Get groups from database instead of JSON file
+        self.groups = db.get_active_providers()
 
         self.parser = SignalParser()
         self.validator = SignalValidator()

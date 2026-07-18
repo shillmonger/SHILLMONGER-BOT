@@ -15,3 +15,5 @@ MT5_SERVER = os.getenv("MT5_SERVER")
 LOT_SIZE = float(os.getenv("LOT_SIZE"))
 
 SYMBOL = os.getenv("SYMBOL")
+
+MONGODB_URI = os.getenv("MONGODB_URI")

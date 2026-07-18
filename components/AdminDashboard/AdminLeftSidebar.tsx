@@ -83,7 +83,7 @@ export default function AdminSidebar({
     // { name: "Live Streams", icon: Radio, href: `${basePath}/live-signals` },
     // { name: "Active Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
     // { name: "Master History", icon: History, href: `${basePath}/trade-history` },
-    { name: "TG Provider", icon: Send, href: `${basePath}/providers` },
+    { name: "BOT Provider", icon: Send, href: `${basePath}/providers` },
 
     // === MANAGEMENT ===
     // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },
@@ -120,7 +120,7 @@ export default function AdminSidebar({
       {/* Desktop Sidebar */}
       <aside 
         className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 relative ${
-          isCollapsed ? "w-20" : "w-70"
+          isCollapsed ? "w-18" : "w-60"
         }`}
       >
         {/* Header */}
@@ -129,7 +129,7 @@ export default function AdminSidebar({
         }`}>
           <div className={`flex flex-col ${isCollapsed ? "items-center" : ""}`}>
             <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
-              {isCollapsed ? "S" : "Shillmonger"}<span className="text-neutral-50 font-black">{isCollapsed ? "B" : " Bot"}</span>
+              {isCollapsed ? "F" : "Shill"}<span className="text-neutral-50 font-black">{isCollapsed ? "X" : "Monger"}</span>
             </h1>
             {!isCollapsed && (
               <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase whitespace-nowrap">

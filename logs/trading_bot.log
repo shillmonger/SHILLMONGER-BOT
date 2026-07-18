@@ -1,0 +1,27 @@
+2026-07-18 15:06:47.881 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 15:06:47.891 | SUCCESS  | api_server:startup_event:25 - FastAPI server started
+2026-07-18 15:13:23.064 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 15:13:23.065 | SUCCESS  | api_server:startup_event:25 - FastAPI server started
+2026-07-18 15:14:49.921 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 15:15:22.668 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 15:15:27.824 | SUCCESS  | mt5.connector:connect:53 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-18 15:15:27.825 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-18 15:23:39.013 | ERROR    | api_server:get_telegram_groups:83 - Failed to fetch Telegram groups: unable to open database file
+2026-07-18 15:24:57.947 | ERROR    | api_server:get_telegram_groups:83 - Failed to fetch Telegram groups: unable to open database file
+2026-07-18 15:25:03.885 | ERROR    | api_server:get_telegram_groups:83 - Failed to fetch Telegram groups: unable to open database file
+2026-07-18 15:25:50.799 | ERROR    | api_server:get_telegram_groups:83 - Failed to fetch Telegram groups: unable to open database file
+2026-07-18 15:30:04.041 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 15:30:08.605 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 15:30:08.636 | SUCCESS  | mt5.connector:connect:53 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-18 15:30:08.637 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-18 15:30:27.163 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 15:30:27.163 | SUCCESS  | api_server:startup_event:26 - FastAPI server started
+2026-07-18 15:31:27.443 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:32:03.300 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:35:09.045 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:37:35.666 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:41:03.964 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:44:43.740 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 15:55:23.614 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 16:07:52.194 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 17:22:45.663 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups

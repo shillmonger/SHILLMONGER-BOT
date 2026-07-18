@@ -4,3 +4,7 @@ python-dotenv
 pandas
 colorama
 loguru
+pymongo
+fastapi
+uvicorn
+requests
