@@ -19,6 +19,7 @@ interface ConnectionDetails {
   telegramUsername: string;
   server: string;
   mt5Login: string;
+  accountType: 'demo' | 'real';
 }
 
 export default function MT5ConnectionPage() {
@@ -32,16 +33,40 @@ export default function MT5ConnectionPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [activeDetails, setActiveDetails] = useState<ConnectionDetails | null>(null);
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
+  const [accountType, setAccountType] = useState<'demo' | 'real'>('demo');
+  const [serverError, setServerError] = useState("");
+
+  const handleServerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setServer(value);
+
+    // Validate server based on account type
+    if (accountType === 'real' && value && !value.includes('Real')) {
+      setServerError("REAL accounts must use servers containing 'Real' (e.g., Exness-MT5Real9)");
+    } else if (accountType === 'demo' && value && !value.includes('Trial')) {
+      setServerError("DEMO accounts must use servers containing 'Trial' (e.g., Exness-MT5Trial9)");
+    } else {
+      setServerError("");
+    }
+  };
+
+  const handleAccountTypeChange = (type: 'demo' | 'real') => {
+    setAccountType(type);
+    setServer(""); // Clear server when switching account type
+    setServerError("");
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!telegramUsername || !server || !mt5Login || !tradingPassword) return;
+    if (serverError) return;
 
     // Simulate connecting to Exness
     setActiveDetails({
       telegramUsername,
       server,
       mt5Login,
+      accountType,
     });
     setIsConnected(true);
 
@@ -106,6 +131,37 @@ export default function MT5ConnectionPage() {
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+                      {/* Account Type Toggle */}
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
+                          <Cpu className="h-3 w-3" /> Account Type
+                        </label>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleAccountTypeChange('demo')}
+                            className={`flex-1 py-3 px-4 rounded-none font-mono font-black text-xs uppercase tracking-wider transition-all border-2 ${
+                              accountType === 'demo'
+                                ? 'bg-emerald-500 text-white border-emerald-500 shadow-[3px_3px_0px_0px_rgba(16,185,129,0.3)]'
+                                : 'bg-neutral-900 text-neutral-400 border-neutral-800 hover:border-neutral-600'
+                            }`}
+                          >
+                            DEMO
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleAccountTypeChange('real')}
+                            className={`flex-1 py-3 px-4 rounded-none font-mono font-black text-xs uppercase tracking-wider transition-all border-2 ${
+                              accountType === 'real'
+                                ? 'bg-rose-500 text-white border-rose-500 shadow-[3px_3px_0px_0px_rgba(244,63,94,0.3)]'
+                                : 'bg-neutral-900 text-neutral-400 border-neutral-800 hover:border-neutral-600'
+                            }`}
+                          >
+                            REAL
+                          </button>
+                        </div>
+                      </div>
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Telegram Username Input */}
                         <div className="space-y-2">
@@ -130,11 +186,18 @@ export default function MT5ConnectionPage() {
                           <input 
                             type="text" 
                             required
-                            placeholder="e.g. Exness-MT5Real6"
+                            placeholder={accountType === 'real' ? "e.g. Exness-MT5Real9" : "e.g. Exness-MT5Trial9"}
                             value={server}
-                            onChange={(e) => setServer(e.target.value)}
-                            className="w-full rounded-none bg-neutral-900 border border-neutral-800 p-3 text-sm text-white font-mono placeholder:text-neutral-600 focus:outline-none focus:border-white transition-colors"
+                            onChange={handleServerChange}
+                            className={`w-full rounded-none bg-neutral-900 border p-3 text-sm text-white font-mono placeholder:text-neutral-600 focus:outline-none transition-colors ${
+                              serverError ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-800 focus:border-white'
+                            }`}
                           />
+                          {serverError && (
+                            <p className="text-[9px] text-rose-400 font-semibold uppercase tracking-wider">
+                              {serverError}
+                            </p>
+                          )}
                         </div>
 
                         {/* MT5 Login Input */}
@@ -192,7 +255,7 @@ export default function MT5ConnectionPage() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="p-3 bg-neutral-900/60 border border-neutral-800/80">
                         <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest block mb-1">Telegram User</span>
                         <span className="text-sm font-bold font-mono text-white">@{activeDetails?.telegramUsername}</span>
@@ -204,6 +267,12 @@ export default function MT5ConnectionPage() {
                       <div className="p-3 bg-neutral-900/60 border border-neutral-800/80">
                         <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest block mb-1">Login Reference</span>
                         <span className="text-sm font-bold font-mono text-white">{activeDetails?.mt5Login}</span>
+                      </div>
+                      <div className={`p-3 border ${activeDetails?.accountType === 'demo' ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-rose-500/10 border-rose-500/30'}`}>
+                        <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest block mb-1">Account Type</span>
+                        <span className={`text-sm font-bold font-mono uppercase ${activeDetails?.accountType === 'demo' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                          {activeDetails?.accountType || 'DEMO'}
+                        </span>
                       </div>
                     </div>
 
@@ -253,6 +322,12 @@ export default function MT5ConnectionPage() {
                       <span className="text-neutral-500 font-bold uppercase">MT5_USER</span>
                       <span className={mt5Login ? "text-white font-bold" : "text-neutral-700 italic"}>
                         {mt5Login || "[Waiting for input]"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between py-2 border-b border-neutral-900">
+                      <span className="text-neutral-500 font-bold uppercase">ACCT_TYPE</span>
+                      <span className={accountType ? (accountType === 'demo' ? "text-emerald-400 font-bold" : "text-rose-400 font-bold") : "text-neutral-700 italic"}>
+                        {accountType ? accountType.toUpperCase() : "[Waiting for selection]"}
                       </span>
                     </div>
                     <div className="flex items-center justify-between py-2">

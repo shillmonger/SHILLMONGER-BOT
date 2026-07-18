@@ -9,6 +9,7 @@ import {
   Terminal,
   Plus,
   LayoutDashboard,
+  Settings,
   Lock,
   Tv,
   Send,
@@ -111,8 +112,8 @@ export default function UserRightSidebar({
       <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
         <div className="flex items-center gap-4">
           {userDb?.profileImage ? (
-            <img 
-              src={userDb.profileImage} 
+            <img
+              src={userDb.profileImage}
               alt={userDb.username}
               className="w-15 h-15 border-2 border-neutral-700 object-cover shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]"
             />
@@ -151,11 +152,10 @@ export default function UserRightSidebar({
               <ShieldCheck className="w-3.5 h-3.5" /> Status
             </span>
             <span
-              className={`text-[9px] px-1.5 py-0.5 font-black border ${
-                userDb?.isVerified
+              className={`text-[9px] px-1.5 py-0.5 font-black border ${userDb?.isVerified
                   ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
                   : "bg-amber-500/10 text-amber-500 border-amber-500/20"
-              }`}
+                }`}
             >
               {loading ? '...' : userDb?.isVerified ? "VERIFIED" : "UNVERIFIED"}
             </span>
@@ -175,7 +175,7 @@ export default function UserRightSidebar({
         </div>
       </div>
 
-       {/* SECTION 2: Quick Status Cards */}
+      {/* SECTION 2: Quick Status Cards */}
       <div>
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">System Overview</h3>
         <div className="grid grid-cols-2 gap-2">
@@ -196,8 +196,8 @@ export default function UserRightSidebar({
         </div>
       </div>
 
-      
-       {/* SECTION 3: Subscription */}
+
+      {/* SECTION 3: Subscription */}
       <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Billing</h3>
         <div className="space-y-1 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
@@ -210,7 +210,7 @@ export default function UserRightSidebar({
       </div>
 
 
-    
+
 
 
 
@@ -226,7 +226,7 @@ export default function UserRightSidebar({
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
           <div className="flex justify-between">
-            <span className="text-neutral-500 text-[10px]">Status</span> 
+            <span className="text-neutral-500 text-[10px]">Status</span>
             <span className="text-[9px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 font-black border border-emerald-500/20">CONNECTED</span>
           </div>
         </div>
@@ -236,23 +236,32 @@ export default function UserRightSidebar({
       </div>
 
 
-        {/* SECTION 8: Quick Actions */}
-            <div className="space-y-2 pt-2 border-t border-neutral-900">
-              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-                <Plus className="w-3.5 h-3.5" /> Connect Telegram
+      {/* SECTION 8: Quick Actions */}
+      <div className="space-y-2 pt-2 border-t border-neutral-900">
+        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
+
+        <div className="flex flex-col gap-2">
+          <Link href="/user-dashboard/mt5-connection">
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+              <Plus className="w-3.5 h-3.5" /> Connect MT5
+            </button>
+          </Link>
+
+          <Link href="/user-dashboard/account-setting">
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+              <Settings className="w-3.5 h-3.5 text-neutral-400" /> Profile Setting
+            </button>
+          </Link>
+
+          {userDb?.role === 'admin' && (
+            <Link href="/admin-dashboard/dashboard">
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+                <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
               </button>
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-                <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
-              </button>
-              {userDb?.role === 'admin' && (
-                <Link href="/admin-dashboard/dashboard">
-                  <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-                    <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
-                  </button>
-                </Link>
-              )}
-            </div>
+            </Link>
+          )}
+        </div>
+      </div>
 
     </div>
   );
@@ -263,15 +272,15 @@ export default function UserRightSidebar({
       <aside className="hidden md:flex w-70 border-l border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[-4px_0_24px_rgba(0,0,0,0.5)]">
         {/* Header */}
         <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
-  <div className="flex flex-col">
-    <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
-      BOT <span className="text-neutral-50 font-black">Automation</span>
-    </h1>
-    <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
-      AI-Powered Trading Intelligence
-    </p>
-  </div>
-</div>
+          <div className="flex flex-col">
+            <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
+              BOT <span className="text-neutral-50 font-black">Automation</span>
+            </h1>
+            <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
+              AI-Powered Trading Intelligence
+            </p>
+          </div>
+        </div>
 
         {/* Scrollable Contents Panel */}
         <div className="flex-1 min-h-0 overflow-y-auto px-5 py-6 space-y-1 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent">

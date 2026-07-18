@@ -14,6 +14,8 @@ import {
   Loader2,
   Trash2,
   ShieldAlert,
+  Image as ImageIcon,
+  X,
 } from "lucide-react";
 
 // --- Types ---
@@ -89,6 +91,32 @@ export default function UserSettingsPage() {
   // --- Danger Zone / Delete Account State ---
   const [deleteInput, setDeleteInput] = useState("");
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+
+  // --- Profile Image Picker State ---
+  const [showImagePicker, setShowImagePicker] = useState(false);
+  const [isUpdatingImage, setIsUpdatingImage] = useState(false);
+  const availableImages = [
+    "/PFP_IMG/1.jfif",
+    "/PFP_IMG/2.jfif",
+    "/PFP_IMG/3.jfif",
+    "/PFP_IMG/4.jfif",
+    "/PFP_IMG/5.jfif",
+    "/PFP_IMG/6.jfif",
+    "/PFP_IMG/7.jfif",
+    "/PFP_IMG/8.jfif",
+    "/PFP_IMG/9.jfif",
+    "/PFP_IMG/10.jfif",
+    "/PFP_IMG/11.jfif",
+    "/PFP_IMG/12.jfif",
+    "/PFP_IMG/13.jfif",
+    "/PFP_IMG/14.jfif",
+    "/PFP_IMG/15.jfif",
+    "/PFP_IMG/16.jfif",
+    "/PFP_IMG/17.jfif",
+    "/PFP_IMG/18.jfif",
+    "/PFP_IMG/19.jfif",
+    "/PFP_IMG/20.jfif",
+  ];
 
   // --- Fetch User Data ---
   useEffect(() => {
@@ -194,6 +222,32 @@ export default function UserSettingsPage() {
     }, 1500);
   };
 
+  const handleImageSelect = async (imagePath: string) => {
+    setIsUpdatingImage(true);
+    try {
+      const response = await fetch('/api/user/update-profile-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ profileImage: imagePath }),
+      });
+
+      if (response.ok) {
+        setPersonalInfo((prev) => ({ ...prev, profileImage: imagePath }));
+        toast.success("Profile image updated successfully");
+        setShowImagePicker(false);
+      } else {
+        toast.error("Failed to update profile image");
+      }
+    } catch (error) {
+      console.error('Error updating profile image:', error);
+      toast.error("Failed to update profile image");
+    } finally {
+      setIsUpdatingImage(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white text-neutral-950 font-sans">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -225,7 +279,7 @@ export default function UserSettingsPage() {
                     <User className="w-4 h-4 text-neutral-400" /> Profile Identity
                   </h3>
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-25 h-25 rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4 flex items-center justify-center">
+                    <div className="relative w-30 h-30 rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
                       {personalInfo.profileImage ? (
                         <img 
                           src={personalInfo.profileImage} 
@@ -235,6 +289,12 @@ export default function UserSettingsPage() {
                       ) : (
                         <User className="w-12 h-12 text-neutral-400" />
                       )}
+                      <button
+                        onClick={() => setShowImagePicker(true)}
+                        className="absolute bottom-0 right-0 bg-neutral-950 border border-neutral-700 p-1.5 rounded-none hover:bg-neutral-800 transition-colors cursor-pointer"
+                      >
+                        <ImageIcon className="w-4 h-4 text-white" />
+                      </button>
                     </div>
                     <h4 className="text-base font-black uppercase tracking-tight text-white">
                       {personalInfo.username || "User Account"}
@@ -515,6 +575,73 @@ export default function UserSettingsPage() {
           </>
         )}
       </div>
+
+      {/* Profile Image Picker Modal */}
+      {showImagePicker && (
+        <div
+          className="fixed inset-0 z-500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setShowImagePicker(false)}
+        >
+          <div
+            className="bg-neutral-950 border-2 border-neutral-800 rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] w-full max-w-3xl max-h-[80vh] overflow-hidden relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between p-4 border-b border-neutral-800">
+              <h2 className="text-lg font-black uppercase tracking-tighter text-white flex items-center gap-2">
+                <ImageIcon className="w-5 h-5 text-neutral-400" /> Select Profile Image
+              </h2>
+              <button
+                onClick={() => setShowImagePicker(false)}
+                className="text-neutral-500 hover:text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-4 overflow-y-auto max-h-[60vh]">
+              <div className="grid grid-cols-4 sm:grid-cols-5 gap-3">
+                {availableImages.map((imagePath) => (
+                  <button
+                    key={imagePath}
+                    onClick={() => handleImageSelect(imagePath)}
+                    disabled={isUpdatingImage}
+                    className={`relative aspect-square rounded-none overflow-hidden border-2 transition-all hover:border-white ${
+                      personalInfo.profileImage === imagePath
+                        ? 'border-emerald-500 ring-2 ring-emerald-500/50'
+                        : 'border-neutral-800'
+                    } ${isUpdatingImage ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  >
+                    <img
+                      src={imagePath}
+                      alt={`Profile option ${imagePath}`}
+                      className="w-full h-full object-cover"
+                    />
+                    {personalInfo.profileImage === imagePath && (
+                      <div className="absolute inset-0 bg-emerald-500/20 flex items-center justify-center">
+                        <div className="bg-emerald-500 rounded-full p-1">
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-4 border-t border-neutral-800 flex justify-end">
+              <button
+                onClick={() => setShowImagePicker(false)}
+                disabled={isUpdatingImage}
+                className="px-6 py-2 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
