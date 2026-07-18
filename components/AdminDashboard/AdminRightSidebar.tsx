@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Link from "next/link";
 import {
   BadgeCheck,
   CheckCircle2,
@@ -79,49 +80,6 @@ export default function UserRightSidebar({
         </div>
       </div>
 
-      {/* SECTION 2: Quick Status Cards */}
-      <div>
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">System Overview</h3>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { label: "Email Verification", value: "Verified", active: true },
-            { label: "MT5 Connection", value: "Connected", active: true },
-            { label: "Telegram Conn.", value: "Connected", active: true },
-            { label: "Database", value: "Online", active: true },
-            { label: "Trade Copier", value: "Running", active: true },
-            { label: "System Health", value: "Healthy", active: true },
-          ].map((status, index) => (
-            <div key={index} className="border border-neutral-800 bg-neutral-900/20 p-2.5 flex flex-col justify-between">
-              <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
-              <div className="flex items-center gap-1.5">
-                <span className={`w-1.5 h-1.5 rounded-full ${status.active ? "bg-emerald-500" : "bg-red-500"}`} />
-                <span className="text-[10px] font-black uppercase tracking-wider text-neutral-200">{status.value}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SECTION 3: Connected MT5 Account */}
-      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">MT5 Terminal</h3>
-        <div className="space-y-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Broker</span> <span>IC Markets</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acc No.</span> <span className="font-mono">8273641</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Server</span> <span className="font-mono">Live-03</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Leverage</span> <span>1:500</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
-          <div className="flex justify-between">
-            <span className="text-neutral-500 text-[10px]">Status</span> 
-            <span className="text-[9px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 font-black border border-emerald-500/20">CONNECTED</span>
-          </div>
-        </div>
-        <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-          Manage MT5
-        </button>
-      </div>
-
       {/* SECTION 4: Telegram Source */}
       <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Telegram Feeds</h3>
@@ -136,72 +94,17 @@ export default function UserRightSidebar({
         </button>
       </div>
 
-      {/* SECTION 5: Subscription */}
-      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Billing</h3>
-        <div className="space-y-1 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Current Plan</span> <span>Pro Plan</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Renewal Date</span> <span className="text-neutral-400">Aug 16, 2026</span></div>
-        </div>
-        <button className="w-full text-center py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-          Upgrade Plan
-        </button>
-      </div>
-
-      {/* SECTION 6: Security Actions */}
-      <div>
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-2">Gatekeeper Security</h3>
-        <div className="grid grid-cols-1 gap-1">
-          {[
-            { label: "Change Password", icon: Key },
-            { label: "Enable 2FA", icon: Shield },
-            { label: "Manage API Keys", icon: Terminal },
-            { label: "Session History & Devices", icon: Cpu },
-          ].map((action, idx) => (
-            <button key={idx} className="flex items-center justify-between px-3 py-2 border border-neutral-800 hover:bg-neutral-900 text-[10px] font-black uppercase tracking-widest text-neutral-400 hover:text-neutral-50 transition-all cursor-pointer">
-              <span className="flex items-center gap-2">
-                <action.icon className="w-3.5 h-3.5 text-neutral-500" />
-                {action.label}
-              </span>
-              <ChevronRight className="w-3 h-3 text-neutral-600" />
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* SECTION 7: Recent Alerts */}
-      <div>
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">Activity Stream</h3>
-        <div className="space-y-2">
-          {[
-            { text: "Trade Executed: BUY EURUSD", desc: "Copier Engine • Just now" },
-            { text: "Telegram Feeds Connected", desc: "Telegram API • 15m ago" },
-            { text: "MT5 Terminal Sync Complete", desc: "Gateway Server • 1h ago" },
-            { text: "Subscription renewed successfully", desc: "System Billing • 1d ago" },
-          ].map((alert, idx) => (
-            <div key={idx} className="border-l-2 border-neutral-800 pl-3 py-0.5 space-y-0.5">
-              <p className="text-[10px] font-black uppercase tracking-wider text-neutral-200 leading-tight">{alert.text}</p>
-              <p className="text-[8px] font-bold uppercase tracking-widest text-neutral-500">{alert.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* SECTION 8: Quick Actions */}
       <div className="space-y-2 pt-2 border-t border-neutral-900">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
         <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-          <Plus className="w-3.5 h-3.5" /> Add MT5 Account
-        </button>
-        <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-          <Plus className="w-3.5 h-3.5" /> Connect Telegram Feed
-        </button>
-        <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
           <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
         </button>
-        <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-          <LayoutDashboard className="w-3.5 h-3.5" /> Back to Dashboard
-        </button>
+        <Link href="/user-dashboard/dashboard">
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+            <LayoutDashboard className="w-3.5 h-3.5" />Switch to User
+          </button>
+        </Link>
       </div>
     </div>
   );

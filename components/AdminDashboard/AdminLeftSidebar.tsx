@@ -10,7 +10,7 @@ import {
   CandlestickChart,
   History,
   Users,
-  Landmark,
+  Send,
   MessageCircle,
   UserRound,
   BarChart3,
@@ -21,6 +21,8 @@ import {
   FileText,
   LogOut,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   X,
 } from "lucide-react";
 
@@ -37,7 +39,7 @@ type NavItem =
       children: { name: string; icon: React.ElementType; href: string }[];
     };
 
-export default function UserSidebar({
+export default function AdminSidebar({
   sidebarOpen,
   setSidebarOpen,
 }: SidebarProps) {
@@ -45,18 +47,22 @@ export default function UserSidebar({
   const router = useRouter();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
+  
+  // Desktop sidebar expand/collapse state
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Group status tracking for collapsible panels
+  // Group status tracking for collapsible sub-menus
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     MAIN: true,
-    ACCOUNT: true,
+    MANAGEMENT: true,
     ANALYTICS: true,
     SYSTEM: true,
   });
 
-  const basePath = "/user-dashboard";
+  // Updated to Admin Base Path
+  const basePath = "/admin-dashboard";
 
-  // Modal Auto-Close Countdown Logic (Pure Frontend)
+  // Modal Auto-Close Countdown Logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (showLogoutConfirm && countdown > 0) {
@@ -70,41 +76,28 @@ export default function UserSidebar({
     return () => clearTimeout(timer);
   }, [showLogoutConfirm, countdown]);
 
+  // Admin Structured Navigation Items
   const navItems: NavItem[] = [
     // === MAIN ===
-    { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-    { name: "Live Signals", icon: Radio, href: `${basePath}/live-signals` },
-    { name: "Open Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
-    { name: "Trade History", icon: History, href: `${basePath}/trade-history` },
-    { name: "Providers", icon: Users, href: `${basePath}/providers` },
+    { name: "Overview", icon: LayoutDashboard, href: `${basePath}/dashboard` },
+    // { name: "Live Streams", icon: Radio, href: `${basePath}/live-signals` },
+    // { name: "Active Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
+    // { name: "Master History", icon: History, href: `${basePath}/trade-history` },
+    { name: "TG Provider", icon: Send, href: `${basePath}/providers` },
 
-    // === ACCOUNT ===
-    {
-      name: "MT5 Accounts",
-      icon: Landmark,
-      href: `${basePath}/mt5-accounts`,
-    },
-    {
-      name: "Telegram Sources",
-      icon: MessageCircle,
-      href: `${basePath}/telegram-sources`,
-    },
-    {
-      name: "Subscribers",
-      icon: UserRound,
-      href: `${basePath}/subscribers`,
-    },
+    // === MANAGEMENT ===
+    // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },
 
-    // === ANALYTICS ===
-    { name: "Analytics", icon: BarChart3, href: `${basePath}/analytics` },
-    { name: "Activity Logs", icon: ScrollText, href: `${basePath}/activity-logs` },
+    // === ANALYTICS & MONITORING ===
+    // { name: "Platform Growth", icon: BarChart3, href: `${basePath}/analytics` },
+    // { name: "System Audit Logs", icon: ScrollText, href: `${basePath}/activity-logs` },
 
     // === SYSTEM ===
-    { name: "System Status", icon: Server, href: `${basePath}/system-status` },
-    { name: "Settings", icon: Settings, href: `${basePath}/settings` },
+    // { name: "Core Server Cluster", icon: Server, href: `${basePath}/system-status` },
+    // { name: "Global Settings", icon: Settings, href: `${basePath}/settings` },
   ];
 
-  // Auto-expand groups containing active pathnames (if any deep routes matching are ever configured as nested children)
+  // Auto-expand groups containing active pathnames
   useEffect(() => {
     navItems.forEach((item) => {
       if ("children" in item) {
@@ -117,23 +110,42 @@ export default function UserSidebar({
   }, [pathname]);
 
   const toggleGroup = (name: string) => {
+    // Prevent expanding menus when sidebar is closed completely
+    if (isCollapsed) setIsCollapsed(false);
     setOpenGroups((prev) => ({ ...prev, [name]: !prev[name] }));
   };
 
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-70 border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)]">
+      <aside 
+        className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 relative ${
+          isCollapsed ? "w-20" : "w-70"
+        }`}
+      >
         {/* Header */}
-        <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
-          <div className="flex flex-col">
+        <div className={`flex-shrink-0 flex items-center h-16 border-b border-neutral-800 transition-all duration-300 relative ${
+          isCollapsed ? "justify-center px-2" : "justify-between px-6"
+        }`}>
+          <div className={`flex flex-col ${isCollapsed ? "items-center" : ""}`}>
             <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
-              SECURE<span className="text-neutral-50 font-black"> RISE</span>
+              {isCollapsed ? "S" : "Shillmonger"}<span className="text-neutral-50 font-black">{isCollapsed ? "B" : " Bot"}</span>
             </h1>
-            <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
-              Your Investments, Our Traders
-            </p>
+            {!isCollapsed && (
+              <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase whitespace-nowrap">
+                Admin Control Room
+              </p>
+            )}
           </div>
+
+          {/* Toggle Collapse Button */}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="absolute -right-3 top-1/2 -translate-y-1/2 w-7 h-7 cursor-pointer bg-neutral-900 border border-neutral-800 rounded-none flex items-center justify-center text-neutral-300 hover:text-neutral-50 shadow-md hover:bg-neutral-850 transition-colors z-10"
+            title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+          >
+            {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          </button>
         </div>
 
         {/* Nav */}
@@ -145,114 +157,143 @@ export default function UserSidebar({
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`group flex items-center px-4 py-2.5 rounded-none border border-transparent transition-all duration-200 ${
+                  className={`group flex items-center rounded-none border border-transparent transition-all duration-200 ${
+                    isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2.5"
+                  } ${
                     active
                       ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
                       : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
                   }`}
+                  title={isCollapsed ? item.name : undefined}
                 >
                   <item.icon
-                    className={`w-5 h-5 mr-5 transition-transform ${
+                    className={`w-5 h-5 transition-transform ${isCollapsed ? "" : "mr-5"} ${
                       active ? "scale-110" : "group-hover:scale-110"
                     }`}
                   />
-                  <span className="text-[12px] font-black uppercase tracking-widest">
-                    {item.name}
-                  </span>
+                  {!isCollapsed && (
+                    <span className="text-[12px] font-black uppercase tracking-widest whitespace-nowrap">
+                      {item.name}
+                    </span>
+                  )}
                 </Link>
               );
             }
 
-            const isOpen = !!openGroups[item.name];
+            const isOpen = !isCollapsed && !!openGroups[item.name];
             const hasActiveChild = item.children.some((c) => pathname === c.href);
 
             return (
               <div key={item.name} className="flex flex-col">
                 <button
                   onClick={() => toggleGroup(item.name)}
-                  className={`group w-full flex items-center px-4 py-2.5 rounded-none transition-all duration-200 cursor-pointer ${
+                  className={`group w-full flex items-center rounded-none transition-all duration-200 cursor-pointer ${
+                    isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2.5"
+                  } ${
                     hasActiveChild
                       ? "text-neutral-50 font-black"
                       : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
                   }`}
+                  title={isCollapsed ? item.name : undefined}
                 >
                   <item.icon
-                    className={`w-5 h-5 mr-5 transition-transform ${
+                    className={`w-5 h-5 transition-transform ${isCollapsed ? "" : "mr-5"} ${
                       hasActiveChild ? "scale-110" : "group-hover:scale-110"
                     }`}
                   />
-                  <span className="flex-1 text-left text-[12px] font-black uppercase tracking-widest">
-                    {item.name}
-                  </span>
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
+                  {!isCollapsed && (
+                    <>
+                      <span className="flex-1 text-left text-[12px] font-black uppercase tracking-widest whitespace-nowrap">
+                        {item.name}
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </>
+                  )}
                 </button>
 
-                <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
-                  <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-neutral-800 space-y-1">
-                    {item.children.map((child) => {
-                      const childActive = pathname === child.href;
-                      return (
-                        <Link
-                          key={child.name}
-                          href={child.href}
-                          className={`group flex items-center gap-3 px-3 py-2 rounded-none border border-transparent transition-all duration-200 ${
-                            childActive
-                              ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                              : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
-                          }`}
-                        >
-                          <child.icon
-                            className={`w-4 h-4 flex-shrink-0 transition-transform ${
-                              childActive ? "scale-110" : "group-hover:scale-110"
+                {!isCollapsed && (
+                  <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
+                    <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-neutral-800 space-y-1">
+                      {item.children.map((child) => {
+                        const childActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className={`group flex items-center gap-3 px-3 py-2 rounded-none border border-transparent transition-all duration-200 ${
+                              childActive
+                                ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
+                                 : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
                             }`}
-                          />
-                          <span className="text-[11px] font-black uppercase tracking-widest">
-                            {child.name}
-                          </span>
-                        </Link>
-                      );
-                    })}
+                          >
+                            <child.icon
+                              className={`w-4 h-4 flex-shrink-0 transition-transform ${
+                                childActive ? "scale-110" : "group-hover:scale-110"
+                              }`}
+                            />
+                            <span className="text-[11px] font-black uppercase tracking-widest whitespace-nowrap">
+                              {child.name}
+                            </span>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             );
           })}
         </nav>
 
-        {/* Footer Links (Support, Documentation, Logout) */}
-        <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 space-y-1">
-          <Link
+        {/* Footer Links */}
+        <div className={`flex-shrink-0 border-t border-neutral-800 py-2 space-y-1 ${isCollapsed ? "px-2" : "px-4"}`}>
+          {/* <Link
             href={`${basePath}/support`}
-            className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+            className={`flex items-center w-full text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group ${
+              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2"
+            }`}
+            title={isCollapsed ? "Support" : undefined}
           >
-            <HelpCircle className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-            <span className="text-[12px] font-black uppercase tracking-widest">
-              Support
-            </span>
+            <HelpCircle className={`w-5 h-5 group-hover:scale-110 transition-transform ${isCollapsed ? "" : "mr-3"}`} />
+            {!isCollapsed && (
+              <span className="text-[12px] font-black uppercase tracking-widest">
+                Support
+              </span>
+            )}
           </Link>
 
           <Link
             href={`${basePath}/documentation`}
-            className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+            className={`flex items-center w-full text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group ${
+              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2"
+            }`}
+            title={isCollapsed ? "Documentation" : undefined}
           >
-            <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-            <span className="text-[12px] font-black uppercase tracking-widest">
-              Documentation
-            </span>
-          </Link>
+            <FileText className={`w-5 h-5 group-hover:scale-110 transition-transform ${isCollapsed ? "" : "mr-3"}`} />
+            {!isCollapsed && (
+              <span className="text-[12px] font-black uppercase tracking-widest">
+                Documentation
+              </span>
+            )}
+          </Link> */}
 
           <button
             onClick={() => setShowLogoutConfirm(true)}
-            className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+            className={`flex items-center cursor-pointer w-full text-red-500 hover:bg-red-500/10 transition-all rounded-none group ${
+              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-3"
+            }`}
+            title={isCollapsed ? "Logout My Account" : undefined}
           >
-            <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-xs font-black uppercase tracking-widest">
-              Logout My Account
-            </span>
+            <LogOut className={`w-5 h-5 group-hover:-translate-x-1 transition-transform ${isCollapsed ? "" : "mr-3"}`} />
+            {!isCollapsed && (
+              <span className="text-xs font-black uppercase tracking-widest whitespace-nowrap">
+                Logout Admin
+              </span>
+            )}
           </button>
         </div>
       </aside>
@@ -272,7 +313,7 @@ export default function UserSidebar({
                   SECURE<span className="text-neutral-50 font-black"> RISE</span>
                 </h1>
                 <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
-                  Your Investments, Our Traders
+                  Admin Control Room
                 </p>
               </div>
               <button
@@ -405,7 +446,7 @@ export default function UserSidebar({
               >
                 <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-xs font-black uppercase tracking-widest">
-                  Logout My Account
+                  Logout Admin
                 </span>
               </button>
             </div>
@@ -424,11 +465,10 @@ export default function UserSidebar({
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-black uppercase tracking-tighter text-neutral-50 mb-2">
-              Logout?
+              Exit Panel?
             </h2>
             <p className="text-sm text-neutral-400 mb-4 leading-relaxed font-semibold">
-              Are you sure you want to sign out? You'll need to log in again to
-              access your account.
+              Are you sure you want to log out of the administration console?
             </p>
 
             {/* Countdown Progress Bar */}
@@ -458,7 +498,7 @@ export default function UserSidebar({
               <button
                 onClick={() => {
                   router.push("/auth-page/login");
-                  toast.success("Successfully signed out");
+                  toast.success("Successfully logged out of Admin Panel");
                   setShowLogoutConfirm(false);
                   setCountdown(10);
                 }}

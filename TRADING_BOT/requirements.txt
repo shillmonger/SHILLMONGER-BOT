@@ -1,0 +1,6 @@
+telethon
+MetaTrader5
+python-dotenv
+pandas
+colorama
+loguru

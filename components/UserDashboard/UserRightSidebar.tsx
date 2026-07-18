@@ -7,7 +7,9 @@ import { toast } from "sonner";
 import Image from "next/image";
 import {
   User,
-  ShieldAlert,
+  Terminal,
+  Plus,
+  LayoutDashboard,
   Lock,
   Tv,
   Send,
@@ -54,24 +56,19 @@ export default function UserRightSidebar({
       href: `${basePath}/account-setting`,
     },
     {
-      name: "Security Settings",
-      icon: ShieldCogCorner,
-      href: `${basePath}/settings/2fa`,
-    },
-    {
       name: "MT5 Connection",
       icon: Tv,
       href: `${basePath}/mt5/connect`,
     },
     {
-      name: "Telegram Connection",
+      name: "Connect Telegram",
       icon: Send,
       href: `${basePath}/telegram/connect`,
     },
     {
       name: "Switch to Admin",
       icon: Lock,
-      href: `${basePath}/telegram/connect`,
+      href: `/admin-dashboard/dashboard`,
     },
   ];
 
@@ -171,39 +168,84 @@ export default function UserRightSidebar({
         </div>
       </div>
 
-      {/* SECTION 2: Navigation Links */}
+       {/* SECTION 2: Quick Status Cards */}
       <div>
-        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-2.5">
-          Workspace Pages
-        </h3>
-        <div className="grid grid-cols-1 gap-1">
-          {navItems.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`group flex items-center justify-between px-4 py-3 border transition-all duration-200 ${
-                  active
-                    ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                    : "border-neutral-800 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  <item.icon
-                    className={`w-4 h-4 transition-transform ${
-                      active ? "scale-110" : "group-hover:scale-110"
-                    }`}
-                  />
-                  <span className="text-[10.5px] font-black uppercase tracking-widest">
-                    {item.name}
-                  </span>
-                </span>
-              </Link>
-            );
-          })}
+        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">System Overview</h3>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { label: "Email Check", value: "Verified", active: true },
+            { label: "MT5 Connection", value: "Connected", active: true },
+            { label: "Telegram Conn.", value: "Connected", active: true },
+            { label: "Database", value: "Online", active: true },
+            { label: "Trade Copier", value: "Running", active: true },
+            { label: "System Health", value: "Healthy", active: true },
+          ].map((status, index) => (
+            <div key={index} className="border border-neutral-800 bg-neutral-900/20 p-2.5 flex flex-col justify-between">
+              <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
+              <div className="flex items-center gap-1.5">
+                <span className={`w-1.5 h-1.5 rounded-full ${status.active ? "bg-emerald-500" : "bg-red-500"}`} />
+                <span className="text-[10px] font-black uppercase tracking-wider text-neutral-200">{status.value}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      
+       {/* SECTION 3: Subscription */}
+      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
+        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Billing</h3>
+        <div className="space-y-1 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Current Plan</span> <span>Pro Plan</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Renewal Date</span> <span className="text-neutral-400">Aug 16, 2026</span></div>
+        </div>
+        <button className="w-full text-center py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+          Upgrade Plan
+        </button>
+      </div>
+
+
+    
+
+
+
+      {/* SECTION 3: Connected MT5 Account */}
+      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
+        <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">MT5 Terminal</h3>
+        <div className="space-y-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Broker</span> <span>IC Markets</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acc No.</span> <span className="font-mono">8273641</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Server</span> <span className="font-mono">Live-03</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Leverage</span> <span>1:500</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
+          <div className="flex justify-between">
+            <span className="text-neutral-500 text-[10px]">Status</span> 
+            <span className="text-[9px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 font-black border border-emerald-500/20">CONNECTED</span>
+          </div>
+        </div>
+        <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+          Manage MT5
+        </button>
+      </div>
+
+
+        {/* SECTION 8: Quick Actions */}
+            <div className="space-y-2 pt-2 border-t border-neutral-900">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+                <Plus className="w-3.5 h-3.5" /> Connect Telegram
+              </button>
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+                <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
+              </button>
+              <Link href="/admin-dashboard/dashboard">
+                <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+                  <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
+                </button>
+              </Link>
+            </div>
+
     </div>
   );
 
