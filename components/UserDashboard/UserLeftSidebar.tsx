@@ -11,6 +11,7 @@ import {
   Info,
   Lightbulb,
   HandFist,
+  Send,
   UsersRound,
   DatabaseX,
   Unplug,
@@ -89,12 +90,17 @@ export default function UserSidebar({
       icon: Unplug,
       children: [
         {
-          name: "Manage MT5",
+          name: "Connect MT5",
           icon: DatabaseX,
-          href: `${basePath}/mt5-accounts/manage`,
+          href: `${basePath}/mt5-connection`,
         },
+        // {
+        //   name: "Connect TG",
+        //   icon: Send,
+        //   href: `${basePath}/mt5-accounts/manage`,
+        // },
         {
-          name: "MT5 Setup",
+          name: "Account Setup",
           icon: LinkIcon,
           href: `${basePath}/mt5-accounts/details`,
         },
