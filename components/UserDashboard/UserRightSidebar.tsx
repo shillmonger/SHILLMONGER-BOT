@@ -39,6 +39,8 @@ export default function UserRightSidebar({
   const [loading, setLoading] = useState(true);
   const [mt5Account, setMt5Account] = useState<any>(null);
   const [mt5Loading, setMt5Loading] = useState(true);
+  const [subscription, setSubscription] = useState<any>(null);
+  const [subscriptionLoading, setSubscriptionLoading] = useState(true);
 
   // Fetch user data
   useEffect(() => {
@@ -85,6 +87,28 @@ export default function UserRightSidebar({
     };
 
     fetchMt5Account();
+  }, []);
+
+  // Fetch subscription data
+  useEffect(() => {
+    const fetchSubscription = async () => {
+      try {
+        const response = await fetch('/api/user/subscription');
+        if (response.ok) {
+          const data = await response.json();
+          setSubscription(data.subscription);
+        } else {
+          setSubscription(null);
+        }
+      } catch (error) {
+        console.error('Failed to fetch subscription data:', error);
+        setSubscription(null);
+      } finally {
+        setSubscriptionLoading(false);
+      }
+    };
+
+    fetchSubscription();
   }, []);
 
   const basePath = "/user-dashboard";
@@ -253,13 +277,41 @@ export default function UserRightSidebar({
       {/* SECTION 3: Subscription */}
       <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Billing</h3>
-        <div className="space-y-1 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Current Plan</span> <span>Pro Plan</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Renewal Date</span> <span className="text-neutral-400">Aug 16, 2026</span></div>
-        </div>
+        {subscriptionLoading ? (
+          <div className="text-[10px] text-neutral-500">Loading...</div>
+        ) : subscription ? (
+          <div className="space-y-2">
+            <div className="space-y-1 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Plan</span> <span>{subscription.planType}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Amount</span> <span className="text-emerald-400">${subscription.amount}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Account Size</span> <span>{subscription.accountSize}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Duration</span> <span>{subscription.duration}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Start Date</span> <span className="text-neutral-400">{new Date(subscription.startDate).toLocaleDateString()}</span></div>
+              <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Expires</span> <span className="text-neutral-400">{new Date(subscription.expirationDate).toLocaleDateString()}</span></div>
+              <div className="flex justify-between items-center">
+                <span className="text-neutral-500 text-[10px]">Status</span>
+                <span className={`text-[9px] px-1.5 py-0.5 font-black border ${
+                  subscription.status === 'approved'
+                    ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                    : subscription.status === 'pending'
+                      ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                      : subscription.status === 'rejected'
+                        ? 'bg-red-500/10 text-red-500 border-red-500/20'
+                        : 'bg-neutral-500/10 text-neutral-500 border-neutral-500/20'
+                }`}>
+                  {subscription.status.toUpperCase()}
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-[10px] text-neutral-500">No active subscription</div>
+        )}
+        <Link href="/user-dashboard/subscription">
         <button className="w-full text-center py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-          Upgrade Plan
+          {subscription ? 'Manage Plan' : 'Upgrade Plan'}
         </button>
+        </Link>
       </div>
 
 
