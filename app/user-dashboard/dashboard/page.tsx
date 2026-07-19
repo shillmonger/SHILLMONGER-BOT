@@ -19,11 +19,7 @@ import {
 export default function DashboardPage() {
   const [greeting, setGreeting] = useState("Welcome");
   const [currentTime, setCurrentTime] = useState("");
-
-  // Mocked user data (replace with actual auth data when available)
-  const userData = {
-    username: "shillmonger",
-  };
+  const [userData, setUserData] = useState<{ username: string } | null>(null);
 
   // Statistics Cards Data
   const statsCards = [
@@ -76,6 +72,16 @@ export default function DashboardPage() {
       day: 'numeric'
     };
     setCurrentTime(new Date().toLocaleDateString("en-US", options));
+
+    // Fetch user data
+    fetch('/api/user/me')
+      .then(res => res.json())
+      .then(data => {
+        if (data.user) {
+          setUserData({ username: data.user.username });
+        }
+      })
+      .catch(err => console.error('Failed to fetch user data:', err));
   }, []);
 
   return (
@@ -92,18 +98,15 @@ export default function DashboardPage() {
                 {greeting},
               </p>
               <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
-                {userData.username}
+                {userData?.username || 'Loading...'}
               </h1>
-              {/* <p className="text-sm text-neutral-600 font-semibold max-w-xl leading-relaxed">
-                Monitor your trading performance, account status, and AI trading activity in real time.
-              </p> */}
             </div>
             <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 System Time
               </span>
               <span className="text-xs font-mono font-bold">
-                {currentTime || "July 16, 2026"}
+                {currentTime}
               </span>
             </div>
           </div>
