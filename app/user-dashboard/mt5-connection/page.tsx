@@ -1,25 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  ShieldCheck, 
-  Cpu, 
-  Server, 
-  User, 
-  Key, 
-  Send, 
-  Link2, 
+import {
+  ShieldCheck,
+  Cpu,
+  Server,
+  User,
+  Key,
+  Send,
+  Link2,
   Link2Off,
   AlertTriangle,
-  X 
+  X,
+  Loader2,
+  Clock,
+  CreditCard
 } from "lucide-react";
+import { toast } from "sonner";
 
 interface ConnectionDetails {
+  id: string;
   telegramUsername: string;
   server: string;
   mt5Login: string;
   accountType: 'demo' | 'real';
+  status: 'connected' | 'disconnected' | 'expired';
+  startDate?: Date;
+  expirationDate?: Date;
+  subscriptionPlan?: string | null;
+  subscriptionExpiryDate?: Date | null;
+  balance?: number;
+  equity?: number;
+  currency?: string;
 }
 
 export default function MT5ConnectionPage() {
@@ -35,6 +48,29 @@ export default function MT5ConnectionPage() {
   const [showDisconnectModal, setShowDisconnectModal] = useState(false);
   const [accountType, setAccountType] = useState<'demo' | 'real'>('demo');
   const [serverError, setServerError] = useState("");
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [isLoadingAccount, setIsLoadingAccount] = useState(true);
+
+  // Fetch user's connected MT5 account on page load
+  useEffect(() => {
+    const fetchConnectedAccount = async () => {
+      try {
+        const response = await fetch('/api/user/mt5/account');
+        const data = await response.json();
+
+        if (response.ok && data.account) {
+          setActiveDetails(data.account);
+          setIsConnected(true);
+        }
+      } catch (error) {
+        console.error('Failed to fetch connected account:', error);
+      } finally {
+        setIsLoadingAccount(false);
+      }
+    };
+
+    fetchConnectedAccount();
+  }, []);
 
   const handleServerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -56,32 +92,74 @@ export default function MT5ConnectionPage() {
     setServerError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!telegramUsername || !server || !mt5Login || !tradingPassword) return;
     if (serverError) return;
 
-    // Simulate connecting to Exness
-    setActiveDetails({
-      telegramUsername,
-      server,
-      mt5Login,
-      accountType,
-    });
-    setIsConnected(true);
+    setIsConnecting(true);
 
-    // Clear password field for security layout
-    setTradingPassword("");
+    try {
+      const response = await fetch('/api/user/mt5/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          telegramUsername,
+          server,
+          mt5Login,
+          password: tradingPassword,
+          accountType,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setActiveDetails(data.account);
+        setIsConnected(true);
+        toast.success('MT5 account connected successfully!');
+      } else {
+        toast.error(data.error || 'Failed to connect MT5 account');
+      }
+    } catch (error) {
+      console.error('Connection error:', error);
+      toast.error('Failed to connect to MT5 account');
+    } finally {
+      setIsConnecting(false);
+      // Clear password field for security
+      setTradingPassword("");
+    }
   };
 
   const handleDisconnect = () => {
     setShowDisconnectModal(true);
   };
 
-  const confirmDisconnect = () => {
-    setIsConnected(false);
-    setActiveDetails(null);
-    setShowDisconnectModal(false);
+  const confirmDisconnect = async () => {
+    try {
+      const response = await fetch('/api/user/mt5/disconnect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsConnected(false);
+        setActiveDetails(null);
+        setShowDisconnectModal(false);
+        toast.success('MT5 account disconnected successfully');
+      } else {
+        toast.error(data.error || 'Failed to disconnect account');
+      }
+    } catch (error) {
+      console.error('Disconnect error:', error);
+      toast.error('Failed to disconnect account');
+    }
   };
 
   return (
@@ -119,7 +197,16 @@ export default function MT5ConnectionPage() {
             
             {/* COLUMN LEFT: FORM AND LIVE PREVIEW (7 Cols) */}
             <div className="lg:col-span-7 space-y-8">
-              {!isConnected ? (
+              {isLoadingAccount ? (
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <CardContent className="p-6 flex items-center justify-center min-h-[300px]">
+                    <div className="flex flex-col items-center gap-4">
+                      <Loader2 className="w-12 h-12 animate-spin text-neutral-400" />
+                      <p className="text-sm font-mono text-neutral-400">Loading account status...</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : !isConnected ? (
                 <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <CardContent className="p-6">
                     <div className="border-b border-neutral-800 pb-3 mb-6 flex items-center justify-between">
@@ -231,12 +318,22 @@ export default function MT5ConnectionPage() {
                         </div>
                       </div>
 
-                      <button 
+                      <button
                         type="submit"
-                        className="w-full mt-4 rounded-none bg-white text-neutral-950 font-mono font-black uppercase tracking-wider p-3 border-2 border-transparent hover:bg-neutral-200 transition-all flex items-center justify-center gap-2"
+                        disabled={isConnecting}
+                        className="w-full mt-4 rounded-none cursor-pointer bg-white text-neutral-950 font-mono font-black uppercase tracking-wider p-3 border-2 border-transparent hover:bg-neutral-200 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <ShieldCheck className="h-4 w-4" />
-                        Initialize AI Bridge Connection
+                        {isConnecting ? (
+                          <>
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Connecting...
+                          </>
+                        ) : (
+                          <>
+                            <ShieldCheck className="h-4 w-4" />
+                            Initialize AI Bridge Connection
+                          </>
+                        )}
                       </button>
                     </form>
                   </CardContent>
@@ -276,6 +373,38 @@ export default function MT5ConnectionPage() {
                       </div>
                     </div>
 
+                    {/* Demo Account Expiration Info */}
+                    {activeDetails?.accountType === 'demo' && activeDetails.expirationDate && (
+                      <div className="p-4 bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+                        <Clock className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                        <div className="flex-1">
+                          <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">Demo Account Expiration</p>
+                          <p className="text-xs text-neutral-300 font-semibold">
+                            Expires: {new Date(activeDetails.expirationDate).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Real Account Subscription Info */}
+                    {activeDetails?.accountType === 'real' && (
+                      <div className="p-4 bg-blue-500/10 border border-blue-500/30 flex items-start gap-3">
+                        <CreditCard className="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                        <div className="flex-1">
+                          <p className="text-xs font-bold text-blue-400 uppercase tracking-wider mb-1">Subscription Status</p>
+                          {activeDetails.subscriptionPlan ? (
+                            <p className="text-xs text-neutral-300 font-semibold">
+                              {activeDetails.subscriptionPlan} - Active
+                            </p>
+                          ) : (
+                            <p className="text-xs text-neutral-300 font-semibold">
+                              No active subscription - Please subscribe to continue
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="p-4 bg-neutral-900/30 border border-dashed border-neutral-800 flex items-start gap-3">
                       <AlertTriangle className="h-5 w-5 text-amber-400 flex-shrink-0 mt-0.5" />
                       <p className="text-xs text-neutral-400 leading-relaxed font-semibold">
@@ -283,9 +412,9 @@ export default function MT5ConnectionPage() {
                       </p>
                     </div>
 
-                    <button 
+                    <button
                       onClick={handleDisconnect}
-                      className="w-full rounded-none bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono font-black uppercase tracking-wider p-3 hover:bg-rose-500/20 transition-all flex items-center justify-center gap-2"
+                      className="w-full rounded-none cursor-pointer bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono font-black uppercase tracking-wider p-3 hover:bg-rose-500/20 transition-all flex items-center justify-center gap-2"
                     >
                       <Link2Off className="h-4 w-4" />
                       Disconnect Bridge Architecture
@@ -389,13 +518,13 @@ export default function MT5ConnectionPage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowDisconnectModal(false)}
-                className="flex-1 px-4 py-3 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors"
+                className="flex-1 px-4 py-3 cursor-pointer  rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDisconnect}
-                className="flex-1 px-4 py-3 rounded-none bg-rose-600 text-white font-black text-xs uppercase tracking-widest hover:bg-rose-700 transition-colors shadow-[3px_3px_0px_0px_rgba(239,68,68,0.3)]"
+                className="flex-1 px-4 py-3 cursor-pointer  rounded-none bg-rose-600 text-white font-black text-xs uppercase tracking-widest hover:bg-rose-700 transition-colors shadow-[3px_3px_0px_0px_rgba(239,68,68,0.3)]"
               >
                 Disconnect
               </button>

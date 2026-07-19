@@ -122,7 +122,7 @@ export default function UserSidebar({
     children: [
       { name: "TG Channel", icon: UsersRound, href: `#` },
       { name: "Refer users", icon: HeartPlus, href: `${basePath}/referal` },
-      { name: "Leaderboard", icon: Trophy, href: `${basePath}/leaderboard` },
+      // { name: "Leaderboard", icon: Trophy, href: `${basePath}/leaderboard` },
     ],
   },
      { name: "Notifications", icon: Bell, href: `${basePath}/notifications` },

@@ -19,10 +19,12 @@ class MT5Connector:
 
     def connect(self) -> bool:
         """
-        Initialize MT5 and log into the trading account.
+        Initialize MT5 and log into the trading account using dedicated master terminal.
         """
 
-        if not mt5.initialize():
+        # Initialize MT5 with dedicated master terminal path
+        master_path = r"C:\Program Files\MT5_Master\terminal64.exe"
+        if not mt5.initialize(path=master_path):
             logger.error(
                 f"MT5 initialization failed: {mt5.last_error()}"
             )

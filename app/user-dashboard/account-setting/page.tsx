@@ -278,8 +278,8 @@ export default function UserSettingsPage() {
                   <h3 className="text-sm font-black uppercase tracking-widest mb-6 flex items-center gap-2">
                     <User className="w-4 h-4 text-neutral-400" /> Profile Identity
                   </h3>
-                  <div className="flex flex-col items-center text-center">
-                    <div className="relative w-30 h-30 rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
+                  <div className="flex flex-col items-center text-center justify-center">
+                    <div className="relative w-30 h-30 flex items-center text-center justify-center rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
                       {personalInfo.profileImage ? (
                         <img 
                           src={personalInfo.profileImage} 
@@ -287,7 +287,7 @@ export default function UserSettingsPage() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <User className="w-12 h-12 text-neutral-400" />
+                        <User className="w-10 h-10 text-neutral-400" />
                       )}
                       <button
                         onClick={() => setShowImagePicker(true)}
@@ -592,7 +592,7 @@ export default function UserSettingsPage() {
               </h2>
               <button
                 onClick={() => setShowImagePicker(false)}
-                className="text-neutral-500 hover:text-white transition-colors"
+                className="text-neutral-500 cursor-pointer hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -634,7 +634,7 @@ export default function UserSettingsPage() {
               <button
                 onClick={() => setShowImagePicker(false)}
                 disabled={isUpdatingImage}
-                className="px-6 py-2 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
+                className="px-6 py-2 rounded-none cursor-pointer border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>

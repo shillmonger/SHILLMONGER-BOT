@@ -26,3 +26,284 @@
 2026-07-18 16:07:52.194 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
 2026-07-18 17:22:45.663 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
 2026-07-18 18:48:16.290 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 20:14:10.123 | SUCCESS  | api_server:get_telegram_groups:84 - Fetched 20 Telegram groups
+2026-07-18 20:23:55.652 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:23:55.654 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:23:55.659 | INFO     | core.database:close:48 - MongoDB connection closed
+2026-07-18 20:23:55.659 | INFO     | __main__:shutdown_event:39 - FastAPI server stopped
+2026-07-18 20:26:35.148 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:26:35.148 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:28:37.115 | ERROR    | __main__:validate_mt5_connection:149 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-18 20:30:18.903 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:30:18.904 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:31:14.197 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:31:14.200 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:32:07.151 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:32:07.152 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:32:53.021 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:32:53.023 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:34:39.187 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:34:39.189 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:37:51.073 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:37:51.073 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:38:58.320 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:38:58.322 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:39:21.031 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:39:24.213 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 20:39:30.801 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:39:30.802 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:40:18.636 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:40:18.638 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:40:29.611 | ERROR    | mt5.connector:connect:26 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 20:41:13.609 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:41:16.965 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 20:41:30.253 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:41:30.254 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:42:22.560 | ERROR    | mt5.connector:connect:26 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 20:43:12.031 | ERROR    | __main__:validate_mt5_connection:134 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 20:48:55.700 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:48:59.191 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 20:49:02.631 | SUCCESS  | mt5.connector:connect:53 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-18 20:49:02.631 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-18 20:49:33.701 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:49:33.702 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:50:55.219 | ERROR    | __main__:validate_mt5_connection:149 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-18 20:55:56.328 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:56:08.930 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 20:56:08.933 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 20:57:27.389 | ERROR    | __main__:validate_mt5_connection:135 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 20:57:27.392 | INFO     | __main__:validate_mt5_connection:137 - MT5 unavailable - returning mock validation for testing
+2026-07-18 21:44:03.038 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:44:06.792 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:44:56.969 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-18 21:45:28.840 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:45:35.677 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:45:35.679 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-18 21:47:45.030 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:47:52.010 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:47:52.012 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-18 21:48:14.075 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:48:17.536 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:48:25.094 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-18 21:50:08.812 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:50:13.045 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:50:15.009 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-18 21:50:15.010 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-18 21:50:41.337 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:50:41.339 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 21:52:15.166 | ERROR    | __main__:validate_mt5_connection:135 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 21:55:15.325 | ERROR    | __main__:validate_mt5_connection:135 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 21:58:23.195 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:58:26.164 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-18 21:58:26.168 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-18 21:58:26.170 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-18 21:58:35.425 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 21:58:35.428 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 21:59:55.700 | ERROR    | __main__:validate_mt5_connection:140 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:01:34.934 | ERROR    | __main__:validate_mt5_connection:140 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:04:13.279 | ERROR    | __main__:validate_mt5_connection:140 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:06:04.747 | ERROR    | __main__:validate_mt5_connection:140 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:14:58.923 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-18 22:14:58.924 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-18 22:15:49.763 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:16:54.963 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:17:12.779 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:18:20.502 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-18 22:18:41.434 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:18:41.435 | INFO     | __main__:validate_mt5_connection:144 - Attempting login with server: Exness-MT5Trial9 , login: 436747484
+2026-07-18 22:19:46.994 | ERROR    | __main__:validate_mt5_connection:155 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-18 22:21:45.216 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:21:45.218 | INFO     | __main__:validate_mt5_connection:144 - Attempting login with server: Exness-MT5Trial9 , login: 436747484
+2026-07-18 22:22:51.422 | ERROR    | __main__:validate_mt5_connection:155 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-18 22:25:22.106 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:26:19.355 | INFO     | __main__:validate_mt5_connection:144 - Attempting login with server: Exness-MT5Trial9 , login: 436747484
+2026-07-18 22:27:29.766 | ERROR    | __main__:validate_mt5_connection:155 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-18 22:42:20.436 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-18 22:43:25.568 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-19 10:04:47.040 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 10:04:50.440 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-19 10:05:20.467 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-19 10:05:20.470 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-19 10:05:51.623 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 10:05:51.624 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-19 10:06:36.907 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:06:43.166 | INFO     | __main__:validate_mt5_connection:144 - Attempting login with server: Exness-MT5Trial9 , login: 436747484
+2026-07-19 10:07:48.547 | ERROR    | __main__:validate_mt5_connection:155 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-19 10:45:54.971 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 10:45:54.971 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-19 10:46:42.802 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:46:42.804 | INFO     | __main__:validate_mt5_connection:144 - Attempting login with server: Exness-MT5Trial9, login: 436747484
+2026-07-19 10:46:47.166 | ERROR    | __main__:validate_mt5_connection:155 - MT5 login failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:47:02.787 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:47:02.789 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:47:30.783 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:47:30.784 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:48:04.902 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:48:04.904 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:52:56.628 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:52:56.629 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:53:37.451 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 10:53:37.452 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-19 10:53:48.133 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:53:48.135 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:54:37.500 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:54:37.501 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 10:55:00.786 | INFO     | __main__:validate_mt5_connection:134 - Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+2026-07-19 10:55:00.787 | ERROR    | __main__:validate_mt5_connection:138 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 11:06:28.486 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:06:28.487 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-19 11:06:58.627 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:07:02.679 | SUCCESS  | __main__:validate_mt5_connection:183 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-19 11:08:52.167 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:08:56.428 | SUCCESS  | __main__:validate_mt5_connection:183 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:09:40.086 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 14
+
+2026-07-19 11:10:46.394 | ERROR    | __main__:validate_mt5_connection:151 - MT5 initialization/login failed: (-10005, 'IPC timeout')
+2026-07-19 11:11:37.338 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 3
+
+2026-07-19 11:12:42.937 | ERROR    | __main__:validate_mt5_connection:151 - MT5 initialization/login failed: (-10005, 'IPC timeout')
+2026-07-19 11:13:40.279 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:13:40.280 | SUCCESS  | __main__:startup_event:33 - FastAPI server started
+2026-07-19 11:13:49.681 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 3
+
+2026-07-19 11:14:22.178 | ERROR    | __main__:validate_mt5_connection:146 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-19 11:14:37.503 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 14
+
+2026-07-19 11:15:10.026 | ERROR    | __main__:validate_mt5_connection:146 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-19 11:15:37.306 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:16:09.892 | ERROR    | __main__:validate_mt5_connection:146 - MT5 initialization failed: (-10005, 'IPC timeout')
+2026-07-19 11:16:48.962 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:17:15.563 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:19:05.848 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:19:11.967 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-19 11:20:14.786 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:21:24.409 | ERROR    | __main__:validate_mt5_connection:161 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-19 11:21:40.713 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:21:47.135 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:25:55.275 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:25:59.981 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:28:52.867 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:28:57.240 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:30:30.622 | INFO     | __main__:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:30:35.667 | SUCCESS  | __main__:validate_mt5_connection:194 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-19 11:32:01.661 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:32:01.662 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 11:32:01.666 | INFO     | core.database:close:48 - MongoDB connection closed
+2026-07-19 11:32:01.667 | INFO     | api_server:shutdown_event:39 - FastAPI server stopped
+2026-07-19 11:32:11.953 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:32:11.954 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 11:32:38.529 | SUCCESS  | api_server:get_telegram_groups:91 - Fetched 20 Telegram groups
+2026-07-19 11:42:39.581 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:42:39.582 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 11:43:02.016 | SUCCESS  | api_server:get_telegram_groups:91 - Fetched 20 Telegram groups
+2026-07-19 11:44:09.927 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 14
+
+2026-07-19 11:44:19.373 | ERROR    | api_server:validate_mt5_connection:161 - MT5 login failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 11:44:56.035 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:44:59.987 | ERROR    | api_server:validate_mt5_connection:146 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 11:46:09.652 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:46:14.405 | ERROR    | api_server:validate_mt5_connection:146 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-19 11:53:03.585 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:53:03.585 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 11:53:20.706 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Users\hp\Desktop\SMG BOT\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:53:20.708 | ERROR    | api_server:validate_mt5_connection:146 - MT5 initialization failed: (-10003, "IPC initialize failed, Process create failed 'C:\\Users\\hp\\Desktop\\SMG BOT\\MT5_Validator\\terminal64.exe'")
+2026-07-19 11:53:53.141 | SUCCESS  | api_server:get_telegram_groups:91 - Fetched 20 Telegram groups
+2026-07-19 11:54:57.733 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:54:57.734 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 11:55:30.048 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 11:55:37.401 | SUCCESS  | api_server:validate_mt5_connection:195 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 11:55:59.871 | SUCCESS  | api_server:get_telegram_groups:91 - Fetched 20 Telegram groups
+2026-07-19 11:56:22.516 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 11:56:27.585 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-19 11:56:29.258 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-19 11:56:29.260 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...

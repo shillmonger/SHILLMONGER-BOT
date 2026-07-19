@@ -7,6 +7,13 @@ from core.database import db
 from core.logger import logger
 from pathlib import Path
 import asyncio
+import MetaTrader5 as mt5
+from pydantic import BaseModel
+
+class MT5ValidationRequest(BaseModel):
+    server: str
+    login: str
+    password: str
 
 app = FastAPI(title="Shillmonger Bot API")
 
@@ -115,6 +122,102 @@ async def refresh_providers():
         logger.error(f"Failed to refresh providers: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+@app.post("/api/mt5/validate")
+async def validate_mt5_connection(request: MT5ValidationRequest):
+    """
+    Validate MT5 credentials by attempting to connect using dedicated validator terminal
+    Returns account info if successful, error if failed
+    """
+    try:
+        # Initialize MT5 with dedicated validator terminal path (without credentials first)
+        # Note: Using MT5_Master temporarily due to MT5_Validator corruption
+        validator_path = r"C:\Program Files\MT5_Master\terminal64.exe"
+        logger.info(
+            f"""
+Initializing MT5 validator at: {validator_path}
+LOGIN = [{request.login}]
+SERVER = [{request.server}]
+PASSWORD LENGTH = {len(request.password)}
+"""
+        )
+
+        # Initialize terminal first (shorter timeout)
+        if not mt5.initialize(path=validator_path, timeout=30000):
+            error = mt5.last_error()
+            logger.error(f"MT5 initialization failed: {error}")
+            return {
+                "success": False,
+                "error": f"MT5 initialization failed: {error}"
+            }
+
+        # Attempt login with provided credentials (shorter timeout for invalid credentials)
+        authorized = mt5.login(
+            login=int(request.login),
+            password=request.password,
+            server=request.server
+        )
+
+        if not authorized:
+            error_msg = f"MT5 login failed: {mt5.last_error()}"
+            logger.error(error_msg)
+            mt5.shutdown()
+            return {
+                "success": False,
+                "error": error_msg
+            }
+
+        # Get account information
+        account = mt5.account_info()
+        if account is None:
+            error_msg = "Failed to retrieve account information"
+            logger.error(error_msg)
+            mt5.shutdown()
+            return {
+                "success": False,
+                "error": error_msg
+            }
+
+        # Extract account info
+        account_info = {
+            "login": account.login,
+            "server": account.server,
+            "balance": account.balance,
+            "equity": account.equity,
+            "currency": account.currency,
+            "margin": account.margin,
+            "free_margin": account.margin_free,
+            "profit": account.profit
+        }
+
+        # Disconnect after validation
+        mt5.shutdown()
+
+        logger.success(
+            f"MT5 validation successful | "
+            f"Login: {account.login} | "
+            f"Server: {account.server} | "
+            f"Balance: {account.balance}"
+        )
+
+        return {
+            "success": True,
+            "accountInfo": account_info
+        }
+
+    except ValueError as e:
+        logger.error(f"Invalid login format: {e}")
+        return {
+            "success": False,
+            "error": "Invalid login format. Login must be a number."
+        }
+    except Exception as e:
+        logger.error(f"MT5 validation error: {e}")
+        # Ensure shutdown on error
+        try:
+            mt5.shutdown()
+        except:
+            pass
+        return {
+            "success": False,
+            "error": str(e)
+        }
