@@ -83,6 +83,20 @@ export async function POST(request: NextRequest) {
     // If validation successful, save to database
     await mongoose.connect(process.env.MONGODB_URI!);
 
+    // Check if user already has a connected account of the same type
+    const existingConnectedAccount = await MT5Account.findOne({
+      userId: decoded.userId,
+      accountType: accountType,
+      status: 'connected'
+    });
+
+    if (existingConnectedAccount) {
+      return NextResponse.json(
+        { error: `You already have a connected ${accountType} account. You can only have one ${accountType} account at a time.` },
+        { status: 409 }
+      );
+    }
+
     // Check if account already exists
     const existingAccount = await MT5Account.findOne({ mt5Login });
     
@@ -91,6 +105,14 @@ export async function POST(request: NextRequest) {
       if (existingAccount.status === 'connected') {
         return NextResponse.json(
           { error: 'This MT5 account is already connected' },
+          { status: 409 }
+        );
+      }
+      
+      // If account is expired, prevent reconnection
+      if (existingAccount.status === 'expired') {
+        return NextResponse.json(
+          { error: 'This account has expired and cannot be reconnected. Please create a new account.' },
           { status: 409 }
         );
       }

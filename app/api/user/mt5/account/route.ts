@@ -26,42 +26,42 @@ export async function GET(request: NextRequest) {
       await mongoose.connect(process.env.MONGODB_URI!);
     }
 
-    // Find user's connected MT5 account
-    const mt5Account = await MT5Account.findOne({ 
-      userId: decoded.userId,
-      status: 'connected'
-    });
+    // Find all user's MT5 accounts
+    const mt5Accounts = await MT5Account.find({ 
+      userId: decoded.userId
+    }).sort({ createdAt: -1 });
 
-    if (!mt5Account) {
+    if (!mt5Accounts || mt5Accounts.length === 0) {
       return NextResponse.json(
-        { account: null },
+        { accounts: [] },
         { status: 200 }
       );
     }
 
+    const formattedAccounts = mt5Accounts.map(account => ({
+      id: account._id,
+      telegramUsername: account.telegramUsername,
+      server: account.server,
+      mt5Login: account.mt5Login,
+      accountType: account.accountType,
+      status: account.status,
+      startDate: account.startDate,
+      expirationDate: account.expirationDate,
+      subscriptionPlan: account.subscriptionPlan,
+      subscriptionExpiryDate: account.subscriptionExpiryDate,
+      balance: account.balance,
+      equity: account.equity,
+      currency: account.currency,
+      connectedAt: account.connectedAt
+    }));
+
     return NextResponse.json(
-      { 
-        account: {
-          id: mt5Account._id,
-          telegramUsername: mt5Account.telegramUsername,
-          server: mt5Account.server,
-          mt5Login: mt5Account.mt5Login,
-          accountType: mt5Account.accountType,
-          status: mt5Account.status,
-          startDate: mt5Account.startDate,
-          expirationDate: mt5Account.expirationDate,
-          subscriptionPlan: mt5Account.subscriptionPlan,
-          subscriptionExpiryDate: mt5Account.subscriptionExpiryDate,
-          balance: mt5Account.balance,
-          equity: mt5Account.equity,
-          currency: mt5Account.currency
-        }
-      },
+      { accounts: formattedAccounts },
       { status: 200 }
     );
 
   } catch (error) {
-    console.error('Get MT5 account error:', error);
+    console.error('Get MT5 accounts error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

@@ -307,3 +307,26 @@ PASSWORD LENGTH = 15
 2026-07-19 11:56:27.585 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
 2026-07-19 11:56:29.258 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
 2026-07-19 11:56:29.260 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-19 14:34:57.803 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-19 14:34:57.805 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-19 14:43:51.150 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436779547]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 14:44:09.165 | SUCCESS  | api_server:validate_mt5_connection:195 - MT5 validation successful | Login: 436779547 | Server: Exness-MT5Trial9 | Balance: 99.36
+2026-07-19 14:45:03.677 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 14:45:17.716 | ERROR    | api_server:validate_mt5_connection:162 - MT5 login failed: (-10001, 'IPC send failed')
+2026-07-19 14:45:20.750 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-19 14:45:38.617 | SUCCESS  | api_server:validate_mt5_connection:195 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42

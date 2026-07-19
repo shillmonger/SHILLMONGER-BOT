@@ -15,7 +15,8 @@ import {
   X,
   Loader2,
   Clock,
-  CreditCard
+  CreditCard,
+  History
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -50,26 +51,38 @@ export default function MT5ConnectionPage() {
   const [serverError, setServerError] = useState("");
   const [isConnecting, setIsConnecting] = useState(false);
   const [isLoadingAccount, setIsLoadingAccount] = useState(true);
+  const [allAccounts, setAllAccounts] = useState<ConnectionDetails[]>([]);
+  const [showReconnectModal, setShowReconnectModal] = useState(false);
+  const [reconnectingAccount, setReconnectingAccount] = useState<ConnectionDetails | null>(null);
+  const [reconnectPassword, setReconnectPassword] = useState("");
 
-  // Fetch user's connected MT5 account on page load
+  // Fetch user's all MT5 accounts on page load
   useEffect(() => {
-    const fetchConnectedAccount = async () => {
+    const fetchAccounts = async () => {
       try {
         const response = await fetch('/api/user/mt5/account');
         const data = await response.json();
 
-        if (response.ok && data.account) {
-          setActiveDetails(data.account);
-          setIsConnected(true);
+        if (response.ok && data.accounts) {
+          setAllAccounts(data.accounts);
+          // Set active details for connected account
+          const connectedAccount = data.accounts.find((acc: ConnectionDetails) => acc.status === 'connected');
+          if (connectedAccount) {
+            setActiveDetails(connectedAccount);
+            setIsConnected(true);
+          } else {
+            setIsConnected(false);
+            setActiveDetails(null);
+          }
         }
       } catch (error) {
-        console.error('Failed to fetch connected account:', error);
+        console.error('Failed to fetch accounts:', error);
       } finally {
         setIsLoadingAccount(false);
       }
     };
 
-    fetchConnectedAccount();
+    fetchAccounts();
   }, []);
 
   const handleServerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,6 +165,12 @@ export default function MT5ConnectionPage() {
         setIsConnected(false);
         setActiveDetails(null);
         setShowDisconnectModal(false);
+        // Refresh accounts list
+        const accountsResponse = await fetch('/api/user/mt5/account');
+        const accountsData = await accountsResponse.json();
+        if (accountsResponse.ok && accountsData.accounts) {
+          setAllAccounts(accountsData.accounts);
+        }
         toast.success('MT5 account disconnected successfully');
       } else {
         toast.error(data.error || 'Failed to disconnect account');
@@ -159,6 +178,60 @@ export default function MT5ConnectionPage() {
     } catch (error) {
       console.error('Disconnect error:', error);
       toast.error('Failed to disconnect account');
+    }
+  };
+
+  const handleReconnect = async (account: ConnectionDetails) => {
+    setReconnectingAccount(account);
+    setShowReconnectModal(true);
+  };
+
+  const confirmReconnect = async () => {
+    if (!reconnectingAccount || !reconnectPassword) {
+      toast.error('Password is required for reconnection');
+      return;
+    }
+
+    try {
+      setIsConnecting(true);
+      
+      const response = await fetch('/api/user/mt5/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          telegramUsername: reconnectingAccount.telegramUsername,
+          server: reconnectingAccount.server,
+          mt5Login: reconnectingAccount.mt5Login,
+          password: reconnectPassword,
+          accountType: reconnectingAccount.accountType
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setActiveDetails(data.account);
+        setIsConnected(true);
+        // Refresh accounts list
+        const accountsResponse = await fetch('/api/user/mt5/account');
+        const accountsData = await accountsResponse.json();
+        if (accountsResponse.ok && accountsData.accounts) {
+          setAllAccounts(accountsData.accounts);
+        }
+        setShowReconnectModal(false);
+        setReconnectPassword("");
+        setReconnectingAccount(null);
+        toast.success('MT5 account reconnected successfully');
+      } else {
+        toast.error(data.error || 'Failed to reconnect account');
+      }
+    } catch (error) {
+      console.error('Reconnect error:', error);
+      toast.error('Failed to reconnect account');
+    } finally {
+      setIsConnecting(false);
     }
   };
 
@@ -422,6 +495,68 @@ export default function MT5ConnectionPage() {
                   </CardContent>
                 </Card>
               )}
+
+              {/* Disconnected/Expired Accounts Section */}
+              {allAccounts.filter(acc => acc.status === 'disconnected' || acc.status === 'expired').length > 0 && (
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
+                      <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
+                        <History className="h-5 w-5 text-neutral-400" />
+                        Previous Accounts
+                      </h2>
+                      <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-neutral-700 px-2 py-0.5">
+                        {allAccounts.filter(acc => acc.status === 'disconnected' || acc.status === 'expired').length} ACCOUNTS
+                      </span>
+                      </div>
+
+                      <div className="space-y-3">
+                        {allAccounts
+                          .filter(acc => acc.status === 'disconnected' || acc.status === 'expired')
+                          .map((account) => (
+                            <div
+                              key={account.id}
+                              className="p-4 bg-neutral-900/60 border border-neutral-800/80 flex items-center justify-between gap-4"
+                            >
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 ${
+                                    account.status === 'expired' 
+                                      ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' 
+                                      : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                  }`}>
+                                    {account.status}
+                                  </span>
+                                  <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">
+                                    {account.accountType}
+                                  </span>
+                                </div>
+                                <p className="text-sm font-bold font-mono text-white truncate">
+                                  {account.mt5Login}
+                                </p>
+                                <p className="text-xs text-neutral-400 font-semibold truncate">
+                                  {account.server}
+                                </p>
+                              </div>
+
+                              {account.status === 'disconnected' ? (
+                                <button
+                                  onClick={() => handleReconnect(account)}
+                                  className="px-4 py-2 rounded-none cursor-pointer bg-emerald-600 text-white font-black text-xs uppercase tracking-wider hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(16,185,129,0.3)]"
+                                >
+                                  Reconnect
+                                </button>
+                              ) : (
+                                <span className="text-xs text-neutral-500 font-semibold">
+                                  Cannot recover
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
             </div>
 
             {/* COLUMN RIGHT: REALTIME INPUT FIELD PREVIEW (5 Cols) */}
@@ -527,6 +662,77 @@ export default function MT5ConnectionPage() {
                 className="flex-1 px-4 py-3 cursor-pointer  rounded-none bg-rose-600 text-white font-black text-xs uppercase tracking-widest hover:bg-rose-700 transition-colors shadow-[3px_3px_0px_0px_rgba(239,68,68,0.3)]"
               >
                 Disconnect
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Reconnect Modal */}
+      {showReconnectModal && reconnectingAccount && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setShowReconnectModal(false)}
+        >
+          <div
+            className="bg-neutral-950 border-2 border-emerald-900 rounded-none shadow-[8px_8px_0px_0px_rgba(16,185,129,0.2)] w-full max-w-md p-6 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowReconnectModal(false)}
+              className="absolute top-3 right-3 text-neutral-500 hover:text-neutral-300"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h2 className="text-lg font-black uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Link2 className="h-5 w-5 text-emerald-400" />
+              Reconnect Account
+            </h2>
+
+            <div className="space-y-4 mb-6">
+              <div className="p-3 bg-neutral-900/60 border border-neutral-800">
+                <p className="text-xs text-neutral-400 font-semibold mb-1">Account</p>
+                <p className="text-sm font-bold font-mono text-white">{reconnectingAccount.mt5Login}</p>
+                <p className="text-xs text-neutral-400 font-semibold">{reconnectingAccount.server}</p>
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 flex items-center gap-1.5 mb-2">
+                  <Key className="h-3 w-3" /> Trading Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  placeholder="••••••••••••"
+                  value={reconnectPassword}
+                  onChange={(e) => setReconnectPassword(e.target.value)}
+                  className="w-full rounded-none bg-neutral-900 border border-neutral-800 p-3 text-sm text-white font-mono placeholder:text-neutral-600 focus:outline-none focus:border-emerald-500 transition-colors"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowReconnectModal(false)}
+                disabled={isConnecting}
+                className="flex-1 px-4 py-3 cursor-pointer rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmReconnect}
+                disabled={isConnecting}
+                className="flex-1 px-4 py-3 cursor-pointer rounded-none bg-emerald-600 text-white font-black text-xs uppercase tracking-wider hover:bg-emerald-700 transition-colors shadow-[3px_3px_0px_0px_rgba(16,185,129,0.3)] disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {isConnecting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Connecting...
+                  </>
+                ) : (
+                  'Reconnect'
+                )}
               </button>
             </div>
           </div>
