@@ -9,6 +9,7 @@ import {
   Radio,
   CandlestickChart,
   History,
+  Gem,
   Users,
   Send,
   MessageCircle,
@@ -82,8 +83,8 @@ export default function AdminSidebar({
     { name: "Overview", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     // { name: "Live Streams", icon: Radio, href: `${basePath}/live-signals` },
     // { name: "Active Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
-    // { name: "Master History", icon: History, href: `${basePath}/trade-history` },
     { name: "BOT Provider", icon: Send, href: `${basePath}/providers` },
+    { name: "Subscriptions", icon: Gem, href: `${basePath}/subscription` },
 
     // === MANAGEMENT ===
     // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },

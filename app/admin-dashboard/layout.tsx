@@ -5,29 +5,39 @@ import { usePathname } from "next/navigation";
 import AdminRightSidebar from "@/components/AdminDashboard/AdminRightSidebar";
 import AdminNav from "@/components/AdminDashboard/AdminNav";
 import AdminLeftSidebar from "@/components/AdminDashboard/AdminLeftSidebar";
+import AdminHeader from "@/components/AdminDashboard/AdminHeader";
 
-export default function UserDashboardLayout({
+export default function AdminDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
   const pathname = usePathname();
   const hideRightSidebar = pathname === "/admin-dashboard/" || pathname === "/admin-dashboard/";
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex">
+    <div className="h-screen bg-background overflow-hidden">
+      {/* Header - Mobile only */}
+      <AdminHeader
+        onLeftClick={() => setLeftSidebarOpen(true)}
+        onRightClick={() => setRightSidebarOpen(true)}
+      />
+
+      <div className="flex h-screen">
         {/* Sidebar - Desktop */}
-        <AdminLeftSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <AdminLeftSidebar sidebarOpen={leftSidebarOpen} setSidebarOpen={setLeftSidebarOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 px-4 py-5 pb-30 lg:pb-0">
+        <main className="flex-1 min-w-0 overflow-y-auto px-4 py-5 pb-45 lg:pb-0 scrollbar-hide">
           {children}
         </main>
 
         {/* Right Sidebar - Desktop */}
-        {!hideRightSidebar && <AdminRightSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
+        {!hideRightSidebar && (
+          <AdminRightSidebar sidebarOpen={rightSidebarOpen} setSidebarOpen={setRightSidebarOpen} />
+        )}
       </div>
 
       {/* Bottom Navigation - Mobile */}

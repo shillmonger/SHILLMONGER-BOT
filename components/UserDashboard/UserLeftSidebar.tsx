@@ -11,6 +11,7 @@ import {
   Info,
   Lightbulb,
   HandFist,
+  Gem,
   Send,
   UsersRound,
   DatabaseX,
@@ -101,7 +102,7 @@ export default function UserSidebar({
   const navItems: NavItem[] = [
     // === HOME ===
     { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-      { name: "Subscription", icon: BarChart3, href: `${basePath}/subscription` },
+      { name: "Subscription", icon: Gem, href: `${basePath}/subscription` },
     {
       name: "MetaTrader 5",
       icon: Unplug,
