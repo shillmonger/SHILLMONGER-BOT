@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
   User,
-  Terminal,
+  History,
   Plus,
   LayoutDashboard,
   Settings,
@@ -37,6 +37,8 @@ export default function UserRightSidebar({
   const [countdown, setCountdown] = useState(10);
   const [userDb, setUserDb] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [mt5Account, setMt5Account] = useState<any>(null);
+  const [mt5Loading, setMt5Loading] = useState(true);
 
   // Fetch user data
   useEffect(() => {
@@ -55,6 +57,34 @@ export default function UserRightSidebar({
     };
 
     fetchUserData();
+  }, []);
+
+  // Fetch MT5 account data
+  useEffect(() => {
+    const fetchMt5Account = async () => {
+      try {
+        const response = await fetch('/api/user/mt5/account');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.accounts && data.accounts.length > 0) {
+            // Get the connected account or the most recent one
+            const connectedAccount = data.accounts.find((acc: any) => acc.status === 'connected') || data.accounts[0];
+            setMt5Account(connectedAccount);
+          } else {
+            setMt5Account(null);
+          }
+        } else {
+          setMt5Account(null);
+        }
+      } catch (error) {
+        console.error('Failed to fetch MT5 account data:', error);
+        setMt5Account(null);
+      } finally {
+        setMt5Loading(false);
+      }
+    };
+
+    fetchMt5Account();
   }, []);
 
   const basePath = "/user-dashboard";
@@ -180,15 +210,38 @@ export default function UserRightSidebar({
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-3">System Overview</h3>
         <div className="grid grid-cols-2 gap-2">
           {[
-            { label: "MT5 Connection", value: "Connected", active: true },
-            { label: "Telegram Conn.", value: "Connected", active: true },
-            { label: "Database", value: "Online", active: true },
-            { label: "Trading Bot", value: "Running", active: true },
+            { 
+              label: "MT5 Connection", 
+              value: mt5Loading ? "Loading..." : !mt5Account ? "Not Connected" : mt5Account.status === 'connected' ? "Connected" : mt5Account.status === 'disconnected' ? "Disconnected" : mt5Account.status === 'expired' ? "Expired" : "Not Connected",
+              color: mt5Loading ? "neutral" : !mt5Account ? "red" : mt5Account.status === 'connected' ? "emerald" : (mt5Account.status === 'disconnected' || mt5Account.status === 'expired') ? "yellow" : "red"
+            },
+            { 
+              label: "Telegram Conn.", 
+              value: mt5Loading ? "Loading..." : mt5Account?.telegramUsername ? "Connected" : "Not Connected",
+              color: mt5Loading ? "neutral" : mt5Account?.telegramUsername ? "emerald" : "red"
+            },
+            { 
+              label: "Database", 
+              value: loading ? "Loading..." : "Online",
+              color: loading ? "neutral" : "emerald"
+            },
+            { 
+              label: "Trading Bot", 
+              value: mt5Loading ? "Loading..." : mt5Account?.status === 'connected' ? "Running" : "Idle",
+              color: mt5Loading ? "neutral" : mt5Account?.status === 'connected' ? "emerald" : "red"
+            },
           ].map((status, index) => (
             <div key={index} className="border border-neutral-800 bg-neutral-900/20 p-2.5 flex flex-col justify-between">
               <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
               <div className="flex items-center gap-1.5">
-                <span className={`w-1.5 h-1.5 rounded-full ${status.active ? "bg-emerald-500" : "bg-red-500"}`} />
+                {/* Change this line by adding flex-shrink-0 */}
+<span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+  status.color === "emerald" ? "bg-emerald-500" : 
+  status.color === "yellow" ? "bg-yellow-500" : 
+  status.color === "amber" ? "bg-yellow-500" : 
+  status.color === "neutral" ? "bg-neutral-500" : 
+  "bg-red-500"
+}`} />
                 <span className="text-[10px] font-black uppercase tracking-wider text-neutral-200">{status.value}</span>
               </div>
             </div>
@@ -218,21 +271,32 @@ export default function UserRightSidebar({
       <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">MT5 Terminal</h3>
         <div className="space-y-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Broker</span> <span>IC Markets</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acc No.</span> <span className="font-mono">8273641</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Server</span> <span className="font-mono">Live-03</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Leverage</span> <span>1:500</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acct Type</span> <span>DEMO</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
-          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">$10,482.50</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Broker</span> <span>{mt5Loading ? '...' : mt5Account?.server?.split('-')[0] || 'N/A'}</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acc No.</span> <span className="font-mono">{mt5Loading ? '...' : mt5Account?.mt5Login || 'N/A'}</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Server</span> <span className="font-mono">{mt5Loading ? '...' : mt5Account?.server || 'N/A'}</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Acct Type</span> <span>{mt5Loading ? '...' : mt5Account?.accountType?.toUpperCase() || 'N/A'}</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Balance</span> <span className="text-emerald-400 font-mono">{mt5Loading ? '...' : mt5Account?.balance ? `${mt5Account.currency || 'USD'} ${mt5Account.balance.toLocaleString()}` : 'N/A'}</span></div>
+          <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">{mt5Loading ? '...' : mt5Account?.equity ? `${mt5Account.currency || 'USD'} ${mt5Account.equity.toLocaleString()}` : 'N/A'}</span></div>
           <div className="flex justify-between">
             <span className="text-neutral-500 text-[10px]">Status</span>
-            <span className="text-[9px] px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 font-black border border-emerald-500/20">CONNECTED</span>
+            <span className={`text-[9px] px-1.5 py-0.5 font-black border ${
+              mt5Loading 
+                ? 'bg-neutral-500/10 text-neutral-500 border-neutral-500/20'
+                : mt5Account?.status === 'connected'
+                  ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                  : mt5Account?.status === 'disconnected'
+                    ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                    : 'bg-rose-500/10 text-rose-500 border-rose-500/20'
+            }`}>
+              {mt5Loading ? '...' : mt5Account?.status?.toUpperCase() || 'N/A'}
+            </span>
           </div>
         </div>
-        <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-          Manage MT5
-        </button>
+        <Link href="/user-dashboard/mt5-connection">
+          <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+            Manage MT5
+          </button>
+        </Link>
       </div>
 
 
@@ -241,9 +305,9 @@ export default function UserRightSidebar({
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
 
         <div className="flex flex-col gap-2">
-          <Link href="/user-dashboard/mt5-connection">
+          <Link href="/user-dashboard/transactions">
             <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-              <Plus className="w-3.5 h-3.5" /> Connect MT5
+              <History className="w-3.5 h-3.5 text-neutral-400" /> Transactions
             </button>
           </Link>
 

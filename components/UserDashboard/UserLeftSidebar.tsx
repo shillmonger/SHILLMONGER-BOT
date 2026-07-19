@@ -14,12 +14,16 @@ import {
   Send,
   UsersRound,
   DatabaseX,
+  DatabasePlus,
   Unplug,
   Trophy,
   Package,
   ChartColumnBig,
   CandlestickChart,
+  ServerCog,
+  Headset,
   BarChart3,
+  BadgeQuestionMark,
   History,
   CreditCard,
   LinkIcon,
@@ -55,7 +59,20 @@ export default function UserSidebar({
   const router = useRouter();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
-  const [isCollapsed, setIsCollapsed] = useState(false); // Controls desktop collapse state
+  const [isCollapsed, setIsCollapsed] = useState(true); // Controls desktop collapse state - default hidden
+
+  // Load collapse state from localStorage on mount (desktop only)
+  useEffect(() => {
+    const savedState = localStorage.getItem('leftSidebarCollapsed');
+    if (savedState !== null) {
+      setIsCollapsed(savedState === 'true');
+    }
+  }, []);
+
+  // Save collapse state to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('leftSidebarCollapsed', isCollapsed.toString());
+  }, [isCollapsed]);
 
   // Group status tracking for collapsible panels
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
@@ -91,7 +108,7 @@ export default function UserSidebar({
       children: [
         {
           name: "Connect MT5",
-          icon: DatabaseX,
+          icon: DatabasePlus,
           href: `${basePath}/mt5-connection`,
         },
         // {
@@ -100,8 +117,8 @@ export default function UserSidebar({
         //   href: `${basePath}/mt5-accounts/manage`,
         // },
         {
-          name: "Account Setup",
-          icon: LinkIcon,
+          name: "How to setup",
+          icon: BadgeQuestionMark,
           href: `${basePath}/mt5-accounts/details`,
         },
       ],
@@ -126,7 +143,7 @@ export default function UserSidebar({
     ],
   },
      { name: "Notifications", icon: Bell, href: `${basePath}/notifications` },
-     { name: "Help Center", icon: HandFist, href: `${basePath}/help-center` },
+     { name: "Help Center", icon: Headset, href: `${basePath}/help-center` },
      { name: "Account Settings", icon: Settings, href: `${basePath}/account-setting` },
   ];
 
@@ -151,7 +168,7 @@ export default function UserSidebar({
       {/* Desktop Sidebar */}
       <aside
         className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-15" : "w-65"
+          isCollapsed ? "w-20" : "w-65"
         }`}
       >
         {/* Header */}
@@ -159,7 +176,7 @@ export default function UserSidebar({
           {!isCollapsed && (
             <div className="flex flex-col overflow-hidden transition-opacity duration-200">
               <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50 truncate">
-                XAUUSD FX<span className="text-neutral-50 font-black"> BOT</span>
+                XAUUSD<span className="text-neutral-50 font-black"> BOT</span>
               </h1>
               <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase truncate">
                 Your Investments, Our Traders

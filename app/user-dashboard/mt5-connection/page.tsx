@@ -9,6 +9,7 @@ import {
   User,
   Key,
   Send,
+  UserRoundKey,
   Link2,
   Link2Off,
   AlertTriangle,
@@ -16,7 +17,9 @@ import {
   Loader2,
   Clock,
   CreditCard,
-  History
+  History,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -55,6 +58,7 @@ export default function MT5ConnectionPage() {
   const [showReconnectModal, setShowReconnectModal] = useState(false);
   const [reconnectingAccount, setReconnectingAccount] = useState<ConnectionDetails | null>(null);
   const [reconnectPassword, setReconnectPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Fetch user's all MT5 accounts on page load
   useEffect(() => {
@@ -285,7 +289,7 @@ export default function MT5ConnectionPage() {
                     <div className="border-b border-neutral-800 pb-3 mb-6 flex items-center justify-between">
                       <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
                         <Link2 className="h-5 w-5 text-neutral-400" />
-                        Exness Terminal Configuration
+                        Exness Configuration
                       </h2>
                       <Cpu className="h-4 w-4 text-neutral-400" />
                     </div>
@@ -380,14 +384,23 @@ export default function MT5ConnectionPage() {
                           <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
                             <Key className="h-3 w-3" /> Trading Password
                           </label>
-                          <input 
-                            type="password" 
-                            required
-                            placeholder="••••••••••••"
-                            value={tradingPassword}
-                            onChange={(e) => setTradingPassword(e.target.value)}
-                            className="w-full rounded-none bg-neutral-900 border border-neutral-800 p-3 text-sm text-white font-mono placeholder:text-neutral-600 focus:outline-none focus:border-white transition-colors"
-                          />
+                          <div className="relative">
+                            <input 
+                              type={showPassword ? "text" : "password"} 
+                              required
+                              placeholder="••••••••••••"
+                              value={tradingPassword}
+                              onChange={(e) => setTradingPassword(e.target.value)}
+                              className="w-full rounded-none bg-neutral-900 border border-neutral-800 p-3 text-sm text-white font-mono placeholder:text-neutral-600 focus:outline-none focus:border-white transition-colors pr-10"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => setShowPassword(!showPassword)}
+                              className="absolute right-3 cursor-pointer top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors"
+                            >
+                              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                            </button>
+                          </div>
                         </div>
                       </div>
 
@@ -403,8 +416,8 @@ export default function MT5ConnectionPage() {
                           </>
                         ) : (
                           <>
-                            <ShieldCheck className="h-4 w-4" />
-                            Initialize AI Bridge Connection
+                            <UserRoundKey className="h-4 w-4" />
+                            Connect Account
                           </>
                         )}
                       </button>
@@ -490,7 +503,7 @@ export default function MT5ConnectionPage() {
                       className="w-full rounded-none cursor-pointer bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono font-black uppercase tracking-wider p-3 hover:bg-rose-500/20 transition-all flex items-center justify-center gap-2"
                     >
                       <Link2Off className="h-4 w-4" />
-                      Disconnect Bridge Architecture
+                      Disconnect Account
                     </button>
                   </CardContent>
                 </Card>
@@ -565,7 +578,7 @@ export default function MT5ConnectionPage() {
                 <CardContent className="p-6">
                   <div className="border-b border-neutral-800 pb-3 mb-4">
                     <h2 className="text-sm font-black uppercase tracking-tighter text-neutral-400">
-                      Live Stream Registry Preview
+                      Live Preview
                     </h2>
                   </div>
                   
@@ -632,7 +645,7 @@ export default function MT5ConnectionPage() {
           >
             <button
               onClick={() => setShowDisconnectModal(false)}
-              className="absolute top-3 right-3 text-neutral-500 hover:text-neutral-300"
+              className="absolute top-3 right-3 cursor-pointer text-neutral-500 hover:text-neutral-300"
             >
               <X className="w-5 h-5" />
             </button>
@@ -680,7 +693,7 @@ export default function MT5ConnectionPage() {
           >
             <button
               onClick={() => setShowReconnectModal(false)}
-              className="absolute top-3 right-3 text-neutral-500 hover:text-neutral-300"
+              className="absolute top-3 right-3 cursor-pointer text-neutral-500 hover:text-neutral-300"
             >
               <X className="w-5 h-5" />
             </button>
