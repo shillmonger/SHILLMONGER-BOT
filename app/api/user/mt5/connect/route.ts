@@ -3,13 +3,13 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import MT5Account from '@/models/MT5Account';
 
-// Helper function to calculate demo account expiration date (7 days excluding weekends)
+// Helper function to calculate demo account expiration date (5 trading days excluding weekends)
 function calculateDemoExpiration(): Date {
   const startDate = new Date();
   let tradingDays = 0;
   let currentDate = new Date(startDate);
 
-  while (tradingDays < 7) {
+  while (tradingDays < 5) {
     currentDate.setDate(currentDate.getDate() + 1);
     const dayOfWeek = currentDate.getDay();
     
