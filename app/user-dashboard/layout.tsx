@@ -30,7 +30,7 @@ export default function UserDashboardLayout({
         <UserLeftSidebar sidebarOpen={leftSidebarOpen} setSidebarOpen={setLeftSidebarOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 min-w-0 overflow-y-auto px-4 py-5 pb-45 lg:pb-0">
+        <main className="flex-1 min-w-0 overflow-y-auto px-4 py-5 pb-45 lg:pb-0 scrollbar-hide">
           {children}
         </main>
 

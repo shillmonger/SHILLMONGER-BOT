@@ -27,11 +27,11 @@ export default function UserMobileHeader({
         aria-label="Open menu"
         className="p-2 -ml-2 hover:bg-neutral-800 rounded-lg transition-colors"
       >
-        <Menu className="w-6 h-6" />
+        <Menu className="w-5 h-5" />
       </button>
 
-      <span className="text-sm font-black uppercase tracking-[0.2em]">
-        Shillmonger
+      <span className="text-lg font-black uppercase tracking-[0.2em]">
+        XAUUSD BOT
       </span>
 
       <button
@@ -39,7 +39,7 @@ export default function UserMobileHeader({
         aria-label="Open panel"
         className="p-2 -mr-2 hover:bg-neutral-800 rounded-lg transition-colors"
       >
-        <Menu className="w-6 h-6" />
+        <Menu className="w-5 h-5" />
       </button>
     </header>
   );
