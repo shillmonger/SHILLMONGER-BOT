@@ -156,7 +156,7 @@ export default function UserRightSidebar({
         <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
           <div className="flex flex-col">
             <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
-              SECURE<span className="text-neutral-50 font-black"> RISE</span>
+              ADMIN<span className="text-neutral-50 font-black"> SECTION</span>
             </h1>
             <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
               Copier Terminal & Control

@@ -73,6 +73,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check for existing subscription with same plan type
+    const existingSubscription = await Subscription.findOne({
+      userId: decoded.userId,
+      planType: planType,
+      status: { $in: ['pending', 'approved'] }
+    });
+
+    if (existingSubscription) {
+      const statusMessage = existingSubscription.status === 'pending' 
+        ? 'You already have a pending subscription for this plan type. Please wait for approval.' 
+        : 'You already have an active subscription for this plan type.';
+      
+      return NextResponse.json(
+        { error: statusMessage },
+        { status: 400 }
+      );
+    }
+
+    // If subscription exists but is expired or rejected, allow re-submission
+    // (No additional check needed since we only block pending/approved)
+
     // Convert file to buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);

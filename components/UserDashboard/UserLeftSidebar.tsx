@@ -112,15 +112,10 @@ export default function UserSidebar({
           icon: DatabasePlus,
           href: `${basePath}/mt5-connection`,
         },
-        // {
-        //   name: "Connect TG",
-        //   icon: Send,
-        //   href: `${basePath}/mt5-accounts/manage`,
-        // },
         {
           name: "How to setup",
           icon: BadgeQuestionMark,
-          href: `${basePath}/mt5-accounts/details`,
+          href: `${basePath}/setup`,
         },
       ],
     },

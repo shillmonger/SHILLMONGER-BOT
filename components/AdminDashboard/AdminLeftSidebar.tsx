@@ -48,9 +48,20 @@ export default function AdminSidebar({
   const router = useRouter();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [countdown, setCountdown] = useState(10);
-  
-  // Desktop sidebar expand/collapse state
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true); // Controls desktop collapse state - default hidden
+
+  // Load collapse state from localStorage on mount (desktop only)
+  useEffect(() => {
+    const savedState = localStorage.getItem('adminLeftSidebarCollapsed');
+    if (savedState !== null) {
+      setIsCollapsed(savedState === 'true');
+    }
+  }, []);
+
+  // Save collapse state to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('adminLeftSidebarCollapsed', isCollapsed.toString());
+  }, [isCollapsed]);
 
   // Group status tracking for collapsible sub-menus
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
