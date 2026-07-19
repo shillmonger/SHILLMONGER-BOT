@@ -241,44 +241,43 @@ export default function DashboardPage() {
                 SECTION 4: RECENT TRADING ACTIVITY (2 Columns Wide)
                ==================================================== */}
             <div className="lg:col-span-2 space-y-6">
-              <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                <CardContent className="px-6">
-                  <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
-                    <h2 className="text-lg font-black uppercase tracking-tighter">
-                      Recent Trading Activity
-                    </h2>
-                    <ArrowRightLeft className="h-4 w-4 text-neutral-400" />
-                  </div>
-                  
-                  {/* Table Wrap for Mobile Responsive Horizontal Scroll */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-neutral-800 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-                          <th className="pb-3 pr-2">Date</th>
-                          <th className="pb-3 px-2">Symbol</th>
-                          <th className="pb-3 px-2">Type</th>
-                          <th className="pb-3 px-2">Entry</th>
-                          <th className="pb-3 px-2">Exit</th>
-                          <th className="pb-3 px-2 text-right">Profit/Loss</th>
-                          <th className="pb-3 pl-2 text-right">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
-                        {/* Row 1 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-16</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3365.20</td>
-                          <td className="py-3 px-2">3371.60</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$64.20</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
+  <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+    <CardContent className="px-6">
+      <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
+        <h2 className="text-lg font-black uppercase tracking-tighter">
+          Recent Trading Activity
+        </h2>
+        <ArrowRightLeft className="h-4 w-4 text-neutral-400" />
+      </div>
+      
+      {/* Table Wrap for Mobile Responsive Horizontal Scroll */}
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[640px] text-left border-collapse">
+          <thead>
+            <tr className="border-b border-neutral-800 text-[10px] font-black uppercase tracking-widest text-neutral-400">
+              <th className="pb-3 pr-2 whitespace-nowrap">Date</th>
+              <th className="pb-3 px-2 whitespace-nowrap">Symbol</th>
+              <th className="pb-3 px-2 whitespace-nowrap">Type</th>
+              <th className="pb-3 px-2 whitespace-nowrap">Entry</th>
+              <th className="pb-3 px-2 whitespace-nowrap">Exit</th>
+              <th className="pb-3 px-2 text-right whitespace-nowrap">Profit/Loss</th>
+              <th className="pb-3 pl-2 text-right whitespace-nowrap">Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
+            <tr className="hover:bg-neutral-900/30">
+              <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+              <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+              <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+              <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+              <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+              <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+              <td className="py-3 pl-2 text-right">
+                <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+                  Closed
+                </span>
+              </td>
+            </tr>
                         {/* Row 2 */}
                         <tr className="hover:bg-neutral-900/30">
                           <td className="py-3 pr-2 text-neutral-400">2026-07-16</td>

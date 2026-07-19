@@ -5,29 +5,39 @@ import { usePathname } from "next/navigation";
 import UserRightSidebar from "@/components/UserDashboard/UserRightSidebar";
 import UserNav from "@/components/UserDashboard/UserNav";
 import UserLeftSidebar from "@/components/UserDashboard/UserLeftSidebar";
+import UserHeader from "@/components/UserDashboard/UserHeader";
 
 export default function UserDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
   const pathname = usePathname();
   const hideRightSidebar = pathname === "/user-dashboard/" || pathname === "/user-dashboard/";
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex">
+    <div className="h-screen bg-background overflow-hidden">
+      {/* Header - Mobile only */}
+      <UserHeader
+        onLeftClick={() => setLeftSidebarOpen(true)}
+        onRightClick={() => setRightSidebarOpen(true)}
+      />
+
+      <div className="flex h-screen">
         {/* Sidebar - Desktop */}
-        <UserLeftSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <UserLeftSidebar sidebarOpen={leftSidebarOpen} setSidebarOpen={setLeftSidebarOpen} />
 
         {/* Main Content */}
-        <main className="flex-1 px-4 py-5 pb-30 lg:pb-0">
+        <main className="flex-1 min-w-0 overflow-y-auto px-4 py-5 pb-45 lg:pb-0">
           {children}
         </main>
 
         {/* Right Sidebar - Desktop */}
-        {!hideRightSidebar && <UserRightSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
+        {!hideRightSidebar && (
+          <UserRightSidebar sidebarOpen={rightSidebarOpen} setSidebarOpen={setRightSidebarOpen} />
+        )}
       </div>
 
       {/* Bottom Navigation - Mobile */}

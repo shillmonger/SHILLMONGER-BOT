@@ -34,9 +34,9 @@ export default function UserNav() {
       className="
         fixed bottom-0 left-0 right-0 z-50 
         flex justify-around items-center 
-        bg-background/95 backdrop-blur-xl
+        bg-neutral-950 backdrop-blur-xl
         py-2 pb-safe-bottom px-2
-        border-t border-border
+        border-t-2 border-black
         shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] 
         lg:hidden select-none
       "
@@ -50,18 +50,18 @@ export default function UserNav() {
             href={href}
             className={`
               flex flex-col items-center transition-all duration-300
-              ${active ? "text-foreground scale-105" : "text-muted-foreground hover:text-foreground"}
+              ${active ? "text-white scale-105" : "text-neutral-400 hover:text-white"}
             `}
           >
             <div
               className={`
                 flex items-center justify-center 
-                w-12 h-12 rounded-lg mb-1.5 
+                w-12 h-12 rounded-none mb-1.5 
                 transition-all duration-300
                 ${
                   active
-                    ? "bg-foreground text-background shadow-lg shadow-black/20"
-                    : "bg-secondary/50"
+                    ? "bg-white text-neutral-950 shadow-lg shadow-black/20"
+                    : "bg-neutral-800/50"
                 }
               `}
             >
