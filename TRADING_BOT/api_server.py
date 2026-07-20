@@ -130,8 +130,7 @@ async def validate_mt5_connection(request: MT5ValidationRequest):
     """
     try:
         # Initialize MT5 with dedicated validator terminal path (without credentials first)
-        # Note: Using MT5_Master temporarily due to MT5_Validator corruption
-        validator_path = r"C:\Program Files\MT5_Master\terminal64.exe"
+        validator_path = r"C:\Program Files\MT5_Validator\terminal64.exe"
         logger.info(
             f"""
 Initializing MT5 validator at: {validator_path}
@@ -141,8 +140,8 @@ PASSWORD LENGTH = {len(request.password)}
 """
         )
 
-        # Initialize terminal first (shorter timeout)
-        if not mt5.initialize(path=validator_path, timeout=30000):
+        # Initialize terminal first (increased timeout for terminal launch)
+        if not mt5.initialize(path=validator_path, timeout=60000):
             error = mt5.last_error()
             logger.error(f"MT5 initialization failed: {error}")
             return {

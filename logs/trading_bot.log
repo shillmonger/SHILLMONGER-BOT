@@ -431,3 +431,137 @@ SL 4002
 2026-07-20 06:51:05.393 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
 2026-07-20 06:51:06.124 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Ticket=2980135990
 2026-07-20 06:51:06.138 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2980135990
+2026-07-20 13:08:33.871 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:08:36.962 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:08:45.559 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-20 13:08:45.562 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 13:09:10.925 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:09:10.925 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-20 13:09:35.532 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:09:35.538 | SUCCESS  | api_server:validate_mt5_connection:195 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-20 13:10:35.441 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 13:10:36.156 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 13:10:36.157 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 13:10:36.157 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4005
+TP 4015
+SL 4002
+2026-07-20 13:10:36.157 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 13:10:36.170 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 13:10:36.171 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4005\nTP 4015\nSL 4002', symbol='XAUUSDm', direction='BUY', entry=4005.0, entry_high=None, entry_low=None, stop_loss=4002.0, take_profits=[4015.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 20, 12, 10, 36, 170398))
+2026-07-20 13:10:36.174 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 13:10:36.175 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $110.21, Open trades: 0/10
+2026-07-20 13:10:36.176 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $110.21, Lot size: 0.01/0.02
+2026-07-20 13:10:36.176 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-20 13:10:36.177 | ERROR    | mt5.trader:execute_trade:134 - Trade failed 10016 Invalid stops
+2026-07-20 13:10:36.177 | ERROR    | telegram.listener:handler:111 - Trade failed: Invalid stops
+2026-07-20 13:11:16.988 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 13:11:17.159 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗙𝗢𝗥𝗘𝗫 𝗠𝗔𝗥𝗞𝗘𝗧 𝗣𝗥𝗢
+2026-07-20 13:11:17.160 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001192590252
+2026-07-20 13:11:17.160 | INFO     | telegram.listener:handler:70 - Next signal will be posted in the VIP group — don’t miss it!
+Join now 
+https://t.me/m/gw7eDuYHZTVk
+https://t.me/m/gw7eDuYHZTVk
+2026-07-20 13:11:17.161 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 13:11:17.162 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-20 13:11:58.319 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 13:11:58.319 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 13:11:58.320 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 13:11:58.320 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4015
+TP 4006
+SL 4021
+2026-07-20 13:11:58.321 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 13:11:58.321 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 13:11:58.322 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4015\nTP 4006\nSL 4021', symbol='XAUUSDm', direction='SELL', entry=4015.0, entry_high=None, entry_low=None, stop_loss=4021.0, take_profits=[4006.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 20, 12, 11, 58, 321172))
+2026-07-20 13:11:58.322 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 13:11:58.323 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $110.21, Open trades: 0/10
+2026-07-20 13:11:58.324 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $110.21, Lot size: 0.01/0.02
+2026-07-20 13:11:58.324 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-20 13:11:58.469 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2981573771
+2026-07-20 13:11:58.470 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2981573771
+2026-07-20 13:13:10.684 | INFO     | api_server:validate_mt5_connection:135 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Master\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:14:16.782 | ERROR    | api_server:validate_mt5_connection:162 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-20 13:17:40.690 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:17:44.371 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:17:50.773 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:17:50.774 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-20 13:17:54.682 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-20 13:18:01.081 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:18:01.083 | ERROR    | api_server:validate_mt5_connection:146 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-20 13:18:47.701 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:18:50.879 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:18:56.436 | ERROR    | mt5.connector:connect:28 - MT5 initialization failed: (-6, 'Terminal: Authorization failed')
+2026-07-20 13:20:54.870 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:20:58.616 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:20:58.618 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-20 13:20:58.618 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 13:21:10.085 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:21:13.245 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:21:16.974 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-20 13:21:16.975 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 13:21:24.704 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:21:24.704 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-20 13:21:39.964 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:22:27.463 | ERROR    | api_server:validate_mt5_connection:161 - MT5 login failed: (-6, 'Terminal: Authorization failed')
+2026-07-20 13:23:02.484 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:23:18.833 | ERROR    | api_server:validate_mt5_connection:161 - MT5 login failed: (-10001, 'IPC send failed')
+2026-07-20 13:25:44.612 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:25:47.740 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 13:25:52.358 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-20 13:25:52.359 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 13:26:05.146 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:26:05.146 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-20 13:26:16.260 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9 ]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:26:47.731 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 13:26:48.480 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝐆𝐨𝐥𝐝 𝐌𝐚𝐫𝐤𝐞𝐭 𝐓𝐫𝐚𝐝𝐞 𝐰𝐢𝐭𝐡 𝐁𝐞𝐬𝐭™
+2026-07-20 13:26:48.480 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001799802494
+2026-07-20 13:26:48.480 | INFO     | telegram.listener:handler:70 - #XAUUSD Result Update ✅
+
+⚡️ Precision Perfected! 340+ Pips Secured 💥
+🏹 Entry: 4040→ Target Hit: 4006
+
+No drawdown, no hesitation — just flawless execution powered by SMC + Pure Price Action. 💯
+
+🏆 #FatherOfGold | #SMC #Mer_Trader
+2026-07-20 13:26:48.481 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 13:26:48.501 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-20 13:27:21.580 | ERROR    | api_server:validate_mt5_connection:161 - MT5 login failed: (-10005, 'IPC timeout')
+2026-07-20 13:28:20.599 | SUCCESS  | api_server:get_telegram_groups:91 - Fetched 28 Telegram groups
+2026-07-20 13:31:39.781 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 13:31:39.782 | SUCCESS  | api_server:startup_event:33 - FastAPI server started
+2026-07-20 13:32:37.691 | INFO     | api_server:validate_mt5_connection:134 - 
+Initializing MT5 validator at: C:\Program Files\MT5_Validator\terminal64.exe
+LOGIN = [436747484]
+SERVER = [Exness-MT5Trial9]
+PASSWORD LENGTH = 15
+
+2026-07-20 13:32:51.338 | SUCCESS  | api_server:validate_mt5_connection:194 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
