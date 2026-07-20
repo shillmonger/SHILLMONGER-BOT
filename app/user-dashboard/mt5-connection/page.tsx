@@ -41,7 +41,7 @@ interface ConnectionDetails {
 
 export default function MT5ConnectionPage() {
   // Form States
-  const [telegramUsername, setTelegramUsername] = useState("");
+  const [telegramUsername, setTelegramUsername] = useState("fetching...");
   const [server, setServer] = useState("");
   const [mt5Login, setMt5Login] = useState("");
   const [tradingPassword, setTradingPassword] = useState("");

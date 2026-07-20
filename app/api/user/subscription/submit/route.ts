@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { v2 as cloudinary } from 'cloudinary';
 import Subscription from '@/models/Subscription';
+import User from '@/models/User';
 
 // Configure Cloudinary
 const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
@@ -145,6 +146,43 @@ export async function POST(request: NextRequest) {
       expirationDate,
     });
 
+    // Send Telegram notification to admin users
+    try {
+      const adminUsers = await User.find({ 
+        role: 'admin',
+        telegram_connected: true,
+        telegram_chat_id: { $exists: true, $ne: null }
+      });
+
+      // Fetch the user who submitted the subscription
+      const submittingUser = await User.findById(decoded.userId);
+
+      if (adminUsers.length > 0) {
+        const message = `🔔 *New Subscription Pending*\n\n` +
+          `👤 *User Details*\n` +
+          `Username: ${submittingUser?.username || 'N/A'}\n` +
+          `Email: ${submittingUser?.email || 'N/A'}\n` +
+          `Profile: ${submittingUser?.profileImage ? '✅ Has profile image' : '❌ No profile image'}\n\n` +
+          `📦 *Subscription Details*\n` +
+          `Plan: ${planType}\n` +
+          `Amount: $${amount}\n` +
+          `Account Size: ${accountSize}\n` +
+          `Duration: ${duration}\n` +
+          `Lot Size: ${lotSize}\n` +
+          `Max Trades: ${maxTrades}\n` +
+          `Target: ${targetLabel}\n` +
+          `Trading Volume: ${tradingVolume}\n\n` +
+          `Please review and approve/reject in the admin panel.`;
+
+        for (const admin of adminUsers) {
+          await sendTelegramMessage(parseInt(admin.telegram_chat_id!), message);
+        }
+      }
+    } catch (notificationError) {
+      console.error('Failed to send Telegram notification to admins:', notificationError);
+      // Don't fail the subscription if notification fails
+    }
+
     return NextResponse.json(
       { 
         success: true, 
@@ -159,5 +197,32 @@ export async function POST(request: NextRequest) {
       { error: 'Internal server error' },
       { status: 500 }
     );
+  }
+}
+
+async function sendTelegramMessage(chatId: number, text: string) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  
+  if (!botToken) {
+    console.error('TELEGRAM_BOT_TOKEN not configured');
+    return;
+  }
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: 'Markdown',
+      }),
+    });
+  } catch (error) {
+    console.error('Error sending Telegram message:', error);
   }
 }
