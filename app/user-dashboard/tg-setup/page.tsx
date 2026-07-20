@@ -67,9 +67,8 @@ export default function TelegramSetupPage() {
       // 2. Open Telegram bot in new tab with token
       window.open(`https://t.me/ShillmongerBot?start=${data.token}`, '_blank');
       
-      // Stop loading state since user will complete connection in Telegram
+      // Stop loading state - user will complete connection in Telegram
       setIsLoading(false);
-      setSuccess(true);
       
     } catch (err) {
       setIsLoading(false);
@@ -110,18 +109,21 @@ export default function TelegramSetupPage() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-950 font-sans">
-      <main className="flex items-center justify-center">
+      <main className="flex items-start justify-center">
         <div className="w-full max-w-7xl space-y-8">
-          
+
           {/* ====================================================
               SECTION 1: HERO
              ==================================================== */}
-          <div className="text-center space-y-4 ">
-            <h1 className="text-3xl md:text-3xl font-black uppercase tracking-tighter text-neutral-950">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#2AABEE] to-[#229ED9] mb-2 shadow-[0_4px_20px_-4px_rgba(34,158,217,0.5)]">
+              <Send className="w-6 h-6 text-white" fill="white" strokeWidth={1} />
+            </div>
+            <h1 className="text-3xl font-black uppercase tracking-tighter text-neutral-950">
               Connect Telegram
             </h1>
-            <p className="text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-              Securely connect your Telegram account to receive important notifications and enable Telegram-powered features.
+            <p className="text-sm text-neutral-600 leading-relaxed max-w-md mx-auto">
+              Securely link your Telegram account to receive notifications and enable Telegram-powered features.
             </p>
           </div>
 
@@ -129,13 +131,13 @@ export default function TelegramSetupPage() {
               SECTION 2: SUCCESS ALERT
              ==================================================== */}
           {success && (
-            <div className="p-5 bg-emerald-500/10 border-2 border-emerald-500/20 flex items-start gap-4 animate-in fade-in slide-in-from-top-2 duration-500">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400 flex-shrink-0 mt-0.5 animate-bounce" />
+            <div className="p-4 bg-emerald-500/10 border-2 border-emerald-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
+              <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-black text-emerald-400 uppercase tracking-wider mb-1">
+                <p className="text-sm font-black text-emerald-600 uppercase tracking-wider mb-0.5">
                   Telegram connected successfully
                 </p>
-                <p className="text-xs text-emerald-300">
+                <p className="text-xs text-emerald-700/80">
                   You can now receive notifications from our platform.
                 </p>
               </div>
@@ -146,13 +148,13 @@ export default function TelegramSetupPage() {
               SECTION 3: ERROR ALERT
              ==================================================== */}
           {error && (
-            <div className="p-5 bg-red-500/10 border-2 border-red-500/20 flex items-start gap-4 animate-in fade-in slide-in-from-top-2 duration-500">
-              <AlertCircle className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5 animate-pulse" />
+            <div className="p-4 bg-red-500/10 border-2 border-red-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
+              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-black text-red-400 uppercase tracking-wider mb-1">
+                <p className="text-sm font-black text-red-600 uppercase tracking-wider mb-0.5">
                   Connection Failed
                 </p>
-                <p className="text-xs text-red-300">
+                <p className="text-xs text-red-700/80">
                   {error}
                 </p>
               </div>
@@ -163,19 +165,19 @@ export default function TelegramSetupPage() {
               SECTION 4: CONNECTION STATUS CARD
              ==================================================== */}
           <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <CardContent className="px-8 py-8">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-lg font-black uppercase tracking-tighter text-white mb-1">
+            <CardContent className="px-6 py-6 sm:px-8 sm:py-8">
+              <div className="flex items-center justify-between mb-6 gap-3">
+                <div className="min-w-0">
+                  <h3 className="text-base sm:text-lg font-black uppercase tracking-tighter text-white mb-1">
                     Connection Status
                   </h3>
                   <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
                     Current Telegram Link Status
                   </p>
                 </div>
-                <div className={`px-4 py-2 border text-[11px] font-black uppercase tracking-widest ${
+                <div className={`flex-shrink-0 px-3 py-1.5 border text-[10px] font-black uppercase tracking-widest whitespace-nowrap ${
                   isConnected 
-                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
+                    ? "bg-[#229ED9]/10 text-[#4FC3F7] border-[#229ED9]/30" 
                     : "bg-neutral-800 text-neutral-400 border-neutral-700"
                 }`}>
                   {isConnected ? "Connected" : "Not Connected"}
@@ -185,7 +187,7 @@ export default function TelegramSetupPage() {
               {!isConnected ? (
                 <div className="space-y-6">
                   <div className="flex items-center gap-4 p-4 bg-neutral-900/60 border border-neutral-800">
-                    <CircleOff className="w-8 h-8 text-red-400 flex-shrink-0" />
+                    <CircleOff className="w-7 h-7 text-red-400 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-bold text-white mb-1">
                         Your Telegram account has not been linked yet
@@ -198,7 +200,7 @@ export default function TelegramSetupPage() {
                   <button
                     onClick={handleConnectTelegram}
                     disabled={isLoading}
-                    className="w-full px-8 py-4 bg-neutral-50 text-neutral-950 font-black text-sm uppercase tracking-widest hover:bg-neutral-200 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 hover:translate-x-1"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-sm uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 border-2 border-black"
                   >
                     {isLoading ? (
                       <>
@@ -207,7 +209,7 @@ export default function TelegramSetupPage() {
                       </>
                     ) : (
                       <>
-                        <Send className="w-5 h-5" />
+                        <Send className="w-5 h-5" fill="white" strokeWidth={1} />
                         Connect Telegram
                       </>
                     )}
@@ -215,13 +217,13 @@ export default function TelegramSetupPage() {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {telegramData.username && (
                       <div className="p-4 bg-neutral-900/60 border border-neutral-800">
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Username
                         </p>
-                        <p className="text-base font-mono font-bold text-white">
+                        <p className="text-sm sm:text-base font-mono font-bold text-white truncate">
                           {telegramData.username}
                         </p>
                       </div>
@@ -231,7 +233,7 @@ export default function TelegramSetupPage() {
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Telegram ID
                         </p>
-                        <p className="text-base font-mono font-bold text-white">
+                        <p className="text-sm sm:text-base font-mono font-bold text-white truncate">
                           {telegramData.telegramId}
                         </p>
                       </div>
@@ -241,17 +243,17 @@ export default function TelegramSetupPage() {
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Connected Date
                         </p>
-                        <p className="text-base font-mono font-bold text-white">
+                        <p className="text-sm sm:text-base font-mono font-bold text-white truncate">
                           {telegramData.connectedDate}
                         </p>
                       </div>
                     )}
                   </div>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={handleConnectTelegram}
                       disabled={isLoading}
-                      className="flex-1 px-6 py-3 bg-neutral-50 text-neutral-950 font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-all duration-300 shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border-2 border-black"
                     >
                       {isLoading ? (
                         <>
@@ -279,10 +281,10 @@ export default function TelegramSetupPage() {
               SECTION 7: HOW IT WORKS
              ==================================================== */}
           <div>
-            <h3 className="text-2xl font-black uppercase tracking-tighter text-neutral-950 mb-6 text-center">
+            <h3 className="text-xl font-black uppercase tracking-tighter text-neutral-950 mb-5 text-center">
               How It Works
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {[
                 {
                   step: 1,
@@ -313,14 +315,14 @@ export default function TelegramSetupPage() {
                   key={item.step}
                   className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <CardContent className="px-6 py-6 text-center">
-                    <div className="w-10 h-10 bg-neutral-900 border-2 border-neutral-800 flex items-center justify-center mx-auto mb-4">
-                      <span className="text-sm font-black text-neutral-400">
+                  <CardContent className="px-4 py-5 sm:px-6 sm:py-6 text-center">
+                    <div className="w-9 h-9 bg-[#229ED9]/10 border-2 border-[#229ED9]/30 flex items-center justify-center mx-auto mb-3">
+                      <span className="text-sm font-black text-[#4FC3F7]">
                         {item.step}
                       </span>
                     </div>
-                    <item.icon className="w-6 h-6 text-neutral-400 mx-auto mb-3" />
-                    <h4 className="text-xs font-black uppercase tracking-wider text-white mb-2">
+                    <item.icon className="w-5 h-5 text-neutral-400 mx-auto mb-2.5" />
+                    <h4 className="text-[11px] font-black uppercase tracking-wider text-white mb-1.5 leading-tight">
                       {item.title}
                     </h4>
                     <p className="text-[10px] text-neutral-400 leading-relaxed">
@@ -335,13 +337,13 @@ export default function TelegramSetupPage() {
           {/* ====================================================
               SECTION 10: FOOTER
              ==================================================== */}
-          <div className="text-center py-8 border-t-2 border-black">
+          <div className="text-center py-6 border-t-2 border-black">
             <p className="text-xs text-neutral-500 mb-2">
               Need help connecting Telegram?
             </p>
             <a
               href="#"
-              className="text-sm font-black text-neutral-950 uppercase tracking-wider hover:text-neutral-700 transition-colors inline-flex items-center gap-2"
+              className="text-sm font-black text-neutral-950 uppercase tracking-wider hover:text-[#229ED9] transition-colors inline-flex items-center gap-2"
             >
               Contact our support team
               <ArrowRight className="w-4 h-4" />

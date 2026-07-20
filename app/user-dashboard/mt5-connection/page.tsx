@@ -45,6 +45,7 @@ export default function MT5ConnectionPage() {
   const [server, setServer] = useState("");
   const [mt5Login, setMt5Login] = useState("");
   const [tradingPassword, setTradingPassword] = useState("");
+  const [telegramConnected, setTelegramConnected] = useState(false);
 
   // Connection System States
   const [isConnected, setIsConnected] = useState(false);
@@ -89,6 +90,30 @@ export default function MT5ConnectionPage() {
     fetchAccounts();
   }, []);
 
+  // Fetch user's Telegram username on page load
+  useEffect(() => {
+    const fetchTelegramStatus = async () => {
+      try {
+        const response = await fetch('/api/user/telegram/status');
+        const data = await response.json();
+        
+        if (response.ok && data.connected && data.username) {
+          setTelegramUsername(data.username);
+          setTelegramConnected(true);
+        } else {
+          setTelegramUsername("NOT CONNECTED");
+          setTelegramConnected(false);
+        }
+      } catch (error) {
+        console.error('Failed to fetch Telegram status:', error);
+        setTelegramUsername("NOT CONNECTED");
+        setTelegramConnected(false);
+      }
+    };
+
+    fetchTelegramStatus();
+  }, []);
+
   const handleServerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setServer(value);
@@ -111,6 +136,10 @@ export default function MT5ConnectionPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!telegramConnected) {
+      toast.error('Please connect your Telegram account first');
+      return;
+    }
     if (!telegramUsername || !server || !mt5Login || !tradingPassword) return;
     if (serverError) return;
 
