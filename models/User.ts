@@ -19,6 +19,12 @@ export interface IUser extends Document {
   referralId: string;
   totalReferrals: number;
   profileImage: string;
+  telegram_chat_id?: string;
+  telegram_username?: string;
+  telegram_token?: string;
+  telegram_token_expires?: Date;
+  telegram_connected: boolean;
+  telegram_connected_date?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -100,6 +106,25 @@ const UserSchema: Schema = new Schema(
     profileImage: {
       type: String,
       default: '',
+    },
+    telegram_chat_id: {
+      type: String,
+    },
+    telegram_username: {
+      type: String,
+    },
+    telegram_token: {
+      type: String,
+    },
+    telegram_token_expires: {
+      type: Date,
+    },
+    telegram_connected: {
+      type: Boolean,
+      default: false,
+    },
+    telegram_connected_date: {
+      type: Date,
     },
   },
   {

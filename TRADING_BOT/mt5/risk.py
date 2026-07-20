@@ -126,17 +126,29 @@ class RiskManager:
     def _check_market_open(self) -> bool:
         """
         Check if the market is currently open for trading.
-        
+
         Returns:
             True if market is open, False otherwise
         """
-        symbol_info = mt5.symbol_info_tick(SYMBOL)
+        # Ensure symbol is available and selected
+        symbol_info = mt5.symbol_info(SYMBOL)
         if symbol_info is None:
-            logger.error("Unable to get symbol info for market check.")
+            logger.error(f"Symbol {SYMBOL} not found in MT5.")
+            return False
+
+        if not symbol_info.visible:
+            logger.info(f"Selecting symbol {SYMBOL}...")
+            if not mt5.symbol_select(SYMBOL, True):
+                logger.error(f"Unable to select {SYMBOL}.")
+                return False
+
+        symbol_tick = mt5.symbol_info_tick(SYMBOL)
+        if symbol_tick is None:
+            logger.error("Unable to get symbol tick for market check.")
             return False
 
         # Market is open if we can get current time and bid/ask prices
-        return symbol_info.time > 0 and symbol_info.bid > 0 and symbol_info.ask > 0
+        return symbol_tick.time > 0 and symbol_tick.bid > 0 and symbol_tick.ask > 0
 
     def _check_signal_age(self, signal: TradingSignal) -> bool:
         """

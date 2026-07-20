@@ -59,30 +59,30 @@ class SymbolParser:
     def _normalize(self, symbol: str) -> str:
         """
         Normalize symbol to standard format.
-        
+
         Args:
             symbol: Raw symbol string
-            
+
         Returns:
             Normalized symbol
         """
-        # Remove slashes and 'm' suffix
-        normalized = symbol.replace('/', '').replace('M', '')
-        
-        # Map common variations to XAUUSD
-        if normalized in ['XAU', 'GOLD', 'XAUUSD']:
-            return 'XAUUSD'
-        
+        # Remove slashes
+        normalized = symbol.replace('/', '')
+
+        # Map common variations to XAUUSDm (MT5 symbol)
+        if normalized in ['XAU', 'GOLD', 'XAUUSD', 'XAUUSDM']:
+            return 'XAUUSDm'
+
         return normalized
 
     def is_supported(self, symbol: str) -> bool:
         """
         Check if a symbol is supported for trading.
-        
+
         Args:
             symbol: Normalized symbol
-            
+
         Returns:
             True if symbol is supported
         """
-        return symbol == 'XAUUSD'
+        return symbol == 'XAUUSDm'

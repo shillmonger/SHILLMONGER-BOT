@@ -330,3 +330,104 @@ SERVER = [Exness-MT5Trial9]
 PASSWORD LENGTH = 15
 
 2026-07-19 14:45:38.617 | SUCCESS  | api_server:validate_mt5_connection:195 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-20 06:39:36.541 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 06:39:39.617 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 06:39:47.174 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-20 06:39:47.175 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 06:40:02.244 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:40:02.905 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 06:40:02.907 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 06:40:02.907 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4021
+TP 4024
+TP 4027
+TP 4030
+TP 4033
+TP 4036
+SL 4011
+
+Follow Proper Risk Management
+2026-07-20 06:40:02.908 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:40:02.933 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 06:40:02.934 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4021\nTP 4024\nTP 4027\nTP 4030\nTP 4033\nTP 4036\nSL 4011\n\nFollow Proper Risk Management', symbol='XAUUSD', direction='BUY', entry=4021.0, entry_high=None, entry_low=None, stop_loss=4011.0, take_profits=[4024.0, 4027.0, 4030.0, 4033.0, 4036.0], order_type='MARKET', confidence=100, timestamp=datetime.datetime(2026, 7, 20, 5, 40, 2, 933124))
+2026-07-20 06:40:02.935 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 06:40:02.936 | ERROR    | mt5.risk:_check_market_open:135 - Unable to get symbol info for market check.
+2026-07-20 06:40:02.936 | WARNING  | telegram.listener:handler:99 - Market is closed for trading.
+2026-07-20 06:41:26.497 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:41:27.836 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗙𝗢𝗥𝗘𝗫 𝗠𝗔𝗥𝗞𝗘𝗧 𝗣𝗥𝗢
+2026-07-20 06:41:27.837 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001192590252
+2026-07-20 06:41:27.838 | INFO     | telegram.listener:handler:70 - GOLD. BUY
+40+Pips Profit Runnings🥳🥳
+2026-07-20 06:41:27.838 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:41:27.839 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-20 06:45:19.194 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 06:45:50.346 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 06:46:41.266 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 06:47:00.109 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 06:47:00.112 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-20 06:47:00.113 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 06:47:20.130 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:47:20.675 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 06:47:20.675 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 06:47:20.676 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4021
+TP 4024
+TP 4027
+TP 4030
+TP 4033
+TP 4036
+SL 4011
+
+Follow Proper Risk Management
+2026-07-20 06:47:20.678 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:47:20.696 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 06:47:20.698 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4021\nTP 4024\nTP 4027\nTP 4030\nTP 4033\nTP 4036\nSL 4011\n\nFollow Proper Risk Management', symbol='XAUUSD', direction='BUY', entry=4021.0, entry_high=None, entry_low=None, stop_loss=4011.0, take_profits=[4024.0, 4027.0, 4030.0, 4033.0, 4036.0], order_type='MARKET', confidence=100, timestamp=datetime.datetime(2026, 7, 20, 5, 47, 20, 696821))
+2026-07-20 06:47:20.701 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 06:47:20.703 | ERROR    | mt5.risk:_check_market_open:135 - Unable to get symbol info for market check.
+2026-07-20 06:47:20.707 | WARNING  | telegram.listener:handler:99 - Market is closed for trading.
+2026-07-20 06:48:58.878 | SUCCESS  | core.database:connect:16 - Connected to MongoDB
+2026-07-20 06:49:01.788 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-20 06:49:01.790 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 115.42
+2026-07-20 06:49:01.791 | SUCCESS  | telegram.listener:start:127 - Waiting For Signals...
+2026-07-20 06:49:28.532 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:49:29.226 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 06:49:29.227 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 06:49:29.227 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4021
+TP 4024
+TP 4027
+TP 4030
+TP 4033
+TP 4036
+SL 4011
+
+Follow Proper Risk Management
+2026-07-20 06:49:29.227 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:49:29.250 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 06:49:29.251 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4021\nTP 4024\nTP 4027\nTP 4030\nTP 4033\nTP 4036\nSL 4011\n\nFollow Proper Risk Management', symbol='XAUUSDm', direction='BUY', entry=4021.0, entry_high=None, entry_low=None, stop_loss=4011.0, take_profits=[4024.0, 4027.0, 4030.0, 4033.0, 4036.0], order_type='MARKET', confidence=100, timestamp=datetime.datetime(2026, 7, 20, 5, 49, 29, 250795))
+2026-07-20 06:49:29.255 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 06:49:29.258 | INFO     | mt5.risk:_check_market_open:140 - Selecting symbol XAUUSDm...
+2026-07-20 06:49:29.261 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $115.42, Open trades: 0/10
+2026-07-20 06:49:29.267 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $115.42, Lot size: 0.01/0.02
+2026-07-20 06:49:29.268 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-20 06:49:29.269 | ERROR    | mt5.trader:execute_trade:134 - Trade failed 10016 Invalid stops
+2026-07-20 06:49:29.270 | ERROR    | telegram.listener:handler:111 - Trade failed: Invalid stops
+2026-07-20 06:50:34.510 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:50:34.511 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 06:50:34.514 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 06:50:34.515 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4005
+TP 4015
+2026-07-20 06:50:34.516 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:50:34.518 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-20 06:51:04.620 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-20 06:51:05.283 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-20 06:51:05.291 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-20 06:51:05.345 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4005
+TP 4015
+SL 4002
+2026-07-20 06:51:05.347 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-20 06:51:05.376 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-20 06:51:05.379 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4005\nTP 4015\nSL 4002', symbol='XAUUSDm', direction='BUY', entry=4005.0, entry_high=None, entry_low=None, stop_loss=4002.0, take_profits=[4015.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 20, 5, 51, 5, 376835))
+2026-07-20 06:51:05.389 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-20 06:51:05.391 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $115.42, Open trades: 0/10
+2026-07-20 06:51:05.392 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $115.42, Lot size: 0.01/0.02
+2026-07-20 06:51:05.393 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-20 06:51:06.124 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Ticket=2980135990
+2026-07-20 06:51:06.138 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2980135990

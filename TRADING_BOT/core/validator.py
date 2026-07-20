@@ -20,7 +20,7 @@ class SignalValidator:
         """
 
         # Symbol validation
-        if signal.symbol != "XAUUSD":
+        if signal.symbol != "XAUUSDm":
             return False, "Unsupported symbol."
 
         # Direction validation

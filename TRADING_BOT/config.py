@@ -1,7 +1,11 @@
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-load_dotenv()
+# Load .env from TRADING_BOT directory
+script_dir = Path(__file__).parent
+env_path = script_dir / ".env"
+load_dotenv(env_path)
 
 API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")

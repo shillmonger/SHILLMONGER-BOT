@@ -113,6 +113,11 @@ export default function UserSidebar({
           href: `${basePath}/mt5-connection`,
         },
         {
+          name: "TELEGRAM SETUP",
+          icon: Send,
+          href: `${basePath}/tg-setup`,
+        },
+        {
           name: "How to setup",
           icon: BadgeQuestionMark,
           href: `${basePath}/setup`,
@@ -135,7 +140,6 @@ export default function UserSidebar({
     children: [
       { name: "TG Channel", icon: UsersRound, href: `#` },
       { name: "Refer users", icon: HeartPlus, href: `${basePath}/referal` },
-      // { name: "Leaderboard", icon: Trophy, href: `${basePath}/leaderboard` },
     ],
   },
      { name: "Notifications", icon: Bell, href: `${basePath}/notifications` },
