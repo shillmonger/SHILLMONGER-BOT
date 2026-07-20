@@ -116,6 +116,19 @@ export default function UserSettingsPage() {
     "/PFP_IMG/18.jfif",
     "/PFP_IMG/19.jfif",
     "/PFP_IMG/20.jfif",
+    "/PFP_IMG/21.jfif",
+    "/PFP_IMG/22.jfif",
+    "/PFP_IMG/23.jfif",
+    "/PFP_IMG/24.jfif",
+    "/PFP_IMG/25.jfif",
+    "/PFP_IMG/26.jfif",
+    "/PFP_IMG/27.jfif",
+    "/PFP_IMG/28.jfif",
+    "/PFP_IMG/29.jfif",
+    "/PFP_IMG/30.jfif",
+    "/PFP_IMG/31.jfif",
+    "/PFP_IMG/32.jfif",
+    "/PFP_IMG/33.jfif",
   ];
 
   // --- Fetch User Data ---

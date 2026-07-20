@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   BarChart3,
-  CreditCard,
+  DatabasePlus,
   Wallet,
-  ChartSpline,
+  Send,
+  Gem,
   Settings,
 } from "lucide-react";
 
@@ -17,11 +18,11 @@ export default function UserNav() {
 
   const navItems = [
     { name: "Home", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-    { name: "Deposit", icon: CreditCard, href: `${basePath}/deposit` },
-    { name: "Invest", icon: BarChart3, href: `${basePath}/invest` },
-    { name: "Payout", icon: Wallet, href: `${basePath}/withdraw` },
-    { name: "Trades", icon: ChartSpline, href: `${basePath}/my-investments` },
-    { name: "Settings", icon: Settings, href: `${basePath}/user-settings` },
+    { name: "BOT PLAN", icon: Gem, href: `${basePath}/subscription` },
+    { name: "Sync MT5", icon: DatabasePlus, href: `${basePath}/mt5-connection` },
+    { name: "Sync Tg", icon: Send, href: `${basePath}/tg-setup` },
+    // { name: "Trades", icon: ChartSpline, href: `${basePath}/my-investments` },
+    { name: "Settings", icon: Settings, href: `${basePath}/account-setting` },
   ];
 
   const isActive = (href: string) => {
