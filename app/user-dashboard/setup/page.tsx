@@ -36,7 +36,7 @@ export default function SetupPage() {
 
           {/* Step 1 */}
           <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
-            <div className="flex flex-col lg:flex-row items-start gap-4">
+            <div className="">
               <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
                 01
               </div>
@@ -83,7 +83,7 @@ export default function SetupPage() {
 
           {/* Step 2 */}
           <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
-            <div className="lex flex-col lg:flex-row items-start gap-4">
+            <div className="">
               <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
                 02
               </div>
@@ -145,7 +145,7 @@ export default function SetupPage() {
 
           {/* Step 3 */}
           <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
-            <div className="lex flex-col lg:flex-row items-start gap-4">
+            <div className="">
               <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
                 03
               </div>
@@ -216,7 +216,7 @@ export default function SetupPage() {
 
           {/* Step 4 */}
           <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
-            <div className="lex flex-col lg:flex-row items-start gap-4">
+            <div className="">
               <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
                 04
               </div>
