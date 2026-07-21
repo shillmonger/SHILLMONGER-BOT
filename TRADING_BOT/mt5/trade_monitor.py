@@ -89,22 +89,28 @@ class TradeMonitor:
 
         logger.info(f"Found {len(history)} deals in history window")
 
-        # Find all deals related to this trade (by symbol and matching entry deal)
+        # Find the entry deal to get its position ID
+        entry_deal = None
+        for deal in history:
+            if deal.ticket == master_entry_deal:
+                entry_deal = deal
+                logger.info(f"Found entry deal: {deal.ticket}, Position ID: {deal.position_id}")
+                break
+
+        if not entry_deal:
+            logger.warning(f"Entry deal {master_entry_deal} not found in history")
+            return
+
+        # Find all deals with the same position ID (entry + all closes)
+        position_id = entry_deal.position_id
         related_deals = []
         for deal in history:
-            if deal.symbol == symbol and deal.ticket == master_entry_deal:
-                related_deals.append(deal)
-                logger.info(f"Found entry deal: {deal.ticket}")
-
-        # Also find closing deals for this position (same symbol, opposite direction, or close type)
-        for deal in history:
-            if deal.symbol == symbol and deal.ticket != master_entry_deal:
-                # This could be a closing deal
+            if deal.position_id == position_id:
                 related_deals.append(deal)
                 logger.info(f"Found related deal: {deal.ticket}, Type: {deal.type}, Profit: {deal.profit}")
 
         if not related_deals:
-            logger.warning(f"No related deals found for trade {master_order_ticket}")
+            logger.warning(f"No deals found with position ID {position_id}")
             return
 
         # Calculate total profit/loss from all related deals
@@ -152,44 +158,54 @@ class TradeMonitor:
             user_history = mt5.history_deals_get(from_time, datetime.utcnow())
             
             if user_history and len(user_history) > 0:
-                # Find all deals related to this user trade
+                # Find the user entry deal to get its position ID
+                user_entry_deal_obj = None
+                for deal in user_history:
+                    if deal.ticket == user_entry_deal:
+                        user_entry_deal_obj = deal
+                        logger.info(f"Found user entry deal: {deal.ticket}, Position ID: {deal.position_id}")
+                        break
+
+                if not user_entry_deal_obj:
+                    logger.warning(f"User entry deal {user_entry_deal} not found in history")
+                    continue
+
+                # Find all deals with the same position ID (entry + all closes)
+                user_position_id = user_entry_deal_obj.position_id
                 user_related_deals = []
                 for deal in user_history:
-                    if deal.symbol == symbol and deal.ticket == user_entry_deal:
+                    if deal.position_id == user_position_id:
                         user_related_deals.append(deal)
-                
-                for deal in user_history:
-                    if deal.symbol == symbol and deal.ticket != user_entry_deal:
-                        user_related_deals.append(deal)
+                        logger.info(f"Found user related deal: {deal.ticket}, Type: {deal.type}, Profit: {deal.profit}")
 
-                if user_related_deals:
-                    user_total_profit = 0.0
-                    user_total_commission = 0.0
-                    user_total_swap = 0.0
+                if not user_related_deals:
+                    logger.warning(f"No deals found with user position ID {user_position_id}")
+                    continue
 
-                    for deal in user_related_deals:
-                        user_total_profit += deal.profit
-                        user_total_commission += deal.commission if hasattr(deal, 'commission') else 0
-                        user_total_swap += deal.swap if hasattr(deal, 'swap') else 0
+                user_total_profit = 0.0
+                user_total_commission = 0.0
+                user_total_swap = 0.0
 
-                    user_net_profit = user_total_profit + user_total_commission + user_total_swap
+                for deal in user_related_deals:
+                    user_total_profit += deal.profit
+                    user_total_commission += deal.commission if hasattr(deal, 'commission') else 0
+                    user_total_swap += deal.swap if hasattr(deal, 'swap') else 0
 
-                    logger.info(
-                        f"User trade {user_order_ticket} P&L: "
-                        f"Profit={user_total_profit:.2f}, Net={user_net_profit:.2f}"
-                    )
+                user_net_profit = user_total_profit + user_total_commission + user_total_swap
 
-                    # Update trade activity
-                    db.update_trade_activity(user_order_ticket, {
-                        "status": "CLOSED",
-                        "profit": user_net_profit
-                    })
+                logger.info(
+                    f"User trade {user_order_ticket} P&L: "
+                    f"Profit={user_total_profit:.2f}, Net={user_net_profit:.2f}"
+                )
 
-                    logger.success(
-                        f"User trade {user_order_ticket} closed | Net Profit: ${user_net_profit:.2f}"
-                    )
-                else:
-                    logger.warning(f"No related deals found for user trade {user_order_ticket}")
+                # Update trade activity
+                db.update_trade_activity(user_order_ticket, {
+                    "status": "CLOSED",
+                    "profit": user_net_profit
+                })
+
+                logger.success(
+                    f"User trade {user_order_ticket} closed | Net Profit: ${user_net_profit:.2f}"
+                )
             else:
-                logger.warning(f"No history found for user trade {user_order_ticket}")
                 logger.warning(f"No history found for user trade {user_order_ticket}")

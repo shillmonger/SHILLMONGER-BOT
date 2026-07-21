@@ -20,6 +20,8 @@ export default function DashboardPage() {
   const [greeting, setGreeting] = useState("Welcome");
   const [currentTime, setCurrentTime] = useState("");
   const [userData, setUserData] = useState<{ username: string } | null>(null);
+  const [tradeActivities, setTradeActivities] = useState<any[]>([]);
+  const [loadingTrades, setLoadingTrades] = useState(true);
 
   // Statistics Cards Data
   const statsCards = [
@@ -82,6 +84,17 @@ export default function DashboardPage() {
         }
       })
       .catch(err => console.error('Failed to fetch user data:', err));
+
+    // Fetch trade activities
+    fetch('/api/user/trade-activity')
+      .then(res => res.json())
+      .then(data => {
+        if (data.tradeActivities) {
+          setTradeActivities(data.tradeActivities);
+        }
+      })
+      .catch(err => console.error('Failed to fetch trade activities:', err))
+      .finally(() => setLoadingTrades(false));
   }, []);
 
   return (
@@ -89,9 +102,7 @@ export default function DashboardPage() {
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-7xl space-y-8">
           
-          {/* ====================================================
-              SECTION 1: WELCOME & PERFORMANCE OVERVIEW
-             ==================================================== */}
+        
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-black pb-3">
             <div>
               <p className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-1">
@@ -113,10 +124,6 @@ export default function DashboardPage() {
 
 
 
-
-          {/* ====================================================
-              SECTION 2: STATISTICS CARDS
-             ==================================================== */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {statsCards.map((card, index) => (
               <Card key={index} className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -144,102 +151,6 @@ export default function DashboardPage() {
           {/* GRID LAYOUT FOR STATUS, HISTORY & PERFORMANCE */}
           <div className="flex flex-col gap-6">
 
-            {/* ====================================================
-                SECTION 3: TRADING ENGINE STATUS (1 Column Wide)
-               ==================================================== */}
-            <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-              <CardContent className="px-6 space-y-6">
-                <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
-                  <h2 className="text-lg font-black uppercase tracking-tighter">
-                    Trading Engine Status
-                  </h2>
-                  <Activity className="h-4 w-4 text-neutral-400 animate-pulse" />
-                </div>
-                
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
-                  {/* Status Rows */}
-                  {[
-                    { label: "AI Engine", value: "Active", positive: true },
-                    { label: "MT5 Connection", value: "Connected", positive: true },
-                    { label: "Market Status", value: "Open", positive: true },
-                    { label: "Auto Trading", value: "Enabled", positive: true },
-                    { label: "Risk Management", value: "Active", positive: true },
-                    { label: "Last Market Analysis", value: "2 minutes ago", positive: null },
-                    { label: "Open Positions", value: "2 Active Trades", positive: null },
-                    { label: "System Health", value: "Excellent", positive: true },
-                  ].map((row, index) => (
-                    <div 
-                      key={index} 
-                      className="flex items-center justify-between p-3 bg-neutral-900/60 border border-neutral-800/80"
-                    >
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
-                        {row.label}
-                      </span>
-                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 border ${
-                        row.positive === true 
-                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
-                          : row.positive === false
-                          ? "bg-red-500/10 text-red-400 border-red-500/20"
-                          : "bg-neutral-800 text-neutral-300 border-neutral-700"
-                      }`}>
-                        {row.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-
-
-
-              {/* ====================================================
-                  EXTRA: PERFORMANCE SUMMARY
-                 ==================================================== */}
-              <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                <CardContent className="px-6">
-                  <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
-                    <h2 className="text-sm font-black uppercase tracking-tighter">
-                      Performance Metrics
-                    </h2>
-                    <Percent className="h-4 w-4 text-neutral-400" />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Winning Trades</p>
-                      <p className="text-base font-bold font-mono text-emerald-400">42 Trades</p>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Losing Trades</p>
-                      <p className="text-base font-bold font-mono text-rose-400">11 Trades</p>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800 col-span-2 md:col-span-1">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Win Rate</p>
-                      <p className="text-base font-bold font-mono text-white">79.2%</p>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Avg. Win</p>
-                      <p className="text-base font-bold font-mono text-emerald-400">+$48.50</p>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Avg. Loss</p>
-                      <p className="text-base font-bold font-mono text-rose-400">-$22.10</p>
-                    </div>
-                    <div className="p-3 bg-neutral-900/40 border border-neutral-800 col-span-2 md:col-span-1">
-                      <p className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest">Global Risk Setting</p>
-                      <p className="text-base font-bold font-mono text-white uppercase">Moderate</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-
-
-
-            {/* ====================================================
-                SECTION 4: RECENT TRADING ACTIVITY (2 Columns Wide)
-               ==================================================== */}
             <div className="lg:col-span-2 space-y-6">
   <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
     <CardContent className="px-6">
@@ -259,140 +170,58 @@ export default function DashboardPage() {
         <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Symbol</th>
         <th className="w-[10%] pb-3 px-2 whitespace-nowrap">Type</th>
         <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Entry</th>
-        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Exit</th>
         <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Lot Size</th>
         <th className="w-[15%] pb-3 px-2 text-right whitespace-nowrap">Profit/Loss</th>
         <th className="w-[14%] pb-3 pl-2 text-right whitespace-nowrap">Status</th>
       </tr>
     </thead>
     <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
-        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-            Closed
-          </span>
-        </td>
-      </tr>
-
-      {/* Row 2 */}
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
-        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
-        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
-        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
-            Running
-          </span>
-        </td>
-      </tr>
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
-        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
-        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
-        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
-            Running
-          </span>
-        </td>
-      </tr>
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
-        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
-        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
-        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
-            Running
-          </span>
-        </td>
-      </tr>
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
-        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
-        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
-        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
-            Running
-          </span>
-        </td>
-      </tr>
-      <tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
-        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-            Closed
-          </span>
-        </td>
-      </tr><tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
-        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-            Closed
-          </span>
-        </td>
-      </tr><tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
-        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-            Closed
-          </span>
-        </td>
-      </tr><tr className="hover:bg-neutral-900/30">
-        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
-        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-        <td className="py-3 pl-2 text-right">
-          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-            Closed
-          </span>
-        </td>
-      </tr>
-
-      {/* Repeat your remaining rows... */}
+      {loadingTrades ? (
+        <tr>
+          <td colSpan={7} className="py-8 text-center text-neutral-400">
+            Loading trade activities...
+          </td>
+        </tr>
+      ) : tradeActivities.length === 0 ? (
+        <tr>
+          <td colSpan={7} className="py-8 text-center text-neutral-400">
+            No trade activities found
+          </td>
+        </tr>
+      ) : (
+        tradeActivities.map((trade) => {
+          const date = new Date(trade.created_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+          const isProfit = trade.profit >= 0;
+          const profitClass = isProfit ? 'text-emerald-400' : 'text-rose-400';
+          const typeClass = trade.type === 'BUY' ? 'text-emerald-400' : 'text-rose-400';
+          const isRunning = trade.status === 'RUNNING' || trade.status === 'OPEN';
+          const statusClass = isRunning 
+            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 animate-pulse' 
+            : 'bg-neutral-900 text-neutral-400 border-neutral-800';
+          
+          return (
+            <tr key={trade._id} className="hover:bg-neutral-900/30">
+              <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">{date}</td>
+              <td className="py-3 px-2 font-bold text-white whitespace-nowrap">{trade.symbol}</td>
+              <td className={`py-3 px-2 ${typeClass} font-black whitespace-nowrap`}>{trade.type}</td>
+              <td className="py-3 px-2 whitespace-nowrap">{trade.entry.toFixed(2)}</td>
+              <td className="py-3 px-2 whitespace-nowrap">{trade.lot.toFixed(2)}</td>
+              <td className={`py-3 px-2 ${profitClass} text-right font-bold whitespace-nowrap`}>
+                {isProfit ? '+' : ''}{trade.profit?.toFixed(2) || '—'}
+              </td>
+              <td className="py-3 pl-2 text-right">
+                <span className={`text-[9px] font-black uppercase tracking-wider border px-2 py-0.5 whitespace-nowrap inline-block ${statusClass}`}>
+                  {isRunning ? 'Running' : 'Closed'}
+                </span>
+              </td>
+            </tr>
+          );
+        })
+      )}
     </tbody>
   </table>
 </div>
