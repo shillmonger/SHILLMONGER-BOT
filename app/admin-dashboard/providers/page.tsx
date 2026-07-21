@@ -198,7 +198,7 @@ export default function ProvidersPage() {
           </div>
 
           {/* Bot Configuration */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-sm font-black uppercase tracking-tighter">
@@ -256,7 +256,7 @@ export default function ProvidersPage() {
 
           {/* Available Telegram Groups */}
           {telegramGroups.length > 0 && (
-            <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <CardContent className="px-6 space-y-6">
                 <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                   <h2 className="text-sm font-black uppercase tracking-tighter">
@@ -342,7 +342,7 @@ export default function ProvidersPage() {
           )}
 
           {/* Saved Providers */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-sm font-black uppercase tracking-tighter">

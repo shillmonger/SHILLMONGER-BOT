@@ -287,7 +287,7 @@ export default function UserSettingsPage() {
               
               {/* LEFT COLUMN: Sidebar Card (Quick Identity Overview & Status) */}
               <div className="space-y-6 lg:sticky lg:top-4 lg:self-start">
-                <div className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+                <div className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
                   <h3 className="text-sm font-black uppercase tracking-widest mb-6 flex items-center gap-2">
                     <User className="w-4 h-4 text-neutral-400" /> Profile Identity
                   </h3>
@@ -358,7 +358,7 @@ export default function UserSettingsPage() {
               <div className="lg:col-span-2 space-y-8">
                 
                 {/* Component 1: Account Information Form */}
-                <form onSubmit={handleProfileUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
+                <form onSubmit={handleProfileUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
                   <div>
                     <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
                       <User className="w-4 h-4 text-neutral-400" /> Personal Information
@@ -442,7 +442,7 @@ export default function UserSettingsPage() {
                 </form>
 
                 {/* Component 2: Forgot / Change Password Section */}
-                <form onSubmit={handlePasswordUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
+                <form onSubmit={handlePasswordUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
                   <div>
                     <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
                       <Lock className="w-4 h-4 text-neutral-400" /> Credentials & Password
@@ -535,7 +535,7 @@ export default function UserSettingsPage() {
                 </form>
 
                 {/* Component 3: Danger Zone */}
-                <div className="bg-rose-950/30 text-white rounded-none border-2 border-rose-900 p-6 space-y-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="bg-rose-950/30 text-white rounded-none border-2 border-rose-900 p-6 space-y-6 shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <div className="flex items-start gap-4">
                     <div className="bg-rose-900/30 p-3 rounded-none border border-rose-800 text-red-800">
                       <ShieldAlert className="w-6 h-6" />

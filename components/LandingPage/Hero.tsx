@@ -122,7 +122,7 @@ export default function ImageCarousel() {
                   <button className="relative bg-neutral-950 mt-5 cursor-pointer text-neutral-50 text-xs md:text-sm font-bold uppercase tracking-widest px-5 py-5 md:px-6 md:py-5 overflow-hidden group border border-neutral-600 hover:bg-neutral-700 transition-colors duration-300">
                     <span className="absolute inset-0 bg-neutral-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
                     <span className="relative z-10 group-hover:text-neutral-900 transition-colors duration-300">
-                      Start Running Bot
+                      5 Days Free Trial
                     </span>
                   </button>
                 </Link>

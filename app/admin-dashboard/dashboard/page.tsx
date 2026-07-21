@@ -94,7 +94,7 @@ export default function AdminDashboardPage() {
           {/* Statistics Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {adminStats.map((card, index) => (
-              <Card key={index} className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <Card key={index} className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <CardContent className="px-5">
                   <div className="flex justify-between items-start mb-4">
                     <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
@@ -114,7 +114,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* System Status Card */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-lg font-black uppercase tracking-tighter">
@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
           </Card>
 
           {/* Recent Alerts */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6">
               <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-black uppercase tracking-tighter">

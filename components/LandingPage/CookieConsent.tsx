@@ -73,11 +73,11 @@ export default function CookieConsent() {
               </button>
 
               {/* Grayscale Cookie Illustration */}
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center">
                 <img
                   src="https://i.postimg.cc/L5wkcDJ6/cookie.png"
                   alt="Cookie"
-                  className="w-35 h-35 object-contain grayscale-60 filter contrast-125 brightness-90 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
+                  className="w-40 h-40 object-contain grayscale-50 filter contrast-125 brightness-90 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
                 />
               </div>
 

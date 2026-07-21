@@ -15,7 +15,7 @@ export default function AdminHeader({
     <header
       className="
         lg:hidden
-        sticky top-0 z-40
+        fixed top-0 left-0 right-0 z-40
         flex items-center justify-between
         bg-neutral-950 text-white
         border-b-2 border-black
@@ -25,7 +25,7 @@ export default function AdminHeader({
       <button
         onClick={onLeftClick}
         aria-label="Open menu"
-        className="p-2 -ml-2 hover:bg-neutral-800 rounded-lg transition-colors"
+        className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
       >
         <Menu className="w-5 h-5" />
       </button>
@@ -37,7 +37,7 @@ export default function AdminHeader({
       <button
         onClick={onRightClick}
         aria-label="Open panel"
-        className="p-2 -mr-2 hover:bg-neutral-800 rounded-lg transition-colors"
+        className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
       >
         <Menu className="w-5 h-5" />
       </button>

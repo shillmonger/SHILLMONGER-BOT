@@ -14,33 +14,57 @@ export default function AdminDashboardLayout({
 }) {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(false);
+
   const pathname = usePathname();
-  const hideRightSidebar = pathname === "/admin-dashboard/" || pathname === "/admin-dashboard/";
+
+  const hideRightSidebar =
+    pathname === "/admin-dashboard/" ||
+    pathname === "/admin-dashboard";
 
   return (
-    <div className="h-screen bg-background overflow-hidden">
-      {/* Header - Mobile only */}
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Mobile Header */}
       <AdminHeader
         onLeftClick={() => setLeftSidebarOpen(true)}
         onRightClick={() => setRightSidebarOpen(true)}
       />
 
-      <div className="flex h-screen">
-        {/* Sidebar - Desktop */}
-        <AdminLeftSidebar sidebarOpen={leftSidebarOpen} setSidebarOpen={setLeftSidebarOpen} />
+      {/* Main Layout */}
+      <div className="flex min-h-screen lg:h-screen">
+        {/* Left Sidebar */}
+        <AdminLeftSidebar
+          sidebarOpen={leftSidebarOpen}
+          setSidebarOpen={setLeftSidebarOpen}
+        />
 
         {/* Main Content */}
-        <main className="flex-1 min-w-0 overflow-y-auto px-4 py-5 pb-45 lg:pb-0 scrollbar-hide">
-          {children}
-        </main>
+        <main
+  className="
+    flex-1
+    min-w-0
+    overflow-y-auto
+    px-4
+    pt-15
+    pb-30
+    lg:pt-0
+    lg:pb-0
+    lg:max-h-screen
+    scrollbar-hide
+  "
+>
+  {children}
+</main>
 
-        {/* Right Sidebar - Desktop */}
+        {/* Right Sidebar */}
         {!hideRightSidebar && (
-          <AdminRightSidebar sidebarOpen={rightSidebarOpen} setSidebarOpen={setRightSidebarOpen} />
+          <AdminRightSidebar
+            sidebarOpen={rightSidebarOpen}
+            setSidebarOpen={setRightSidebarOpen}
+          />
         )}
       </div>
 
-      {/* Bottom Navigation - Mobile */}
+      {/* Mobile Bottom Navigation */}
       <AdminNav />
     </div>
   );

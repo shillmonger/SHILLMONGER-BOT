@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 interface UserMobileHeaderProps {
   onLeftClick: () => void;
@@ -12,49 +12,54 @@ export default function UserMobileHeader({
   onLeftClick,
   onRightClick,
 }: UserMobileHeaderProps) {
-  const [hidden, setHidden] = useState(false);
-  const lastScrollY = useRef(0);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const texts = [
+    "SMG BOT",
+    "XAUUSD BOT",
+    "FOREX BOT",
+    "MT5 TERMINAL",
+    "EXNESS",
+    "SHILLMONGER"
+  ];
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
+    const currentFullText = texts[currentTextIndex];
+    const typingSpeed = isDeleting ? 50 : 100;
+    const delayAfterComplete = isDeleting ? 500 : 2000;
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollY.current;
-
-      // Ignore tiny jitters (e.g. rubber-band scroll on iOS)
-      if (Math.abs(delta) < 5) return;
-
-      if (currentScrollY < 40) {
-        // Always show header near the top of the page
-        setHidden(false);
-      } else if (delta > 0) {
-        // Scrolling down -> hide
-        setHidden(true);
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < currentFullText.length) {
+          setDisplayText(currentFullText.slice(0, displayText.length + 1));
+        } else {
+          setTimeout(() => setIsDeleting(true), delayAfterComplete);
+        }
       } else {
-        // Scrolling up -> show
-        setHidden(false);
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+        } else {
+          setIsDeleting(false);
+          setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+        }
       }
+    }, typingSpeed);
 
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentTextIndex, texts]);
 
   return (
     <header
-      className={`
+      className="
         lg:hidden
-        sticky top-0 z-40
+        fixed top-0 left-0 right-0 z-40
         flex items-center justify-between
         bg-neutral-950 text-white
         border-b-2 border-black
         px-4 py-3
-        transition-transform duration-300 ease-in-out
-        ${hidden ? "-translate-y-full" : "translate-y-0"}
-      `}
+      "
     >
       <button
         onClick={onLeftClick}
@@ -64,7 +69,7 @@ export default function UserMobileHeader({
         <Menu className="w-5 h-5" />
       </button>
       <span className="text-lg font-black uppercase tracking-[0.2em]">
-        SMG BOT
+        {displayText}
       </span>
       <button
         onClick={onRightClick}

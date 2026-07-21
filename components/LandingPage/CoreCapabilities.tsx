@@ -146,7 +146,7 @@ export default function FeaturesSection() {
             alt="SHILLMONGER App"
             width={700}
             height={1400}
-            className="relative z-10 object-contain grayscale-40 w-[260px] xl:w-[350px] h-auto"
+            className="relative z-10 object-contain grayscale-0 w-[260px] xl:w-[350px] h-auto"
             priority
           />
         </div>

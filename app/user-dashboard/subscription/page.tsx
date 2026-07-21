@@ -191,7 +191,7 @@ export default function SubscriptionPage() {
                 Subscription
               </h1>
             </div>
-            <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+            <div className="hidden lg:block bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 Risk Engine
               </span>
@@ -208,7 +208,7 @@ export default function SubscriptionPage() {
             {accessPlans.map((plan, i) => (
               <Card 
                 key={i} 
-                className={`rounded-none bg-neutral-950 text-white border-2 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between relative overflow-hidden ${
+                className={`rounded-none bg-neutral-950 text-white border-2 shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between relative overflow-hidden ${
                   plan.popular ? "border-white ring-2 ring-black" : "border-black"
                 }`}
               >
@@ -294,7 +294,7 @@ export default function SubscriptionPage() {
           {/* ====================================================
               SECTION 3: DISCLAIMER CARD
               ==================================================== */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-4">
               <p className="text-[10px] text-neutral-500 leading-relaxed font-mono text-center">
                 <span className="font-black text-neutral-300 uppercase tracking-widest">Disclaimer: </span>
@@ -321,7 +321,7 @@ export default function SubscriptionPage() {
             </div>
 
             {/* Flat Brutalist Container Table */}
-            <div className="bg-neutral-950 border-2 border-black text-white rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="bg-neutral-950 border-2 border-black text-white rounded-none shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
               {/* Header Row */}
               <div className="hidden md:grid grid-cols-3 border-b border-neutral-800 bg-neutral-900 p-4 text-[10px] font-black uppercase tracking-widest font-mono">
                 <div className="text-neutral-400">Metric</div>

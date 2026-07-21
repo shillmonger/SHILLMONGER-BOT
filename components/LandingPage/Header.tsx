@@ -21,11 +21,21 @@ export default function Navbar() {
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
-  const navLinks = [
+  const desktopNavLinks = [
     { label: "Subscribtion", href: "/LandingPage/subscribtion" },
-    { label: "About", href: "/about" },
-    { label: "Agents", href: "/agents" },
+    { label: "API", href: "/api" },
+    { label: "About Bot", href: "/about" },
     { label: "Community", href: "/community" },
+  ];
+
+  const mobileNavLinks = [
+    { label: "About BOT", href: "/about" },
+    { label: "Community", href: "/community" },
+    { label: "Subscribtion", href: "/LandingPage/subscribtion" },
+    { label: "Refund Policy", href: "/refund" },
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Developers Portal", href: "/developers" },
+    { label: "Guides & Tutorials", href: "/guides" },
   ];
 
   return (
@@ -49,7 +59,7 @@ export default function Navbar() {
 
           {/* Center: Navigation Links (Desktop) */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
+            {desktopNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -69,14 +79,22 @@ export default function Navbar() {
           </div>
 
           {/* Right: Desktop Action Buttons / Mobile Hamburger */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {/* Desktop-only action */}
             <div className="hidden md:flex items-center gap-4">
+              <Link href="/auth-page/login">
+              <button className="relative bg-neutral-900 cursor-pointer text-neutral-50 text-xs font-bold uppercase tracking-widest px-6 py-3 overflow-hidden group border border-neutral-700 hover:bg-neutral-800 transition-colors duration-300 rounded-none">
+                <span className="absolute inset-0 bg-neutral-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
+                <span className="relative z-10 group-hover:text-neutral-950 transition-colors duration-300">
+                  Sign up
+                </span>
+              </button>
+              </Link>
               <Link href="/auth-page/register">
               <button className="relative bg-neutral-900 cursor-pointer text-neutral-50 text-xs font-bold uppercase tracking-widest px-6 py-3 overflow-hidden group border border-neutral-700 hover:bg-neutral-800 transition-colors duration-300 rounded-none">
                 <span className="absolute inset-0 bg-neutral-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
                 <span className="relative z-10 group-hover:text-neutral-950 transition-colors duration-300">
-                  Register NOW
+                  Register
                 </span>
               </button>
               </Link>
@@ -123,7 +141,7 @@ export default function Navbar() {
 
           {/* Navigation Links (Mobile) */}
           <nav className="flex flex-col">
-            {navLinks.map((link) => {
+            {mobileNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -161,7 +179,7 @@ export default function Navbar() {
               Register NOW
             </button>
             </Link>
-            <p className="text-center text-[10px] text-neutral-500 mt-2 px-4 uppercase tracking-wider">
+            <p className="text-center text-[10px] font-semibold text-neutral-500 mt-2 px-4 uppercase tracking-wider">
               By joining, you agree to our Terms of Service and Risk Disclosure.
             </p>
           </div>

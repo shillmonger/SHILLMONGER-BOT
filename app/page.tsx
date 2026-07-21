@@ -17,8 +17,8 @@ export default function App() {
       <Hero />
       <HowWeWork />
       <CoreCapabilities />
+      <PairsSlide />
       <Subscribtion />
-      {/* <PairsSlide /> */}
       <FQ />
     </div>
   );

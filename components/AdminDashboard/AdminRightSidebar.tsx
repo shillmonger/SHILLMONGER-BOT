@@ -190,7 +190,7 @@ export default function UserRightSidebar({
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed top-0 left-0 w-full h-full bg-neutral-950 z-50 flex flex-col shadow-2xl lg:hidden">
+          <aside className="fixed top-0 left-0 w-full h-full bg-neutral-950 z-500 flex flex-col shadow-2xl lg:hidden">
             {/* Mobile Header */}
             <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
               <div className="flex flex-col">

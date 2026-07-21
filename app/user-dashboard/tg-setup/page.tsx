@@ -116,11 +116,8 @@ export default function TelegramSetupPage() {
               SECTION 1: HERO
              ==================================================== */}
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#2AABEE] to-[#229ED9] mb-2 shadow-[0_4px_20px_-4px_rgba(34,158,217,0.5)]">
-              <Send className="w-6 h-6 text-white" fill="white" strokeWidth={1} />
-            </div>
             <h1 className="text-3xl font-black uppercase tracking-tighter text-neutral-950">
-              Connect Telegram
+              Sync Telegram
             </h1>
             <p className="text-sm text-neutral-600 leading-relaxed max-w-md mx-auto">
               Securely link your Telegram account to receive notifications and enable Telegram-powered features.
@@ -164,7 +161,7 @@ export default function TelegramSetupPage() {
           {/* ====================================================
               SECTION 4: CONNECTION STATUS CARD
              ==================================================== */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6 py-6 sm:px-8 sm:py-8">
               <div className="flex items-center justify-between mb-6 gap-3">
                 <div className="min-w-0">
@@ -313,9 +310,9 @@ export default function TelegramSetupPage() {
               ].map((item) => (
                 <Card 
                   key={item.step}
-                  className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
+                  className="rounded-none bg-neutral-950 text-white border-2 border-black hover:shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <CardContent className="px-4 py-5 sm:px-6 sm:py-6 text-center">
+                  <CardContent className="px-4 py-4 sm:px-6 sm:py-4 text-center">
                     <div className="w-9 h-9 bg-[#229ED9]/10 border-2 border-[#229ED9]/30 flex items-center justify-center mx-auto mb-3">
                       <span className="text-sm font-black text-[#4FC3F7]">
                         {item.step}

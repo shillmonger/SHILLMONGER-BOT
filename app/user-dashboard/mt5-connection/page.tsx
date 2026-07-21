@@ -282,10 +282,10 @@ export default function MT5ConnectionPage() {
                 SYSTEM configuration
               </p>
               <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
-                MT5 Engine Connection
+                MT5 Connection
               </h1>
             </div>
-            <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+            <div className="hidden lg:block bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 Engine Status
               </span>
@@ -304,7 +304,7 @@ export default function MT5ConnectionPage() {
             {/* COLUMN LEFT: FORM AND LIVE PREVIEW (7 Cols) */}
             <div className="lg:col-span-7 space-y-8">
               {isLoadingAccount ? (
-                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <CardContent className="p-6 flex items-center justify-center min-h-[300px]">
                     <div className="flex flex-col items-center gap-4">
                       <Loader2 className="w-12 h-12 animate-spin text-neutral-400" />
@@ -313,7 +313,7 @@ export default function MT5ConnectionPage() {
                   </CardContent>
                 </Card>
               ) : !isConnected ? (
-                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <CardContent className="p-6">
                     <div className="border-b border-neutral-800 pb-3 mb-6 flex items-center justify-between">
                       <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
@@ -455,12 +455,12 @@ export default function MT5ConnectionPage() {
                 </Card>
               ) : (
                 /* Connected State Success Display Card */
-                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                  <CardContent className="p-6 space-y-6">
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                  <CardContent className="p-4 lg:p-6 space-y-6">
                     <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                       <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
                         <ShieldCheck className="h-5 w-5 text-emerald-400" />
-                        Active Bridge Configuration
+                        Configuration
                       </h2>
                       <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5">
                         SECURE LOGGED
@@ -540,7 +540,7 @@ export default function MT5ConnectionPage() {
 
               {/* Disconnected/Expired Accounts Section */}
               {allAccounts.filter(acc => acc.status === 'disconnected' || acc.status === 'expired').length > 0 && (
-                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <CardContent className="p-6 space-y-4">
                     <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                       <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
@@ -603,7 +603,7 @@ export default function MT5ConnectionPage() {
 
             {/* COLUMN RIGHT: REALTIME INPUT FIELD PREVIEW (5 Cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <CardContent className="p-6">
                   <div className="border-b border-neutral-800 pb-3 mb-4">
                     <h2 className="text-sm font-black uppercase tracking-tighter text-neutral-400">
@@ -665,7 +665,7 @@ export default function MT5ConnectionPage() {
       {/* Disconnect Confirmation Modal */}
       {showDisconnectModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           onClick={() => setShowDisconnectModal(false)}
         >
           <div
@@ -713,7 +713,7 @@ export default function MT5ConnectionPage() {
       {/* Reconnect Modal */}
       {showReconnectModal && reconnectingAccount && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           onClick={() => setShowReconnectModal(false)}
         >
           <div

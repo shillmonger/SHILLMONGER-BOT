@@ -113,7 +113,7 @@ export default function UserSidebar({
           href: `${basePath}/mt5-connection`,
         },
         {
-          name: "TELEGRAM SETUP",
+          name: "Sync TELEGRAM",
           icon: Send,
           href: `${basePath}/tg-setup`,
         },
