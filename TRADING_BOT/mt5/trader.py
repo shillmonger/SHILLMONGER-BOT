@@ -146,12 +146,13 @@ class MT5Trader:
         logger.success(
             f"{signal.direction} executed "
             f"{symbol} "
-            f"Ticket={result.order}"
+            f"Order={result.order} Deal={result.deal}"
         )
 
         return TradeResult(
             success=True,
-            ticket=result.order,
+            order=result.order,
+            deal=result.deal,
             symbol=symbol,
             direction=signal.direction,
             entry_price=price,

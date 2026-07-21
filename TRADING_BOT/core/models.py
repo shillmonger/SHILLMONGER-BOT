@@ -38,7 +38,8 @@ class TradeResult:
 
     success: bool
 
-    ticket: Optional[int] = None
+    order: Optional[int] = None  # Order ticket from order_send()
+    deal: Optional[int] = None   # Deal ticket from order_send()
 
     symbol: Optional[str] = None
 

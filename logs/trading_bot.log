@@ -961,3 +961,278 @@ SL 4039
 2026-07-21 06:18:21.258 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
 2026-07-21 06:18:21.474 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
 2026-07-21 06:18:21.476 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:39:55.499 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:39:57.437 | SUCCESS  | mt5.trade_monitor:start:21 - Trade Monitor started
+2026-07-21 06:39:58.653 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 06:40:02.482 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 103.31
+2026-07-21 06:40:02.484 | SUCCESS  | telegram.listener:start:141 - Waiting For Signals...
+2026-07-21 06:40:04.719 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:40:04.720 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 06:40:08.480 | SUCCESS  | mt5.copy_connector:initialize:30 - MT5 Copy Engine terminal initialized
+2026-07-21 06:41:33.123 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:41:33.693 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 06:41:33.694 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 06:41:33.695 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4064
+TP 4065
+SL 4063
+2026-07-21 06:41:33.696 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:41:33.731 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:41:33.731 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4064\nTP 4065\nSL 4063', symbol='XAUUSDm', direction='SELL', entry=4064.0, entry_high=None, entry_low=None, stop_loss=4063.0, take_profits=[4065.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 5, 41, 33, 731051))
+2026-07-21 06:41:33.732 | WARNING  | telegram.listener:handler:90 - SELL stop loss must be above entry.
+2026-07-21 06:41:37.881 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:41:38.043 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝐅𝐗 𝐆𝐎𝐋𝐃 𝐓𝐑𝐀𝐃𝐄𝐑
+2026-07-21 06:41:38.043 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001745731456
+2026-07-21 06:41:38.045 | INFO     | telegram.listener:handler:70 - 📈(XAUUSD) BUY NOW 4057/4052
+
+TP1      4062
+
+TP2      4067
+
+TP3      4072
+
+TP4      4078
+
+
+❌STOP LOSS  4047
+2026-07-21 06:41:38.047 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:41:38.048 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:41:38.048 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-1001745731456, group_name='𝐅𝐗 𝐆𝐎𝐋𝐃 𝐓𝐑𝐀𝐃𝐄𝐑', raw_message='📈(XAUUSD) BUY NOW 4057/4052\n\nTP1\xa0\xa0\xa0\xa0\xa0 4062\n\nTP2\xa0\xa0\xa0\xa0\xa0 4067\n\nTP3\xa0\xa0\xa0\xa0\xa0 4072\n\nTP4\xa0\xa0\xa0\xa0\xa0 4078\n\n\n❌STOP LOSS\xa0 4047', symbol='XAUUSDm', direction='BUY', entry=4057.0, entry_high=None, entry_low=None, stop_loss=4047.0, take_profits=[4062.0, 4067.0, 4072.0, 4078.0], order_type='MARKET', confidence=100, timestamp=datetime.datetime(2026, 7, 21, 5, 41, 38, 48553))
+2026-07-21 06:41:38.050 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 06:41:38.052 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $103.31, Open trades: 0/10
+2026-07-21 06:41:38.054 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $103.31, Lot size: 0.01/0.02
+2026-07-21 06:41:38.054 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 06:41:38.055 | ERROR    | mt5.trader:execute_trade:134 - Trade failed 10016 Invalid stops
+2026-07-21 06:41:38.056 | ERROR    | telegram.listener:handler:125 - Trade failed: Invalid stops
+2026-07-21 06:42:14.443 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:42:15.020 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 06:42:15.021 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 06:42:15.021 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4064
+TP 4065
+SL 4063
+2026-07-21 06:42:15.022 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:42:15.023 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:42:15.024 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4064\nTP 4065\nSL 4063', symbol='XAUUSDm', direction='BUY', entry=4064.0, entry_high=None, entry_low=None, stop_loss=4063.0, take_profits=[4065.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 5, 42, 15, 23555))
+2026-07-21 06:42:15.024 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 06:42:15.026 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $103.31, Open trades: 0/10
+2026-07-21 06:42:15.026 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $103.31, Lot size: 0.01/0.02
+2026-07-21 06:42:15.027 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 06:42:15.879 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Order=2984916393 Deal=2443810299
+2026-07-21 06:42:15.880 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Order: 2984916393, Deal: 2443810299
+2026-07-21 06:42:16.058 | SUCCESS  | core.database:save_master_trade:69 - Master trade saved: 6a5f06b7c778396f34a47d35
+2026-07-21 06:42:17.393 | INFO     | copy_engine.engine:process_uncopied_trades:53 - Found 1 uncopied master trades
+2026-07-21 06:42:17.393 | INFO     | copy_engine.engine:copy_trade_to_users:62 - Processing copy job for master trade: 2984916393
+2026-07-21 06:42:17.674 | INFO     | copy_engine.engine:copy_trade_to_users:73 - Found 2 active accounts to copy to
+2026-07-21 06:42:18.989 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 06:42:18.990 | ERROR    | copy_engine.engine:copy_trade_to_users:121 - Error copying to user 436923056: 'master_ticket'
+2026-07-21 06:42:18.991 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:42:19.917 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:42:19.918 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 1 tickets
+2026-07-21 06:42:19.918 | INFO     | mt5.trade_monitor:check_closed_trades:66 - Checking master trade: Order=2984916393, Entry Deal=2443810299
+2026-07-21 06:42:20.884 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 06:42:20.892 | ERROR    | copy_engine.engine:copy_trade_to_users:121 - Error copying to user 436747484: 'master_ticket'
+2026-07-21 06:42:20.892 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:42:21.198 | SUCCESS  | copy_engine.engine:copy_trade_to_users:139 - Copy job completed for master trade 2984916393 | Processed: 0 | Failed: 2
+2026-07-21 06:42:30.087 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:42:30.088 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 1 tickets
+2026-07-21 06:42:30.089 | INFO     | mt5.trade_monitor:check_closed_trades:66 - Checking master trade: Order=2984916393, Entry Deal=2443810299
+2026-07-21 06:42:40.245 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:42:40.246 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 06:42:40.248 | INFO     | mt5.trade_monitor:check_closed_trades:66 - Checking master trade: Order=2984916393, Entry Deal=2443810299
+2026-07-21 06:42:40.249 | INFO     | mt5.trade_monitor:check_closed_trades:70 - Trade 2984916393 not in open positions - processing as closed
+2026-07-21 06:42:40.251 | INFO     | mt5.trade_monitor:process_closed_trade:79 - Processing closed trade: Order=2984916393, Symbol=XAUUSDm
+2026-07-21 06:42:40.254 | INFO     | mt5.trade_monitor:process_closed_trade:89 - Found 14 deals in history window
+2026-07-21 06:42:40.257 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2439394323, Type: 0, Profit: 0.0
+2026-07-21 06:42:40.260 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2439551994, Type: 1, Profit: -5.21
+2026-07-21 06:42:40.263 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2440745753, Type: 1, Profit: 0.0
+2026-07-21 06:42:40.264 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2441300835, Type: 0, Profit: 9.78
+2026-07-21 06:42:40.267 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443652291, Type: 1, Profit: 0.0
+2026-07-21 06:42:40.268 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443658931, Type: 0, Profit: 2.96
+2026-07-21 06:42:40.269 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443663508, Type: 0, Profit: 0.0
+2026-07-21 06:42:40.270 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443667149, Type: 1, Profit: -1.72
+2026-07-21 06:42:40.271 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443668014, Type: 0, Profit: 0.0
+2026-07-21 06:42:40.273 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443669075, Type: 1, Profit: 1.34
+2026-07-21 06:42:40.274 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443680559, Type: 1, Profit: 0.0
+2026-07-21 06:42:40.275 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443682164, Type: 1, Profit: 0.0
+2026-07-21 06:42:40.275 | INFO     | mt5.trade_monitor:process_closed_trade:103 - Found related deal: 2443686340, Type: 1, Profit: 0.0
+2026-07-21 06:42:40.276 | INFO     | mt5.trade_monitor:process_closed_trade:121 - Trade 2984916393 P&L calculation: Profit=7.15, Commission=0.00, Swap=0.00, Net=7.15
+2026-07-21 06:42:40.449 | SUCCESS  | mt5.trade_monitor:process_closed_trade:134 - Master trade 2984916393 closed | Net Profit: $7.15
+2026-07-21 06:42:40.781 | INFO     | mt5.trade_monitor:process_closed_trade:141 - Found 0 related trade activities to update
+2026-07-21 06:43:32.171 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:43:32.174 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:43:32.346 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗔𝗟𝗟 𝗦𝗧𝗔𝗥 𝗙𝗢𝗥𝗘𝗫
+2026-07-21 06:43:32.347 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001210370243
+2026-07-21 06:43:32.347 | INFO     | telegram.listener:handler:70 - 𝗚𝗢𝗟𝗗 𝗕𝗨𝗬 𝗥𝗨𝗡𝗡𝗜𝗡𝗚 200 𝗣𝗶𝗽𝘀 𝗣𝗿𝗼𝗳𝗶𝘁 💰💰💰
+
+𝗖𝗹𝗲𝗮𝗻 𝗮𝗻𝗱 𝗣𝗿𝗲𝗰𝗶𝘀𝗲 𝗺𝗼𝘃𝗲💣💣💣
+2026-07-21 06:43:32.348 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:43:32.349 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:43:32.353 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗚𝗢𝗟𝗗 𝗣𝗥𝗢 𝗧𝗥𝗔𝗗𝗘𝗥
+2026-07-21 06:43:32.353 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001838220681
+2026-07-21 06:43:32.354 | INFO     | telegram.listener:handler:70 - 𝗚𝗢𝗟𝗗 BUY 𝗥𝗨𝗡𝗡𝗜𝗡𝗚 200 𝗣𝗶𝗽𝘀 𝗣𝗿𝗼𝗳𝗶𝘁 🔥
+2026-07-21 06:43:32.354 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:43:32.355 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:44:58.833 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:44:59.002 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗙𝗢𝗥𝗘𝗫 𝗠𝗔𝗥𝗞𝗘𝗧 𝗖𝗢𝗡𝗤𝗨𝗘𝗥
+2026-07-21 06:44:59.003 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001661508107
+2026-07-21 06:44:59.003 | INFO     | telegram.listener:handler:70 - GOLD BUY HIT TP (1) 70+ pips from entry 4059 to 4066
+
+Move SL to your entry and close ba💰💰💰
+2026-07-21 06:44:59.005 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:44:59.005 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:46:47.362 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:46:49.200 | SUCCESS  | mt5.trade_monitor:start:21 - Trade Monitor started
+2026-07-21 06:46:50.324 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 06:46:50.326 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 104.28
+2026-07-21 06:46:50.327 | SUCCESS  | telegram.listener:start:141 - Waiting For Signals...
+2026-07-21 06:46:53.636 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:46:53.637 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 06:46:53.638 | SUCCESS  | mt5.copy_connector:initialize:30 - MT5 Copy Engine terminal initialized
+2026-07-21 06:47:33.621 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:47:34.227 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝐅𝐗 𝐆𝐎𝐋𝐃 𝐓𝐑𝐀𝐃𝐄𝐑
+2026-07-21 06:47:34.228 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001745731456
+2026-07-21 06:47:34.229 | INFO     | telegram.listener:handler:70 - GOLD BUY 
+
+TP 1 Hit Achieved +60 Pip's Done ✅
+2026-07-21 06:47:34.229 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:47:34.246 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:47:50.343 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:47:50.508 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUS DPRO SIGNALS
+2026-07-21 06:47:50.509 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001180718680
+2026-07-21 06:47:50.509 | INFO     | telegram.listener:handler:70 - (#XAUUSD) BUY 📈
+
+TARGET ALL COMPLETE 150+ PIPS DONE ✅✅✔️💎💎
+2026-07-21 06:47:50.509 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:47:50.510 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:48:17.242 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:48:17.243 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUSD VIP SIGNALS
+2026-07-21 06:48:17.244 | INFO     | telegram.listener:handler:66 - CHAT ID : -1003856406743
+2026-07-21 06:48:17.245 | INFO     | telegram.listener:handler:70 - #XAUUSD SELL NOW 4068
+
+SL 4078
+
+TP 4065
+TP 4062
+TP 4058
+TP 4055
+TP 4045
+2026-07-21 06:48:17.248 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:48:17.250 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:48:17.251 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-1003856406743, group_name='XAUUSD VIP SIGNALS', raw_message='#XAUUSD SELL NOW 4068\n\nSL 4078\n\nTP 4065\nTP 4062\nTP 4058\nTP 4055\nTP 4045', symbol='XAUUSDm', direction='SELL', entry=4068.0, entry_high=None, entry_low=None, stop_loss=4078.0, take_profits=[4065.0, 4062.0, 4058.0, 4055.0, 4045.0], order_type='MARKET', confidence=100, timestamp=datetime.datetime(2026, 7, 21, 5, 48, 17, 250636))
+2026-07-21 06:48:17.260 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 06:48:17.263 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $104.28, Open trades: 0/10
+2026-07-21 06:48:17.265 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $104.28, Lot size: 0.01/0.02
+2026-07-21 06:48:17.265 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 06:48:17.850 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Order=2984943333 Deal=2443832760
+2026-07-21 06:48:17.851 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Order: 2984943333, Deal: 2443832760
+2026-07-21 06:48:18.030 | SUCCESS  | core.database:save_master_trade:69 - Master trade saved: 6a5f08212ed1c956dead1967
+2026-07-21 06:48:20.219 | INFO     | copy_engine.engine:process_uncopied_trades:53 - Found 1 uncopied master trades
+2026-07-21 06:48:20.221 | INFO     | copy_engine.engine:copy_trade_to_users:63 - Processing copy job for master trade: 2984943333
+2026-07-21 06:48:20.561 | INFO     | copy_engine.engine:copy_trade_to_users:74 - Found 2 active accounts to copy to
+2026-07-21 06:48:20.875 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:48:20.876 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 1 tickets
+2026-07-21 06:48:20.878 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:48:22.340 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 06:48:22.488 | SUCCESS  | mt5.copy_trader:execute_copy_trade:109 - Copy trade executed SELL XAUUSDm | User Order: 2984943576 Deal: 2443832937 | Master Order: 2984943333
+2026-07-21 06:48:22.643 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:48:24.602 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 06:48:24.765 | SUCCESS  | mt5.copy_trader:execute_copy_trade:109 - Copy trade executed SELL XAUUSDm | User Order: 2984943706 Deal: 2443833045 | Master Order: 2984943333
+2026-07-21 06:48:24.921 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:48:25.240 | SUCCESS  | copy_engine.engine:copy_trade_to_users:140 - Copy job completed for master trade 2984943333 | Processed: 2 | Failed: 0
+2026-07-21 06:48:29.502 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:48:29.676 | SUCCESS  | telegram.listener:handler:65 - GROUP : GOLD Snipers
+2026-07-21 06:48:29.676 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001584939836
+2026-07-21 06:48:29.677 | INFO     | telegram.listener:handler:70 - 📊 XAUUSD BUY BOOM BOOM RUNNING 230+ PIPS 🙏
+2026-07-21 06:48:29.677 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:48:29.678 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:48:31.056 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:48:31.057 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:48:31.057 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:48:41.245 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:48:41.246 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:48:41.246 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:48:51.434 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:48:51.434 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:48:51.435 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:01.610 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:01.611 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:01.611 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:11.783 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:11.783 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:11.784 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:22.005 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:22.006 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:22.006 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:32.161 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:32.163 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:32.164 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:42.332 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:42.333 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:42.333 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:49:52.493 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:49:52.493 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:49:52.493 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:50:02.651 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:50:02.651 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:50:02.651 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:50:12.811 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:50:12.811 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 06:50:12.811 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:50:23.000 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 06:50:23.001 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 06:50:23.002 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2984943333, Entry Deal=2443832760
+2026-07-21 06:50:23.004 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2984943333 not in open positions - processing as closed
+2026-07-21 06:50:23.005 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2984943333, Symbol=XAUUSDm
+2026-07-21 06:50:23.006 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 19 deals in history window
+2026-07-21 06:50:23.009 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2439394323, Type: 0, Profit: 0.0
+2026-07-21 06:50:23.011 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2439551994, Type: 1, Profit: -5.21
+2026-07-21 06:50:23.013 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2440745753, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.014 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2441300835, Type: 0, Profit: 9.78
+2026-07-21 06:50:23.014 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443652291, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.015 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443658931, Type: 0, Profit: 2.96
+2026-07-21 06:50:23.015 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443663508, Type: 0, Profit: 0.0
+2026-07-21 06:50:23.018 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443667149, Type: 1, Profit: -1.72
+2026-07-21 06:50:23.018 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443668014, Type: 0, Profit: 0.0
+2026-07-21 06:50:23.020 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443669075, Type: 1, Profit: 1.34
+2026-07-21 06:50:23.021 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443680559, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.022 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443682164, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.023 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443686340, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.023 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443688702, Type: 0, Profit: -0.79
+2026-07-21 06:50:23.024 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443688715, Type: 0, Profit: -1.9
+2026-07-21 06:50:23.024 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443688717, Type: 0, Profit: -1.5699999999999998
+2026-07-21 06:50:23.027 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443693471, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.028 | INFO     | mt5.trade_monitor:process_closed_trade:104 - Found related deal: 2443693971, Type: 1, Profit: 0.0
+2026-07-21 06:50:23.029 | INFO     | mt5.trade_monitor:process_closed_trade:122 - Trade 2984943333 P&L calculation: Profit=2.89, Commission=0.00, Swap=0.00, Net=2.89
+2026-07-21 06:50:23.238 | SUCCESS  | mt5.trade_monitor:process_closed_trade:135 - Master trade 2984943333 closed | Net Profit: $2.89
+2026-07-21 06:50:23.410 | INFO     | mt5.trade_monitor:process_closed_trade:142 - Found 2 related trade activities to update
+2026-07-21 06:50:23.410 | INFO     | mt5.trade_monitor:process_closed_trade:149 - Processing user trade: Order=2984943576, Entry Deal=2443832937
+2026-07-21 06:50:23.411 | INFO     | mt5.trade_monitor:process_closed_trade:177 - User trade 2984943576 P&L: Profit=2.89, Net=2.89
+2026-07-21 06:50:23.591 | SUCCESS  | mt5.trade_monitor:process_closed_trade:188 - User trade 2984943576 closed | Net Profit: $2.89
+2026-07-21 06:50:23.592 | INFO     | mt5.trade_monitor:process_closed_trade:149 - Processing user trade: Order=2984943706, Entry Deal=2443833045
+2026-07-21 06:50:23.593 | INFO     | mt5.trade_monitor:process_closed_trade:177 - User trade 2984943706 P&L: Profit=2.89, Net=2.89
+2026-07-21 06:50:23.756 | SUCCESS  | mt5.trade_monitor:process_closed_trade:188 - User trade 2984943706 closed | Net Profit: $2.89
+2026-07-21 06:50:50.411 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:50:50.430 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:50:50.433 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:50:50.651 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUS DPRO SIGNALS
+2026-07-21 06:50:50.652 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001180718680
+2026-07-21 06:50:50.652 | INFO     | telegram.listener:handler:70 - I am in a good mood ☺️
+
+I will help 5 people in the chat. Me
+
+The first 5 will get it; be quick.
+
+Send me: "HELP"
+
+👉 @Dilawarfxm1
+2026-07-21 06:50:50.654 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:50:50.658 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:50:50.663 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUS DPRO SIGNALS
+2026-07-21 06:50:50.665 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001180718680
+2026-07-21 06:50:50.699 | INFO     | telegram.listener:handler:70 - Now
+2026-07-21 06:50:50.731 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:50:50.731 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:50:50.735 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUS DPRO SIGNALS
+2026-07-21 06:50:50.736 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001180718680
+2026-07-21 06:50:50.738 | INFO     | telegram.listener:handler:70 - Fast
+2026-07-21 06:50:50.738 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:50:50.739 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.

@@ -105,12 +105,13 @@ class TelegramListener:
 
             if result.success:
                 logger.success(
-                    f"Trade opened successfully. Ticket: {result.ticket}"
+                    f"Trade opened successfully. Order: {result.order}, Deal: {result.deal}"
                 )
                 
                 # Save master trade to database for copy engine
                 trade_data = {
-                    "master_ticket": result.ticket,
+                    "master_order_ticket": result.order,
+                    "master_entry_deal": result.deal,
                     "symbol": result.symbol,
                     "type": result.direction,
                     "entry": result.entry_price,

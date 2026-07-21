@@ -57,12 +57,13 @@ class CopyEngine:
 
     def copy_trade_to_users(self, master_trade):
         """Copy a single master trade to all active users."""
-        master_ticket = master_trade["master_ticket"]
+        # Handle backward compatibility for old database records
+        master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
         
-        logger.info(f"Processing copy job for master trade: {master_ticket}")
+        logger.info(f"Processing copy job for master trade: {master_order_ticket}")
 
         # Create copy job record
-        job_id = db.create_copy_job(master_ticket)
+        job_id = db.create_copy_job(master_order_ticket)
         
         users_processed = 0
         users_failed = 0
@@ -98,16 +99,16 @@ class CopyEngine:
                     # Save trade activity
                     activity_data = {
                         "user_id": user_id,
-                        "master_ticket": master_ticket,
-                        "user_ticket": result.ticket,
+                        "master_order_ticket": master_order_ticket,
+                        "user_order_ticket": result.order,
+                        "user_entry_deal": result.deal,
                         "symbol": result.symbol,
                         "type": result.direction,
                         "entry": result.entry_price,
                         "lot": result.lot_size,
                         "sl": master_trade.get("sl"),
                         "tp": master_trade.get("tp"),
-                        "status": "OPEN",
-                        "profit": 0.0
+                        "status": "OPEN"
                     }
                     db.save_trade_activity(activity_data)
                     users_processed += 1
@@ -134,9 +135,9 @@ class CopyEngine:
         })
 
         # Mark master trade as copied
-        db.mark_master_trade_copied(master_ticket)
+        db.mark_master_trade_copied(master_order_ticket)
 
         logger.success(
-            f"Copy job completed for master trade {master_ticket} | "
+            f"Copy job completed for master trade {master_order_ticket} | "
             f"Processed: {users_processed} | Failed: {users_failed}"
         )

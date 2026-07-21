@@ -68,6 +68,9 @@ class MT5CopyTrader:
                 message=f"Unknown trade type: {trade_type}"
             )
 
+        # Handle backward compatibility for old database records
+        master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
+        
         request = {
             "action": trade_action,
             "symbol": symbol,
@@ -78,7 +81,7 @@ class MT5CopyTrader:
             "tp": master_trade.get("tp", [])[0] if master_trade.get("tp") else None,
             "deviation": 20,
             "magic": self.MAGIC_NUMBER,
-            "comment": f"Copy from Master #{master_trade['master_ticket']}",
+            "comment": f"Copy from Master #{master_order_ticket}",
             "type_time": mt5.ORDER_TIME_GTC,
             "type_filling": type_filling,
         }
@@ -105,13 +108,14 @@ class MT5CopyTrader:
 
         logger.success(
             f"Copy trade executed {trade_type} {symbol} | "
-            f"User Ticket: {result.order} | "
-            f"Master Ticket: {master_trade['master_ticket']}"
+            f"User Order: {result.order} Deal: {result.deal} | "
+            f"Master Order: {master_trade['master_order_ticket']}"
         )
 
         return TradeResult(
             success=True,
-            ticket=result.order,
+            order=result.order,
+            deal=result.deal,
             symbol=symbol,
             direction=trade_type,
             entry_price=price,

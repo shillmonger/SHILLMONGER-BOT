@@ -63,8 +63,8 @@ class Database:
             trade_data["created_at"] = datetime.utcnow()
             trade_data["status"] = "OPEN"
             trade_data["copied"] = False
-            trade_data["profit"] = 0.0
-            trade_data["loss"] = 0.0
+            trade_data["profit"] = None
+            trade_data["closed_at"] = None
             result = self.master_trades_collection.insert_one(trade_data)
             logger.success(f"Master trade saved: {result.inserted_id}")
             return result.inserted_id
@@ -81,31 +81,43 @@ class Database:
             logger.error(f"Failed to get uncopied trades: {e}")
             return []
 
-    def mark_master_trade_copied(self, master_ticket):
+    def mark_master_trade_copied(self, master_order_ticket):
         """Mark a master trade as copied"""
         try:
-            self.master_trades_collection.update_one(
-                {"master_ticket": master_ticket},
+            # Handle backward compatibility - try both field names
+            result = self.master_trades_collection.update_one(
+                {"master_order_ticket": master_order_ticket},
                 {"$set": {"copied": True}}
             )
+            if result.matched_count == 0:
+                # Try old field name
+                self.master_trades_collection.update_one(
+                    {"master_ticket": master_order_ticket},
+                    {"$set": {"copied": True}}
+                )
         except Exception as e:
             logger.error(f"Failed to mark trade as copied: {e}")
 
-    def update_master_trade_status(self, master_ticket, status, profit=0.0, loss=0.0):
-        """Update master trade status (OPEN/CLOSED) and profit/loss"""
+    def update_master_trade_status(self, master_order_ticket, status, profit=None):
+        """Update master trade status (OPEN/CLOSED) and profit (negative for loss)"""
         try:
             update_data = {"status": status}
-            if profit != 0.0:
+            if profit is not None:
                 update_data["profit"] = profit
-            if loss != 0.0:
-                update_data["loss"] = loss
             if status == "CLOSED":
                 update_data["closed_at"] = datetime.utcnow()
             
-            self.master_trades_collection.update_one(
-                {"master_ticket": master_ticket},
+            # Handle backward compatibility - try both field names
+            result = self.master_trades_collection.update_one(
+                {"master_order_ticket": master_order_ticket},
                 {"$set": update_data}
             )
+            if result.matched_count == 0:
+                # Try old field name
+                self.master_trades_collection.update_one(
+                    {"master_ticket": master_order_ticket},
+                    {"$set": update_data}
+                )
         except Exception as e:
             logger.error(f"Failed to update master trade status: {e}")
 
@@ -114,24 +126,32 @@ class Database:
         """Save a trade activity record for a user"""
         try:
             activity_data["created_at"] = datetime.utcnow()
-            activity_data["profit"] = 0.0
-            activity_data["loss"] = 0.0
+            activity_data["profit"] = None
+            activity_data["closed_at"] = None
             result = self.trade_activity_collection.insert_one(activity_data)
             return result.inserted_id
         except Exception as e:
             logger.error(f"Failed to save trade activity: {e}")
             return None
 
-    def update_trade_activity(self, user_ticket, update_data):
+    def update_trade_activity(self, user_order_ticket, update_data):
         """Update trade activity (e.g., when trade closes)"""
         try:
             update_data["updated_at"] = datetime.utcnow()
             if "status" in update_data and update_data["status"] == "CLOSED":
                 update_data["closed_at"] = datetime.utcnow()
-            self.trade_activity_collection.update_one(
-                {"user_ticket": user_ticket},
+            
+            # Handle backward compatibility - try both field names
+            result = self.trade_activity_collection.update_one(
+                {"user_order_ticket": user_order_ticket},
                 {"$set": update_data}
             )
+            if result.matched_count == 0:
+                # Try old field name
+                self.trade_activity_collection.update_one(
+                    {"user_ticket": user_order_ticket},
+                    {"$set": update_data}
+                )
         except Exception as e:
             logger.error(f"Failed to update trade activity: {e}")
 
@@ -145,11 +165,11 @@ class Database:
             return []
 
     # Copy Jobs Collection Methods
-    def create_copy_job(self, master_ticket):
+    def create_copy_job(self, master_order_ticket):
         """Create a new copy job"""
         try:
             job_data = {
-                "master_ticket": master_ticket,
+                "master_order_ticket": master_order_ticket,
                 "state": "IN_PROGRESS",
                 "users_processed": 0,
                 "users_failed": 0,
@@ -191,13 +211,17 @@ class Database:
             logger.error(f"Failed to get open master trades: {e}")
             return []
 
-    def get_trade_activities_by_master_ticket(self, master_ticket):
-        """Get all trade activities for a specific master ticket"""
+    def get_trade_activities_by_master_order_ticket(self, master_order_ticket):
+        """Get all trade activities for a specific master order ticket"""
         try:
-            activities = list(self.trade_activity_collection.find({"master_ticket": master_ticket}))
+            # Handle backward compatibility - try both field names
+            activities = list(self.trade_activity_collection.find({"master_order_ticket": master_order_ticket}))
+            if not activities:
+                # Try old field name
+                activities = list(self.trade_activity_collection.find({"master_ticket": master_order_ticket}))
             return activities
         except Exception as e:
-            logger.error(f"Failed to get trade activities by master ticket: {e}")
+            logger.error(f"Failed to get trade activities by master order ticket: {e}")
             return []
 
 # Global database instance
