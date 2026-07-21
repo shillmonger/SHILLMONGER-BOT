@@ -21,18 +21,27 @@ class CopyEngine:
         self.running = True
         logger.success("Copy Engine started")
 
-        while self.running:
-            try:
-                self.process_uncopied_trades()
-                time.sleep(2)  # Check every 2 seconds
-            except Exception as e:
-                logger.error(f"Copy Engine error: {e}")
-                time.sleep(5)
+        # Initialize MT5 terminal once
+        if not self.copy_connector.initialize():
+            logger.error("Failed to initialize MT5 Copy Engine terminal")
+            return
+
+        try:
+            while self.running:
+                try:
+                    self.process_uncopied_trades()
+                    time.sleep(2)  # Check every 2 seconds
+                except Exception as e:
+                    logger.error(f"Copy Engine error: {e}")
+                    time.sleep(5)
+        finally:
+            # Shutdown terminal when stopping
+            self.copy_connector.shutdown()
 
     def stop(self):
         """Stop the copy engine."""
         self.running = False
-        logger.info("Copy Engine stopped")
+        logger.info("Copy Engine stopping...")
 
     def process_uncopied_trades(self):
         """Process all uncopied master trades."""
@@ -105,7 +114,7 @@ class CopyEngine:
                 else:
                     users_failed += 1
 
-                # Disconnect from user account
+                # Logout from user account (keeps terminal running)
                 self.copy_connector.disconnect()
 
             except Exception as e:

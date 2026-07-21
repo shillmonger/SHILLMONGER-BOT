@@ -63,6 +63,8 @@ class Database:
             trade_data["created_at"] = datetime.utcnow()
             trade_data["status"] = "OPEN"
             trade_data["copied"] = False
+            trade_data["profit"] = 0.0
+            trade_data["loss"] = 0.0
             result = self.master_trades_collection.insert_one(trade_data)
             logger.success(f"Master trade saved: {result.inserted_id}")
             return result.inserted_id
@@ -89,12 +91,20 @@ class Database:
         except Exception as e:
             logger.error(f"Failed to mark trade as copied: {e}")
 
-    def update_master_trade_status(self, master_ticket, status):
-        """Update master trade status (OPEN/CLOSED)"""
+    def update_master_trade_status(self, master_ticket, status, profit=0.0, loss=0.0):
+        """Update master trade status (OPEN/CLOSED) and profit/loss"""
         try:
+            update_data = {"status": status}
+            if profit != 0.0:
+                update_data["profit"] = profit
+            if loss != 0.0:
+                update_data["loss"] = loss
+            if status == "CLOSED":
+                update_data["closed_at"] = datetime.utcnow()
+            
             self.master_trades_collection.update_one(
                 {"master_ticket": master_ticket},
-                {"$set": {"status": status}}
+                {"$set": update_data}
             )
         except Exception as e:
             logger.error(f"Failed to update master trade status: {e}")
@@ -104,6 +114,8 @@ class Database:
         """Save a trade activity record for a user"""
         try:
             activity_data["created_at"] = datetime.utcnow()
+            activity_data["profit"] = 0.0
+            activity_data["loss"] = 0.0
             result = self.trade_activity_collection.insert_one(activity_data)
             return result.inserted_id
         except Exception as e:
@@ -114,6 +126,8 @@ class Database:
         """Update trade activity (e.g., when trade closes)"""
         try:
             update_data["updated_at"] = datetime.utcnow()
+            if "status" in update_data and update_data["status"] == "CLOSED":
+                update_data["closed_at"] = datetime.utcnow()
             self.trade_activity_collection.update_one(
                 {"user_ticket": user_ticket},
                 {"$set": update_data}
@@ -166,6 +180,24 @@ class Database:
             return accounts
         except Exception as e:
             logger.error(f"Failed to get active MT5 accounts: {e}")
+            return []
+
+    def get_open_master_trades(self):
+        """Get all open master trades for monitoring"""
+        try:
+            trades = list(self.master_trades_collection.find({"status": "OPEN"}))
+            return trades
+        except Exception as e:
+            logger.error(f"Failed to get open master trades: {e}")
+            return []
+
+    def get_trade_activities_by_master_ticket(self, master_ticket):
+        """Get all trade activities for a specific master ticket"""
+        try:
+            activities = list(self.trade_activity_collection.find({"master_ticket": master_ticket}))
+            return activities
+        except Exception as e:
+            logger.error(f"Failed to get trade activities by master ticket: {e}")
             return []
 
 # Global database instance

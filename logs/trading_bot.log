@@ -818,3 +818,146 @@ SL 4048
 2026-07-21 05:48:11.462 | SUCCESS  | mt5.copy_trader:execute_copy_trade:106 - Copy trade executed SELL XAUUSDm | User Ticket: 2984783191 | Master Ticket: 2984782603
 2026-07-21 05:48:11.619 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
 2026-07-21 05:48:11.930 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984782603 | Processed: 2 | Failed: 0
+2026-07-21 05:54:52.903 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:54:56.455 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:54:56.458 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 98.32
+2026-07-21 05:54:56.458 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:55:33.124 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:55:33.126 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:55:36.743 | SUCCESS  | mt5.copy_connector:initialize:30 - MT5 Copy Engine terminal initialized
+2026-07-21 06:06:17.640 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:06:19.487 | SUCCESS  | mt5.trade_monitor:start:19 - Trade Monitor started
+2026-07-21 06:06:20.796 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 06:06:24.925 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 96.96
+2026-07-21 06:06:24.926 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 06:06:26.171 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 06:06:26.172 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 06:06:29.794 | SUCCESS  | mt5.copy_connector:initialize:30 - MT5 Copy Engine terminal initialized
+2026-07-21 06:07:47.235 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:07:48.039 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗔𝗟𝗟 𝗦𝗧𝗔𝗥 𝗙𝗢𝗥𝗘𝗫
+2026-07-21 06:07:48.039 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001210370243
+2026-07-21 06:07:48.040 | INFO     | telegram.listener:handler:70 - GOLD Buy 4046
+2026-07-21 06:07:48.040 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:07:48.058 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:08:33.340 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:08:33.518 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗔𝗟𝗟 𝗦𝗧𝗔𝗥 𝗙𝗢𝗥𝗘𝗫
+2026-07-21 06:08:33.520 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001210370243
+2026-07-21 06:08:33.521 | INFO     | telegram.listener:handler:70 - GOLD Buy 4045-4046
+
+TP 4052
+TP 4060
+TP 4100
+
+SL 4039
+2026-07-21 06:08:33.523 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:08:33.525 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:08:33.527 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-1001210370243, group_name='𝗔𝗟𝗟 𝗦𝗧𝗔𝗥 𝗙𝗢𝗥𝗘𝗫', raw_message='GOLD Buy 4045-4046\n\nTP 4052\nTP 4060\nTP 4100\n\nSL 4039', symbol='XAUUSDm', direction='BUY', entry=4045.0, entry_high=None, entry_low=None, stop_loss=4039.0, take_profits=[4052.0, 4060.0, 4100.0], order_type='MARKET', confidence=99, timestamp=datetime.datetime(2026, 7, 21, 5, 8, 33, 525229))
+2026-07-21 06:08:33.530 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 06:08:33.532 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $96.96, Open trades: 0/10
+2026-07-21 06:08:33.533 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $96.96, Lot size: 0.01/0.02
+2026-07-21 06:08:33.534 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 06:08:34.265 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Ticket=2984815277
+2026-07-21 06:08:34.265 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984815277
+2026-07-21 06:08:34.424 | SUCCESS  | core.database:save_master_trade:69 - Master trade saved: 6a5efed2ba2e3b99981b4974
+2026-07-21 06:08:34.860 | INFO     | copy_engine.engine:process_uncopied_trades:53 - Found 1 uncopied master trades
+2026-07-21 06:08:34.861 | INFO     | copy_engine.engine:copy_trade_to_users:62 - Processing copy job for master trade: 2984815277
+2026-07-21 06:08:35.161 | INFO     | copy_engine.engine:copy_trade_to_users:73 - Found 2 active accounts to copy to
+2026-07-21 06:08:36.588 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 06:08:36.718 | SUCCESS  | mt5.copy_trader:execute_copy_trade:106 - Copy trade executed BUY XAUUSDm | User Ticket: 2984815352 | Master Ticket: 2984815277
+2026-07-21 06:08:36.868 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:08:38.207 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 06:08:39.075 | SUCCESS  | mt5.copy_trader:execute_copy_trade:106 - Copy trade executed BUY XAUUSDm | User Ticket: 2984815421 | Master Ticket: 2984815277
+2026-07-21 06:08:39.236 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 06:08:39.523 | SUCCESS  | copy_engine.engine:copy_trade_to_users:139 - Copy job completed for master trade 2984815277 | Processed: 2 | Failed: 0
+2026-07-21 06:09:20.870 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:09:21.057 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗚𝗢𝗟𝗗 𝗣𝗥𝗢 𝗧𝗥𝗔𝗗𝗘𝗥
+2026-07-21 06:09:21.058 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001838220681
+2026-07-21 06:09:21.058 | INFO     | telegram.listener:handler:70 - GOLD Buy 4045-4046
+
+TP 4052
+TP 4060
+TP 4100
+
+SL 4039
+2026-07-21 06:09:21.059 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:09:21.060 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 06:09:21.060 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-1001838220681, group_name='𝗚𝗢𝗟𝗗 𝗣𝗥𝗢 𝗧𝗥𝗔𝗗𝗘𝗥', raw_message='GOLD Buy 4045-4046\n\nTP 4052\nTP 4060\nTP 4100\n\nSL 4039', symbol='XAUUSDm', direction='BUY', entry=4045.0, entry_high=None, entry_low=None, stop_loss=4039.0, take_profits=[4052.0, 4060.0, 4100.0], order_type='MARKET', confidence=99, timestamp=datetime.datetime(2026, 7, 21, 5, 9, 21, 60293))
+2026-07-21 06:09:21.062 | WARNING  | telegram.listener:handler:90 - Duplicate signal.
+2026-07-21 06:10:55.852 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:10:56.074 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗙𝗢𝗥𝗘𝗫 𝗠𝗔𝗥𝗞𝗘𝗧 𝗣𝗥𝗢
+2026-07-21 06:10:56.075 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001192590252
+2026-07-21 06:10:56.077 | INFO     | telegram.listener:handler:70 - GOLD. SELL
+40+Pips Profit Runnings🥳🥳
+2026-07-21 06:10:56.077 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:10:56.078 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:14:49.661 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:14:49.662 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗠𝗿 𝗚𝗢𝗟𝗗 𝗩𝗶𝗣 𝗦𝗶𝗴𝗻𝗮𝗹⚡
+2026-07-21 06:14:49.663 | INFO     | telegram.listener:handler:66 - CHAT ID : -1002266817414
+2026-07-21 06:14:49.663 | INFO     | telegram.listener:handler:70 - Good morning ✅
+2026-07-21 06:14:49.664 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:14:49.665 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:15:08.352 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:08.353 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:15:18.507 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:18.508 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:15:28.662 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:28.662 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:15:38.830 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:38.831 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:15:49.024 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:49.024 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:15:59.215 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:15:59.217 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:16:09.401 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:16:09.401 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:16:19.547 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:16:19.549 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:16:21.013 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:16:21.016 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:16:21.227 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗚𝗢𝗟𝗗 𝗣𝗥𝗢 𝗧𝗥𝗔𝗗𝗘𝗥
+2026-07-21 06:16:21.229 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001838220681
+2026-07-21 06:16:21.232 | INFO     | telegram.listener:handler:70 - 𝗚𝗢𝗟𝗗 BUY  𝗛𝗜𝗧 𝗧𝗣 1 𝗮𝗻𝗱 𝗿𝘂𝗻𝗻𝗶𝗻𝗴 
+70+ 𝗽𝗶𝗽𝘀 🍾
+
+𝗠𝗼𝘃𝗲 𝗦𝗟 𝘁𝗼 𝗲𝗻𝘁𝗿𝘆 𝗽𝗼𝗶𝗻𝘁 𝗮𝗻𝗱 𝗺𝗮𝗸𝗲 𝗶𝘁 ✍️ 𝗿𝗶𝘀𝗸-𝗳𝗿𝗲𝗲 𝘁𝗿𝗮𝗱𝗲 🎯
+2026-07-21 06:16:21.234 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:16:21.238 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:16:21.244 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝗔𝗟𝗟 𝗦𝗧𝗔𝗥 𝗙𝗢𝗥𝗘𝗫
+2026-07-21 06:16:21.245 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001210370243
+2026-07-21 06:16:21.246 | INFO     | telegram.listener:handler:70 - #𝗚𝗢𝗟𝗗 #𝗕𝗨𝗬 𝗛𝗜𝗧 #𝐓𝐏 1 💣💣💣
+
+#𝗕𝗢𝗢𝗞 70 #𝐏𝐢𝐩𝐬 #𝐏𝐫𝐨𝐟𝐢𝐭 💰💰💰
+
+#𝗠𝗼𝘃𝗲 𝗦𝗟 𝘁𝗼 #𝗕𝗿𝗲𝗮𝗸 𝗘𝘃𝗲𝗻😮😮😮
+2026-07-21 06:16:21.247 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:16:21.249 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:16:29.727 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:16:29.728 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:16:39.877 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:16:39.878 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:16:50.035 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:16:50.036 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:00.203 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:00.203 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:10.347 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:10.348 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:20.515 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:20.517 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:30.663 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:30.664 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:40.813 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:40.814 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:17:50.978 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:17:50.980 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:18:01.138 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:18:01.139 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:18:11.306 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:18:11.307 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277
+2026-07-21 06:18:21.061 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 06:18:21.255 | SUCCESS  | telegram.listener:handler:65 - GROUP : GOLD Snipers
+2026-07-21 06:18:21.255 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001584939836
+2026-07-21 06:18:21.256 | INFO     | telegram.listener:handler:70 - 📊 XAUUSD BUY TP1 DONE 70+ PIPS 🙏
+2026-07-21 06:18:21.256 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 06:18:21.258 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 06:18:21.474 | INFO     | mt5.trade_monitor:process_closed_trade:63 - Processing closed trade: 2984815277
+2026-07-21 06:18:21.476 | WARNING  | mt5.trade_monitor:process_closed_trade:69 - No history found for ticket 2984815277

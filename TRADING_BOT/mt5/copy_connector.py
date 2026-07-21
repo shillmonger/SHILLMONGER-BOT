@@ -10,17 +10,32 @@ class MT5CopyConnector:
 
     def __init__(self):
         self.connected = False
+        self.initialized = False
 
-    def connect(self, login: int, password: str, server: str) -> bool:
+    def initialize(self) -> bool:
         """
-        Initialize MT5 and log into a user account using copy engine terminal.
+        Initialize MT5 terminal once (before processing any users).
         """
-        # Initialize MT5 with dedicated copy engine terminal path
+        if self.initialized:
+            return True
+
         copy_path = r"C:\Program Files\MT5_CopyEngine\terminal64.exe"
         if not mt5.initialize(path=copy_path):
             logger.error(
                 f"MT5 Copy Engine initialization failed: {mt5.last_error()}"
             )
+            return False
+
+        self.initialized = True
+        logger.success("MT5 Copy Engine terminal initialized")
+        return True
+
+    def connect(self, login: int, password: str, server: str) -> bool:
+        """
+        Log into a user account (terminal must already be initialized).
+        """
+        if not self.initialized:
+            logger.error("MT5 Copy Engine not initialized. Call initialize() first.")
             return False
 
         authorized = mt5.login(
@@ -33,14 +48,12 @@ class MT5CopyConnector:
             logger.error(
                 f"MT5 Copy Engine login failed for {login}: {mt5.last_error()}"
             )
-            mt5.shutdown()
             return False
 
         account = mt5.account_info()
 
         if account is None:
             logger.error("Failed to retrieve account information.")
-            mt5.shutdown()
             return False
 
         self.connected = True
@@ -55,12 +68,23 @@ class MT5CopyConnector:
 
     def disconnect(self):
         """
-        Close the MT5 connection.
+        Logout from current user account (keeps terminal running).
         """
         if self.connected:
-            mt5.shutdown()
+            # Just logout, don't shutdown the terminal
+            mt5.login(login=0, password="", server="")
             self.connected = False
-            logger.info("MT5 Copy Engine connection closed.")
+            logger.info("MT5 Copy Engine logged out from user account")
+
+    def shutdown(self):
+        """
+        Shutdown the MT5 terminal (call once after all users processed).
+        """
+        if self.initialized:
+            mt5.shutdown()
+            self.initialized = False
+            self.connected = False
+            logger.info("MT5 Copy Engine terminal shutdown")
 
     def is_connected(self) -> bool:
         """
