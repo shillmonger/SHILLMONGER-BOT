@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TRADING BOT",
+  title: "XAUUSD BOT",
   description: "Automated Trading Bot",
 };
 

@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <section className="relative mt-15 lg:mt-40 w-full bg-neutral-950 text-neutral-50 font-sans">
       {/* Floating Character */}
-      <div
+     <div
         className="
           hidden
           sm:block
@@ -49,14 +49,14 @@ export default function Footer() {
           -top-56
           sm:-top-64
           md:-top-72
-          lg:-top-166
+          lg:-top-80
           z-30
           pointer-events-none
           select-none
         "
       >
         <Image
-          src="/FooterIMG.png"
+          src="/logo.png"
           alt="Footer Character"
           width={900}
           height={900}
@@ -68,7 +68,9 @@ export default function Footer() {
             lg:w-[550px]
             xl:w-[650px]
             h-auto
-            grayscale-50
+            grayscale-30
+            {/* Added: White drop-shadow */}
+            drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]
           "
         />
       </div>
@@ -85,16 +87,16 @@ export default function Footer() {
             <div className="max-w-sm">
               <Link href="/" className="inline-flex items-center gap-3">
                 <div>
-                  <h2 className="text-2xl font-black text-neutral-50 tracking-tighter uppercase">
-                    SHILLMONGER
+                  <h2 className="text-3xl font-black text-neutral-50 tracking-tighter uppercase">
+                    SMG - BOT
                   </h2>
-                  <p className="text-[10px] uppercase tracking-[0.25em] font-black text-neutral-400">
+                  <p className="text-[12px] uppercase tracking-[0.25em] font-black text-neutral-400">
                     Trading Intelligence
                   </p>
                 </div>
               </Link>
 
-              <p className="mt-4 text-sm md:text-[15px] leading-relaxed text-neutral-400 font-medium">
+              <p className="mt-4 text-sm md:text-[16px] leading-relaxed text-neutral-400 font-medium">
                 Automate your trading with confidence. Choose a subscription plan that matches your account size and let our intelligent trading system execute trades whenever valid market opportunities arise.
               </p>
 
@@ -116,7 +118,7 @@ export default function Footer() {
             <div className="flex flex-col lg:flex-row justify-between lg:justify-end flex-1 lg:flex-initial lg:ml-auto gap-10 lg:gap-16">
               {Object.entries(footerLinks).map(([title, items]) => (
                 <div key={title} className="min-w-[140px]">
-                  <h3 className="text-[12px] uppercase tracking-[0.2em] font-black text-neutral-400 mb-6">
+                  <h3 className="text-[13px] uppercase tracking-[0.2em] font-black text-neutral-400 mb-6">
                     {title}
                   </h3>
                   <ul className="space-y-3">
@@ -124,7 +126,7 @@ export default function Footer() {
                       <li key={item.name}>
                         <Link
                           href={item.href}
-                          className="text-sm text-neutral-400 hover:text-neutral-50 hover:underline transition-all duration-300 font-medium"
+                          className="text-[15px] text-neutral-400 hover:text-neutral-50 hover:underline transition-all duration-300 font-medium"
                         >
                           {item.name}
                         </Link>
@@ -161,7 +163,7 @@ export default function Footer() {
 
   {/* Risk Disclosure */}
   <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="text-xs font-medium">
+    <p className="text-sm font-medium">
       <span className="font-black text-neutral-50">RISK DISCLOSURE:</span>{" "}
       Trading Forex and other financial markets involves substantial risk and may not be suitable for every investor. Our automated trading bot executes trades based on predefined trading strategies and valid market conditions. While our system is designed to identify quality trading opportunities, profits are never guaranteed, and losses can occur. Users should only trade with funds they can afford to lose.
     </p>
@@ -169,22 +171,22 @@ export default function Footer() {
 
   {/* Service Disclaimer */}
   <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="font-black text-neutral-50 uppercase tracking-widest text-xs">
+    <p className="font-black text-neutral-50 uppercase tracking-widest text-sm">
       SERVICE DISCLAIMER
     </p>
 
-    <p className="text-xs font-medium">
+    <p className="text-sm font-medium">
       SHILLMONGER provides subscription-based access to an automated trading bot that places trades on connected MetaTrader 5 accounts according to each user's selected plan. The bot only executes trades when valid market conditions are detected and does not force trades during unfavorable market conditions. Performance targets described in each subscription plan are objectives rather than guarantees and may vary depending on market volatility and available trading opportunities.
     </p>
   </div>
 
   {/* User Responsibility */}
   <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="font-black text-neutral-50 uppercase tracking-widest text-xs">
+    <p className="font-black text-neutral-50 uppercase tracking-widest text-sm">
       USER RESPONSIBILITY
     </p>
 
-    <p className="text-xs font-medium">
+    <p className="text-sm font-medium">
       By subscribing, users acknowledge the risks associated with financial market trading and remain fully responsible for their trading accounts, broker selection, and deposited funds. It is the user's responsibility to ensure their account meets the minimum requirements for their selected subscription plan.
     </p>
   </div>

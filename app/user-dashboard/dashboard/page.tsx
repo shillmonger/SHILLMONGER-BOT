@@ -185,25 +185,23 @@ export default function DashboardPage() {
   <table className="w-full min-w-[640px] table-fixed text-left border-collapse">
     <thead>
       <tr className="border-b border-neutral-800 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-        <th className="w-[13%] pb-3 pr-2 whitespace-nowrap">Date</th>
-        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Symbol</th>
-        <th className="w-[10%] pb-3 px-2 whitespace-nowrap">Type</th>
-        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Entry</th>
-        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Lot Size</th>
-        <th className="w-[15%] pb-3 px-2 text-right whitespace-nowrap">Profit/Loss</th>
-        <th className="w-[14%] pb-3 pl-2 text-right whitespace-nowrap">Status</th>
+        <th className="w-[15%] pb-3 pr-2 whitespace-nowrap">Symbol</th>
+        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Type</th>
+        <th className="w-[15%] pb-3 px-2 whitespace-nowrap">Entry</th>
+        <th className="w-[15%] pb-3 px-2 whitespace-nowrap">Lot Size</th>
+        <th className="w-[13%] pb-3 pl-2 whitespace-nowrap">Date</th>
       </tr>
     </thead>
     <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
       {loadingTrades ? (
         <tr>
-          <td colSpan={7} className="py-8 text-center text-neutral-400">
+          <td colSpan={5} className="py-8 text-center text-neutral-400">
             Loading trade activities...
           </td>
         </tr>
       ) : tradeActivities.length === 0 ? (
         <tr>
-          <td colSpan={7} className="py-8 text-center text-neutral-400">
+          <td colSpan={5} className="py-8 text-center text-neutral-400">
             No trade activities found
           </td>
         </tr>
@@ -214,29 +212,15 @@ export default function DashboardPage() {
             month: '2-digit',
             day: '2-digit'
           });
-          const isProfit = trade.profit >= 0;
-          const profitClass = isProfit ? 'text-emerald-400' : 'text-rose-400';
           const typeClass = trade.type === 'BUY' ? 'text-emerald-400' : 'text-rose-400';
-          const isRunning = trade.status === 'RUNNING' || trade.status === 'OPEN';
-          const statusClass = isRunning 
-            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 animate-pulse' 
-            : 'bg-neutral-900 text-neutral-400 border-neutral-800';
           
           return (
             <tr key={trade._id} className="hover:bg-neutral-900/30">
-              <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">{date}</td>
-              <td className="py-3 px-2 font-bold text-white whitespace-nowrap">{trade.symbol}</td>
+              <td className="py-3 pr-2 font-bold text-white whitespace-nowrap">{trade.symbol}</td>
               <td className={`py-3 px-2 ${typeClass} font-black whitespace-nowrap`}>{trade.type}</td>
               <td className="py-3 px-2 whitespace-nowrap">{trade.entry.toFixed(2)}</td>
               <td className="py-3 px-2 whitespace-nowrap">{trade.lot.toFixed(2)}</td>
-              <td className={`py-3 px-2 ${profitClass} text-right font-bold whitespace-nowrap`}>
-                {isProfit ? '+' : ''}{trade.profit?.toFixed(2) || '—'}
-              </td>
-              <td className="py-3 pl-2 text-right">
-                <span className={`text-[9px] font-black uppercase tracking-wider border px-2 py-0.5 whitespace-nowrap inline-block ${statusClass}`}>
-                  {isRunning ? 'Running' : 'Closed'}
-                </span>
-              </td>
+              <td className="py-3 pl-2 text-neutral-400 whitespace-nowrap">{date}</td>
             </tr>
           );
         })

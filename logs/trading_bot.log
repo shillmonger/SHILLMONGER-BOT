@@ -1236,3 +1236,413 @@ Send me: "HELP"
 2026-07-21 06:50:50.738 | INFO     | telegram.listener:handler:70 - Fast
 2026-07-21 06:50:50.738 | INFO     | telegram.listener:handler:72 - ============================================================
 2026-07-21 06:50:50.739 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 18:56:47.843 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 18:56:49.825 | SUCCESS  | mt5.trade_monitor:start:21 - Trade Monitor started
+2026-07-21 18:56:51.251 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 18:56:58.542 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 111.15
+2026-07-21 18:56:58.544 | SUCCESS  | telegram.listener:start:141 - Waiting For Signals...
+2026-07-21 18:57:05.566 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 18:57:05.566 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 18:57:09.847 | SUCCESS  | mt5.copy_connector:initialize:30 - MT5 Copy Engine terminal initialized
+2026-07-21 18:59:38.741 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 18:59:38.743 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 18:59:38.744 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 18:59:38.744 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4066
+TP 4073
+SL 4062
+2026-07-21 18:59:38.744 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 18:59:38.766 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 18:59:38.767 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4066\nTP 4073\nSL 4062', symbol='XAUUSDm', direction='BUY', entry=4066.0, entry_high=None, entry_low=None, stop_loss=4062.0, take_profits=[4073.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 17, 59, 38, 766211))
+2026-07-21 18:59:38.769 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 18:59:38.770 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $111.15, Open trades: 0/10
+2026-07-21 18:59:38.771 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $111.15, Lot size: 0.01/0.02
+2026-07-21 18:59:38.772 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 18:59:39.654 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Order=2988276700 Deal=2446847112
+2026-07-21 18:59:39.656 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Order: 2988276700, Deal: 2446847112
+2026-07-21 18:59:39.826 | SUCCESS  | core.database:save_master_trade:69 - Master trade saved: 6a5fb38b73f0b557763f501b
+2026-07-21 18:59:40.779 | INFO     | copy_engine.engine:process_uncopied_trades:53 - Found 1 uncopied master trades
+2026-07-21 18:59:40.781 | INFO     | copy_engine.engine:copy_trade_to_users:63 - Processing copy job for master trade: 2988276700
+2026-07-21 18:59:41.088 | INFO     | copy_engine.engine:copy_trade_to_users:74 - Found 3 active accounts to copy to
+2026-07-21 18:59:42.679 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 18:59:42.680 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 1 tickets
+2026-07-21 18:59:42.680 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 18:59:42.915 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436924105 | Server: Exness-MT5Trial9
+2026-07-21 18:59:43.046 | SUCCESS  | mt5.copy_trader:execute_copy_trade:109 - Copy trade executed BUY XAUUSDm | User Order: 2988276850 Deal: 2446847229 | Master Order: 2988276700
+2026-07-21 18:59:43.195 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 18:59:44.858 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 18:59:45.504 | SUCCESS  | mt5.copy_trader:execute_copy_trade:109 - Copy trade executed BUY XAUUSDm | User Order: 2988276919 Deal: 2446847293 | Master Order: 2988276700
+2026-07-21 18:59:45.658 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 18:59:46.788 | SUCCESS  | mt5.copy_connector:connect:61 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 18:59:47.604 | SUCCESS  | mt5.copy_trader:execute_copy_trade:109 - Copy trade executed BUY XAUUSDm | User Order: 2988277085 Deal: 2446847459 | Master Order: 2988276700
+2026-07-21 18:59:47.762 | INFO     | mt5.copy_connector:disconnect:77 - MT5 Copy Engine logged out from user account
+2026-07-21 18:59:48.062 | SUCCESS  | copy_engine.engine:copy_trade_to_users:140 - Copy job completed for master trade 2988276700 | Processed: 3 | Failed: 0
+2026-07-21 18:59:52.862 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 18:59:52.864 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 18:59:52.868 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:03.059 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:03.061 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:03.061 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:13.275 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:13.276 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:13.277 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:23.431 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:23.432 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:23.432 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:33.594 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:33.595 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:33.596 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:43.768 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:43.769 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:43.771 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:00:53.940 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:00:53.942 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:00:53.943 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:04.098 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:04.099 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:04.100 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:14.417 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:14.417 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:14.418 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:24.597 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:24.597 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:24.598 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:34.757 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:34.758 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:34.759 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:44.923 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:44.925 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:44.926 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:01:55.097 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:01:55.098 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:01:55.100 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:05.265 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:05.266 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:05.266 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:15.418 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:15.418 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:15.419 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:25.610 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:25.618 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:25.624 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:35.902 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:35.904 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:35.904 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:46.083 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:46.084 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:46.090 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:02:56.255 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:02:56.258 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:02:56.258 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:06.416 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:06.416 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:06.417 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:16.574 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:16.575 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:16.575 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:26.747 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:26.748 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:26.749 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:36.955 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:36.955 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:36.955 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:47.125 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:47.127 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:47.130 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:03:57.293 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:03:57.295 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:03:57.295 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:07.463 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:07.464 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:07.464 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:17.679 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:17.680 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:17.683 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:27.865 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:27.865 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:27.866 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:38.034 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:38.035 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:38.035 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:48.240 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:48.240 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:48.240 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:04:58.425 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:04:58.427 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:04:58.429 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:08.706 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:08.708 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:08.709 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:18.946 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:18.946 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:18.946 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:29.378 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:29.379 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:29.380 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:39.562 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:39.563 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:39.564 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:49.717 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:49.718 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:49.720 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:05:59.871 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:05:59.871 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:05:59.872 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:06:10.023 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:06:10.043 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:06:10.046 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:06:20.220 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:06:20.229 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:06:20.230 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:06:30.385 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:06:30.386 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:06:30.388 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:06:40.557 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:06:40.557 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:06:40.558 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:06:50.773 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:06:50.774 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:06:50.775 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:00.950 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:00.951 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:00.952 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:11.120 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:11.122 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:11.124 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:21.282 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:21.282 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:21.283 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:31.452 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:31.454 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:31.456 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:41.624 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:41.624 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:41.625 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:07:51.779 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:07:51.802 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:07:51.808 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:02.009 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:02.010 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:02.010 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:12.177 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:12.178 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:12.178 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:22.428 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:22.429 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:22.429 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:32.596 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:32.597 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:32.597 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:42.756 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:42.760 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:42.762 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:08:52.954 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:08:52.955 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:08:52.956 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:03.116 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:03.116 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:03.117 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:13.275 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:13.276 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:13.278 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:23.450 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:23.453 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:23.460 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:33.632 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:33.633 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:33.634 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:43.806 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:43.807 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:43.807 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:09:53.973 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:09:53.974 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:09:53.974 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:04.132 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:04.134 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:04.136 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:14.302 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:14.303 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:14.304 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:24.456 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:24.457 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:24.458 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:34.623 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:34.624 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:34.624 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:43.467 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 19:10:44.420 | SUCCESS  | telegram.listener:handler:65 - GROUP : XAUUS DPRO SIGNALS
+2026-07-21 19:10:44.424 | INFO     | telegram.listener:handler:66 - CHAT ID : -1001180718680
+2026-07-21 19:10:44.426 | INFO     | telegram.listener:handler:70 - Fast
+2026-07-21 19:10:44.430 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 19:10:44.433 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 19:10:44.791 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:44.791 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:44.792 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:10:54.952 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:10:54.956 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:10:54.958 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:05.145 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:05.146 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:05.146 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:15.310 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:15.312 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:15.314 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:25.507 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:25.508 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:25.509 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:35.694 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:35.694 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:35.696 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:45.876 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:45.877 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:45.877 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:11:56.033 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:11:56.034 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:11:56.035 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:06.209 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:06.209 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:06.209 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:16.368 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:16.368 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:16.369 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:26.529 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:26.529 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:26.531 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:36.689 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:36.689 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:36.690 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:46.877 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:46.878 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:46.880 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:12:57.038 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:12:57.039 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:12:57.041 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:13:07.202 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:13:07.208 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:13:07.209 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:13:17.385 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:13:17.385 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:13:17.389 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:13:27.557 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:13:27.559 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:13:27.559 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:13:37.719 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:13:37.722 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:13:37.731 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:13:47.929 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:13:47.929 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:13:47.929 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:00.238 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:00.241 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:00.246 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:11.075 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:11.076 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:11.076 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:21.266 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:21.266 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:21.267 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:31.519 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:31.520 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:31.521 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:41.723 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:41.725 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:41.726 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:14:51.902 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:14:51.902 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:14:51.903 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:02.085 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:02.085 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:02.085 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:12.256 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:12.257 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:12.259 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:22.711 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:22.714 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:22.716 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:32.919 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:32.922 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:32.924 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:43.125 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:43.126 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:43.128 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:15:53.386 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:15:53.386 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:15:53.387 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:03.542 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:03.543 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:03.544 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:13.701 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:13.704 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:13.705 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:23.869 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:23.870 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:23.871 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:34.028 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:34.029 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:34.029 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:44.198 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:44.199 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:44.200 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:16:54.368 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:16:54.369 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:16:54.370 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:04.525 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:04.526 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:17:04.527 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:14.700 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:14.701 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:17:14.701 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:24.860 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:24.861 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:17:24.861 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:35.040 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:35.041 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 2 tickets
+2026-07-21 19:17:35.042 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:45.203 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:45.204 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:17:45.204 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:45.205 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:17:45.205 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:17:45.206 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:17:45.207 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:17:55.369 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:17:55.370 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:17:55.370 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:17:55.372 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:17:55.372 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:17:55.372 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:17:55.373 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:18:05.548 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:18:05.549 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:18:05.550 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:18:05.551 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:18:05.551 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:18:05.552 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:18:05.552 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:18:15.719 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:18:15.721 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:18:15.724 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:18:15.725 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:18:15.727 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:18:15.730 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:18:15.733 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:18:25.907 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:18:25.908 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:18:25.908 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:18:25.908 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:18:25.909 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:18:25.909 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:18:25.910 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:18:36.102 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:18:36.103 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:18:36.103 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:18:36.103 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:18:36.104 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:18:36.104 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:18:36.105 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history
+2026-07-21 19:18:46.266 | INFO     | mt5.trade_monitor:check_closed_trades:49 - Checking 1 open master trades
+2026-07-21 19:18:46.267 | INFO     | mt5.trade_monitor:check_closed_trades:59 - Open MT5 positions: 0 tickets
+2026-07-21 19:18:46.269 | INFO     | mt5.trade_monitor:check_closed_trades:67 - Checking master trade: Order=2988276700, Entry Deal=2446847112
+2026-07-21 19:18:46.270 | INFO     | mt5.trade_monitor:check_closed_trades:71 - Trade 2988276700 not in open positions - processing as closed
+2026-07-21 19:18:46.272 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2988276700, Symbol=XAUUSDm
+2026-07-21 19:18:46.274 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 35 deals in history window
+2026-07-21 19:18:46.275 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2446847112 not found in history

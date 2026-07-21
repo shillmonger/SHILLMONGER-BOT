@@ -63,8 +63,8 @@ export default function UserMobileHeader({
       >
         <Menu className="w-5 h-5" />
       </button>
-      <span className="text-sm font-black uppercase tracking-[0.2em]">
-        XAUUSD BOT
+      <span className="text-lg font-black uppercase tracking-[0.2em]">
+        SMG BOT
       </span>
       <button
         onClick={onRightClick}
