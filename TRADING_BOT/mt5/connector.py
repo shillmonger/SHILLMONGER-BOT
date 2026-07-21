@@ -22,9 +22,9 @@ class MT5Connector:
         Initialize MT5 and log into the trading account using dedicated master terminal.
         """
 
-        # Initialize MT5 with dedicated validator terminal path
-        validator_path = r"C:\Program Files\MT5_Validator\terminal64.exe"
-        if not mt5.initialize(path=validator_path):
+        # Initialize MT5 with dedicated master terminal path
+        master_path = r"C:\Program Files\MT5_Master\terminal64.exe"
+        if not mt5.initialize(path=master_path):
             logger.error(
                 f"MT5 initialization failed: {mt5.last_error()}"
             )

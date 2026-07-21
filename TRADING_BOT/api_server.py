@@ -28,14 +28,34 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    """Connect to database on startup"""
+    """Connect to database and initialize MT5 validator terminal on startup"""
     db.connect()
+    
+    # Initialize MT5 validator terminal once for reuse
+    validator_path = r"C:\Program Files\MT5_Validator\terminal64.exe"
+    logger.info(f"Initializing MT5 validator terminal at: {validator_path}")
+    
+    if not mt5.initialize(path=validator_path, timeout=60000):
+        logger.error(f"MT5 validator initialization failed: {mt5.last_error()}")
+    else:
+        # Wait for terminal to become responsive
+        for attempt in range(20):  # up to ~10 seconds
+            info = mt5.terminal_info()
+            if info is not None:
+                logger.success("MT5 validator terminal ready")
+                break
+            time.sleep(0.5)
+        else:
+            logger.error("MT5 validator terminal never became ready")
+            mt5.shutdown()
+    
     logger.success("FastAPI server started")
 
 @app.on_event("shutdown")
 async def shutdown_event():
-    """Close database connection on shutdown"""
+    """Close database connection and MT5 terminal on shutdown"""
     db.close()
+    mt5.shutdown()
     logger.info("FastAPI server stopped")
 
 @app.get("/api/health")
@@ -125,31 +145,28 @@ async def refresh_providers():
 @app.post("/api/mt5/validate")
 async def validate_mt5_connection(request: MT5ValidationRequest):
     """
-    Validate MT5 credentials by attempting to connect using dedicated validator terminal
+    Validate MT5 credentials by attempting to connect using pre-initialized validator terminal
     Returns account info if successful, error if failed
     """
     try:
-        # Initialize MT5 with dedicated validator terminal path (without credentials first)
-        validator_path = r"C:\Program Files\MT5_Validator\terminal64.exe"
         logger.info(
             f"""
-Initializing MT5 validator at: {validator_path}
+Validating MT5 credentials
 LOGIN = [{request.login}]
 SERVER = [{request.server}]
 PASSWORD LENGTH = {len(request.password)}
 """
         )
 
-        # Initialize terminal first (increased timeout for terminal launch)
-        if not mt5.initialize(path=validator_path, timeout=60000):
-            error = mt5.last_error()
-            logger.error(f"MT5 initialization failed: {error}")
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
             return {
                 "success": False,
-                "error": f"MT5 initialization failed: {error}"
+                "error": "MT5 validator terminal not initialized. Please restart the server."
             }
 
-        # Attempt login with provided credentials (shorter timeout for invalid credentials)
+        # Attempt login with provided credentials
         authorized = mt5.login(
             login=int(request.login),
             password=request.password,
@@ -159,7 +176,6 @@ PASSWORD LENGTH = {len(request.password)}
         if not authorized:
             error_msg = f"MT5 login failed: {mt5.last_error()}"
             logger.error(error_msg)
-            mt5.shutdown()
             return {
                 "success": False,
                 "error": error_msg
@@ -188,9 +204,6 @@ PASSWORD LENGTH = {len(request.password)}
             "profit": account.profit
         }
 
-        # Disconnect after validation
-        mt5.shutdown()
-
         logger.success(
             f"MT5 validation successful | "
             f"Login: {account.login} | "
@@ -211,11 +224,6 @@ PASSWORD LENGTH = {len(request.password)}
         }
     except Exception as e:
         logger.error(f"MT5 validation error: {e}")
-        # Ensure shutdown on error
-        try:
-            mt5.shutdown()
-        except:
-            pass
         return {
             "success": False,
             "error": str(e)
