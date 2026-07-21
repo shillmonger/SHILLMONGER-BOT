@@ -37,7 +37,7 @@ export default function DashboardPage() {
       iconColor: "text-neutral-400",
       value: subscriptionStats ? `$${subscriptionStats.totalAmountSpent.toFixed(2)}` : "$0.00",
       valueColor: "text-white",
-      subtitle: "Approved Subscriptions",
+      subtitle: "Approved Plans",
     },
     {
       label: "Pending",
@@ -45,7 +45,7 @@ export default function DashboardPage() {
       iconColor: "text-amber-400",
       value: subscriptionStats?.pendingCount.toString() || "0",
       valueColor: "text-amber-400",
-      subtitle: "Awaiting Approval",
+      subtitle: "Pending plans",
     },
     {
       label: "Active",
@@ -53,7 +53,7 @@ export default function DashboardPage() {
       iconColor: "text-emerald-400",
       value: subscriptionStats?.activeCount.toString() || "0",
       valueColor: "text-emerald-400",
-      subtitle: "Currently Active",
+      subtitle: "Currently plan",
     },
     {
       label: "Rejected",
@@ -61,7 +61,7 @@ export default function DashboardPage() {
       iconColor: "text-rose-400",
       value: subscriptionStats?.rejectedCount.toString() || "0",
       valueColor: "text-rose-400",
-      subtitle: "Not Approved",
+      subtitle: "Rejected plans",
     },
   ];
 
