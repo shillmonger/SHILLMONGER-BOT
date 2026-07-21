@@ -22,40 +22,46 @@ export default function DashboardPage() {
   const [userData, setUserData] = useState<{ username: string } | null>(null);
   const [tradeActivities, setTradeActivities] = useState<any[]>([]);
   const [loadingTrades, setLoadingTrades] = useState(true);
+  const [subscriptionStats, setSubscriptionStats] = useState<{
+    totalAmountSpent: number;
+    pendingCount: number;
+    activeCount: number;
+    rejectedCount: number;
+  } | null>(null);
 
   // Statistics Cards Data
   const statsCards = [
     {
-      label: "Account Balance",
-      icon: Wallet,
-      iconColor: "text-neutral-400",
-      value: "$2,540.75",
-      valueColor: "text-white",
-      subtitle: "Available Equity",
-    },
-    {
-      label: "Today's Profit",
-      icon: TrendingUp,
-      iconColor: "text-emerald-400",
-      value: "+$125.42",
-      valueColor: "text-emerald-400",
-      subtitle: "Today's Performance",
-    },
-    {
-      label: "Total Profit",
-      icon: ArrowUpRight,
-      iconColor: "text-emerald-400",
-      value: "+$3,824.60",
-      valueColor: "text-emerald-400",
-      subtitle: "Lifetime Earnings",
-    },
-    {
-      label: "Withdrawals",
+      label: "Total Spent",
       icon: DollarSign,
       iconColor: "text-neutral-400",
-      value: "$1,250.00",
+      value: subscriptionStats ? `$${subscriptionStats.totalAmountSpent.toFixed(2)}` : "$0.00",
       valueColor: "text-white",
-      subtitle: "Successfully Withdrawn",
+      subtitle: "Approved Subscriptions",
+    },
+    {
+      label: "Pending",
+      icon: Clock,
+      iconColor: "text-amber-400",
+      value: subscriptionStats?.pendingCount.toString() || "0",
+      valueColor: "text-amber-400",
+      subtitle: "Awaiting Approval",
+    },
+    {
+      label: "Active",
+      icon: TrendingUp,
+      iconColor: "text-emerald-400",
+      value: subscriptionStats?.activeCount.toString() || "0",
+      valueColor: "text-emerald-400",
+      subtitle: "Currently Active",
+    },
+    {
+      label: "Rejected",
+      icon: TrendingDown,
+      iconColor: "text-rose-400",
+      value: subscriptionStats?.rejectedCount.toString() || "0",
+      valueColor: "text-rose-400",
+      subtitle: "Not Approved",
     },
   ];
 
@@ -95,6 +101,19 @@ export default function DashboardPage() {
       })
       .catch(err => console.error('Failed to fetch trade activities:', err))
       .finally(() => setLoadingTrades(false));
+
+    // Fetch subscription stats
+    fetch('/api/user/subscriptions')
+      .then(res => res.json())
+      .then(data => {
+        setSubscriptionStats({
+          totalAmountSpent: data.totalAmountSpent,
+          pendingCount: data.pendingCount,
+          activeCount: data.activeCount,
+          rejectedCount: data.rejectedCount
+        });
+      })
+      .catch(err => console.error('Failed to fetch subscription stats:', err));
   }, []);
 
   return (
@@ -120,7 +139,7 @@ export default function DashboardPage() {
                 {currentTime}
               </span>
             </div>
-          </div>
+          </div>  
 
 
 
