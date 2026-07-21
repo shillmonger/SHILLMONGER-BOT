@@ -117,7 +117,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
+    <div className="flex flex-col bg-white text-neutral-950 font-sans">
       <main className="flex-grow flex items-center justify-center">
         <div className="w-full max-w-7xl space-y-8">
           
