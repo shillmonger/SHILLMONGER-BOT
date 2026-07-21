@@ -32,6 +32,15 @@ MT5_SERVER=your_mt5_server
 python main.py
 ```
 
+# Terminal 1 - Master Trading Bot
+python TRADING_BOT/main.py
+
+# Terminal 2 - API Server (for validation)
+python TRADING_BOT/run_api.py
+
+# Terminal 3 - Copy Engine
+python TRADING_BOT/run_copy_engine
+
 ## Tools
 
 The `tools/` directory contains utility scripts for testing and configuration:

@@ -251,204 +251,151 @@ export default function DashboardPage() {
       </div>
       
       {/* Table Wrap for Mobile Responsive Horizontal Scroll */}
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px] text-left border-collapse">
-          <thead>
-            <tr className="border-b border-neutral-800 text-[10px] font-black uppercase tracking-widest text-neutral-400">
-              <th className="pb-3 pr-2 whitespace-nowrap">Date</th>
-              <th className="pb-3 px-2 whitespace-nowrap">Symbol</th>
-              <th className="pb-3 px-2 whitespace-nowrap">Type</th>
-              <th className="pb-3 px-2 whitespace-nowrap">Entry</th>
-              <th className="pb-3 px-2 whitespace-nowrap">Exit</th>
-              <th className="pb-3 px-2 text-right whitespace-nowrap">Profit/Loss</th>
-              <th className="pb-3 pl-2 text-right whitespace-nowrap">Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
-            <tr className="hover:bg-neutral-900/30">
-              <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
-              <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
-              <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
-              <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
-              <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
-              <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
-              <td className="py-3 pl-2 text-right">
-                <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
-                  Closed
-                </span>
-              </td>
-            </tr>
-                        {/* Row 2 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-16</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-rose-400 font-black">SELL</td>
-                          <td className="py-3 px-2">3372.40</td>
-                          <td className="py-3 px-2 text-neutral-500">—</td>
-                          <td className="py-3 px-2 text-neutral-400 text-right">—</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse">
-                              Running
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                        {/* Row 3 */}
-                        <tr className="hover:bg-neutral-900/30">
-                          <td className="py-3 pr-2 text-neutral-400">2026-07-15</td>
-                          <td className="py-3 px-2 font-bold text-white">XAUUSD</td>
-                          <td className="py-3 px-2 text-emerald-400 font-black">BUY</td>
-                          <td className="py-3 px-2">3358.00</td>
-                          <td className="py-3 px-2">3364.70</td>
-                          <td className="py-3 px-2 text-emerald-400 text-right font-bold">+$52.80</td>
-                          <td className="py-3 pl-2 text-right">
-                            <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5">
-                              Closed
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+<div className="overflow-x-auto">
+  <table className="w-full min-w-[640px] table-fixed text-left border-collapse">
+    <thead>
+      <tr className="border-b border-neutral-800 text-[10px] font-black uppercase tracking-widest text-neutral-400">
+        <th className="w-[13%] pb-3 pr-2 whitespace-nowrap">Date</th>
+        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Symbol</th>
+        <th className="w-[10%] pb-3 px-2 whitespace-nowrap">Type</th>
+        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Entry</th>
+        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Exit</th>
+        <th className="w-[12%] pb-3 px-2 whitespace-nowrap">Lot Size</th>
+        <th className="w-[15%] pb-3 px-2 text-right whitespace-nowrap">Profit/Loss</th>
+        <th className="w-[14%] pb-3 pl-2 text-right whitespace-nowrap">Status</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-neutral-900 text-xs font-mono font-semibold text-neutral-300">
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
+        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+            Closed
+          </span>
+        </td>
+      </tr>
+
+      {/* Row 2 */}
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
+        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
+        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
+        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
+            Running
+          </span>
+        </td>
+      </tr>
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
+        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
+        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
+        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
+            Running
+          </span>
+        </td>
+      </tr>
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
+        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
+        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
+        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
+            Running
+          </span>
+        </td>
+      </tr>
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-rose-400 font-black whitespace-nowrap">SELL</td>
+        <td className="py-3 px-2 whitespace-nowrap">3372.40</td>
+        <td className="py-3 px-2 text-neutral-500 whitespace-nowrap">—</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.15</td>
+        <td className="py-3 px-2 text-neutral-400 text-right whitespace-nowrap">—</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 animate-pulse whitespace-nowrap inline-block">
+            Running
+          </span>
+        </td>
+      </tr>
+      <tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
+        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+            Closed
+          </span>
+        </td>
+      </tr><tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
+        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+            Closed
+          </span>
+        </td>
+      </tr><tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
+        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+            Closed
+          </span>
+        </td>
+      </tr><tr className="hover:bg-neutral-900/30">
+        <td className="py-3 pr-2 text-neutral-400 whitespace-nowrap">2026-07-16</td>
+        <td className="py-3 px-2 font-bold text-white whitespace-nowrap">XAUUSD</td>
+        <td className="py-3 px-2 text-emerald-400 font-black whitespace-nowrap">BUY</td>
+        <td className="py-3 px-2 whitespace-nowrap">3365.20</td>
+        <td className="py-3 px-2 whitespace-nowrap">3371.60</td>
+        <td className="py-3 px-2 whitespace-nowrap">0.10</td>
+        <td className="py-3 px-2 text-emerald-400 text-right font-bold whitespace-nowrap">+$64.20</td>
+        <td className="py-3 pl-2 text-right">
+          <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-900 text-neutral-400 border border-neutral-800 px-2 py-0.5 whitespace-nowrap inline-block">
+            Closed
+          </span>
+        </td>
+      </tr>
+
+      {/* Repeat your remaining rows... */}
+    </tbody>
+  </table>
+</div>
                 </CardContent>
               </Card>
             </div>

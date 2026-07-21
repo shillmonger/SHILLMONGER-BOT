@@ -225,6 +225,17 @@ cd TRADING_BOT
 python run_api.py
 ```
 
+# Terminal 1 - Master Trading Bot
+python TRADING_BOT/main.py
+
+# Terminal 2 - API Server (for validation)
+python TRADING_BOT/run_api.py
+
+# Terminal 3 - Copy Engine
+python TRADING_BOT/run_copy_engine
+
+
+
 This server:
 - Provides API endpoints for frontend
 - Validates MT5 user credentials via MT5_Validator terminal

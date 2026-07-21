@@ -565,3 +565,256 @@ SERVER = [Exness-MT5Trial9]
 PASSWORD LENGTH = 15
 
 2026-07-20 13:32:51.338 | SUCCESS  | api_server:validate_mt5_connection:194 - MT5 validation successful | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 110.21
+2026-07-21 05:01:34.229 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:01:37.471 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:01:42.547 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 100.0
+2026-07-21 05:01:42.548 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:02:37.190 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:02:37.190 | SUCCESS  | telegram.listener:handler:65 - GROUP : 𝐆𝐎𝐋𝐃 𝐄𝐗𝐏𝐄𝐑𝐓 𝐓𝐄𝐀𝐌
+2026-07-21 05:02:37.191 | INFO     | telegram.listener:handler:66 - CHAT ID : -1002210052786
+2026-07-21 05:02:37.192 | INFO     | telegram.listener:handler:70 - XAUUSD BUY NOW 4045//4042
+
+📊TP¹ ➡️4050
+📊TP² ➡️4055
+📊TP³ ➡️4060
+
+❌ Stop Loss  4035
+
+Use Proper money management‼️
+2026-07-21 05:02:37.192 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:02:37.210 | WARNING  | telegram.listener:handler:81 - Not a valid trading signal.
+2026-07-21 05:03:19.292 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:03:19.292 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:05:19.100 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:05:19.101 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:05:19.102 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:05:19.103 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4050
+TP 4045
+SL 4050
+2026-07-21 05:05:19.103 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:05:19.104 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:05:19.104 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4050\nTP 4045\nSL 4050', symbol='XAUUSDm', direction='SELL', entry=4050.0, entry_high=None, entry_low=None, stop_loss=4050.0, take_profits=[4045.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 5, 19, 104145))
+2026-07-21 05:05:19.105 | WARNING  | telegram.listener:handler:90 - SELL stop loss must be above entry.
+2026-07-21 05:05:44.729 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:05:47.955 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:05:47.960 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 100.0
+2026-07-21 05:05:47.961 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:05:51.530 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:05:51.531 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:06:47.932 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:06:47.933 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:06:47.933 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:06:47.933 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4050
+TP 4047
+SL 4052
+2026-07-21 05:06:47.934 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:06:47.947 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:06:47.947 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4050\nTP 4047\nSL 4052', symbol='XAUUSDm', direction='SELL', entry=4050.0, entry_high=None, entry_low=None, stop_loss=4052.0, take_profits=[4047.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 6, 47, 947255))
+2026-07-21 05:06:47.948 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:06:47.950 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $100.00, Open trades: 0/10
+2026-07-21 05:06:47.951 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $100.00, Lot size: 0.01/0.02
+2026-07-21 05:06:47.951 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:06:48.568 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2984725684
+2026-07-21 05:06:48.569 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984725684
+2026-07-21 05:06:48.742 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef058412f496a3e9d1a8c
+2026-07-21 05:06:49.622 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:06:49.623 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984725684
+2026-07-21 05:06:49.962 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 0 active accounts to copy to
+2026-07-21 05:06:50.276 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984725684 | Processed: 0 | Failed: 0
+2026-07-21 05:09:58.691 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:10:02.190 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:10:02.191 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 100.0
+2026-07-21 05:10:02.192 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:10:07.273 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:10:07.273 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:14:15.926 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:14:15.927 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:14:15.927 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:14:15.927 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4047
+TP 4049
+SL 4040
+2026-07-21 05:14:15.928 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:14:15.941 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:14:15.942 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4047\nTP 4049\nSL 4040', symbol='XAUUSDm', direction='BUY', entry=4047.0, entry_high=None, entry_low=None, stop_loss=4040.0, take_profits=[4049.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 14, 15, 941099))
+2026-07-21 05:14:15.943 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:14:15.944 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $102.96, Open trades: 0/10
+2026-07-21 05:14:15.945 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $102.96, Lot size: 0.01/0.02
+2026-07-21 05:14:15.945 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:14:16.641 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Ticket=2984739357
+2026-07-21 05:14:16.642 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984739357
+2026-07-21 05:14:16.839 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef21898bae1f534bf8887
+2026-07-21 05:14:17.725 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:14:17.726 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984739357
+2026-07-21 05:14:18.052 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:14:23.907 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:14:23.909 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:14:23.909 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:14:25.230 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:14:25.231 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:14:25.232 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:14:25.555 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984739357 | Processed: 0 | Failed: 2
+2026-07-21 05:16:50.822 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:16:54.423 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:16:55.909 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:16:55.909 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:16:58.172 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 102.96
+2026-07-21 05:16:58.174 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:19:20.091 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:19:20.094 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:19:20.095 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:19:20.095 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4044
+TP 4046
+SL 4042
+2026-07-21 05:19:20.096 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:19:20.112 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:19:20.112 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4044\nTP 4046\nSL 4042', symbol='XAUUSDm', direction='BUY', entry=4044.0, entry_high=None, entry_low=None, stop_loss=4042.0, take_profits=[4046.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 19, 20, 112378))
+2026-07-21 05:19:20.113 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:19:20.115 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $101.24, Open trades: 0/10
+2026-07-21 05:19:20.115 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $101.24, Lot size: 0.01/0.02
+2026-07-21 05:19:20.116 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:19:21.064 | SUCCESS  | mt5.trader:execute_trade:146 - BUY executed XAUUSDm Ticket=2984745982
+2026-07-21 05:19:21.064 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984745982
+2026-07-21 05:19:21.252 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef3497c44294b3834439a
+2026-07-21 05:19:21.291 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:19:21.295 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984745982
+2026-07-21 05:19:21.609 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:19:26.670 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:19:26.671 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:19:26.671 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:19:28.215 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:19:28.215 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:19:28.216 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:19:28.539 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984745982 | Processed: 0 | Failed: 2
+2026-07-21 05:27:10.951 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:27:10.951 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:27:10.952 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:27:10.952 | INFO     | telegram.listener:handler:70 - XAUUSD BUY 4043
+TP 4045
+SL 4042
+2026-07-21 05:27:10.953 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:27:10.953 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:27:10.954 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD BUY 4043\nTP 4045\nSL 4042', symbol='XAUUSDm', direction='BUY', entry=4043.0, entry_high=None, entry_low=None, stop_loss=4042.0, take_profits=[4045.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 27, 10, 953588))
+2026-07-21 05:27:10.954 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:27:10.955 | WARNING  | telegram.listener:handler:99 - Account is disconnected from MT5.
+2026-07-21 05:30:54.337 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:30:57.417 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:30:59.204 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:30:59.204 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:31:01.145 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 102.58
+2026-07-21 05:31:01.146 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:32:20.415 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:32:20.416 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:32:20.416 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:32:20.416 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4046
+TP 4044
+SL 4047
+2026-07-21 05:32:20.417 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:32:20.434 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:32:20.434 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4046\nTP 4044\nSL 4047', symbol='XAUUSDm', direction='SELL', entry=4046.0, entry_high=None, entry_low=None, stop_loss=4047.0, take_profits=[4044.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 32, 20, 434788))
+2026-07-21 05:32:20.435 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:32:20.437 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $102.58, Open trades: 0/10
+2026-07-21 05:32:20.438 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $102.58, Lot size: 0.01/0.02
+2026-07-21 05:32:20.439 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:32:21.332 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2984763427
+2026-07-21 05:32:21.334 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984763427
+2026-07-21 05:32:21.499 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef655c721c526f4c4d759
+2026-07-21 05:32:23.583 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:32:23.585 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984763427
+2026-07-21 05:32:23.890 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:32:28.822 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:32:28.824 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:32:28.824 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:32:30.243 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:32:30.243 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:32:30.244 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:32:30.548 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984763427 | Processed: 0 | Failed: 2
+2026-07-21 05:34:17.089 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:34:17.725 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:34:17.725 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:34:17.726 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4045
+TP 4044
+SL 4047
+2026-07-21 05:34:17.726 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:34:17.726 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:34:17.727 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4045\nTP 4044\nSL 4047', symbol='XAUUSDm', direction='SELL', entry=4045.0, entry_high=None, entry_low=None, stop_loss=4047.0, take_profits=[4044.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 34, 17, 726667))
+2026-07-21 05:34:17.727 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:34:17.729 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $102.58, Open trades: 1/10
+2026-07-21 05:34:17.729 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $102.58, Lot size: 0.01/0.02
+2026-07-21 05:34:17.729 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:34:18.498 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2984765664
+2026-07-21 05:34:18.499 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984765664
+2026-07-21 05:34:18.636 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef6cac721c526f4c4d75a
+2026-07-21 05:34:18.883 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:34:18.884 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984765664
+2026-07-21 05:34:19.292 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:34:21.042 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:34:21.047 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:34:21.055 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:34:22.400 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:34:22.401 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:34:22.402 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:34:22.722 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984765664 | Processed: 0 | Failed: 2
+2026-07-21 05:38:43.954 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:38:47.124 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:38:51.049 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 102.58
+2026-07-21 05:38:51.050 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:38:56.906 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:38:56.907 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:39:45.788 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:39:45.789 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:39:45.789 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:39:45.790 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4046
+TP 4045
+SL 4047
+2026-07-21 05:39:45.791 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:39:45.816 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:39:45.816 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4046\nTP 4045\nSL 4047', symbol='XAUUSDm', direction='SELL', entry=4046.0, entry_high=None, entry_low=None, stop_loss=4047.0, take_profits=[4045.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 39, 45, 816102))
+2026-07-21 05:39:45.817 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:39:45.818 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $102.58, Open trades: 2/10
+2026-07-21 05:39:45.818 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $102.58, Lot size: 0.01/0.02
+2026-07-21 05:39:45.818 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:39:46.659 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2984771621
+2026-07-21 05:39:46.661 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984771621
+2026-07-21 05:39:46.844 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5ef8124d2bf253c8fad996
+2026-07-21 05:39:48.835 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:39:48.836 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984771621
+2026-07-21 05:39:49.138 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:39:55.366 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:39:55.366 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:39:55.367 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:39:56.787 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:39:56.788 | ERROR    | mt5.copy_trader:execute_copy_trade:95 - Copy trade failed for XAUUSDm | Error: 10027 | Comment: AutoTrading disabled by client
+2026-07-21 05:39:56.788 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:39:57.116 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984771621 | Processed: 0 | Failed: 2
+2026-07-21 05:46:46.898 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:46:50.155 | SUCCESS  | telegram.listener:login:48 - Telegram Connected!
+2026-07-21 05:46:54.188 | SUCCESS  | mt5.connector:connect:55 - Connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9 | Balance: 98.32
+2026-07-21 05:46:54.188 | SUCCESS  | telegram.listener:start:140 - Waiting For Signals...
+2026-07-21 05:47:00.290 | SUCCESS  | core.database:connect:25 - Connected to MongoDB
+2026-07-21 05:47:00.291 | SUCCESS  | copy_engine.engine:start:22 - Copy Engine started
+2026-07-21 05:47:59.598 | INFO     | telegram.listener:handler:56 - ============================================================
+2026-07-21 05:47:59.599 | SUCCESS  | telegram.listener:handler:65 - GROUP : SHILLMONGER XAUUSD
+2026-07-21 05:47:59.601 | INFO     | telegram.listener:handler:66 - CHAT ID : -5217839680
+2026-07-21 05:47:59.601 | INFO     | telegram.listener:handler:70 - XAUUSD SELL 4047
+TP 4045
+SL 4048
+2026-07-21 05:47:59.602 | INFO     | telegram.listener:handler:72 - ============================================================
+2026-07-21 05:47:59.619 | SUCCESS  | telegram.listener:handler:84 - Signal Parsed Successfully
+2026-07-21 05:47:59.620 | INFO     | telegram.listener:handler:85 - TradingSignal(chat_id=-5217839680, group_name='SHILLMONGER XAUUSD', raw_message='XAUUSD SELL 4047\nTP 4045\nSL 4048', symbol='XAUUSDm', direction='SELL', entry=4047.0, entry_high=None, entry_low=None, stop_loss=4048.0, take_profits=[4045.0], order_type='MARKET', confidence=93, timestamp=datetime.datetime(2026, 7, 21, 4, 47, 59, 619235))
+2026-07-21 05:47:59.623 | SUCCESS  | telegram.listener:handler:93 - Signal Validated
+2026-07-21 05:47:59.625 | INFO     | mt5.risk:_check_trade_limits:197 - Balance: $98.32, Open trades: 0/10
+2026-07-21 05:47:59.627 | INFO     | mt5.risk:_check_lot_size_limits:224 - Balance: $98.32, Lot size: 0.01/0.02
+2026-07-21 05:47:59.628 | SUCCESS  | telegram.listener:handler:102 - Risk Checks Passed
+2026-07-21 05:48:00.585 | SUCCESS  | mt5.trader:execute_trade:146 - SELL executed XAUUSDm Ticket=2984782603
+2026-07-21 05:48:00.586 | SUCCESS  | telegram.listener:handler:107 - Trade opened successfully. Ticket: 2984782603
+2026-07-21 05:48:00.757 | SUCCESS  | core.database:save_master_trade:67 - Master trade saved: 6a5efa003034a3bf3d780f96
+2026-07-21 05:48:02.906 | INFO     | copy_engine.engine:process_uncopied_trades:44 - Found 1 uncopied master trades
+2026-07-21 05:48:02.906 | INFO     | copy_engine.engine:copy_trade_to_users:53 - Processing copy job for master trade: 2984782603
+2026-07-21 05:48:03.236 | INFO     | copy_engine.engine:copy_trade_to_users:64 - Found 2 active accounts to copy to
+2026-07-21 05:48:08.184 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436923056 | Server: Exness-MT5Trial9
+2026-07-21 05:48:09.050 | SUCCESS  | mt5.copy_trader:execute_copy_trade:106 - Copy trade executed SELL XAUUSDm | User Ticket: 2984782988 | Master Ticket: 2984782603
+2026-07-21 05:48:09.246 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:48:10.797 | SUCCESS  | mt5.copy_connector:connect:48 - Copy Engine connected to MT5 | Login: 436747484 | Server: Exness-MT5Trial9
+2026-07-21 05:48:11.462 | SUCCESS  | mt5.copy_trader:execute_copy_trade:106 - Copy trade executed SELL XAUUSDm | User Ticket: 2984783191 | Master Ticket: 2984782603
+2026-07-21 05:48:11.619 | INFO     | mt5.copy_connector:disconnect:63 - MT5 Copy Engine connection closed.
+2026-07-21 05:48:11.930 | SUCCESS  | copy_engine.engine:copy_trade_to_users:130 - Copy job completed for master trade 2984782603 | Processed: 2 | Failed: 0

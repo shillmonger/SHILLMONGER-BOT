@@ -107,6 +107,19 @@ class TelegramListener:
                 logger.success(
                     f"Trade opened successfully. Ticket: {result.ticket}"
                 )
+                
+                # Save master trade to database for copy engine
+                trade_data = {
+                    "master_ticket": result.ticket,
+                    "symbol": result.symbol,
+                    "type": result.direction,
+                    "entry": result.entry_price,
+                    "sl": signal.stop_loss,
+                    "tp": signal.take_profits,
+                    "lot": result.lot_size,
+                    "group_name": group_name,  # Track which group sent the signal
+                }
+                db.save_master_trade(trade_data)
             else:
                 logger.error(
                     f"Trade failed: {result.message}"
