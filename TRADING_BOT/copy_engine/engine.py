@@ -88,9 +88,29 @@ class CopyEngine:
 
                 self.copy_trader = MT5CopyTrader(self.copy_connector)
 
-                # Calculate lot size based on user balance (simple 1:1 for now)
-                # TODO: Implement proper lot sizing based on user balance vs master balance
-                lot_size = master_trade["lot"]
+                # Get user account balance
+                account_info = self.copy_connector.get_account_info()
+                if account_info is None:
+                    logger.error(f"Failed to get account info for user {login}")
+                    users_failed += 1
+                    self.copy_connector.disconnect()
+                    continue
+
+                balance = account_info.get("balance", 0)
+                logger.info(f"User {login} balance: ${balance}")
+
+                # Get lot size from database based on balance
+                lot_size = db.get_lot_size_for_balance(balance)
+                if lot_size is None:
+                    logger.warning(
+                        f"User {login} skipped - No lot size rule found for balance ${balance}. "
+                        f"Add a rule in admin dashboard to include this balance range."
+                    )
+                    users_failed += 1
+                    self.copy_connector.disconnect()
+                    continue
+
+                logger.info(f"User {login} using lot size: {lot_size}")
 
                 # Execute copy trade
                 result = self.copy_trader.execute_copy_trade(master_trade, lot_size)

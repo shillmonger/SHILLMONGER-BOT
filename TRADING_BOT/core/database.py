@@ -12,6 +12,7 @@ class Database:
         self.trade_activity_collection = None
         self.copy_jobs_collection = None
         self.mt5_accounts_collection = None
+        self.lot_size_management_collection = None
 
     def connect(self):
         try:
@@ -22,6 +23,7 @@ class Database:
             self.trade_activity_collection = self.db.trade_activity
             self.copy_jobs_collection = self.db.copy_jobs
             self.mt5_accounts_collection = self.db.mt5accounts
+            self.lot_size_management_collection = self.db.lotsizemanagements
             logger.success("Connected to MongoDB")
             return True
         except Exception as e:
@@ -223,6 +225,40 @@ class Database:
         except Exception as e:
             logger.error(f"Failed to get trade activities by master order ticket: {e}")
             return []
+
+    # Lot Size Management Collection Methods
+    def get_active_lot_size_rules(self):
+        """Get all active lot size rules sorted by min_balance"""
+        try:
+            rules = list(self.lot_size_management_collection.find({"active": True}).sort("min_balance", 1))
+            return rules
+        except Exception as e:
+            logger.error(f"Failed to get lot size rules: {e}")
+            return []
+
+    def get_lot_size_for_balance(self, balance):
+        """
+        Find the appropriate lot size for a given balance.
+        Returns the lot size if a matching rule is found, None otherwise.
+        """
+        try:
+            rules = self.get_active_lot_size_rules()
+            
+            for rule in rules:
+                min_balance = rule.get("min_balance")
+                max_balance = rule.get("max_balance")
+                lot_size = rule.get("lot_size")
+                
+                if min_balance is not None and max_balance is not None and lot_size is not None:
+                    if min_balance <= balance <= max_balance:
+                        logger.info(f"Lot size rule matched for balance ${balance}: ${min_balance}-${max_balance} -> {lot_size}")
+                        return lot_size
+            
+            logger.warning(f"No lot size rule found for balance ${balance}")
+            return None
+        except Exception as e:
+            logger.error(f"Failed to get lot size for balance: {e}")
+            return None
 
 # Global database instance
 db = Database()

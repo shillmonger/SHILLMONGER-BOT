@@ -101,7 +101,25 @@ class TelegramListener:
 
             logger.success("Risk Checks Passed")
 
-            result = self.mt5_trader.execute_trade(signal)
+            # Get account balance from MT5
+            account_info = self.mt5_connector.get_account_info()
+            if account_info is None:
+                logger.error("Failed to get account info")
+                return
+            
+            balance = account_info.get("balance", 0)
+            logger.info(f"Master account balance: ${balance}")
+
+            # Get lot size from database based on balance
+            lot_size = db.get_lot_size_for_balance(balance)
+            if lot_size is None:
+                logger.warning(f"No lot size rule found for master account balance ${balance}. Skipping trade.")
+                return
+
+            logger.info(f"Using lot size: {lot_size}")
+
+            # Update trader to use dynamic lot size
+            result = self.mt5_trader.execute_trade_with_lot_size(signal, lot_size)
 
             if result.success:
                 logger.success(

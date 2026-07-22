@@ -15,6 +15,14 @@ class MT5Trader:
     def execute_trade(self, signal: TradingSignal) -> TradeResult:
         """
         Execute a market or pending order based on a validated TradingSignal.
+        Uses the default LOT_SIZE from config.
+        """
+        return self.execute_trade_with_lot_size(signal, LOT_SIZE)
+
+    def execute_trade_with_lot_size(self, signal: TradingSignal, lot_size: float) -> TradeResult:
+        """
+        Execute a market or pending order based on a validated TradingSignal.
+        Uses the provided lot_size parameter.
         """
 
         if not self.connector.is_connected():
@@ -109,7 +117,7 @@ class MT5Trader:
         request = {
             "action": trade_action,
             "symbol": symbol,
-            "volume": LOT_SIZE,
+            "volume": lot_size,
             "type": order_type,
             "price": price,
             "sl": signal.stop_loss,
@@ -156,6 +164,6 @@ class MT5Trader:
             symbol=symbol,
             direction=signal.direction,
             entry_price=price,
-            lot_size=LOT_SIZE,
+            lot_size=lot_size,
             message="Trade executed successfully."
         )

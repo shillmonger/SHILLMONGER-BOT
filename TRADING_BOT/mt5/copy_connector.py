@@ -117,3 +117,24 @@ class MT5CopyConnector:
         if not self.connected:
             return None
         return mt5.symbol_info(symbol)
+
+    def get_account_info(self):
+        """
+        Returns account information as a dictionary.
+        """
+        if not self.connected:
+            return None
+
+        account = mt5.account_info()
+        if account is None:
+            return None
+
+        return {
+            "login": account.login,
+            "balance": account.balance,
+            "equity": account.equity,
+            "margin": account.margin,
+            "free_margin": account.margin_free,
+            "profit": account.profit,
+            "server": account.server,
+        }
