@@ -10,6 +10,7 @@ import {
   CandlestickChart,
   History,
   Gem,
+  Copy,
   Users,
   Send,
   ScreenShare,
@@ -99,6 +100,7 @@ export default function AdminSidebar({
     { name: "Master trades", icon: Server, href: `${basePath}/master-trades` },
     { name: "Copy jobs", icon: Tags, href: `${basePath}/copy-jobs` },
     { name: "Trade activity", icon: ScreenShare, href: `${basePath}/trade-activity` },
+    { name: "Lot size settings", icon: Copy, href: `${basePath}/lot-size` },
 
     // === MANAGEMENT ===
     // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },
@@ -135,7 +137,7 @@ export default function AdminSidebar({
       {/* Desktop Sidebar */}
       <aside 
         className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 relative ${
-          isCollapsed ? "w-18" : "w-60"
+          isCollapsed ? "w-20" : "w-65"
         }`}
       >
         {/* Header */}

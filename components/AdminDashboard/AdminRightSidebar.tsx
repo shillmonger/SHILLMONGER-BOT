@@ -136,14 +136,23 @@ export default function UserRightSidebar({
       {/* SECTION 8: Quick Actions */}
       <div className="space-y-2 pt-2 border-t border-neutral-900">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
+        <div className="flex flex-col gap-2">
+        <Link href="#">
         <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
           <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
         </button>
+        </Link>
+        <Link href="/user-dashboard/lot-size">
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+            <LayoutDashboard className="w-3.5 h-3.5" />Lot Size Management
+          </button>
+        </Link>
         <Link href="/user-dashboard/dashboard">
           <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
             <LayoutDashboard className="w-3.5 h-3.5" />Switch to User
           </button>
         </Link>
+      </div>
       </div>
     </div>
   );
