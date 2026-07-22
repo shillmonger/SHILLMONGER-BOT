@@ -71,6 +71,22 @@ class MT5CopyTrader:
         # Handle backward compatibility for old database records
         master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
         
+        # Select TP based on number of TPs (same logic as master trader)
+        # 1 TP: use TP[0]
+        # 2-3 TPs: use last TP
+        # 4+ TPs: use second-to-last TP
+        tps = master_trade.get("tp", [])
+        if tps:
+            num_tps = len(tps)
+            if num_tps == 1:
+                tp_to_use = tps[0]
+            elif num_tps <= 3:
+                tp_to_use = tps[-1]  # Last TP
+            else:
+                tp_to_use = tps[-2]  # Second-to-last TP
+        else:
+            tp_to_use = None
+        
         request = {
             "action": trade_action,
             "symbol": symbol,
@@ -78,7 +94,7 @@ class MT5CopyTrader:
             "type": order_type,
             "price": price,
             "sl": master_trade.get("sl"),
-            "tp": master_trade.get("tp", [])[0] if master_trade.get("tp") else None,
+            "tp": tp_to_use,
             "deviation": 20,
             "magic": self.MAGIC_NUMBER,
             "comment": f"Copy from Master #{master_order_ticket}",

@@ -12,6 +12,32 @@ class MT5Trader:
     def __init__(self, connector):
         self.connector = connector
 
+    def get_current_direction(self, symbol):
+        """
+        Get the current direction of open positions for a symbol.
+        Returns: 'BUY' if any BUY positions, 'SELL' if any SELL positions, None if no positions
+        """
+        if not self.connector.is_connected():
+            return None
+
+        positions = mt5.positions_get(symbol=symbol)
+        if positions is None or len(positions) == 0:
+            return None
+
+        # Check if we have any BUY or SELL positions
+        has_buy = any(pos.type == mt5.POSITION_TYPE_BUY for pos in positions)
+        has_sell = any(pos.type == mt5.POSITION_TYPE_SELL for pos in positions)
+
+        if has_buy and has_sell:
+            # Hedging detected - return None (neutral)
+            return None
+        elif has_buy:
+            return 'BUY'
+        elif has_sell:
+            return 'SELL'
+        else:
+            return None
+
     def execute_trade(self, signal: TradingSignal) -> TradeResult:
         """
         Execute a market or pending order based on a validated TradingSignal.
@@ -32,6 +58,27 @@ class MT5Trader:
             )
 
         symbol = SYMBOL
+
+        # Trade Direction Guard - prevent conflicting positions
+        current_direction = self.get_current_direction(symbol)
+        if current_direction is not None:
+            # We have existing positions
+            if current_direction != signal.direction:
+                # Conflicting direction - reject the signal
+                logger.warning(
+                    f"Direction Guard: {signal.direction} signal rejected. "
+                    f"Existing {current_direction} position(s) detected for {symbol}."
+                )
+                return TradeResult(
+                    success=False,
+                    message=f"Direction Guard: {signal.direction} signal rejected. Existing {current_direction} position(s) detected."
+                )
+            else:
+                # Same direction - allow (multiple entries in same direction)
+                logger.info(
+                    f"Direction Guard: {signal.direction} signal allowed. "
+                    f"Existing {current_direction} position(s) detected for {symbol}."
+                )
 
         # Ensure symbol is available
         symbol_info = mt5.symbol_info(symbol)
@@ -114,6 +161,18 @@ class MT5Trader:
             
             type_filling = mt5.ORDER_FILLING_RETURN
 
+        # Select TP based on number of TPs in signal
+        # 1 TP: use TP[0]
+        # 2-3 TPs: use last TP
+        # 4+ TPs: use second-to-last TP
+        num_tps = len(signal.take_profits)
+        if num_tps == 1:
+            tp_to_use = signal.take_profits[0]
+        elif num_tps <= 3:
+            tp_to_use = signal.take_profits[-1]  # Last TP
+        else:
+            tp_to_use = signal.take_profits[-2]  # Second-to-last TP
+
         request = {
             "action": trade_action,
             "symbol": symbol,
@@ -121,7 +180,7 @@ class MT5Trader:
             "type": order_type,
             "price": price,
             "sl": signal.stop_loss,
-            "tp": signal.take_profits[0],      # TP1 only
+            "tp": tp_to_use,
             "deviation": 20,
             "magic": self.MAGIC_NUMBER,
             "comment": "Telegram Copier",
