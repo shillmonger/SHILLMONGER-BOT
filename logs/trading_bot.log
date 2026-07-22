@@ -2209,3 +2209,7 @@ TP3 :4150
 2026-07-22 07:30:35.885 | INFO     | mt5.trade_monitor:process_closed_trade:80 - Processing closed trade: Order=2990032908, Symbol=XAUUSDm
 2026-07-22 07:30:35.886 | INFO     | mt5.trade_monitor:process_closed_trade:90 - Found 26 deals in history window
 2026-07-22 07:30:35.887 | WARNING  | mt5.trade_monitor:process_closed_trade:101 - Entry deal 2448349274 not found in history
+2026-07-22 07:39:44.427 | SUCCESS  | core.database:connect:27 - Connected to MongoDB
+2026-07-22 07:39:46.626 | SUCCESS  | mt5.trade_monitor:start:21 - Trade Monitor started
+2026-07-22 07:39:53.197 | SUCCESS  | core.database:connect:27 - Connected to MongoDB
+2026-07-22 07:39:54.844 | SUCCESS  | mt5.trade_monitor:start:21 - Trade Monitor started
