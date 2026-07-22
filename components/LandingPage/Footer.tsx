@@ -47,9 +47,7 @@ export default function Footer() {
           left-1/2
           -translate-x-1/2
           -top-56
-          sm:-top-64
-          md:-top-72
-          lg:-top-80
+          lg:-top-35
           z-30
           pointer-events-none
           select-none
@@ -63,10 +61,7 @@ export default function Footer() {
           priority
           className="
             w-[500px]
-            sm:w-[330px]
-            md:w-[420px]
-            lg:w-[550px]
-            xl:w-[650px]
+            lg:w-[500px]
             h-auto
             grayscale-30
             {/* Added: White drop-shadow */}
