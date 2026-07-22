@@ -83,7 +83,7 @@ export default function Footer() {
               <Link href="/" className="inline-flex items-center gap-3">
                 <div>
                   <h2 className="text-3xl font-black text-neutral-50 tracking-tighter uppercase">
-                    SMG - BOT
+                    SHILLMONGER
                   </h2>
                   <p className="text-[12px] uppercase tracking-[0.25em] font-black text-neutral-400">
                     Trading Intelligence
