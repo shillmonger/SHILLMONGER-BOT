@@ -38,7 +38,7 @@ export default function Footer() {
 
   return (
     <section className="relative mt-15 lg:mt-40 w-full bg-neutral-950 text-neutral-50 font-sans">
-      {/* Floating Character */}
+    
      <div
         className="
           hidden
@@ -66,6 +66,8 @@ export default function Footer() {
             grayscale-30
             {/* Added: White drop-shadow */}
             drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]
+            {/* Added: Bouncing animation */}
+            animate-bounce
           "
         />
       </div>
