@@ -2,6 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Send,
+  ShieldCheck,
+  Zap,
+  Coins,
+} from "lucide-react";
 import { FaTelegram, FaDiscord, FaTwitter, FaGithub, FaWhatsapp } from "react-icons/fa";
 import ScrollToTop from "./ScrollToTop";
 
@@ -36,15 +42,15 @@ export default function Footer() {
   ];
 
   return (
-    <section className="relative mt-10 lg:mt-20 w-full bg-neutral-950 text-neutral-50 font-sans">
-      
-      {/* Floating Logo Character Overlay */}
-      
+    <section className="relative mt-10 lg:mt-20 w-full text-neutral-50 font-sans pb-4">
+      {/* Footer Outer Container with 10px Margin, Rounded Corners & Blue Theme */}
+      <footer className="mx-[10px] lg:mx-[20px] relative bg-[#4842ee] border border-blue-900/50 rounded-4xl overflow-hidden shadow-2xl shadow-blue-950/40">
+        
+        {/* Subtle Ambient Blue Top Light */}
+        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-blue-500/10 via-blue-800/5 to-transparent pointer-events-none" />
 
-      {/* Footer Container */}
-      <footer className="relative bg-neutral-950 border-t border-neutral-800/80 overflow-visible">
         {/* Content */}
-        <div className="relative z-20 max-w-[1500px] mx-auto px-6 lg:px-12 pt-16 md:pt-36 lg:pt-15 pb-10">
+        <div className="relative z-20 max-w-[1500px] mx-auto px-6 lg:px-12 pt-16 md:pt-24 lg:pt-16 pb-10">
           
           {/* Top Row */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
@@ -56,13 +62,13 @@ export default function Footer() {
                   <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
                     SHILLMONGER
                   </h2>
-                  <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-neutral-400">
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-white">
                     Trading Intelligence
                   </p>
                 </div>
               </Link>
 
-              <p className="mt-4 text-sm leading-relaxed text-neutral-400 font-normal">
+              <p className="mt-4 text-sm leading-relaxed text-white/80 font-normal">
                 Automate your trading with confidence. Choose a subscription plan that matches your account size and let our intelligent trading system execute trades whenever valid market opportunities arise.
               </p>
 
@@ -73,7 +79,7 @@ export default function Footer() {
                     key={social.name}
                     href={social.href}
                     aria-label={social.name}
-                    className="w-10 h-10 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white transition-all duration-300 flex items-center justify-center text-neutral-400 hover:shadow-lg hover:shadow-indigo-500/20"
+                    className="w-11 h-11 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 flex items-center justify-center text-white hover:shadow-lg hover:shadow-white/25"
                   >
                     {social.icon}
                   </Link>
@@ -93,7 +99,7 @@ export default function Footer() {
                       <li key={item.name}>
                         <Link
                           href={item.href}
-                          className="text-sm text-neutral-400 hover:text-white transition-colors duration-200 font-medium"
+                          className="text-sm text-white/80 hover:text-white transition-colors duration-200 font-medium"
                         >
                           {item.name}
                         </Link>
@@ -106,20 +112,52 @@ export default function Footer() {
           </div>
 
 
+          {/* Trust Badges */}
+          <div className="max-w-[1500px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/20 pt-12">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                <ShieldCheck className="text-white" size={24} />
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm text-white uppercase tracking-wide">Secure Trading</h4>
+                <p className="text-xs text-white/70 mt-1">Your account credentials are encrypted and never shared.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                <Zap className="text-white" size={24} />
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm text-white uppercase tracking-wide">Real-Time Execution</h4>
+                <p className="text-xs text-white/70 mt-1">Lightning-fast trade execution on valid market conditions.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                <Coins className="text-white" size={24} />
+              </div>
+              <div>
+                <h4 className="font-semibold text-sm text-white uppercase tracking-wide">MT4/MT5 Compatible</h4>
+                <p className="text-xs text-white/70 mt-1">Seamlessly integrates with MetaTrader 4 and 5 platforms.</p>
+              </div>
+            </div>
+          </div>
+
+
           {/* Financial Disclaimer */}
-          <div className="max-w-[1500px] mx-auto mt-6 space-y-5 text-xs leading-relaxed text-neutral-400 pt-2">
+          <div className="max-w-[1500px] mx-auto mt-6 space-y-5 text-xs leading-relaxed text-white/70 pt-2">
 
             {/* Risk Disclosure */}
-            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
+            <div className="space-y-2 border-t border-white/20 pt-6">
               <p className="text-xs font-normal">
-                <span className="font-bold text-neutral-200">RISK DISCLOSURE:</span>{" "}
+                <span className="font-bold text-white">RISK DISCLOSURE:</span>{" "}
                 Trading Forex and other financial markets involves substantial risk and may not be suitable for every investor. Our automated trading bot executes trades based on predefined trading strategies and valid market conditions. While our system is designed to identify quality trading opportunities, profits are never guaranteed, and losses can occur. Users should only trade with funds they can afford to lose.
               </p>
             </div>
 
             {/* Service Disclaimer */}
-            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
-              <p className="font-bold text-neutral-200 uppercase tracking-wider text-xs">
+            <div className="space-y-2 border-t border-white/20 pt-6">
+              <p className="font-bold text-white uppercase tracking-wider text-xs">
                 SERVICE DISCLAIMER
               </p>
 
@@ -129,8 +167,8 @@ export default function Footer() {
             </div>
 
             {/* User Responsibility */}
-            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
-              <p className="font-bold text-neutral-200 uppercase tracking-wider text-xs">
+            <div className="space-y-2 border-t border-white/20 pt-6">
+              <p className="font-bold text-white uppercase tracking-wider text-xs">
                 USER RESPONSIBILITY
               </p>
 
@@ -142,9 +180,9 @@ export default function Footer() {
           </div>
 
           {/* Final Copyright & Details */}
-          <div className="max-w-[1500px]  mx-auto border-t border-neutral-900 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-neutral-400">
+          <div className="max-w-[1500px] mx-auto border-t border-white/20 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-white/70">
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-              <p className="font-semibold text-neutral-300">© {new Date().getFullYear()} SHILLMONGER. All rights reserved.</p>
+              <p className="font-semibold text-white">© {new Date().getFullYear()} SHILLMONGER. All rights reserved.</p>
               <div className="flex flex-wrap md:flex-nowrap justify-center md:justify-start gap-x-4 gap-y-2">
                 <Link href="/landing-page/privacy" className="hover:text-white transition-colors">
                   Privacy Policy
@@ -160,7 +198,7 @@ export default function Footer() {
                 </Link>
               </div>
             </div>
-            <p className="text-center md:text-right max-w-md text-neutral-400 text-[11px] leading-relaxed">
+            <p className="text-center md:text-right max-w-md text-white/60 text-[11px] leading-relaxed">
               Trading involves risk and profits are never guaranteed. SHILLMONGER provides subscription-based access to an automated trading bot for MetaTrader 5. By using this platform, you acknowledge and accept our Risk Disclosure and Terms of Service.
             </p>
           </div>

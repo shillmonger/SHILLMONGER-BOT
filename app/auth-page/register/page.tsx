@@ -99,8 +99,8 @@ export default function SignupPage() {
                       id="name"
                       name="name"
                       type="text"
-                      className="h-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                      placeholder="secure rise"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      placeholder="shillmonger"
                       required
                       disabled={isLoading}
                     />
@@ -118,8 +118,8 @@ export default function SignupPage() {
                       id="email"
                       name="email"
                       type="email"
-                      className="h-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                      placeholder="secure@example.com"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      placeholder="shillmonger@example.com"
                       required
                       disabled={isLoading}
                     />
@@ -138,7 +138,7 @@ export default function SignupPage() {
                         id="password"
                         name="password"
                         type={showPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}
@@ -167,7 +167,7 @@ export default function SignupPage() {
                         id="confirmPassword"
                         name="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}

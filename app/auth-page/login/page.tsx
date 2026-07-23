@@ -80,7 +80,7 @@ export default function LoginPage() {
                     <Input
                       id="email"
                       name="email"
-                      className="h-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       type="text"
                       placeholder="email or username"
                       disabled={isLoading}
@@ -109,7 +109,7 @@ export default function LoginPage() {
                       <Input
                         id="password"
                         name="password"
-                        className="h-12 pr-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 p-5 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
                         disabled={isLoading}
