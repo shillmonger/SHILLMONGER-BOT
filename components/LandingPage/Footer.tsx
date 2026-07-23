@@ -42,12 +42,12 @@ export default function Footer() {
   ];
 
   return (
-    <section className="relative mt-10 lg:mt-20 w-full text-neutral-50 font-sans pb-4">
+    <section className="relative mt-10 lg:mt-10 w-full text-neutral-50 font-sans pb-4">
       {/* Footer Outer Container with 10px Margin, Rounded Corners & Blue Theme */}
-      <footer className="mx-[10px] lg:mx-[20px] relative bg-[#4842ee] border border-blue-900/50 rounded-4xl overflow-hidden shadow-2xl shadow-blue-950/40">
+      <footer className="mx-[10px] lg:mx-[20px] relative bg-indigo-700 border border-indigo-900/50 rounded-4xl overflow-hidden shadow-2xl shadow-indigo-950/40">
         
         {/* Subtle Ambient Blue Top Light */}
-        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-blue-500/10 via-blue-800/5 to-transparent pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-indigo-500/10 via-indigo-800/5 to-transparent pointer-events-none" />
 
         {/* Content */}
         <div className="relative z-20 max-w-[1500px] mx-auto px-6 lg:px-12 pt-16 md:pt-24 lg:pt-16 pb-10">
@@ -79,7 +79,7 @@ export default function Footer() {
                     key={social.name}
                     href={social.href}
                     aria-label={social.name}
-                    className="w-11 h-11 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 flex items-center justify-center text-white hover:shadow-lg hover:shadow-white/25"
+                    className="w-11 h-11 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 hover:border-white/40 hover:text-white transition-all duration-300 flex items-center justify-center text-white"
                   >
                     {social.icon}
                   </Link>
@@ -115,7 +115,7 @@ export default function Footer() {
           {/* Trust Badges */}
           <div className="max-w-[1500px] mx-auto mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-white/20 pt-12">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
                 <ShieldCheck className="text-white" size={24} />
               </div>
               <div>
@@ -124,7 +124,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
                 <Zap className="text-white" size={24} />
               </div>
               <div>
@@ -133,7 +133,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
                 <Coins className="text-white" size={24} />
               </div>
               <div>

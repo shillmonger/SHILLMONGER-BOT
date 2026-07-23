@@ -37,14 +37,14 @@ export default function FAQSection() {
   const rightColumnFaqs = faqs.slice(half);
 
   return (
-    <section id="faq" className="mx-auto max-w-[1400px] px-4 lg:px-8 py-0 w-full text-neutral-900 font-sans">
+    <section id="faq" className="mx-auto max-w-[1400px] px-4 lg:px-8 py-20 w-full text-neutral-900 font-sans">
       <div className="text-center mb-10 relative z-10 max-w-xl mx-auto">
         <span className="inline-block rounded-full bg-[#ccff00] px-4 py-1 text-xs font-semibold text-black mb-3 shadow-sm">
           Got Questions?
         </span>
 
         {/* Main Heading */}
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-900">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-neutral-900">
           Frequently Asked Questions
         </h2>
 
@@ -98,7 +98,7 @@ function FAQItem({ faq, isOpen, onClick }: { faq: any; isOpen: boolean; onClick:
           : "bg-white/70 hover:bg-white border-neutral-200/80 hover:border-neutral-300 shadow-sm"
       }`}
     >
-      <div className="w-full flex items-center justify-between p-6 text-left">
+      <div className="w-full flex items-center justify-between p-5 text-left">
         <span
           className={`text-sm md:text-base font-bold tracking-tight transition-colors ${
             isOpen ? "text-indigo-950" : "text-neutral-800 group-hover:text-neutral-900"

@@ -99,7 +99,7 @@ export default function Navbar() {
               </Link>
               
               <Link href="/auth-page/register">
-                <button className="rounded-2xl bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#4338ca] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer">
+                <button className="rounded-xl bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#4338ca] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer">
                   Register
                 </button>
               </Link>

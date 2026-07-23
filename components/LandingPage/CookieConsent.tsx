@@ -50,17 +50,14 @@ export default function CookieConsent() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-[420px] bg-black border border-neutral-800 rounded-3xl p-6 md:p-8 overflow-hidden shadow-2xl shadow-blue-950/50"
+              className="relative w-full max-w-[420px] bg-black border border-neutral-800 rounded-3xl p-6 md:p-8 overflow-hidden"
             >
-              {/* Top Blue Ambient Glow */}
-              <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-blue-600/20 via-blue-950/10 to-transparent pointer-events-none" />
-
               {/* Close Button */}
               <button
                 onClick={handleClose}
                 className="absolute top-4 right-4 z-20 cursor-pointer text-neutral-400 hover:text-white hover:bg-neutral-900 transition-all p-2 rounded-full border border-transparent hover:border-neutral-800"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
 
               {/* Cookie Illustration */}
@@ -68,7 +65,7 @@ export default function CookieConsent() {
                 <img
                   src="https://i.postimg.cc/L5wkcDJ6/cookie.png"
                   alt="Cookie"
-                  className="w-36 h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(37,99,235,0.25)]"
+                  className="w-36 h-36 object-contain filter"
                 />
               </div>
 
@@ -78,7 +75,7 @@ export default function CookieConsent() {
                   Data & Security
                 </h3>
 
-                <p className="text-neutral-400 text-xs md:text-sm mb-6 leading-relaxed font-normal">
+                <p className="text-neutral-400 text-sm md:text-sm mb-6 leading-relaxed font-normal">
                   We use essential cookies to secure your session, protect your
                   wallet connections, and optimize your trading dashboard
                   performance. By continuing, you agree to our security
@@ -86,16 +83,16 @@ export default function CookieConsent() {
                 </p>
 
                 {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex sm:flex-row gap-3">
                   <button
                     onClick={() => handleConsent("accepted")}
-                    className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold text-xs tracking-wide shadow-lg shadow-blue-600/30 transition-all duration-300 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm tracking-wide transition-all duration-300 cursor-pointer"
                   >
                     Accept
                   </button>
                   <button
                     onClick={() => handleConsent("declined")}
-                    className="w-full py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white font-semibold text-xs tracking-wide border border-neutral-800 transition-all duration-300 cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white font-semibold text-sm tracking-wide border border-neutral-800 transition-all duration-300 cursor-pointer"
                   >
                     No thanks
                   </button>

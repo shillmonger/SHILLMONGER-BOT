@@ -69,7 +69,7 @@ export default function WhyPlatformSection() {
         <span className="inline-block rounded-full bg-[#ccff00] px-4 py-1 text-xs font-semibold text-black mb-3">
           Workflow
         </span>
-        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-900">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-neutral-900">
           How It Works
         </h2>
 
@@ -103,7 +103,7 @@ export default function WhyPlatformSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-2 flex items-center justify-center gap-4">
             <CarouselPrevious className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
             <CarouselNext className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
           </div>
@@ -111,7 +111,7 @@ export default function WhyPlatformSection() {
       </div>
 
       {/* Footer Divider */}
-      <div className="mt-16 flex items-center gap-4">
+      <div className="mt-8 flex items-center gap-4">
         <div className="h-[1px] flex-1 bg-neutral-200" />
         <span className="text-xs uppercase tracking-widest text-neutral-400 font-semibold whitespace-nowrap">
           Start your journey today
@@ -145,7 +145,7 @@ function StepCard({
       onMouseEnter={onMouseEnter}
       className={`group relative rounded-3xl p-7 transition-all duration-300 cursor-pointer border ${
         isActive
-          ? "bg-white border-indigo-200 shadow-xl shadow-indigo-500/10 -translate-y-1.5"
+          ? "bg-white border-indigo-200 -translate-y-1.5"
           : "bg-white/60 hover:bg-white border-neutral-200/80 hover:border-neutral-300 shadow-sm"
       }`}
     >

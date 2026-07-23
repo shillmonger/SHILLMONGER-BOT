@@ -23,13 +23,13 @@ export default function SubscriptionPage() {
       maxTrades: 5,
       targetLabel: "Up to 40%",
       tradingVolume: "Entry Level",
-      headerBg: "bg-gradient-to-b from-indigo-950/40 via-neutral-900/30 to-transparent",
-      accent: "text-indigo-300",
-      accentBg: "bg-indigo-500/10",
-      iconGrad: "from-indigo-800 to-indigo-950",
+      headerBg: "bg-gradient-to-b from-orange-950/40 via-neutral-900/30 to-transparent",
+      accent: "text-orange-300",
+      accentBg: "bg-orange-500/10",
+      iconGrad: "from-orange-800 to-orange-950",
       popular: false,
       btnClass:
-        "bg-neutral-900 hover:bg-neutral-800 text-neutral-100 border border-neutral-800",
+        "bg-orange-600 hover:bg-orange-500 text-white font-bold shadow-lg shadow-orange-950/50",
       planFeatures: [
         "Maximum 5 Open Trades",
         "Unlimited Profit Potential",
@@ -73,13 +73,13 @@ export default function SubscriptionPage() {
       maxTrades: 10,
       targetLabel: "Unlimited",
       tradingVolume: "Institutional",
-      headerBg: "bg-gradient-to-b from-neutral-800/40 via-neutral-900/30 to-transparent",
-      accent: "text-neutral-300",
-      accentBg: "bg-neutral-800",
-      iconGrad: "from-neutral-600 to-neutral-900",
+      headerBg: "bg-gradient-to-b from-rose-950/40 via-neutral-900/30 to-transparent",
+      accent: "text-rose-300",
+      accentBg: "bg-rose-500/10",
+      iconGrad: "from-rose-800 to-rose-950",
       popular: false,
       btnClass:
-        "bg-neutral-900 hover:bg-neutral-800 text-neutral-100 border border-neutral-800",
+        "bg-rose-600 hover:bg-rose-500 text-white font-bold shadow-lg shadow-rose-950/50",
       planFeatures: [
         "Maximum 10 Open Trades",
         "Unlimited Profit Potential",
@@ -127,10 +127,10 @@ export default function SubscriptionPage() {
     <main className="min-h-screen flex flex-col text-black font-sans pb-24">
       {/* Hero Header */}
       <section className="max-w-[1400px] mx-auto px-4 lg:px-10 pt-24 pb-10 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-semibold tracking-wide mb-6 text-neutral-300 shadow-sm">
+        {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-semibold tracking-wide mb-6 text-neutral-300 shadow-sm">
           <Gift className="w-3.5 h-3.5 text-indigo-500" />
           <span>Premium Trading Bot Plans</span>
-        </div>
+        </div> */}
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-black">
           Bot Subscription
         </h1>
@@ -273,41 +273,41 @@ export default function SubscriptionPage() {
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-black mb-3">
             Automated vs Manual
           </h2>
-          <p className="text-neutral-400 text-sm md:text-base leading-relaxed mx-auto font-normal">
+          <p className="text-neutral-500 text-sm md:text-base leading-relaxed mx-auto font-normal">
             Choose a plan and let our advanced trading systems work for you.
             Earnings topped up automatically every 24 hours.
           </p>
         </div>
 
         {/* Flat Modern Container Table */}
-        <div className="bg-black border border-neutral-900 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
+        <div className="bg-white border border-neutral-200 rounded-2xl shadow-2xl overflow-hidden">
           {/* Header Row */}
-          <div className="hidden md:grid grid-cols-3 border-b border-neutral-900 bg-neutral-950 p-5 text-xs font-bold uppercase tracking-wider">
-            <div className="text-neutral-300">Metric</div>
-            <div className="text-rose-400">Manual Trading</div>
-            <div className="text-emerald-400">Automated Trading</div>
+          <div className="hidden md:grid grid-cols-3 border-b border-neutral-200 bg-neutral-200 p-5 text-xs font-bold uppercase tracking-wider">
+            <div className="text-neutral-800">Metric</div>
+            <div className="text-rose-600">Manual Trading</div>
+            <div className="text-emerald-600">Automated Trading</div>
           </div>
 
           {/* Table Body rows */}
-          <div className="divide-y divide-neutral-900">
+          <div className="divide-y divide-neutral-200">
             {comparisonData.map((row, index) => (
               <div
                 key={index}
-                className="grid grid-cols-1 md:grid-cols-3 p-5 gap-3 md:gap-4 items-center hover:bg-neutral-950 transition-colors"
+                className="grid grid-cols-1 md:grid-cols-3 p-5 gap-3 md:gap-4 items-center hover:bg-neutral-50 transition-colors"
               >
                 {/* Metric Label */}
-                <div className="text-sm font-semibold text-neutral-200">
+                <div className="text-sm font-semibold text-neutral-800">
                   {row.metric}
                 </div>
 
                 {/* Manual Column */}
                 <div className="flex items-start gap-2.5 md:pr-4">
-                  <span className="md:hidden text-xs font-semibold text-rose-400 block mb-1">
+                  <span className="md:hidden text-xs font-semibold text-rose-600 block mb-1">
                     Manual:
                   </span>
                   <div className="flex items-start gap-2">
-                    <X className="w-4 h-4 stroke-[2.5] text-rose-400 shrink-0 mt-0.5" />
-                    <span className="text-xs md:text-sm text-neutral-400 font-normal leading-relaxed">
+                    <X className="w-4 h-4 stroke-[2.5] text-rose-600 shrink-0 mt-0.5" />
+                    <span className="text-xs md:text-sm text-neutral-600 font-normal leading-relaxed">
                       {row.manual}
                     </span>
                   </div>
@@ -315,12 +315,12 @@ export default function SubscriptionPage() {
 
                 {/* Automated Column */}
                 <div className="flex items-start gap-2.5">
-                  <span className="md:hidden text-xs font-semibold text-emerald-400 block mb-1">
+                  <span className="md:hidden text-xs font-semibold text-emerald-600 block mb-1">
                     Automated:
                   </span>
                   <div className="flex items-start gap-2">
-                    <Check className="w-4 h-4 stroke-[2.5] text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="text-xs md:text-sm text-neutral-100 font-medium leading-relaxed">
+                    <Check className="w-4 h-4 stroke-[2.5] text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="text-xs md:text-sm text-neutral-800 font-medium leading-relaxed">
                       {row.automated}
                     </span>
                   </div>

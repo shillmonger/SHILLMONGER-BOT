@@ -19,19 +19,19 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative w-full bg-white pt-20 lg:pt-30 py-20 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-4">
+    <section className="relative w-full bg-white pt-20 lg:pt-20 py-20 overflow-hidden">
+      <div className="mx-auto max-w-[1400px] px-3">
         {/* Top Nav Pills (Outside the purple card) */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8 flex items-center gap-3"
+          className="mb-3 flex items-center gap-3 overflow-x-auto"
         >
           {navPills.map((pill) => (
             <button
               key={pill.label}
-              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
+              className={`shrink-0 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
                 pill.active
                   ? "bg-[#ccff00] text-black shadow-sm"
                   : "bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300"
@@ -43,18 +43,18 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Main Hero Card Container */}
-        <div className="relative rounded-[2.5rem] bg-gradient-to-r from-[#2932e1] via-[#4842ee] to-[#6366f1] p-7 md:p-12 lg:p-16 min-h-[520px] flex items-center">
+        <div className="relative rounded-[2rem] bg-gradient-to-r from-[#2932e1] via-[#4842ee] to-[#6366f1] p-6 md:p-12 lg:p-10 lg:min-h-[550px] flex items-center">
           
           {/* Subtle background glow effects inside the card */}
           <div className="pointer-events-none absolute left-1/3 top-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-blue-400/20 blur-[100px]" />
 
           {/* Grid Layout */}
-          <div className="grid w-4xl grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid w-full lg:w-4xl grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Content Column */}
             <div className="lg:col-span-7 z-10 max-w-xl">
               {/* Bullet Points */}
-              <ul className="mb-10 space-y-3">
+              <ul className="mb-8 lg:mb-10 space-y-3">
                 {bullets.map((line) => (
                   <li key={line} className="flex items-start gap-3 text-xs md:text-sm text-white/80 font-medium">
                     <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#ccff00]" />
@@ -64,37 +64,65 @@ export default function HeroSection() {
               </ul>
 
               {/* Main Headline */}
-              <h1 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-[1.08] mb-10">
+              <h1 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tight text-white leading-[1.08] mb-8 lg:mb-10">
                 The Smarter Way
-to Trade Forex
+                to Trade Forex
               </h1>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-6">
-                <Link href="/LandingPage/subscribtion">
-                  <button className="rounded-2xl bg-[#0d0d0d] px-7 py-4 text-sm font-semibold text-white shadow-xl transition-transform hover:scale-105 active:scale-95">
-                    Start Trading
-                  </button>
-                </Link>
+<div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4 lg:gap-6">
+  <Link href="/LandingPage/subscribtion" className="w-full sm:w-auto">
+    <button className="w-full sm:w-auto rounded-2xl cursor-pointer bg-[#0d0d0d] px-7 py-4 text-sm font-semibold text-white shadow-xl transition-transform hover:scale-105 active:scale-95">
+      Start 5 days free trial
+    </button>
+  </Link>
 
-                <Link
-                  href="#showreel"
-                  className="rounded-2xl bg-white px-7 py-4 text-sm font-semibold text-black shadow-xl transition-transform hover:scale-105 active:scale-95"
-                >
-                  Sign in 
-                </Link>
-              </div>
+  <Link
+    href="#showreel"
+    className="w-full sm:w-auto text-center rounded-2xl cursor-pointer bg-white px-7 py-4 text-sm font-semibold text-black shadow-xl transition-transform hover:scale-105 active:scale-95"
+  >
+    Sign in 
+  </Link>
+</div>
             </div>
 
-            {/* Right Column: Space for phone breakout */}
-            <div className="hidden lg:block lg:col-span-5 h-[400px] relative">
-              {/* Intentional space reserved for absolute positioned phone frame */}
+            {/* Right Column: Phone image on mobile, reserved breakout space on desktop */}
+            <div className="lg:col-span-5 relative">
+              {/* Mobile / tablet inline image (hidden on lg where the breakout version takes over) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative mx-auto h-[500px] w-full overflow-hidden lg:hidden"
+              >
+                <Image
+                  src="/phone-half.png"
+                  alt="Phone Screen App Interface"
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </motion.div>
+
+              {/* Mobile stat pills under the image */}
+              <div className="mt-5 flex flex-wrap justify-center gap-3 lg:hidden">
+                <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-semibold text-neutral-800 shadow-lg">
+                  <span className="h-2 w-2 rounded-full bg-[#ccff00]" />
+                  +45 pips • $320
+                </div>
+                <div className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-[11px] font-semibold text-black shadow-lg">
+                  Profit +$1,245.00
+                </div>
+              </div>
+
+              {/* Desktop-only reserved space for the absolute breakout phone frame */}
+              <div className="hidden lg:block h-[400px]" />
             </div>
 
           </div>
 
           {/* ------------------------------------------------------------- */}
-          {/* OVERLAY ELEMENTS (Phone mockup breaking out of container) */}
+          {/* OVERLAY ELEMENTS (Phone mockup breaking out of container) — desktop only, unchanged */}
           {/* ------------------------------------------------------------- */}
 
           {/* 1. Trading Activity Floating Box (Left of Phone) */}
@@ -152,7 +180,7 @@ to Trade Forex
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="hidden lg:block lg:absolute lg:right-[15%] lg:-top-20 lg:-bottom-20 z-30 w-full max-w-[350px] mx-auto lg:mx-0 h-[650px] lg:h-auto rounded-[3rem] bg-black overflow-hidden flex flex-col justify-between"
+            className="hidden lg:block lg:absolute lg:right-[15%] lg:-top-15 lg:-bottom-15 z-30 w-full max-w-[330px] mx-auto lg:mx-0 h-[550px] lg:h-auto rounded-[2rem] overflow-hidden flex flex-col justify-between"
           >
             {/* Embedded Mockup Image */}
             <div className="relative w-full h-full">
@@ -161,13 +189,13 @@ to Trade Forex
                 alt="Phone Screen App Interface"
                 fill
                 priority
-                className="object-cover rounded-[2.5rem]"
+                className="object-cover rounded-[2rem]"
               />
             </div>
           </motion.div>
 
           {/* 3. Right Floating Overlay Stack */}
-          <div className="hidden lg:flex flex-col gap-4 absolute right-4 xl:right-10 top-12 z-40">
+          <div className="hidden lg:flex flex-col gap-4 absolute right-4 xl:right-8 top-12 z-40">
             {/* Top Floating Notification Card */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
