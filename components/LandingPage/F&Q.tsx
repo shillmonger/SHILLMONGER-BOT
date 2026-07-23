@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Plus, X } from "lucide-react";
+import { Plus, ChevronDown } from "lucide-react";
 
 const faqs = [
   {
@@ -37,15 +37,19 @@ export default function FAQSection() {
   const rightColumnFaqs = faqs.slice(half);
 
   return (
-    <section id="faq" className="mx-auto max-w-[1400px] px-4 lg:px-8 w-full text-black font-sans">
-      <div className="text-center mb-5 relative z-10">
+    <section id="faq" className="mx-auto max-w-[1400px] px-4 lg:px-8 py-0 w-full text-neutral-900 font-sans">
+      <div className="text-center mb-10 relative z-10 max-w-xl mx-auto">
+        <span className="inline-block rounded-full bg-[#ccff00] px-4 py-1 text-xs font-semibold text-black mb-3 shadow-sm">
+          Got Questions?
+        </span>
+
         {/* Main Heading */}
-        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2 leading-none text-black">
-          Asked Questions
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-900">
+          Frequently Asked Questions
         </h2>
 
         {/* Centered Paragraph */}
-        <p className="text-neutral-600 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+        <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
           Everything you need to know about the SHILLMONGER automated trading bot.
           From MT4/MT5 integration to subscription plans and withdrawals.
         </p>
@@ -54,7 +58,7 @@ export default function FAQSection() {
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         {/* Left Column */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           {leftColumnFaqs.map((faq, index) => (
             <FAQItem
               key={index}
@@ -66,7 +70,7 @@ export default function FAQSection() {
         </div>
 
         {/* Right Column */}
-        <div className="space-y-5">
+        <div className="space-y-4">
           {rightColumnFaqs.map((faq, index) => {
             const globalIndex = index + half;
             return (
@@ -88,35 +92,37 @@ function FAQItem({ faq, isOpen, onClick }: { faq: any; isOpen: boolean; onClick:
   return (
     <div
       onClick={onClick}
-      className={`group relative transition-all duration-300 rounded-none border-2 border-black cursor-pointer overflow-hidden ${
+      className={`group relative transition-all duration-300 rounded-xl border cursor-pointer overflow-hidden ${
         isOpen
-          ? "bg-neutral-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-          : "bg-white hover:bg-neutral-50 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+          ? "bg-white border-indigo-200 shadow-lg shadow-indigo-500/5"
+          : "bg-white/70 hover:bg-white border-neutral-200/80 hover:border-neutral-300 shadow-sm"
       }`}
     >
-      <div className="w-full flex items-center justify-between p-5 text-left">
+      <div className="w-full flex items-center justify-between p-6 text-left">
         <span
-          className="text-xs md:text-[13px] font-black uppercase tracking-wider text-black"
+          className={`text-sm md:text-base font-bold tracking-tight transition-colors ${
+            isOpen ? "text-indigo-950" : "text-neutral-800 group-hover:text-neutral-900"
+          }`}
         >
           {faq.question}
         </span>
         <div className="flex-shrink-0 ml-4">
-          {isOpen ? (
-            <div className="flex h-8 w-8 items-center justify-center rounded-none border-2 border-black bg-black text-white">
-              <X className="w-4 h-4 stroke-[3px]" />
-            </div>
-          ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-none border-2 border-black bg-white text-black transition-all duration-300 group-hover:bg-black group-hover:text-white">
-              <Plus className="w-4 h-4 stroke-[3px]" />
-            </div>
-          )}
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
+              isOpen
+                ? "bg-indigo-600 text-white rotate-180 shadow-md shadow-indigo-500/30"
+                : "bg-neutral-100 text-neutral-600 group-hover:bg-neutral-200"
+            }`}
+          >
+            <ChevronDown className="w-4 h-4 stroke-[2.5]" />
+          </div>
         </div>
       </div>
 
       {isOpen && (
-        <div className="px-5 pb-5" onClick={(e) => e.stopPropagation()}>
-          <div className="h-[2px] bg-black mb-4" />
-          <p className="text-neutral-600 text-xs md:text-sm leading-relaxed font-medium">
+        <div className="px-6 pb-6 pt-0" onClick={(e) => e.stopPropagation()}>
+          <div className="h-[1px] bg-neutral-100 mb-4" />
+          <p className="text-neutral-500 text-xs md:text-sm leading-relaxed font-normal">
             {faq.answer}
           </p>
         </div>

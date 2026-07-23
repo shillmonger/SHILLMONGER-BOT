@@ -72,17 +72,17 @@ export default function SignupPage() {
     <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
       <main className="flex-grow flex items-center justify-center px-4 py-10 md:py-10">
         <div className="w-full max-w-md">
-          {/* Brutalist Card: No rounded corners, solid thick border, and strong offset shadow */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+          {/* Modern Card with rounded corners and indigo accents */}
+          <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
             <CardContent className="p-0">
-              <form className="px-6 py-10 md:px-10" onSubmit={handleSubmit}>
+              <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
                   {/* Title Header */}
                   <div className="flex flex-col items-center text-center">
-                    <h1 className="text-3xl font-black uppercase tracking-tighter">
+                    <h1 className="text-3xl font-extrabold tracking-tight">
                       Create Account
                     </h1>
-                    <p className="text-xs text-neutral-400 mt-1 uppercase tracking-widest font-semibold">
+                    <p className="text-sm text-neutral-400 mt-2">
                       Enter your details below to get started
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="name" 
-                      className="text-xs font-black uppercase tracking-wider text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-300"
                     >
                       Username
                     </Label>
@@ -99,7 +99,7 @@ export default function SignupPage() {
                       id="name"
                       name="name"
                       type="text"
-                      className="h-12 text-[15px] rounded-none border-2 border-neutral-800 bg-neutral-900 text-white focus-visible:ring-0 focus-visible:border-neutral-400 placeholder:text-neutral-500"
+                      className="h-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       placeholder="secure rise"
                       required
                       disabled={isLoading}
@@ -110,7 +110,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="email" 
-                      className="text-xs font-black uppercase tracking-wider text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-300"
                     >
                       User Email
                     </Label>
@@ -118,7 +118,7 @@ export default function SignupPage() {
                       id="email"
                       name="email"
                       type="email"
-                      className="h-12 text-[15px] rounded-none border-2 border-neutral-800 bg-neutral-900 text-white focus-visible:ring-0 focus-visible:border-neutral-400 placeholder:text-neutral-500"
+                      className="h-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       placeholder="secure@example.com"
                       required
                       disabled={isLoading}
@@ -129,7 +129,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="password" 
-                      className="text-xs font-black uppercase tracking-wider text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-300"
                     >
                       Password
                     </Label>
@@ -138,7 +138,7 @@ export default function SignupPage() {
                         id="password"
                         name="password"
                         type={showPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-[15px] rounded-none border-2 border-neutral-800 bg-neutral-900 text-white focus-visible:ring-0 focus-visible:border-neutral-400 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}
@@ -158,7 +158,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="confirmPassword" 
-                      className="text-xs font-black uppercase tracking-wider text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-300"
                     >
                       Confirm Password
                     </Label>
@@ -167,7 +167,7 @@ export default function SignupPage() {
                         id="confirmPassword"
                         name="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-[15px] rounded-none border-2 border-neutral-800 bg-neutral-900 text-white focus-visible:ring-0 focus-visible:border-neutral-400 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}
@@ -183,15 +183,15 @@ export default function SignupPage() {
                     </div>
                   </div>
 
-                  {/* Brutalist Terms and Conditions Checkbox */}
+                  {/* Terms and Conditions Checkbox */}
                   <div className="flex items-start gap-3 mt-1">
                     <button
                       type="button"
                       id="terms"
                       onClick={() => setAgreedToTerms(!agreedToTerms)}
-                      className={`h-5 w-5 shrink-0 rounded-none border-2 transition-all flex items-center justify-center cursor-pointer ${
+                      className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
                         agreedToTerms 
-                          ? "bg-white border-white text-neutral-950" 
+                          ? "bg-indigo-600 border-indigo-600 text-white" 
                           : "border-neutral-700 bg-neutral-900 hover:border-neutral-500"
                       }`}
                     >
@@ -199,10 +199,10 @@ export default function SignupPage() {
                     </button>
                     <Label 
                       htmlFor="terms" 
-                      className="text-xs font-bold text-neutral-400 select-none leading-tight cursor-pointer"
+                      className="text-xs font-semibold text-neutral-400 select-none leading-tight cursor-pointer"
                     >
                       I agree to the{" "}
-                      <Link href="#" className="text-white underline underline-offset-4 font-black">
+                      <Link href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">
                         Terms and Condition
                       </Link>
                     </Label>
@@ -212,7 +212,7 @@ export default function SignupPage() {
                   <div className="relative pt-2">
                     <Button 
                       type="submit" 
-                      className="w-full h-12 rounded-none text-xs font-black uppercase tracking-wider cursor-pointer bg-white text-neutral-950 hover:bg-neutral-200 border-2 border-black transition-all disabled:opacity-50 disabled:cursor-not-allowed" 
+                      className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed" 
                       disabled={isLoading || !agreedToTerms}
                     >
                       {isLoading ? (
@@ -227,8 +227,8 @@ export default function SignupPage() {
                   </div>
 
                   {/* Divider Line */}
-                  <div className="relative text-center text-[10px] font-black uppercase tracking-widest my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t-2 after:border-neutral-800">
-                    <span className="relative z-10 bg-neutral-950 px-3 text-neutral-400">
+                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-800">
+                    <span className="relative z-10 bg-neutral-900 px-3 text-neutral-400">
                       Or continue with
                     </span>
                   </div>
@@ -238,7 +238,7 @@ export default function SignupPage() {
                     {/* X (formerly Twitter) */}
                     <Button
                       type="button"
-                      className="h-12 rounded-none cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border-2 border-neutral-800 hover:border-neutral-700"
+                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
                     >
                       <svg
                         className="h-4 w-4"
@@ -254,7 +254,7 @@ export default function SignupPage() {
                     {/* Google */}
                     <Button
                       type="button"
-                      className="h-12 rounded-none cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border-2 border-neutral-800 hover:border-neutral-700"
+                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
                     >
                       <svg
                         className="h-5 w-5"
@@ -284,7 +284,7 @@ export default function SignupPage() {
                     {/* Facebook */}
                     <Button
                       type="button"
-                      className="h-12 rounded-none cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border-2 border-neutral-800 hover:border-neutral-700"
+                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
                     >
                       <svg
                         className="h-4 w-4"
@@ -299,11 +299,11 @@ export default function SignupPage() {
                   </div>
 
                   {/* Sign In link */}
-                  <div className="text-center text-xs font-semibold text-neutral-400 mt-2">
+                  <div className="text-center text-sm font-semibold text-neutral-400 mt-2">
                     Already have an account?{" "}
                     <Link 
                       href="/auth-page/login" 
-                      className="font-black text-white underline underline-offset-4 hover:text-neutral-300"
+                      className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
                     >
                       Sign in
                     </Link>
@@ -314,13 +314,13 @@ export default function SignupPage() {
           </Card>
 
           {/* Legal Footer Info */}
-          <div className="mt-8 text-center text-[10px] font-semibold text-neutral-500 uppercase tracking-wider leading-relaxed">
+          <div className="mt-8 text-center text-xs font-semibold text-neutral-500 leading-relaxed">
             By clicking continue, you agree to our{" "}
-            <Link href="#" className="font-bold underline text-neutral-700 hover:text-neutral-950">
+            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="#" className="font-bold underline text-neutral-700 hover:text-neutral-950">
+            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
               Privacy Policy
             </Link>
             .

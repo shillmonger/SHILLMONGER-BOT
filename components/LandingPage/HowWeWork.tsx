@@ -3,7 +3,7 @@
 import {
   UserPlus,
   CreditCard,
-  Link,
+  Link as LinkIcon,
   TestTubeDiagonal,
   ArrowUpFromLine,
   RefreshCw,
@@ -25,61 +25,55 @@ export default function WhyPlatformSection() {
       step: "01",
       title: "Create Account",
       desc: "Join SHILLMONGER in seconds. Our registration is fast, encrypted, and built to protect your identity from day one.",
-      icon: <UserPlus className="w-[18px] h-[18px]" />,
+      icon: <UserPlus className="w-5 h-5" />,
     },
     {
       step: "02",
       title: "Connect & Test Demo",
       desc: "Connect and test on a demo account first to ensure everything works perfectly before using real funds.",
-      icon: <TestTubeDiagonal className="w-[18px] h-[18px]" />,
+      icon: <TestTubeDiagonal className="w-5 h-5" />,
     },
     {
       step: "03",
       title: "Buy Bot Subscription",
       desc: "Purchase a bot subscription plan that suits your trading goals and budget.",
-      icon: <CreditCard className="w-[18px] h-[18px]" />,
+      icon: <CreditCard className="w-5 h-5" />,
     },
     {
       step: "04",
       title: "Fund & Connect MT5",
       desc: "Fund real money on your broker, connect to MT5 and link it to your account for automated trading.",
-      icon: <Link className="w-[18px] h-[18px]" />,
+      icon: <LinkIcon className="w-5 h-5" />,
     },
     {
       step: "05",
       title: "Withdraw Profits",
       desc: "Withdraw your profits at the end of your subscription period to your preferred payment method.",
-      icon: <ArrowUpFromLine className="w-[18px] h-[18px]" />,
+      icon: <ArrowUpFromLine className="w-5 h-5" />,
     },
     {
       step: "06",
       title: "Renew or Upgrade",
       desc: "At the end of each subscription, buy a new one or upgrade to continue using our bot and maximize your trading potential.",
-      icon: <RefreshCw className="w-[18px] h-[18px]" />,
+      icon: <RefreshCw className="w-5 h-5" />,
     },
   ];
-
-  // Auto-cycle hover effect every 1 second
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % steps.length);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [steps.length]);
 
   return (
     <section
       id="why-this-platform"
-      className="mx-auto max-w-[1400px] px-4 lg:px-8 py-16 lg:py-10 w-full text-black font-sans"
+      className="mx-auto max-w-[1400px] px-4 lg:px-8  w-full text-neutral-900 font-sans"
     >
       {/* Header */}
-      <div className="mb-5">
-        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2 text-black">
+      <div className="mb-10 text-left max-w-xl">
+        <span className="inline-block rounded-full bg-[#ccff00] px-4 py-1 text-xs font-semibold text-black mb-3">
+          Workflow
+        </span>
+        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-900">
           How It Works
         </h2>
 
-        <p className="text-neutral-600 max-w-lg text-sm md:text-base leading-relaxed">
+        <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
           A streamlined 6-step journey — from sign-up to subscription renewal with
           institutional-grade efficiency.
         </p>
@@ -88,7 +82,12 @@ export default function WhyPlatformSection() {
       {/* Desktop / Tablet Grid */}
       <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {steps.map((step, index) => (
-          <StepCard key={index} step={step} isActive={index === activeIndex} index={index} />
+          <StepCard
+            key={index}
+            step={step}
+            isActive={index === activeIndex}
+            onMouseEnter={() => setActiveIndex(index)}
+          />
         ))}
       </div>
 
@@ -99,25 +98,25 @@ export default function WhyPlatformSection() {
             {steps.map((step, i) => (
               <CarouselItem key={i}>
                 <div className="p-1">
-                  <StepCard step={step} isActive={i === activeIndex} index={i} />
+                  <StepCard step={step} isActive={i === activeIndex} />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="mt-8 flex items-center justify-center gap-6">
-            <CarouselPrevious className="static translate-y-0 w-12 h-12 bg-white hover:bg-black hover:text-white border-2 border-black rounded-none text-black transition-colors duration-300" />
-            <CarouselNext className="static translate-y-0 w-12 h-12 bg-white hover:bg-black hover:text-white border-2 border-black rounded-none text-black transition-colors duration-300" />
+          <div className="mt-8 flex items-center justify-center gap-4">
+            <CarouselPrevious className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
+            <CarouselNext className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
           </div>
         </Carousel>
       </div>
 
-      {/* Footer rule */}
-      <div className="mt-5 flex items-center gap-4">
-        <div className="h-[2px] flex-1 bg-black" />
-        <span className="text-[11px] uppercase tracking-widest text-black font-black whitespace-nowrap">
+      {/* Footer Divider */}
+      <div className="mt-16 flex items-center gap-4">
+        <div className="h-[1px] flex-1 bg-neutral-200" />
+        <span className="text-xs uppercase tracking-widest text-neutral-400 font-semibold whitespace-nowrap">
           Start your journey today
         </span>
-        <div className="h-[2px] flex-1 bg-black" />
+        <div className="h-[1px] flex-1 bg-neutral-200" />
       </div>
     </section>
   );
@@ -132,50 +131,56 @@ type Step = {
   icon: React.ReactNode;
 };
 
-function StepCard({ step, isActive, index }: { step: Step; isActive: boolean; index: number }) {
-  const isDark = index % 2 === 0;
-  const cardClassName = `group relative rounded-none border-2 p-6 transition-all duration-300 cursor-pointer overflow-hidden ${
-    isDark
-      ? "border-white bg-neutral-950"
-      : "border-black bg-white"
-  } ${!isDark && isActive ? "-translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" : ""}`;
-  const iconClassName = `flex h-10 w-10 items-center justify-center rounded-none border-2 transition-all duration-300 ml-auto ${
-    isDark
-      ? isActive
-        ? "bg-white text-black border-white"
-        : "bg-neutral-900 text-white border-white"
-      : isActive
-        ? "bg-black text-white border-black"
-        : "bg-white text-black border-black"
-  }`;
-  const labelClassName = `text-[11px] font-black uppercase tracking-widest absolute left-0 top-0 px-3 py-1.5 ${
-    isDark ? "text-black bg-white border-b border-r border-white" : "text-white bg-neutral-900 border-b border-r border-black"
-  }`;
-  const titleClassName = `font-black text-sm uppercase tracking-wider mb-2 transition-colors duration-300 mt-2 ${
-    isDark ? "text-white group-hover:text-neutral-200" : "text-black group-hover:text-neutral-700"
-  }`;
-  const descClassName = `text-xs leading-relaxed font-medium ${
-    isDark ? "text-neutral-400" : "text-neutral-600"
-  }`;
-
+function StepCard({
+  step,
+  isActive,
+  onMouseEnter,
+}: {
+  step: Step;
+  isActive: boolean;
+  onMouseEnter?: () => void;
+}) {
   return (
-    <div className={cardClassName}>
-      
-      {/* Step label + Icon */}
-      <div className="flex items-start justify-between mb-6">
-        <span className={labelClassName}>
+    <div
+      onMouseEnter={onMouseEnter}
+      className={`group relative rounded-3xl p-7 transition-all duration-300 cursor-pointer border ${
+        isActive
+          ? "bg-white border-indigo-200 shadow-xl shadow-indigo-500/10 -translate-y-1.5"
+          : "bg-white/60 hover:bg-white border-neutral-200/80 hover:border-neutral-300 shadow-sm"
+      }`}
+    >
+      {/* Step Badge + Icon Header */}
+      <div className="flex items-center justify-between mb-6">
+        <span
+          className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${
+            isActive
+              ? "bg-[#ccff00] text-black"
+              : "bg-neutral-100 text-neutral-500 group-hover:bg-neutral-200"
+          }`}
+        >
           Step {step.step}
         </span>
-        <div className={iconClassName}>
+
+        <div
+          className={`flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 ${
+            isActive
+              ? "bg-gradient-to-tr from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-500/30"
+              : "bg-neutral-100 text-neutral-600 group-hover:bg-neutral-900 group-hover:text-white"
+          }`}
+        >
           {step.icon}
         </div>
       </div>
 
-      {/* Text */}
-      <h3 className={titleClassName}>
+      {/* Title & Description */}
+      <h3
+        className={`font-bold text-lg tracking-tight mb-2.5 transition-colors ${
+          isActive ? "text-indigo-950" : "text-neutral-800"
+        }`}
+      >
         {step.title}
       </h3>
-      <p className={descClassName}>
+      <p className="text-xs md:text-sm text-neutral-500 leading-relaxed">
         {step.desc}
       </p>
     </div>

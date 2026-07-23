@@ -26,33 +26,33 @@ export default function ThemeAndScroll({ children }: ThemeAndScrollProps) {
 
   return (
     <>
-      {/* Floating Telegram Button (Sharp Corners, Monochrome) */}
+      {/* Floating Telegram Button (Sleek Rounded Gradient Action) */}
       <a
         href="#"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-10 right-2 z-50 sm:bottom-10 sm:right-6 flex items-center justify-center w-12 h-12 rounded-none
-          bg-neutral-950 text-white border border-neutral-800 shadow-lg transition-all duration-300 
-          hover:bg-white hover:text-neutral-950 hover:border-white cursor-pointer focus:outline-none"
+        className="fixed bottom-6 right-2 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full
+          bg-gradient-to-tr from-indigo-600 via-indigo-500 to-indigo-400 text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 
+          hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 active:scale-95 cursor-pointer focus:outline-none ring-1 ring-white/20"
         aria-label="Join Telegram"
         title="Join Telegram"
       >
-        <Send className="w-5 h-5" />
+        <Send className="w-5 h-5 -translate-x-0.5 translate-y-0.5" />
       </a>
 
       {children}
 
-      {/* Floating Scroll to Top Button (Sharp Corners, Monochrome) */}
+      {/* Floating Scroll to Top Button (Sleek Minimalist Dark/White Toggle) */}
       {showScrollTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="
-            fixed bottom-25 right-2 sm:right-6 z-[50]          
-            bg-neutral-950 text-white border border-neutral-800
-            w-12 h-12 rounded-none
+            fixed bottom-22 right-2 sm:bottom-24 sm:right-8 z-[50]          
+            bg-white/90 backdrop-blur-md text-neutral-800 border border-neutral-200/80
+            w-12 h-12 rounded-full
             flex items-center justify-center
-            shadow-2xl
-            hover:bg-white hover:text-neutral-950 hover:border-white
+            shadow-lg shadow-neutral-900/5
+            hover:bg-neutral-900 hover:text-white hover:border-neutral-900 hover:scale-110
             active:scale-95
             transition-all duration-300 cursor-pointer
           "

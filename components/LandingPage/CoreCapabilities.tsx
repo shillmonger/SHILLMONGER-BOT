@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
+  weight: ["600", "700", "800"],
 });
 
 const LEFT_FEATURES = [
@@ -51,24 +51,18 @@ function FeatureItem({
 
   return (
     <div
-      className="flex items-start gap-4 p-5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300"
-      style={{
-        flexDirection: isLeft ? "row-reverse" : "row",
-      }}
+      className={`group relative flex items-start gap-4 p-6 rounded-xl bg-white border border-neutral-200/80 hover:border-indigo-200 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 cursor-pointer ${
+        isLeft ? "lg:flex-row-reverse lg:text-right" : "flex-row text-left"
+      }`}
     >
-      {/* Neo-brutalist Square Badges */}
-      <div className="shrink-0 mt-0.5 h-7 w-7 rounded-none border-2 border-black bg-black flex items-center justify-center">
-        <span className="h-2 w-2 bg-white block" />
-      </div>
-
       {/* Text */}
-      <div className={isLeft ? "text-right" : "text-left"}>
+      <div className="flex-1">
         <h3
-          className={`${montserrat.className} text-black font-black text-sm uppercase tracking-wider mb-2 leading-none`}
+          className={`${montserrat.className} text-neutral-900 font-bold text-base tracking-tight mb-1.5 transition-colors group-hover:text-indigo-950`}
         >
           {title}
         </h3>
-        <p className="text-neutral-600 text-xs md:text-sm leading-relaxed font-medium">
+        <p className="text-neutral-500 text-xs md:text-sm leading-relaxed font-normal">
           {desc}
         </p>
       </div>
@@ -78,30 +72,37 @@ function FeatureItem({
 
 export default function FeaturesSection() {
   return (
-    <section className="relative w-full overflow-hidden py-5 text-black font-sans">
+    <section className="relative mx-auto max-w-[1400px] overflow-hidden py-20 bg-slate-50/50 text-neutral-900 font-sans">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-indigo-500/5 blur-[120px]" />
+
       {/* ── SECTION HEADER ── */}
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 text-center px-4 mb-5 max-w-3xl mx-auto">
+        <span className="inline-block rounded-full bg-[#ccff00] px-4 py-1 text-xs font-semibold text-black mb-3 shadow-sm">
+          Capabilities
+        </span>
         <h2
-          className={`${montserrat.className} text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2 text-black`}
+          className={`${montserrat.className} text-3xl md:text-5xl font-extrabold tracking-tight mb-4 text-neutral-900`}
         >
           Core Capabilities
         </h2>
-        <p className="text-neutral-600 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
+        <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
           Our automated XAUUSD trading bot integrates seamlessly with MT4/MT5, offering flexible subscription plans,
           secure account linking, and real-time execution for consistent trading performance.
         </p>
       </div>
 
       {/* ── MOBILE LAYOUT (< lg) ── */}
-      <div className="lg:hidden relative z-10 px-4 flex flex-col items-center gap-2">
-        {/* Center Phone Wrapper with sharp border */}
-        <div className="relative flex justify-center p-6 w-full max-w-[400px]">
+      <div className="lg:hidden relative z-10 px-4 flex flex-col items-center gap-8">
+        {/* Center Phone Wrapper */}
+        <div className="relative flex justify-center p-2 w-full max-w-[320px]">
+          <div className="absolute inset-0 bg-indigo-500/10 blur-2xl rounded-full" />
           <Image
             src="/Trade.png"
             alt="SHILLMONGER App"
             width={700}
             height={700}
-            className="relative z-10 object-contain max-h-[900px] w-auto"
+            className="relative z-10 object-contain max-h-[500px] w-auto rounded-[2.5rem]"
             priority
           />
         </div>
@@ -120,15 +121,15 @@ export default function FeaturesSection() {
 
       {/* ── DESKTOP LAYOUT (lg+) ── */}
       <div
-        className="hidden lg:grid relative z-10 mx-auto max-w-[1400px] px-8 xl:px-12"
+        className="hidden lg:grid relative z-10 mx-auto max-w-8xl px-8"
         style={{
-          gridTemplateColumns: "1fr 420px 1fr",
-          gap: "0.5rem",
+          gridTemplateColumns: "1fr 380px 1fr",
+          gap: "2rem",
           alignItems: "center",
         }}
       >
         {/* LEFT FEATURES */}
-        <div className="flex flex-col gap-6 cursor-pointer">
+        <div className="flex flex-col gap-5">
           {LEFT_FEATURES.map((f, i) => (
             <FeatureItem
               key={i}
@@ -139,20 +140,23 @@ export default function FeaturesSection() {
           ))}
         </div>
 
-        {/* CENTER PHONE (Framed & Structured) */}
+        {/* CENTER PHONE (Framed with Soft Glow) */}
         <div className="relative flex justify-center items-center py-4">
+          {/* Subtle Ambient Backlight */}
+          <div className="absolute h-[450px] w-[280px] bg-gradient-to-b from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl -z-0" />
+          
           <Image
             src="/Trade.png"
             alt="SHILLMONGER App"
             width={700}
             height={1400}
-            className="relative z-10 object-contain grayscale-0 w-[260px] xl:w-[350px] h-auto"
+            className="relative z-10 object-contain w-[280px] xl:w-[350px] h-auto rounded-[2.5rem] transition-transform duration-500 hover:scale-105"
             priority
           />
         </div>
 
         {/* RIGHT FEATURES */}
-        <div className="flex flex-col gap-6 cursor-pointer">
+        <div className="flex flex-col gap-5">
           {RIGHT_FEATURES.map((f, i) => (
             <FeatureItem
               key={i}

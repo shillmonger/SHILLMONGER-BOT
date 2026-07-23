@@ -13,7 +13,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -41,20 +41,30 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-0 border-b ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-200 ${
           isScrolled
-            ? "bg-neutral-950 text-neutral-400 border-neutral-800 py-2"
-            : "bg-neutral-950 text-neutral-400 border-neutral-800/30 py-2"
+            ? "bg-white/90 backdrop-blur-md border-b border-neutral-200/60 shadow-sm py-2"
+            : "bg-transparent py-2"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between">
-          {/* Left: Logo Placeholder */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+          
+          {/* Left: Logo & Brand Icon */}
           <Link href="/">
-          <div className="flex items-center gap-2 group cursor-pointer">
-            <span className="font-black tracking-widest text-xl text-neutral-50 uppercase">
-              SHILLMONGER
-            </span>
-          </div>
+            <div className="flex items-center group cursor-pointer">
+              {/* Favicon Icon */}
+              {/* <div className="relative w-8 h-8">
+                <Image
+                  src="/favicon.png"
+                  alt="SHILLMONGER"
+                  fill
+                  className="object-contain"
+                />
+              </div> */}
+              <span className="font-bold tracking-tight text-xl text-neutral-900">
+                SHILLMONGER
+              </span>
+            </div>
           </Link>
 
           {/* Center: Navigation Links (Desktop) */}
@@ -65,45 +75,40 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`text-xs font-bold tracking-widest uppercase transition-colors relative py-2 group cursor-pointer ${
-                    isActive ? "text-neutral-100" : "hover:text-neutral-300"
+                  className={`text-sm font-medium transition-colors relative py-1 cursor-pointer ${
+                    isActive ? "text-neutral-900 font-semibold" : "text-neutral-600 hover:text-neutral-900"
                   }`}
                 >
                   {link.label}
-                  <span className={`absolute bottom-0 left-0 h-[2px] bg-neutral-100 transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  }`} />
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-600 rounded-full" />
+                  )}
                 </Link>
               );
             })}
           </div>
 
           {/* Right: Desktop Action Buttons / Mobile Hamburger */}
-          <div className="flex items-center gap-2">
-            {/* Desktop-only action */}
-            <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            {/* Desktop Action Buttons */}
+            <div className="hidden md:flex items-center gap-3">
               <Link href="/auth-page/login">
-              <button className="relative bg-neutral-900 cursor-pointer text-neutral-50 text-xs font-bold uppercase tracking-widest px-6 py-3 overflow-hidden group border border-neutral-700 hover:bg-neutral-800 transition-colors duration-300 rounded-none">
-                <span className="absolute inset-0 bg-neutral-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                <span className="relative z-10 group-hover:text-neutral-950 transition-colors duration-300">
-                  Sign up
-                </span>
-              </button>
+                <button className="text-sm font-semibold text-neutral-700 hover:text-neutral-900 px-4 py-2.5 transition-colors cursor-pointer">
+                  Sign in
+                </button>
               </Link>
+              
               <Link href="/auth-page/register">
-              <button className="relative bg-neutral-900 cursor-pointer text-neutral-50 text-xs font-bold uppercase tracking-widest px-6 py-3 overflow-hidden group border border-neutral-700 hover:bg-neutral-800 transition-colors duration-300 rounded-none">
-                <span className="absolute inset-0 bg-neutral-100 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out z-0" />
-                <span className="relative z-10 group-hover:text-neutral-950 transition-colors duration-300">
+                <button className="rounded-2xl bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#4338ca] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer">
                   Register
-                </span>
-              </button>
+                </button>
               </Link>
             </div>
 
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="md:hidden p-2 text-neutral-100 hover:bg-neutral-900/50 transition-colors cursor-pointer"
+              className="md:hidden p-2 text-neutral-800 hover:bg-neutral-100 rounded-xl transition-colors cursor-pointer"
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -114,33 +119,33 @@ export default function Navbar() {
       {/* MOBILE MENU BACKDROP */}
       <div
         onClick={closeMobileMenu}
-        className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-50 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 md:hidden ${
           mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
 
-      {/* MOBILE SIDEBAR (100% Width) */}
+      {/* MOBILE SIDEBAR */}
       <aside
-        className={`fixed right-0 top-0 h-full w-full bg-neutral-950 border-l border-neutral-800 shadow-2xl z-500 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl z-[51] transform transition-transform duration-300 ease-in-out md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="p-6 h-full flex flex-col">
           {/* Sidebar Header */}
-          <div className="flex justify-between items-center mb-6">
-            <span className="text-neutral-400 font-black tracking-widest text-xs uppercase">
-              Menu
+          <div className="flex justify-between items-center mb-8 border-b border-neutral-100 pb-4">
+            <span className="text-neutral-900 font-bold tracking-tight text-base">
+              SHILLMONGER
             </span>
             <button
               onClick={closeMobileMenu}
-              className="p-2 hover:bg-neutral-900 text-neutral-100 cursor-pointer"
+              className="p-2 hover:bg-neutral-100 rounded-xl text-neutral-600 transition-colors cursor-pointer"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             </button>
           </div>
 
           {/* Navigation Links (Mobile) */}
-          <nav className="flex flex-col">
+          <nav className="flex flex-col space-y-1">
             {mobileNavLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -148,8 +153,10 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`relative flex items-center py-4 text-xs font-black uppercase tracking-widest border-b border-neutral-800 cursor-pointer transition-colors ${
-                    isActive ? "text-white" : "text-neutral-400 hover:text-white"
+                  className={`flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+                    isActive
+                      ? "bg-indigo-50 text-indigo-600 font-semibold"
+                      : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                   }`}
                 >
                   {link.label}
@@ -158,28 +165,26 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Mobile Auth/Action Buttons */}
-          <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-neutral-900">
-            {/* Sign In Button */}
-            <Link href="/auth-page//login">
-            <button
-              onClick={closeMobileMenu}
-              className="w-full py-4 border border-neutral-800 text-neutral-400 font-black uppercase tracking-widest text-xs cursor-pointer hover:bg-neutral-900 hover:text-white transition-all rounded-none"
-            >
-              Sign In
-            </button>
+          {/* Mobile Action Buttons */}
+          <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-neutral-100">
+            <Link href="/auth-page/login" className="w-full">
+              <button
+                onClick={closeMobileMenu}
+                className="w-full py-3 border border-neutral-200 text-neutral-800 font-semibold rounded-2xl text-sm cursor-pointer hover:bg-neutral-50 transition-all"
+              >
+                Sign In
+              </button>
             </Link>
 
-            {/* Sign Up / Registration Action Button */}
-            <Link href="/auth-page//register">
-            <button
-              onClick={closeMobileMenu}
-              className="w-full justify-center items-center bg-white text-neutral-950 cursor-pointer px-8 py-4 font-black uppercase tracking-widest text-xs transition-all flex gap-3 shadow-lg hover:bg-neutral-200 hover:scale-[1.01] active:scale-95 rounded-none"
-            >
-              Register NOW
-            </button>
+            <Link href="/auth-page/register" className="w-full">
+              <button
+                onClick={closeMobileMenu}
+                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white cursor-pointer py-3.5 font-semibold text-sm rounded-2xl shadow-md shadow-indigo-500/20 transition-all hover:scale-[1.01] active:scale-95"
+              >
+                Register NOW
+              </button>
             </Link>
-            <p className="text-center text-[10px] font-semibold text-neutral-500 mt-2 px-4 uppercase tracking-wider">
+            <p className="text-center text-[11px] text-neutral-400 mt-2 px-2">
               By joining, you agree to our Terms of Service and Risk Disclosure.
             </p>
           </div>

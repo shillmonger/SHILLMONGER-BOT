@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FaTelegram, FaDiscord, FaTwitter, FaGithub, FaWhatsapp } from "react-icons/fa";
 import ScrollToTop from "./ScrollToTop";
 
-
 const footerLinks = {
   Company: [
     { name: "Exness", href: "https://www.exness.com/" },
@@ -29,81 +28,52 @@ const footerLinks = {
 
 export default function Footer() {
   const socialLinks = [
-    { name: "Telegram", icon: <FaTelegram size={20} />, href: "#" },
-    { name: "Discord", icon: <FaDiscord size={20} />, href: "#" },
-    { name: "X (Twitter)", icon: <FaTwitter size={20} />, href: "#" },
-    { name: "WhatsApp", icon: <FaWhatsapp size={20} />, href: "#" },
-    { name: "GitHub", icon: <FaGithub size={20} />, href: "#" },
+    { name: "Telegram", icon: <FaTelegram size={18} />, href: "#" },
+    { name: "Discord", icon: <FaDiscord size={18} />, href: "#" },
+    { name: "X (Twitter)", icon: <FaTwitter size={18} />, href: "#" },
+    { name: "WhatsApp", icon: <FaWhatsapp size={18} />, href: "#" },
+    { name: "GitHub", icon: <FaGithub size={18} />, href: "#" },
   ];
 
   return (
-    <section className="relative mt-15 lg:mt-40 w-full bg-neutral-950 text-neutral-50 font-sans">
-    
-     <div
-        className="
-          hidden
-          sm:block
-          absolute
-          left-1/2
-          -translate-x-1/2
-          -top-56
-          lg:-top-20
-          z-30
-          pointer-events-none
-          select-none
-        "
-      >
-        <Image
-          src="/logo.png"
-          alt="Footer Character"
-          width={900}
-          height={900}
-          priority
-          className="
-            w-[500px]
-            lg:w-[400px]
-            h-auto
-            grayscale-30
-            {/* Added: White drop-shadow */}
-            drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]
-            {/* Added: Bouncing animation */}
-            animate-bounce
-          "
-        />
-      </div>
+    <section className="relative mt-10 lg:mt-20 w-full bg-neutral-950 text-neutral-50 font-sans">
+      
+      {/* Floating Logo Character Overlay */}
+      
 
       {/* Footer Container */}
-      <footer className="relative bg-neutral-950 border-t-2 border-neutral-800 overflow-visible">
+      <footer className="relative bg-neutral-950 border-t border-neutral-800/80 overflow-visible">
         {/* Content */}
-        <div className="relative z-20 max-w-[1400px] mx-auto px-5 lg:px-8 pt-8 md:pt-36 lg:pt-30 pb-8">
+        <div className="relative z-20 max-w-[1500px] mx-auto px-6 lg:px-12 pt-16 md:pt-36 lg:pt-15 pb-10">
           
           {/* Top Row */}
-          <div className="flex flex-col lg:flex-row justify-between gap-16">
+          <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
             
             {/* Brand details */}
             <div className="max-w-sm">
-              <Link href="/" className="inline-flex items-center gap-3">
+              <Link href="/" className="inline-flex items-center gap-2.5">
                 <div>
-                  <h2 className="text-3xl font-black text-neutral-50 tracking-tighter uppercase">
+                  <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
                     SHILLMONGER
                   </h2>
-                  <p className="text-[12px] uppercase tracking-[0.25em] font-black text-neutral-400">
+                  <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-neutral-400">
                     Trading Intelligence
                   </p>
                 </div>
               </Link>
 
-              <p className="mt-4 text-sm md:text-[16px] leading-relaxed text-neutral-400 font-medium">
+              <p className="mt-4 text-sm leading-relaxed text-neutral-400 font-normal">
                 Automate your trading with confidence. Choose a subscription plan that matches your account size and let our intelligent trading system execute trades whenever valid market opportunities arise.
               </p>
 
-              {/* Stark Social Icons with preserved theme styling */}
-              <div className="flex gap-3 mt-6">
+              {/* Social Icons */}
+              <div className="flex gap-2.5 mt-6">
                 {socialLinks.map((social) => (
                   <Link
                     key={social.name}
                     href={social.href}
-                    className="w-11 h-11 rounded-none border-2 border-neutral-800 bg-neutral-900 hover:bg-neutral-50 hover:text-neutral-950 transition-all duration-300 flex items-center justify-center text-neutral-400 aria-label={social.name}"
+                    aria-label={social.name}
+                    className="w-10 h-10 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-indigo-600 hover:border-indigo-500 hover:text-white transition-all duration-300 flex items-center justify-center text-neutral-400 hover:shadow-lg hover:shadow-indigo-500/20"
                   >
                     {social.icon}
                   </Link>
@@ -115,7 +85,7 @@ export default function Footer() {
             <div className="flex flex-col lg:flex-row justify-between lg:justify-end flex-1 lg:flex-initial lg:ml-auto gap-10 lg:gap-16">
               {Object.entries(footerLinks).map(([title, items]) => (
                 <div key={title} className="min-w-[140px]">
-                  <h3 className="text-[13px] uppercase tracking-[0.2em] font-black text-neutral-400 mb-6">
+                  <h3 className="text-xs uppercase tracking-[0.15em] font-bold text-white mb-5">
                     {title}
                   </h3>
                   <ul className="space-y-3">
@@ -123,7 +93,7 @@ export default function Footer() {
                       <li key={item.name}>
                         <Link
                           href={item.href}
-                          className="text-[15px] text-neutral-400 hover:text-neutral-50 hover:underline transition-all duration-300 font-medium"
+                          className="text-sm text-neutral-400 hover:text-white transition-colors duration-200 font-medium"
                         >
                           {item.name}
                         </Link>
@@ -135,89 +105,69 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Huge Retro Wordmark */}
-          <div className="mt-12 lg:mt-16 overflow-hidden border-t-2 border-neutral-900 py-2">
-            <h2
-              className="
-                text-center
-                font-black
-                leading-none
-                tracking-tighter
-                text-neutral-100
-                text-[12vw]
-                sm:text-[16vw]
-                md:text-[13vw]
-                lg:text-[10vw]
-                select-none
-              "
-            >
-              SHILLMONGER
-            </h2>
-          </div>
 
           {/* Financial Disclaimer */}
-<div className="max-w-[1400px] mx-auto mt-5 space-y-6 text-xs leading-relaxed text-neutral-400 pt-2">
+          <div className="max-w-[1500px] mx-auto mt-6 space-y-5 text-xs leading-relaxed text-neutral-400 pt-2">
 
-  {/* Risk Disclosure */}
-  <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="text-sm font-medium">
-      <span className="font-black text-neutral-50">RISK DISCLOSURE:</span>{" "}
-      Trading Forex and other financial markets involves substantial risk and may not be suitable for every investor. Our automated trading bot executes trades based on predefined trading strategies and valid market conditions. While our system is designed to identify quality trading opportunities, profits are never guaranteed, and losses can occur. Users should only trade with funds they can afford to lose.
-    </p>
-  </div>
+            {/* Risk Disclosure */}
+            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
+              <p className="text-xs font-normal">
+                <span className="font-bold text-neutral-200">RISK DISCLOSURE:</span>{" "}
+                Trading Forex and other financial markets involves substantial risk and may not be suitable for every investor. Our automated trading bot executes trades based on predefined trading strategies and valid market conditions. While our system is designed to identify quality trading opportunities, profits are never guaranteed, and losses can occur. Users should only trade with funds they can afford to lose.
+              </p>
+            </div>
 
-  {/* Service Disclaimer */}
-  <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="font-black text-neutral-50 uppercase tracking-widest text-sm">
-      SERVICE DISCLAIMER
-    </p>
+            {/* Service Disclaimer */}
+            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
+              <p className="font-bold text-neutral-200 uppercase tracking-wider text-xs">
+                SERVICE DISCLAIMER
+              </p>
 
-    <p className="text-sm font-medium">
-      SHILLMONGER provides subscription-based access to an automated trading bot that places trades on connected MetaTrader 5 accounts according to each user's selected plan. The bot only executes trades when valid market conditions are detected and does not force trades during unfavorable market conditions. Performance targets described in each subscription plan are objectives rather than guarantees and may vary depending on market volatility and available trading opportunities.
-    </p>
-  </div>
+              <p className="text-xs font-normal">
+                SHILLMONGER provides subscription-based access to an automated trading bot that places trades on connected MetaTrader 5 accounts according to each user's selected plan. The bot only executes trades when valid market conditions are detected and does not force trades during unfavorable market conditions. Performance targets described in each subscription plan are objectives rather than guarantees and may vary depending on market volatility and available trading opportunities.
+              </p>
+            </div>
 
-  {/* User Responsibility */}
-  <div className="space-y-2 border-t border-dashed border-neutral-800 pt-6">
-    <p className="font-black text-neutral-50 uppercase tracking-widest text-sm">
-      USER RESPONSIBILITY
-    </p>
+            {/* User Responsibility */}
+            <div className="space-y-2 border-t border-neutral-800/60 pt-6">
+              <p className="font-bold text-neutral-200 uppercase tracking-wider text-xs">
+                USER RESPONSIBILITY
+              </p>
 
-    <p className="text-sm font-medium">
-      By subscribing, users acknowledge the risks associated with financial market trading and remain fully responsible for their trading accounts, broker selection, and deposited funds. It is the user's responsibility to ensure their account meets the minimum requirements for their selected subscription plan.
-    </p>
-  </div>
+              <p className="text-xs font-normal">
+                By subscribing, users acknowledge the risks associated with financial market trading and remain fully responsible for their trading accounts, broker selection, and deposited funds. It is the user's responsibility to ensure their account meets the minimum requirements for their selected subscription plan.
+              </p>
+            </div>
 
-</div>
+          </div>
 
           {/* Final Copyright & Details */}
-          <div className="max-w-[1400px] mx-auto border-t-2 border-neutral-900 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-neutral-400">
+          <div className="max-w-[1500px]  mx-auto border-t border-neutral-900 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-neutral-400">
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-              <p className="font-bold text-neutral-50">© {new Date().getFullYear()} SHILLMONGER. All rights reserved.</p>
+              <p className="font-semibold text-neutral-300">© {new Date().getFullYear()} SHILLMONGER. All rights reserved.</p>
               <div className="flex flex-wrap md:flex-nowrap justify-center md:justify-start gap-x-4 gap-y-2">
-                <Link href="/landing-page/privacy" className="underline hover:text-neutral-50 font-medium">
+                <Link href="/landing-page/privacy" className="hover:text-white transition-colors">
                   Privacy Policy
                 </Link>
-                <Link href="/landing-page/terms" className="underline hover:text-neutral-50 font-medium">
+                <Link href="/landing-page/terms" className="hover:text-white transition-colors">
                   Investor Agreement
                 </Link>
-                <Link href="/landing-page/refund" className="underline hover:text-neutral-50 font-medium">
+                <Link href="/landing-page/refund" className="hover:text-white transition-colors">
                   Refunds Policy
                 </Link>
-                <Link href="/landing-page/security" className="underline hover:text-neutral-50 font-medium">
+                <Link href="/landing-page/security" className="hover:text-white transition-colors">
                   Security Policy
                 </Link>
               </div>
             </div>
-            <p className="italic text-center md:text-right max-w-md opacity-80 text-[11px] font-medium">
-  Trading involves risk and profits are never guaranteed. SHILLMONGER provides subscription-based access to an automated trading bot for MetaTrader 5. By using this platform, you acknowledge and accept our Risk Disclosure and Terms of Service.
-</p>
+            <p className="text-center md:text-right max-w-md text-neutral-400 text-[11px] leading-relaxed">
+              Trading involves risk and profits are never guaranteed. SHILLMONGER provides subscription-based access to an automated trading bot for MetaTrader 5. By using this platform, you acknowledge and accept our Risk Disclosure and Terms of Service.
+            </p>
           </div>
 
         </div>
       </footer>
-            <ScrollToTop />
-      
+      <ScrollToTop />
     </section>
   );
 }

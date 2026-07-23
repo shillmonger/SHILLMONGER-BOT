@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
 import { toast } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
 
 function ConfirmEmailContent() {
   const router = useRouter();
@@ -63,39 +64,45 @@ function ConfirmEmailContent() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
       <main className="flex-grow flex items-center justify-center px-4 py-16">
-        <div className="w-full max-w-md text-center">
-          {status === "loading" && (
-            <div className="flex flex-col items-center gap-6">
-              <Loader2 className="h-16 w-16 animate-spin text-neutral-950" />
-              <h1 className="text-2xl font-black uppercase tracking-tighter">
-                Verifying your account...
-              </h1>
-            </div>
-          )}
+        <div className="w-full max-w-md">
+          <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
+            <CardContent className="p-8 md:p-10">
+              <div className="text-center">
+                {status === "loading" && (
+                  <div className="flex flex-col items-center gap-6">
+                    <Loader2 className="h-16 w-16 animate-spin text-indigo-400" />
+                    <h1 className="text-2xl font-extrabold tracking-tight">
+                      Verifying your account...
+                    </h1>
+                  </div>
+                )}
 
-          {status === "success" && (
-            <div className="flex flex-col items-center gap-6">
-              <CheckCircle className="h-16 w-16 text-green-600" />
-              <h1 className="text-2xl font-black uppercase tracking-tighter">
-                {message}
-              </h1>
-              <p className="text-sm text-neutral-600">
-                Redirecting to dashboard...
-              </p>
-            </div>
-          )}
+                {status === "success" && (
+                  <div className="flex flex-col items-center gap-6">
+                    <CheckCircle className="h-16 w-16 text-indigo-400" />
+                    <h1 className="text-2xl font-extrabold tracking-tight">
+                      {message}
+                    </h1>
+                    <p className="text-sm text-neutral-400">
+                      Redirecting to dashboard...
+                    </p>
+                  </div>
+                )}
 
-          {status === "error" && (
-            <div className="flex flex-col items-center gap-6">
-              <XCircle className="h-16 w-16 text-red-600" />
-              <h1 className="text-2xl font-black uppercase tracking-tighter">
-                {message}
-              </h1>
-              <p className="text-sm text-neutral-600">
-                Redirecting to registration...
-              </p>
-            </div>
-          )}
+                {status === "error" && (
+                  <div className="flex flex-col items-center gap-6">
+                    <XCircle className="h-16 w-16 text-red-400" />
+                    <h1 className="text-2xl font-extrabold tracking-tight">
+                      {message}
+                    </h1>
+                    <p className="text-sm text-neutral-400">
+                      Redirecting to registration...
+                    </p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>
@@ -107,8 +114,14 @@ export default function ConfirmEmailPage() {
     <Suspense fallback={
       <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
         <main className="flex-grow flex items-center justify-center px-4 py-16">
-          <div className="w-full max-w-md text-center">
-            <Loader2 className="h-16 w-16 animate-spin text-neutral-950 mx-auto" />
+          <div className="w-full max-w-md">
+            <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
+              <CardContent className="p-8 md:p-10">
+                <div className="text-center">
+                  <Loader2 className="h-16 w-16 animate-spin text-indigo-400 mx-auto" />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </main>
       </div>

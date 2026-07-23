@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Check, BarChart3, Gift, X, Info } from "lucide-react";
+import { Check, Gift, X, Info, Sparkles } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function SubscriptionPage() {
@@ -23,11 +23,13 @@ export default function SubscriptionPage() {
       maxTrades: 5,
       targetLabel: "Up to 40%",
       tradingVolume: "Entry Level",
-      color: "from-emerald-500/15 to-emerald-500/5",
-      border: "border-neutral-800",
-      accent: "text-emerald-400",
-      accentBg: "bg-emerald-500/10",
+      headerBg: "bg-gradient-to-b from-indigo-950/40 via-neutral-900/30 to-transparent",
+      accent: "text-indigo-300",
+      accentBg: "bg-indigo-500/10",
+      iconGrad: "from-indigo-800 to-indigo-950",
       popular: false,
+      btnClass:
+        "bg-neutral-900 hover:bg-neutral-800 text-neutral-100 border border-neutral-800",
       planFeatures: [
         "Maximum 5 Open Trades",
         "Unlimited Profit Potential",
@@ -35,7 +37,7 @@ export default function SubscriptionPage() {
         "Duration: 5 Days",
       ],
       note:
-        "The bot only trades when a valid trading opportunity is detected, so the 100% target is not guaranteed within the subscription period. Quality entries are prioritized over trade frequency.",
+        "The bot only trades when a valid trading opportunity is detected, so the target is not guaranteed within the subscription period. Quality entries are prioritized over trade frequency.",
     },
     {
       amount: 20,
@@ -46,11 +48,13 @@ export default function SubscriptionPage() {
       maxTrades: 10,
       targetLabel: "Up to 60%",
       tradingVolume: "Enhanced",
-      color: "from-purple-500/15 to-purple-500/5",
-      border: "border-neutral-500/45",
-      accent: "text-purple-400",
-      accentBg: "bg-purple-500/10",
+      headerBg: "bg-gradient-to-b from-indigo-900/50 via-indigo-950/20 to-transparent",
+      accent: "text-indigo-400",
+      accentBg: "bg-indigo-500/15",
+      iconGrad: "from-indigo-500 to-indigo-700",
       popular: true,
+      btnClass:
+        "bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-lg shadow-indigo-950/50",
       planFeatures: [
         "Maximum 10 Open Trades",
         "Unlimited Profit Potential",
@@ -58,7 +62,7 @@ export default function SubscriptionPage() {
         "Duration: 14 Days",
       ],
       note:
-        "The bot only trades when valid opportunities are available, so the 100% target is not guaranteed. Trades are never forced simply to reach the target.",
+        "The bot only trades when valid opportunities are available, so the target is not guaranteed. Trades are never forced simply to reach it.",
     },
     {
       amount: 50,
@@ -69,11 +73,13 @@ export default function SubscriptionPage() {
       maxTrades: 10,
       targetLabel: "Unlimited",
       tradingVolume: "Institutional",
-      color: "from-orange-500/15 to-orange-500/5",
-      border: "border-neutral-800",
-      accent: "text-orange-400",
-      accentBg: "bg-orange-500/10",
+      headerBg: "bg-gradient-to-b from-neutral-800/40 via-neutral-900/30 to-transparent",
+      accent: "text-neutral-300",
+      accentBg: "bg-neutral-800",
+      iconGrad: "from-neutral-600 to-neutral-900",
       popular: false,
+      btnClass:
+        "bg-neutral-900 hover:bg-neutral-800 text-neutral-100 border border-neutral-800",
       planFeatures: [
         "Maximum 10 Open Trades",
         "Unlimited Profit Potential",
@@ -118,18 +124,18 @@ export default function SubscriptionPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col text-neutral-50 font-sans pb-24">
+    <main className="min-h-screen flex flex-col text-black font-sans pb-24">
       {/* Hero Header */}
-      <section className="max-w-7xl mx-auto px-4 lg:px-10 pt-24 pb-10 text-center mt-5">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-neutral-900 border-2 border-neutral-800 text-[10px] font-black uppercase tracking-[.25em] mb-6 text-neutral-50">
-          <Gift className="w-3.5 h-3.5" />
-          Premium Trading Bot Plans
+      <section className="max-w-[1400px] mx-auto px-4 lg:px-10 pt-24 pb-10 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-semibold tracking-wide mb-6 text-neutral-300 shadow-sm">
+          <Gift className="w-3.5 h-3.5 text-indigo-500" />
+          <span>Premium Trading Bot Plans</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl lg:text-4xl text-black font-black uppercase tracking-tighter leading-none mb-2">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 text-black">
           Bot Subscription
         </h1>
 
-        <p className="text-neutral-600 max-w-2xl text-sm md:text-base leading-relaxed mx-auto font-medium">
+        <p className="text-neutral-500 max-w-2xl text-sm md:text-base leading-relaxed mx-auto font-normal">
           Pick the subscription that matches your trading account size. Every plan
           includes automated trading, 24/7 customer support, upgrade flexibility,
           and risk-managed execution designed for your selected package.
@@ -137,73 +143,99 @@ export default function SubscriptionPage() {
       </section>
 
       {/* Plans Grid */}
-      <section className="max-w-7xl mx-auto px-4 lg:px-10 pb-10 lg:pb-14 w-full">
-        {/* lg:items-center vertically aligns side cards against the taller middle card */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch lg:items-center">
+      <section className="max-w-7xl mx-auto px-4 lg:px-8 pb-10 lg:pb-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch lg:items-center">
           {accessPlans.map((plan, i) => (
             <Card
               key={i}
-              className={`flex flex-col justify-between bg-neutral-950 rounded-none transition-all duration-300 overflow-hidden relative border
-                ${plan.popular
-                  ? "ring-2 ring-neutral-50 ring-offset-2 ring-offset-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)] lg:scale-[1.04] z-10 border-transparent py-10"
-                  : `${plan.border} shadow-[6px_6px_0px_0px_rgba(255,255,255,0.05)] py-6`
+              className={`flex flex-col justify-between rounded-3xl transition-all duration-300 overflow-hidden relative backdrop-blur-md border bg-black text-neutral-50
+                ${
+                  plan.popular
+                    ? "lg:scale-[1.06] z-10 border-indigo-900/60 shadow-2xl shadow-indigo-950/60 ring-1 ring-indigo-500/40 py-4 lg:py-6"
+                    : "border-neutral-900 shadow-xl py-2 opacity-95 hover:opacity-100"
                 }
-                hover:border-neutral-50/60 hover:shadow-[10px_10px_0px_0px_rgba(255,255,255,1)] group
+                hover:border-neutral-800 group
               `}
             >
-              {/* Top accent bar */}
-              <div className={`absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r ${plan.color}`} />
-
-              {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                  <div className="bg-neutral-50 text-neutral-950 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
-                    Most Popular
-                  </div>
-                </div>
-              )}
+              {/* Background Glow / Top Gradient Accent */}
+              <div className={`absolute top-0 inset-x-0 h-40 ${plan.headerBg} pointer-events-none`} />
 
               {/* Header */}
-              <CardHeader className={`px-6 pb-3 ${plan.popular ? "pt-10" : "pt-6"}`}>
-                <div className="flex justify-between items-center mb-2">
-                  <span className={`text-[10px] font-black uppercase tracking-widest ${plan.accent}`}>
+              <CardHeader className="px-7 pt-7 pb-2 relative z-10">
+                <div className="flex justify-between items-start mb-6">
+                  {/* Brand Circular Icon */}
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-tr ${plan.iconGrad} p-0.5 flex items-center justify-center shadow-lg`}>
+                    <div className="w-full h-full bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
+                  {plan.popular && (
+                    <div className="bg-indigo-600/90 border border-indigo-500/60 backdrop-blur-md text-white text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full shadow-sm shadow-indigo-950/50">
+                      Most popular
+                    </div>
+                  )}
+                </div>
+
+                <div className="mb-2">
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
                     {plan.type}
-                  </span>
-                  <span className={`text-[10px] font-black px-2 py-1 rounded-none border border-neutral-800 ${plan.accentBg} ${plan.accent}`}>
-                    {plan.targetLabel}
+                  </h3>
+                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                    Account Size {plan.accountSize} &middot; {plan.duration}
+                  </p>
+                </div>
+
+                <div className="pt-2 flex items-baseline gap-1">
+                  <CardTitle className="text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+                    ${plan.amount.toLocaleString()}
+                  </CardTitle>
+                  <span className="text-xs text-neutral-400 font-medium">
+                    /{plan.duration.toLowerCase()}
                   </span>
                 </div>
-                <CardTitle className="text-4xl font-black tracking-tighter text-neutral-50">
-                  ${plan.amount.toLocaleString()}
-                </CardTitle>
-                <p className="text-[11px] text-neutral-400 mt-1 uppercase tracking-widest font-semibold">
-                  Account Size {plan.accountSize} &middot; {plan.duration}
-                </p>
               </CardHeader>
 
-              {/* Body */}
-              <CardContent className="px-6 pb-6 flex-grow flex flex-col gap-5">
-                {/* Key stats row */}
-                <div className={`flex justify-between items-center px-3.5 py-3 rounded-none bg-gradient-to-br ${plan.color} border border-neutral-800`}>
-                  <span className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold">
-                    Lot Size &middot; Max Trades
-                  </span>
-                  <span className={`text-sm font-black ${plan.accent}`}>
-                    {plan.lotSize} &middot; {plan.maxTrades}
-                  </span>
+              {/* Action Button */}
+              <div className="px-7 py-4 relative z-10">
+                <button
+                  onClick={() => handleSelectPlan(plan.type, plan.amount)}
+                  className={`w-full cursor-pointer text-sm py-3 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${plan.btnClass}`}
+                >
+                  <span>Choose this plan</span>
+                </button>
+              </div>
+
+              {/* Body Content */}
+              <CardContent className="px-7 pb-7 pt-2 flex-grow flex flex-col justify-between gap-6 relative z-10">
+                {/* Stats row */}
+                <div className="space-y-3 pt-2 border-t border-neutral-900">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-neutral-400 font-medium">Target Profit</span>
+                    <span className={`font-semibold px-2.5 py-0.5 rounded-md text-[11px] ${plan.accentBg} ${plan.accent}`}>
+                      {plan.targetLabel}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-neutral-400 font-medium">Lot Size & Max Trades</span>
+                    <span className="text-neutral-200 font-semibold">
+                      {plan.lotSize} &middot; {plan.maxTrades} trades
+                    </span>
+                  </div>
                 </div>
 
-                {/* Benefits */}
-                <div className="border-t-2 border-dashed border-neutral-800 pt-5">
-                  <p className="text-[9px] font-black uppercase text-neutral-400 mb-3 tracking-[0.2em]">
-                    Guarantees & Inclusions
+                {/* Features List */}
+                <div className="space-y-3 border-t border-neutral-900 pt-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                    Plan Features
                   </p>
                   <ul className="space-y-2.5">
                     {[...commonFeatures, ...plan.planFeatures].map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5">
-                        <div className="shrink-0 w-4 h-4 border border-neutral-800 bg-neutral-950 flex items-center justify-center rounded-none mt-0.5">
-                          <Check className={`w-3 h-3 stroke-[3] ${plan.accent}`} />
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="shrink-0 w-4 h-4 rounded-full bg-neutral-900 flex items-center justify-center mt-0.5">
+                          <Check className="w-2.5 h-2.5 text-indigo-400 stroke-[3]" />
                         </div>
-                        <span className="text-[11px] text-neutral-400 font-semibold leading-tight">
+                        <span className="text-xs text-neutral-300 font-normal leading-tight">
                           {benefit}
                         </span>
                       </li>
@@ -212,30 +244,21 @@ export default function SubscriptionPage() {
                 </div>
 
                 {/* Important note */}
-                <div className="flex items-start gap-2 px-3 py-2.5 border border-neutral-800 bg-neutral-900/60">
-                  <Info className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${plan.accent}`} />
-                  <p className="text-[10px] text-neutral-500 leading-relaxed font-medium">
+                <div className="flex items-start gap-2.5 p-3 rounded-xl bg-neutral-950 border border-neutral-900">
+                  <Info className={`w-4 h-4 shrink-0 mt-0.5 ${plan.accent}`} />
+                  <p className="text-[11px] text-neutral-400 leading-relaxed font-normal">
                     {plan.note}
                   </p>
                 </div>
-
-                {/* CTA */}
-                <button
-                  onClick={() => handleSelectPlan(plan.type, plan.amount)}
-                  className="mt-auto w-full cursor-pointer font-black text-xs uppercase tracking-wider py-3.5 rounded-none transition-all duration-300 flex items-center justify-center gap-2 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.3)]"
-                >
-                  <span>Subscribe Now</span>
-                  {/* <BarChart3 className="w-4 h-4 stroke-[2.5] group-hover:translate-x-0.5 transition-transform duration-200" /> */}
-                </button>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Disclaimer */}
-        <div className="max-w-4xl mx-auto mt-10 px-5 py-4 border border-neutral-800 bg-neutral-950 rounded-none">
-          <p className="text-[10px] text-neutral-500 leading-relaxed font-medium text-center">
-            <span className="font-black text-neutral-300 uppercase tracking-widest">Disclaimer: </span>
+        <div className="max-w-4xl mx-auto mt-12 px-6 py-4 border border-neutral-900 bg-neutral-900 backdrop-blur-sm rounded-2xl">
+          <p className="text-xs text-neutral-300 leading-relaxed font-normal text-center">
+            <span className="font-semibold text-neutral-100">Disclaimer: </span>
             Trading in the financial markets involves risk, and profits cannot be guaranteed. Our bot only
             executes trades when predefined trading conditions are met. It does not force trades during
             unfavorable market conditions. Past performance does not guarantee future results. Users should
@@ -244,47 +267,47 @@ export default function SubscriptionPage() {
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="max-w-[1400px] mx-auto px-4 lg:px-5 mt-4 w-full">
-        <section className="max-w-7xl mx-auto px-4 lg:px-10 pb-5 text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-black font-black uppercase tracking-tighter text-center mb-2 leading-none">
+      {/* Comparison Section (Automated vs Manual) */}
+      <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-6 w-full">
+        <div className="max-w-3xl mx-auto pb-8 text-center">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-black mb-3">
             Automated vs Manual
           </h2>
-          <p className="text-neutral-600 max-w-lg text-sm md:text-base leading-relaxed mx-auto font-medium">
+          <p className="text-neutral-400 text-sm md:text-base leading-relaxed mx-auto font-normal">
             Choose a plan and let our advanced trading systems work for you.
             Earnings topped up automatically every 24 hours.
           </p>
-        </section>
+        </div>
 
-        {/* Flat Brutalist Container Table */}
-        <div className="bg-white border-2 border-black rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+        {/* Flat Modern Container Table */}
+        <div className="bg-black border border-neutral-900 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-md">
           {/* Header Row */}
-          <div className="hidden md:grid grid-cols-3 border-b-2 border-black bg-neutral-100 p-6 text-xs font-black uppercase tracking-widest">
-            <div className="text-black">Metric</div>
-            <div className="text-rose-500">Manual Trading</div>
-            <div className="text-emerald-500">Automated Trading</div>
+          <div className="hidden md:grid grid-cols-3 border-b border-neutral-900 bg-neutral-950 p-5 text-xs font-bold uppercase tracking-wider">
+            <div className="text-neutral-300">Metric</div>
+            <div className="text-rose-400">Manual Trading</div>
+            <div className="text-emerald-400">Automated Trading</div>
           </div>
 
           {/* Table Body rows */}
-          <div className="divide-y-2 divide-black/60">
+          <div className="divide-y divide-neutral-900">
             {comparisonData.map((row, index) => (
               <div
                 key={index}
-                className="grid grid-cols-1 md:grid-cols-3 p-5 md:p-6 gap-3 md:gap-4 items-center bg-white hover:bg-neutral-50 transition-colors"
+                className="grid grid-cols-1 md:grid-cols-3 p-5 gap-3 md:gap-4 items-center hover:bg-neutral-950 transition-colors"
               >
                 {/* Metric Label */}
-                <div className="text-sm font-black uppercase tracking-tight text-black">
+                <div className="text-sm font-semibold text-neutral-200">
                   {row.metric}
                 </div>
 
                 {/* Manual Column */}
                 <div className="flex items-start gap-2.5 md:pr-4">
-                  <span className="md:hidden text-[10px] font-black uppercase tracking-wider text-rose-500 block mb-1">
+                  <span className="md:hidden text-xs font-semibold text-rose-400 block mb-1">
                     Manual:
                   </span>
                   <div className="flex items-start gap-2">
-                    <X className="w-4 h-4 stroke-[3] text-rose-500 shrink-0 mt-0.5" />
-                    <span className="text-xs md:text-sm text-neutral-700 font-medium leading-relaxed">
+                    <X className="w-4 h-4 stroke-[2.5] text-rose-400 shrink-0 mt-0.5" />
+                    <span className="text-xs md:text-sm text-neutral-400 font-normal leading-relaxed">
                       {row.manual}
                     </span>
                   </div>
@@ -292,12 +315,12 @@ export default function SubscriptionPage() {
 
                 {/* Automated Column */}
                 <div className="flex items-start gap-2.5">
-                  <span className="md:hidden text-[10px] font-black uppercase tracking-wider text-emerald-500 block mb-1">
-                    Elirox Auto:
+                  <span className="md:hidden text-xs font-semibold text-emerald-400 block mb-1">
+                    Automated:
                   </span>
                   <div className="flex items-start gap-2">
-                    <Check className="w-4 h-4 stroke-[3] text-emerald-500 shrink-0 mt-0.5" />
-                    <span className="text-xs md:text-sm text-neutral-900 font-semibold leading-relaxed">
+                    <Check className="w-4 h-4 stroke-[2.5] text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="text-xs md:text-sm text-neutral-100 font-medium leading-relaxed">
                       {row.automated}
                     </span>
                   </div>
