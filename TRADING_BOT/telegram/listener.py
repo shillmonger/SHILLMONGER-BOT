@@ -118,6 +118,12 @@ class TelegramListener:
 
             logger.info(f"Using lot size: {lot_size}")
 
+            # For accounts with balance $10-$40, use fixed $5 stop loss
+            original_sl = signal.stop_loss
+            if 10 <= balance <= 40:
+                signal.stop_loss = 5.0
+                logger.info(f"Account balance in $10-$40 range. Using fixed SL: ${signal.stop_loss}")
+
             # Update trader to use dynamic lot size
             result = self.mt5_trader.execute_trade_with_lot_size(signal, lot_size)
 

@@ -2,7 +2,10 @@ import asyncio
 import threading
 from telegram.listener import TelegramListener
 from mt5.trade_monitor import TradeMonitor
+from core.logger import setup_logger
 
+# Setup logger for master service
+setup_logger("logs/master.log")
 
 async def main():
     listener = TelegramListener()

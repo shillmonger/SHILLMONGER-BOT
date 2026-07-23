@@ -4,7 +4,10 @@ This script runs continuously and watches for new master trades to copy
 """
 from core.database import db
 from copy_engine.engine import CopyEngine
-from core.logger import logger
+from core.logger import logger, setup_logger
+
+# Setup logger for copy engine service
+setup_logger("logs/copy_engine.log")
 
 
 def main():

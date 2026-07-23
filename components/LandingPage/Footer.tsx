@@ -61,7 +61,7 @@ export default function Footer() {
           priority
           className="
             w-[500px]
-            lg:w-[500px]
+            lg:w-[400px]
             h-auto
             grayscale-30
             {/* Added: White drop-shadow */}
