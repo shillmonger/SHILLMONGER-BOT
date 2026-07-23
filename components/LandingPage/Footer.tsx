@@ -47,7 +47,7 @@ export default function Footer() {
           left-1/2
           -translate-x-1/2
           -top-56
-          lg:-top-35
+          lg:-top-20
           z-30
           pointer-events-none
           select-none
