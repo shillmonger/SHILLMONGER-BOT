@@ -197,7 +197,7 @@ export default function TelegramSetupPage() {
                   <button
                     onClick={handleConnectTelegram}
                     disabled={isLoading}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-sm uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 border-2 border-black"
+                    className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-sm uppercase tracking-widest hover:brightness-110 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 border-2 border-black"
                   >
                     {isLoading ? (
                       <>
@@ -250,7 +250,7 @@ export default function TelegramSetupPage() {
                     <button
                       onClick={handleConnectTelegram}
                       disabled={isLoading}
-                      className="flex-1 px-6 py-3 bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all duration-300 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border-2 border-black"
+                      className="flex-1 px-6 py-3 bg-gradient-to-r from-[#2AABEE] to-[#229ED9] text-white font-black text-xs uppercase tracking-widest hover:brightness-110 transition-all duration-300 rounded-xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 border-2 border-black"
                     >
                       {isLoading ? (
                         <>
