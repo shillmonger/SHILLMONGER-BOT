@@ -176,7 +176,7 @@ export default function UserSidebar({
           {!isCollapsed && (
             <div className="flex flex-col overflow-hidden transition-opacity duration-200">
               <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50 truncate">
-                XAUUSD<span className="text-neutral-50 font-black"> BOT</span>
+                Bot<span className="text-neutral-50 font-black"> MenuBAR</span>
               </h1>
               <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase truncate">
                 Your Investments, Our Traders
@@ -218,7 +218,7 @@ export default function UserSidebar({
                     isCollapsed ? "justify-center px-2 py-3" : "px-4 py-2.5"
                   } ${
                     active
-                      ? "bg-indigo-600 text-white font-black border-indigo-500 shadow-lg shadow-indigo-500/30"
+                      ? "bg-indigo-600 text-white font-black border-indigo-500"
                       : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                   }`}
                 >
@@ -288,7 +288,7 @@ export default function UserSidebar({
                           href={child.href}
                           className={`group flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent transition-all duration-200 ${
                             childActive
-                              ? "bg-indigo-600 text-white font-black border-indigo-500 shadow-lg shadow-indigo-500/30"
+                              ? "bg-indigo-600 text-white font-black border-indigo-500"
                               : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                           }`}
                         >
@@ -336,12 +336,12 @@ export default function UserSidebar({
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 z-[500] flex flex-col shadow-2xl lg:hidden">
+          <aside className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 z-[500] flex flex-col lg:hidden">
             {/* Mobile Header */}
             <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
               <div className="flex flex-col">
                 <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
-                  XAUUSD<span className="text-neutral-50 font-black"> BOT</span>
+                  BOT<span className="text-neutral-50 font-black"> MENUBAR</span>
                 </h1>
                 <p className="text-[8px] font-bold tracking-[0.2em] text-neutral-400 uppercase">
                   Your Investments, Our Traders
@@ -366,7 +366,7 @@ export default function UserSidebar({
                       href={item.href}
                       className={`group flex items-center px-4 py-2.5 rounded-xl border border-transparent transition-all duration-200 ${
                         active
-                          ? "bg-indigo-600 text-white font-black border-indigo-500 shadow-lg shadow-indigo-500/30"
+                          ? "bg-indigo-600 text-white font-black border-indigo-500"
                           : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                       }`}
                       onClick={() => setSidebarOpen(false)}

@@ -169,10 +169,10 @@ export default function UserRightSidebar({
             <img
               src={userDb.profileImage}
               alt={userDb.username}
-              className="w-20 h-20 border-2 border-indigo-700 object-cover rounded-full"
+              className="w-20 h-20 border border-indigo-700 object-cover rounded-xl"
             />
           ) : (
-            <div className="w-20 h-20 bg-indigo-900 border-2 border-indigo-700 flex items-center justify-center rounded-full">
+            <div className="w-20 h-20 bg-indigo-900 border border-indigo-700 flex items-center justify-center rounded-full">
               <User className="w-6 h-6 text-neutral-400" />
             </div>
           )}
@@ -206,7 +206,7 @@ export default function UserRightSidebar({
               <ShieldCheck className="w-3.5 h-3.5" /> Status
             </span>
             <span
-              className={`text-[9px] px-1.5 py-0.5 font-black border ${userDb?.isVerified
+              className={`text-[9px] rounded-full px-1.5 py-0.5 font-black border ${userDb?.isVerified
                   ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20"
                   : "bg-amber-500/10 text-amber-500 border-amber-500/20"
                 }`}
@@ -290,7 +290,7 @@ export default function UserRightSidebar({
               <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Expires</span> <span className="text-neutral-400">{new Date(subscription.expirationDate).toLocaleDateString()}</span></div>
               <div className="flex justify-between items-center">
                 <span className="text-neutral-500 text-[10px]">Status</span>
-                <span className={`text-[9px] px-1.5 py-0.5 font-black border ${
+                <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-black border ${
                   subscription.status === 'approved'
                     ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
                     : subscription.status === 'pending'
@@ -331,7 +331,7 @@ export default function UserRightSidebar({
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Equity</span> <span className="text-emerald-400 font-mono">{mt5Loading ? '...' : mt5Account?.equity ? `${mt5Account.currency || 'USD'} ${mt5Account.equity.toLocaleString()}` : 'N/A'}</span></div>
           <div className="flex justify-between">
             <span className="text-neutral-500 text-[10px]">Status</span>
-            <span className={`text-[9px] px-1.5 py-0.5 font-black border ${
+            <span className={`text-[9px] rounded-full px-1.5 py-0.5 font-black border ${
               mt5Loading 
                 ? 'bg-neutral-500/10 text-neutral-500 border-neutral-500/20'
                 : mt5Account?.status === 'connected'

@@ -126,7 +126,7 @@ export default function Navbar() {
 
       {/* MOBILE SIDEBAR */}
       <aside
-        className={`fixed right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl z-[51] transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed right-0 top-0 h-full w-full bg-white shadow-2xl z-[51] transform transition-transform duration-300 ease-in-out md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

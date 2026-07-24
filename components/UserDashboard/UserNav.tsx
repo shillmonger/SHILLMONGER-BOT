@@ -36,10 +36,8 @@ export default function UserNav() {
       className="
         fixed bottom-0 left-0 right-0 z-50 
         flex justify-around items-center 
-        bg-gradient-to-t from-indigo-950 via-neutral-950 to-neutral-950 backdrop-blur-xl
-        py-2 pb-safe-bottom px-2
-        border-t border-indigo-900/50
-        shadow-[0_-10px_40px_-15px_rgba(79,70,229,0.15)] 
+        bg-black
+        py-2.5 pb-safe-bottom px-2
         lg:hidden select-none
       "
     >
@@ -62,8 +60,8 @@ export default function UserNav() {
                 transition-all duration-300
                 ${
                   active
-                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/30"
-                    : "bg-indigo-900/30"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-indigo-900/20"
                 }
               `}
             >
@@ -75,7 +73,7 @@ export default function UserNav() {
             <span 
               className={`
                 text-[9px] font-black tracking-[0.15em] uppercase transition-opacity duration-300
-                ${active ? "text-indigo-300 opacity-100" : "text-neutral-400 opacity-60"}
+                ${active ? "text-indigo-400 opacity-100" : "text-neutral-400 opacity-60"}
               `}
             >
               {name}
