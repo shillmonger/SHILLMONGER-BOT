@@ -144,7 +144,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`flex items-center py-3 rounded-xl text-lg font-medium transition-colors cursor-pointer ${
+                  className={`flex items-center py-2 rounded-xl text-lg font-medium transition-colors cursor-pointer ${
                     isActive
                       ? "bg-indigo-50 text-indigo-600 font-semibold"
                       : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
