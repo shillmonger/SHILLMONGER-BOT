@@ -121,14 +121,14 @@ export default function AdminSubscriptionPage() {
   };
 
   return (
-    <div className="text-white">
+    <div className="bg-white text-neutral-950 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl text-black font-black uppercase tracking-tighter mb-2">
+          <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">
             Subscription
           </h1>
-          <p className="text-neutral-400 text-sm">
+          <p className="text-neutral-500 text-sm">
             Manage and review all subscription requests
           </p>
         </div>
@@ -143,39 +143,39 @@ export default function AdminSubscriptionPage() {
             No subscriptions found
           </div>
         ) : (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-none overflow-hidden">
+          <div className="bg-neutral-950 border-2 border-black rounded-xl overflow-hidden shadow-none">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-950">
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       User
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Plan
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Amount
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Account Size
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Duration
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Status
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Start Date
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Expires
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Screenshot
                     </th>
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Actions
                     </th>
                   </tr>
@@ -185,7 +185,7 @@ export default function AdminSubscriptionPage() {
                     <tr key={sub._id} className="border-b border-neutral-800 hover:bg-neutral-800/50 transition-colors">
                       <td className="p-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-none bg-neutral-800 overflow-hidden flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-neutral-800 overflow-hidden flex-shrink-0">
                             {sub.userId?.profileImage ? (
                               <img
                                 src={sub.userId.profileImage}
@@ -193,23 +193,23 @@ export default function AdminSubscriptionPage() {
                                 className="w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center text-neutral-500 text-xs font-bold">
+                              <div className="w-full h-full flex items-center justify-center text-neutral-500 text-xs font-bold rounded-full">
                                 {sub.userId?.username?.charAt(0).toUpperCase() || 'U'}
                               </div>
                             )}
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-sm font-bold">{sub.userId?.username || 'Unknown'}</span>
+                            <span className="text-sm font-bold text-white">{sub.userId?.username || 'Unknown'}</span>
                             <span className="text-xs text-neutral-400">{sub.userId?.email || 'Unknown'}</span>
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 text-sm font-bold">{sub.planType}</td>
+                      <td className="p-4 text-sm font-bold text-white">{sub.planType}</td>
                       <td className="p-4 text-sm font-mono text-emerald-400">${sub.amount}</td>
-                      <td className="p-4 text-sm">{sub.accountSize}</td>
-                      <td className="p-4 text-sm">{sub.duration}</td>
+                      <td className="p-4 text-sm text-white">{sub.accountSize}</td>
+                      <td className="p-4 text-sm text-white">{sub.duration}</td>
                       <td className="p-4">
-                        <span className={`text-[9px] px-2 py-1 font-black border ${getStatusColor(sub.status)}`}>
+                        <span className={`text-[9px] px-2 py-1 font-black border rounded-full ${getStatusColor(sub.status)}`}>
                           {sub.status.toUpperCase()}
                         </span>
                       </td>
@@ -222,7 +222,7 @@ export default function AdminSubscriptionPage() {
                       <td className="p-4">
                         <button
                           onClick={() => viewScreenshot(sub.screenshotUrl)}
-                          className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors"
+                          className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors rounded-xl"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
@@ -234,7 +234,7 @@ export default function AdminSubscriptionPage() {
                               <button
                                 onClick={() => handleAction(sub._id, 'approve')}
                                 disabled={actionLoading === sub._id}
-                                className="cursor-pointer p-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 border border-emerald-500/20 transition-colors disabled:opacity-50"
+                                className="cursor-pointer p-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 border border-emerald-500/20 transition-colors disabled:opacity-50 rounded-xl"
                               >
                                 {actionLoading === sub._id ? (
                                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -245,7 +245,7 @@ export default function AdminSubscriptionPage() {
                               <button
                                 onClick={() => handleAction(sub._id, 'reject')}
                                 disabled={actionLoading === sub._id}
-                                className="cursor-pointer p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 transition-colors disabled:opacity-50"
+                                className="cursor-pointer p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 transition-colors disabled:opacity-50 rounded-xl"
                               >
                                 {actionLoading === sub._id ? (
                                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -258,7 +258,7 @@ export default function AdminSubscriptionPage() {
                           <button
                             onClick={() => handleAction(sub._id, 'delete')}
                             disabled={actionLoading === sub._id}
-                            className="cursor-pointer p-2 bg-neutral-500/10 hover:bg-neutral-500/20 text-neutral-400 border border-neutral-500/20 transition-colors disabled:opacity-50"
+                            className="cursor-pointer p-2 bg-neutral-500/10 hover:bg-neutral-500/20 text-neutral-400 border border-neutral-500/20 transition-colors disabled:opacity-50 rounded-xl"
                           >
                             {actionLoading === sub._id ? (
                               <Loader2 className="w-4 h-4 animate-spin" />
@@ -284,13 +284,13 @@ export default function AdminSubscriptionPage() {
           onClick={() => setShowConfirmModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-md relative"
+            className="bg-neutral-950 border-2 border-black rounded-xl shadow-none w-full max-w-md relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 space-y-4">
               <div className="flex items-center gap-3">
                 <AlertTriangle className="w-6 h-6 text-amber-400" />
-                <h2 className="text-xl font-black uppercase tracking-tighter">
+                <h2 className="text-xl font-black uppercase tracking-tighter text-white">
                   Confirm Action
                 </h2>
               </div>
@@ -300,13 +300,13 @@ export default function AdminSubscriptionPage() {
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={() => setShowConfirmModal(false)}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmAction}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
                 >
                   Confirm
                 </button>
@@ -319,16 +319,16 @@ export default function AdminSubscriptionPage() {
       {/* Screenshot Modal */}
       {showScreenshotModal && selectedScreenshot && (
         <div
-          className="fixed inset-0 z-500 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           onClick={() => setShowScreenshotModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-4xl relative"
+            className="bg-neutral-950 border-2 border-black rounded-xl shadow-none w-full max-w-4xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setShowScreenshotModal(false)}
-              className="absolute top-3 right-3 cursor-pointer text-neutral-400 hover:text-white z-10"
+              className="absolute top-3 right-3 cursor-pointer text-neutral-400 hover:text-white z-10 p-2 rounded-xl hover:bg-neutral-800 transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -336,7 +336,7 @@ export default function AdminSubscriptionPage() {
               <img
                 src={selectedScreenshot}
                 alt="Transfer Screenshot"
-                className="w-full h-auto"
+                className="w-full h-auto rounded-xl"
               />
             </div>
           </div>

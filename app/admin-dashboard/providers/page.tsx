@@ -175,7 +175,7 @@ export default function ProvidersPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
       <main className="flex-grow flex items-center justify-center">
-        <div className="w-full max-w-7xl space-y-8">
+        <div className="w-full max-w-7xl space-y-8 sm:px-6">
           
           {/* Welcome Section */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-black pb-3">
@@ -187,7 +187,7 @@ export default function ProvidersPage() {
                 Telegram Providers
               </h1>
             </div>
-            <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right flex-shrink-0">
+            <div className="hidden lg:block bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right rounded-xl flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 System Time
               </span>
@@ -198,8 +198,8 @@ export default function ProvidersPage() {
           </div>
 
           {/* Bot Configuration */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black ">
-            <CardContent className="px-6 space-y-6">
+          <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
+            <CardContent className="px-4 sm:px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-sm font-black uppercase tracking-tighter">
                   Bot Configuration
@@ -208,14 +208,14 @@ export default function ProvidersPage() {
               </div>
               
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80">
+                <div className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80 rounded-xl">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 block mb-1">
                       Bot API URL
                     </p>
                     <p className="text-sm font-mono text-neutral-50">{botApiUrl}</p>
                   </div>
-                  <span className="text-[10px] font-black uppercase px-2 py-0.5 border bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                  <span className="text-[10px] font-black uppercase px-2 py-0.5 border bg-emerald-500/10 text-emerald-400 border-emerald-500/20 rounded-full">
                     Connected
                   </span>
                 </div>
@@ -226,7 +226,7 @@ export default function ProvidersPage() {
   <Button
     onClick={fetchTelegramGroups}
     disabled={isFetching}
-    className="flex-1 h-12 bg-neutral-50 text-neutral-950 rounded-none font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer"
+    className="flex-1 p-3 lg:p-5 bg-neutral-50 text-neutral-950 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors cursor-pointer"
   >
     {isFetching ? (
       <>
@@ -236,7 +236,7 @@ export default function ProvidersPage() {
     ) : (
       <>
         <RefreshCw className="w-4 h-4 mr-2" />
-        Fetch TG Groups / Channels
+        Fetch TG Groups
       </>
     )}
   </Button>
@@ -244,7 +244,7 @@ export default function ProvidersPage() {
   {/* Open Telegram Button */}
   <Button
     onClick={() => window.open("tg://", "_self")}
-    className="flex-1 h-12 bg-[#229ED9] text-white rounded-none font-black text-xs uppercase tracking-widest hover:bg-[#1d8cc2] transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer"
+    className="flex-1 p-3 lg:p-5 bg-[#229ED9] text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-[#1d8cc2] transition-colors cursor-pointer"
   >
     <Send className="w-4 h-4 mr-2" />
     Open Telegram
@@ -256,8 +256,8 @@ export default function ProvidersPage() {
 
           {/* Available Telegram Groups */}
           {telegramGroups.length > 0 && (
-            <Card className="rounded-none bg-neutral-950 text-white border-2 border-black ">
-              <CardContent className="px-6 space-y-6">
+            <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
+              <CardContent className="px-4 sm:px-6 space-y-6">
                 <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                   <h2 className="text-sm font-black uppercase tracking-tighter">
                     Available Telegram Groups/Channels
@@ -272,11 +272,11 @@ export default function ProvidersPage() {
                     placeholder="Search by group name..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-neutral-900 border-2 border-neutral-800 text-white pl-10 pr-4 py-3 text-sm font-mono focus:outline-none focus:border-neutral-50 transition-colors"
+                    className="w-full bg-neutral-900 border-2 border-neutral-800 text-white pl-10 pr-4 py-3 text-sm font-mono focus:outline-none focus:border-neutral-50 transition-colors rounded-xl"
                   />
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-3 overflow-x-auto">
                   {telegramGroups
                     .filter(group => 
                       group.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -286,17 +286,17 @@ export default function ProvidersPage() {
                     return (
                       <div 
                         key={group.id}
-                        className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80"
+                        className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80 rounded-xl min-w-[320px]"
                       >
                         <div className="flex items-center gap-4">
                           {group.profile_image ? (
                             <img 
                               src={group.profile_image} 
                               alt={group.name}
-                              className="w-10 h-10 rounded-none object-cover border border-neutral-700"
+                              className="w-10 h-10 rounded-xl object-cover border border-neutral-700"
                             />
                           ) : (
-                            <div className="w-10 h-10 bg-neutral-800 border border-neutral-700 flex items-center justify-center">
+                            <div className="w-10 h-10 bg-neutral-800 border border-neutral-700 flex items-center justify-center rounded-full">
                               <Users className="w-5 h-5 text-neutral-400" />
                             </div>
                           )}
@@ -309,7 +309,7 @@ export default function ProvidersPage() {
                           {saved ? (
                             <Button
                               disabled={true}
-                              className="bg-blue-500/20 rounded-none text-blue-300 border border-blue-500/30 font-black text-[10px] uppercase tracking-widest px-4 py-2"
+                              className="bg-blue-500/20 rounded-xl text-blue-300 border border-blue-500/30 font-black text-[10px] uppercase tracking-widest px-4 py-2"
                             >
                               <Check className="w-4 h-4 mr-1" />
                               Saved
@@ -318,7 +318,7 @@ export default function ProvidersPage() {
                             <Button
                               onClick={() => saveProvider(group)}
                               disabled={isLoading}
-                              className="bg-emerald-500/10 rounded-none text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
+                              className="bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
                             >
                               <Check className="w-4 h-4 mr-1" />
                               Save
@@ -327,7 +327,7 @@ export default function ProvidersPage() {
                           <Button
                             onClick={() => saved ? removeProvider(group.id) : setTelegramGroups(telegramGroups.filter(g => g.id !== group.id))}
                             disabled={isLoading}
-                            className="bg-red-500/10 rounded-none text-red-400 border border-red-500/20 hover:bg-red-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
+                            className="bg-red-500/10 rounded-xl text-red-400 border border-red-500/20 hover:bg-red-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
                           >
                             <X className="w-4 h-4 mr-1" />
                             {saved ? 'Remove' : 'Remove'}
@@ -342,8 +342,8 @@ export default function ProvidersPage() {
           )}
 
           {/* Saved Providers */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black ">
-            <CardContent className="px-6 space-y-6">
+          <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
+            <CardContent className="px-4 sm:px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-sm font-black uppercase tracking-tighter">
                   Saved Providers
@@ -357,27 +357,27 @@ export default function ProvidersPage() {
                   <p className="text-sm font-bold text-neutral-400">Loading providers...</p>
                 </div>
               ) : savedProviders.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 border border-dashed border-neutral-800">
+                <div className="flex flex-col items-center justify-center py-12 border border-dashed border-neutral-800 rounded-xl">
                   <AlertCircle className="w-12 h-12 text-neutral-600 mb-4" />
                   <p className="text-sm font-bold text-neutral-400">No providers saved yet</p>
                   <p className="text-[10px] text-neutral-500 mt-1">Fetch and save Telegram groups to get started</p>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="space-y-3 overflow-x-auto">
                   {savedProviders.map((provider) => (
                     <div 
                       key={provider._id}
-                      className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80"
+                      className="flex items-center justify-between p-4 bg-neutral-900/60 border border-neutral-800/80 rounded-xl min-w-[320px]"
                     >
                       <div className="flex items-center gap-4">
                         {provider.profileImage ? (
                           <img 
                             src={provider.profileImage} 
                             alt={provider.groupName}
-                            className="w-10 h-10 rounded-none object-cover border border-neutral-700"
+                            className="w-10 h-10 rounded-xl object-cover border border-neutral-700"
                           />
                         ) : (
-                          <div className="w-10 h-10 bg-neutral-800 border border-neutral-700 flex items-center justify-center">
+                          <div className="w-10 h-10 bg-neutral-800 border border-neutral-700 flex items-center justify-center rounded-full">
                             <Users className="w-5 h-5 text-neutral-400" />
                           </div>
                         )}
@@ -387,7 +387,7 @@ export default function ProvidersPage() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`text-[10px] font-black uppercase px-2 py-0.5 border ${
+                        <span className={`text-[10px] font-black uppercase px-2 py-0.5 border rounded-full ${
                           provider.isActive 
                             ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
                             : "bg-red-500/10 text-red-400 border-red-500/20"
@@ -397,7 +397,7 @@ export default function ProvidersPage() {
                         <Button
                           onClick={() => removeProvider(provider.groupId)}
                           disabled={isLoading}
-                          className="bg-red-500/10 text-red-400 border rounded-none border-red-500/20 hover:bg-red-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
+                          className="bg-red-500/10 text-red-400 border rounded-xl border-red-500/20 hover:bg-red-500/20 font-black text-[10px] uppercase tracking-widest px-4 py-2"
                         >
                           <X className="w-4 h-4 mr-1" />
                           Remove
