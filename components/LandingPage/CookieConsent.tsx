@@ -40,7 +40,7 @@ export default function CookieConsent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-md"
+            className="fixed inset-0 z-[100] bg-black/10 backdrop-blur-md"
           />
 
           {/* 2. CENTERED CARD */}
@@ -50,7 +50,7 @@ export default function CookieConsent() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              className="relative w-full max-w-[420px] bg-black border border-neutral-800 rounded-3xl p-6 md:p-8 overflow-hidden"
+              className="relative w-full max-w-[420px] bg-neutral-950 border border-neutral-800 rounded-3xl p-6 md:p-8 overflow-hidden"
             >
               {/* Close Button */}
               <button

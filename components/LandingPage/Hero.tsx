@@ -71,17 +71,17 @@ export default function HeroSection() {
 
               {/* CTA Buttons */}
 <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4 lg:gap-6">
-  <Link href="/LandingPage/subscribtion" className="w-full sm:w-auto">
+  <Link href="/auth-page/register" className="w-full sm:w-auto">
     <button className="w-full sm:w-auto rounded-2xl cursor-pointer bg-[#0d0d0d] px-7 py-4 text-sm font-semibold text-white shadow-xl transition-transform hover:scale-105 active:scale-95">
       Start 5 days free trial
     </button>
   </Link>
 
   <Link
-    href="#showreel"
+    href="/auth-page/login"
     className="w-full sm:w-auto text-center rounded-2xl cursor-pointer bg-white px-7 py-4 text-sm font-semibold text-black shadow-xl transition-transform hover:scale-105 active:scale-95"
   >
-    Sign in 
+    Sign in Account 
   </Link>
 </div>
             </div>

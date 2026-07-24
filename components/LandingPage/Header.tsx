@@ -52,16 +52,7 @@ export default function Navbar() {
           {/* Left: Logo & Brand Icon */}
           <Link href="/">
             <div className="flex items-center group cursor-pointer">
-              {/* Favicon Icon */}
-              {/* <div className="relative w-8 h-8">
-                <Image
-                  src="/favicon.png"
-                  alt="SHILLMONGER"
-                  fill
-                  className="object-contain"
-                />
-              </div> */}
-              <span className="font-bold tracking-tight text-xl text-neutral-900">
+              <span className="font-bold tracking-tight text-2xl text-neutral-900">
                 SHILLMONGER
               </span>
             </div>
@@ -133,7 +124,7 @@ export default function Navbar() {
         <div className="p-6 h-full flex flex-col">
           {/* Sidebar Header */}
           <div className="flex justify-between items-center mb-8 border-b border-neutral-100 pb-4">
-            <span className="text-neutral-900 font-bold tracking-tight text-base">
+            <span className="text-neutral-900 font-bold tracking-tight text-xl">
               SHILLMONGER
             </span>
             <button
@@ -153,7 +144,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+                  className={`flex items-center py-3 rounded-xl text-lg font-medium transition-colors cursor-pointer ${
                     isActive
                       ? "bg-indigo-50 text-indigo-600 font-semibold"
                       : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
@@ -170,7 +161,7 @@ export default function Navbar() {
             <Link href="/auth-page/login" className="w-full">
               <button
                 onClick={closeMobileMenu}
-                className="w-full py-3 border border-neutral-200 text-neutral-800 font-semibold rounded-2xl text-sm cursor-pointer hover:bg-neutral-50 transition-all"
+                className="w-full py-3 border border-neutral-200 text-neutral-800 font-semibold rounded-2xl text-base cursor-pointer hover:bg-neutral-50 transition-all"
               >
                 Sign In
               </button>
@@ -179,7 +170,7 @@ export default function Navbar() {
             <Link href="/auth-page/register" className="w-full">
               <button
                 onClick={closeMobileMenu}
-                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white cursor-pointer py-3.5 font-semibold text-sm rounded-2xl shadow-md shadow-indigo-500/20 transition-all hover:scale-[1.01] active:scale-95"
+                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white cursor-pointer py-3.5 font-semibold text-base rounded-2xl shadow-md shadow-indigo-500/20 transition-all hover:scale-[1.01] active:scale-95"
               >
                 Register NOW
               </button>

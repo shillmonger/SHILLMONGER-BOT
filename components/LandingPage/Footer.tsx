@@ -42,15 +42,15 @@ export default function Footer() {
   ];
 
   return (
-    <section className="relative mt-10 lg:mt-10 w-full text-neutral-50 font-sans pb-4">
+    <section className="relative mt-10 lg:mt-10 w-full text-neutral-50 font-sans lg:pb-4">
       {/* Footer Outer Container with 10px Margin, Rounded Corners & Blue Theme */}
-      <footer className="mx-[10px] lg:mx-[20px] relative bg-indigo-700 border border-indigo-900/50 rounded-4xl overflow-hidden shadow-2xl shadow-indigo-950/40">
+      <footer className="m-0 lg:mx-[20px] relative bg-indigo-800 border border-indigo-900/50 lg:rounded-4xl overflow-hidden shadow-2xl shadow-indigo-950/40">
         
         {/* Subtle Ambient Blue Top Light */}
         <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-indigo-500/10 via-indigo-800/5 to-transparent pointer-events-none" />
 
         {/* Content */}
-        <div className="relative z-20 max-w-[1500px] mx-auto px-6 lg:px-12 pt-16 md:pt-24 lg:pt-16 pb-10">
+        <div className="relative z-20 max-w-[1500px] mx-auto px-5 lg:px-12 pt-10 md:pt-24 lg:pt-16 pb-5">
           
           {/* Top Row */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
@@ -59,7 +59,7 @@ export default function Footer() {
             <div className="max-w-sm">
               <Link href="/" className="inline-flex items-center gap-2.5">
                 <div>
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+                  <h2 className="text-3xl lg:text-3xl font-bold text-white tracking-tight">
                     SHILLMONGER
                   </h2>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-white">
