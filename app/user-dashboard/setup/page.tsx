@@ -35,9 +35,9 @@ export default function SetupPage() {
         <div className="space-y-6">
 
           {/* Step 1 */}
-          <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+          <div className="bg-neutral-950 text-white border-2 border-black rounded-2xl p-6">
             <div className="">
-              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
+              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black rounded-lg">
                 01
               </div>
               <div className="flex-1 min-w-0">
@@ -48,7 +48,7 @@ export default function SetupPage() {
                 <p className="text-neutral-400 text-xs mb-4">
                   Create your Exness account to get started with trading
                 </p>
-                <div className="space-y-3 bg-neutral-900/60 border border-neutral-800/80 p-4">
+                <div className="space-y-3 bg-neutral-900/60 border border-neutral-800/80 p-4 rounded-lg">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-neutral-300">
@@ -82,9 +82,9 @@ export default function SetupPage() {
           </div>
 
           {/* Step 2 */}
-          <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+          <div className="bg-neutral-950 text-white border-2 border-black rounded-2xl p-6">
             <div className="">
-              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
+              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black rounded-lg">
                 02
               </div>
               <div className="flex-1 min-w-0">
@@ -98,7 +98,7 @@ export default function SetupPage() {
 
                 <div className="grid sm:grid-cols-2 gap-3">
                   {/* Demo Account */}
-                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-4">
+                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-4 rounded-lg">
                     <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-3">
                       Demo — Recommended
                     </p>
@@ -119,7 +119,7 @@ export default function SetupPage() {
                   </div>
 
                   {/* Real Account */}
-                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-4">
+                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-4 rounded-lg">
                     <p className="text-[10px] font-black uppercase tracking-widest text-neutral-400 mb-3">
                       Real — Live Trading
                     </p>
@@ -144,9 +144,9 @@ export default function SetupPage() {
           </div>
 
           {/* Step 3 */}
-          <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+          <div className="bg-neutral-950 text-white border-2 border-black rounded-2xl p-6">
             <div className="">
-              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
+              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black rounded-lg">
                 03
               </div>
               <div className="flex-1 min-w-0">
@@ -159,24 +159,24 @@ export default function SetupPage() {
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-3">
+                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-3 rounded-lg">
                     <div className="flex items-center gap-2 text-neutral-400 mb-1">
                       <Send className="w-3.5 h-3.5" />
                       <span className="text-[10px] font-black uppercase tracking-widest">Telegram Username</span>
                     </div>
                     <p className="text-[10px] text-neutral-500 mb-2">Without the @ symbol</p>
-                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300">
+                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300 rounded-lg">
                       shillmonger_trades
                     </div>
                   </div>
 
-                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-3">
+                  <div className="bg-neutral-900/60 border border-neutral-800/80 p-3 rounded-lg">
                     <div className="flex items-center gap-2 text-neutral-400 mb-1">
                       <UserPlus className="w-3.5 h-3.5" />
                       <span className="text-[10px] font-black uppercase tracking-widest">MT5 Login ID</span>
                     </div>
                     <p className="text-[10px] text-neutral-500 mb-2">Your 8-digit account number</p>
-                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300">
+                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300 rounded-lg">
                       84729402
                     </div>
                   </div>
@@ -188,11 +188,11 @@ export default function SetupPage() {
                     </div>
                     <p className="text-[10px] text-neutral-500 mb-2">Must match your account type</p>
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5">
+                      <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 rounded-lg">
                         <p className="text-[9px] font-black uppercase text-emerald-400 mb-0.5">Demo</p>
                         <p className="font-mono text-xs text-neutral-300">Exness-MT5Trial9</p>
                       </div>
-                      <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5">
+                      <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 rounded-lg">
                         <p className="text-[9px] font-black uppercase text-neutral-500 mb-0.5">Real</p>
                         <p className="font-mono text-xs text-neutral-300">Exness-MT5Real9</p>
                       </div>
@@ -205,7 +205,7 @@ export default function SetupPage() {
                       <span className="text-[10px] font-black uppercase tracking-widest">Trading Password</span>
                     </div>
                     <p className="text-[10px] text-neutral-500 mb-2">NOT your main Exness login password</p>
-                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300">
+                    <div className="bg-neutral-950 border border-neutral-800 px-2 py-1.5 font-mono text-xs text-neutral-300 rounded-lg">
                       Create one: Settings → Trading Password
                     </div>
                   </div>
@@ -215,9 +215,9 @@ export default function SetupPage() {
           </div>
 
           {/* Step 4 */}
-          <div className="bg-neutral-950 text-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+          <div className="bg-neutral-950 text-white border-2 border-black rounded-2xl p-6">
             <div className="">
-              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black">
+              <div className="w-10 h-10 bg-white text-neutral-950 font-black font-mono text-lg flex items-center justify-center flex-shrink-0 border-2 border-black rounded-lg">
                 04
               </div>
               <div className="flex-1 min-w-0">
@@ -228,7 +228,7 @@ export default function SetupPage() {
                 <p className="text-neutral-400 text-xs mb-4">
                   Enter your details to complete the setup
                 </p>
-                <div className="space-y-3 bg-neutral-900/60 border border-neutral-800/80 p-4">
+                <div className="space-y-3 bg-neutral-900/60 border border-neutral-800/80 p-4 rounded-lg">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-neutral-300">
@@ -258,7 +258,7 @@ export default function SetupPage() {
           </div>
 
           {/* Important Notice */}
-          <div className="bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+          <div className="bg-white border-2 border-black rounded-2xl p-6">
             <div className="flex items-center gap-2 mb-3 pb-3 border-b-2 border-black">
               <AlertCircle className="w-4 h-4 text-neutral-950" />
               <h3 className="text-sm font-black uppercase tracking-widest text-neutral-950">
@@ -289,7 +289,7 @@ export default function SetupPage() {
           <div className="flex justify-center pt-2">
             <Link
               href="/user-dashboard/mt5-connection"
-              className="inline-flex items-center gap-2 bg-neutral-950 hover:bg-neutral-800 text-white font-black font-mono text-xs uppercase tracking-widest py-4 px-8 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-200"
+              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-black font-mono text-xs uppercase tracking-widest py-4 px-8 border-2 border-indigo-500 shadow-lg shadow-indigo-500/30 rounded-xl transition-all duration-200"
             >
               Go to MT5 Connection
               <ArrowRight className="w-4 h-4" />

@@ -287,26 +287,28 @@ export default function UserSettingsPage() {
               
               {/* LEFT COLUMN: Sidebar Card (Quick Identity Overview & Status) */}
               <div className="space-y-6 lg:sticky lg:top-4 lg:self-start">
-                <div className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6">
+                <div className="bg-neutral-950 text-white rounded-2xl border-2 border-black shadow-none p-6">
                   <h3 className="text-sm font-black uppercase tracking-widest mb-6 flex items-center gap-2">
                     <User className="w-4 h-4 text-neutral-400" /> Profile Identity
                   </h3>
                   <div className="flex flex-col items-center text-center justify-center">
-                    <div className="relative w-30 h-30 flex items-center text-center justify-center rounded-none overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
-                      {personalInfo.profileImage ? (
-                        <img 
-                          src={personalInfo.profileImage} 
-                          alt="Profile" 
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <User className="w-10 h-10 text-neutral-400" />
-                      )}
+                    <div className="relative">
+                      <div className="relative w-40 h-40 flex items-center text-center justify-center rounded-2xl overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
+                        {personalInfo.profileImage ? (
+                          <img 
+                            src={personalInfo.profileImage} 
+                            alt="Profile" 
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <User className="w-10 h-10 text-neutral-400" />
+                        )}
+                      </div>
                       <button
                         onClick={() => setShowImagePicker(true)}
-                        className="absolute bottom-0 right-0 bg-neutral-950 border border-neutral-700 p-1.5 rounded-none hover:bg-neutral-800 transition-colors cursor-pointer"
+                        className="absolute bottom-3 right-0 bg-white border border-neutral-300 p-1.5 rounded-lg hover:bg-neutral-100 transition-colors cursor-pointer"
                       >
-                        <ImageIcon className="w-4 h-4 text-white" />
+                        <ImageIcon className="w-4 h-4 text-black" />
                       </button>
                     </div>
                     <h4 className="text-base font-black uppercase tracking-tight text-white">
@@ -322,31 +324,31 @@ export default function UserSettingsPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Access Level</span>
-                      <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-none font-black uppercase border border-emerald-500/20 text-[10px]">
+                      <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-lg font-black uppercase border border-emerald-500/20 text-[10px]">
                         {personalInfo.role?.toUpperCase() || "USER"}
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Identity Status</span>
-                      <span className={`${personalInfo.isVerified ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'} px-2 py-0.5 rounded-none font-black uppercase border text-[10px]`}>
+                      <span className={`${personalInfo.isVerified ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border-rose-500/20'} px-2 py-0.5 rounded-lg font-black uppercase border text-[10px]`}>
                         {personalInfo.isVerified ? "VERIFIED" : "UNVERIFIED"}
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Date Joined</span>
-                      <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-none font-black uppercase border border-emerald-500/20 text-[10px]">
+                      <span className="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-lg font-black uppercase border border-emerald-500/20 text-[10px]">
                         {personalInfo.createdAt ? new Date(personalInfo.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'N/A'}
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Referral ID</span>
-                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-none font-black uppercase border border-neutral-700 text-[10px]">
+                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-lg font-black uppercase border border-neutral-700 text-[10px]">
                         {personalInfo.referralId || 'N/A'}
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Total Referrals</span>
-                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-none font-black uppercase border border-neutral-700 text-[10px]">
+                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-lg font-black uppercase border border-neutral-700 text-[10px]">
                         {personalInfo.totalReferrals || 0}
                       </span>
                     </div>
@@ -358,7 +360,7 @@ export default function UserSettingsPage() {
               <div className="lg:col-span-2 space-y-8">
                 
                 {/* Component 1: Account Information Form */}
-                <form onSubmit={handleProfileUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
+                <form onSubmit={handleProfileUpdate} className="bg-neutral-950 text-white rounded-2xl border-2 border-black shadow-none  p-6 space-y-6">
                   <div>
                     <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
                       <User className="w-4 h-4 text-neutral-400" /> Personal Information
@@ -376,7 +378,7 @@ export default function UserSettingsPage() {
                           type="text"
                           value={personalInfo.username}
                           readOnly
-                          className="w-full bg-neutral-900/50 border border-neutral-800 rounded-none pl-10 pr-4 py-3 text-sm text-neutral-400 cursor-not-allowed opacity-70"
+                          className="w-full bg-neutral-900/50 border border-neutral-800 rounded-lg pl-10 pr-4 py-3 text-sm text-neutral-400 cursor-not-allowed opacity-70"
                         />
                       </div>
                     </div>
@@ -390,7 +392,7 @@ export default function UserSettingsPage() {
                           type="email"
                           value={personalInfo.email}
                           readOnly
-                          className="w-full bg-neutral-900/50 border border-neutral-800 rounded-none pl-10 pr-4 py-3 text-sm text-neutral-400 cursor-not-allowed opacity-70"
+                          className="w-full bg-neutral-900/50 border border-neutral-800 rounded-lg pl-10 pr-4 py-3 text-sm text-neutral-400 cursor-not-allowed opacity-70"
                         />
                       </div>
                     </div>
@@ -404,7 +406,7 @@ export default function UserSettingsPage() {
                           type="text"
                           value={personalInfo.country}
                           onChange={handleInputChange}
-                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-none pl-10 pr-4 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
+                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-lg pl-10 pr-4 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
                         />
                       </div>
                     </div>
@@ -418,7 +420,7 @@ export default function UserSettingsPage() {
                           type="tel"
                           value={personalInfo.phone}
                           onChange={handleInputChange}
-                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-none pl-10 pr-4 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
+                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-lg pl-10 pr-4 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
                         />
                       </div>
                     </div>
@@ -428,7 +430,7 @@ export default function UserSettingsPage() {
                     <button
                       type="submit"
                       disabled={isUpdatingProfile}
-                      className="w-full cursor-pointer bg-white text-neutral-950 px-8 py-3 rounded-none font-black font-mono text-xs uppercase tracking-wider hover:bg-neutral-200 disabled:opacity-50 flex items-center justify-center gap-2 border border-black shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.4)] transition"
+                      className="w-full cursor-pointer bg-indigo-600 text-white px-8 py-3 rounded-xl font-black font-mono text-xs uppercase tracking-wider hover:bg-indigo-500 disabled:opacity-50 flex items-center justify-center gap-2 border border-indigo-500 shadow-lg shadow-indigo-500/30 transition"
                     >
                       {isUpdatingProfile ? (
                         <>
@@ -442,7 +444,7 @@ export default function UserSettingsPage() {
                 </form>
 
                 {/* Component 2: Forgot / Change Password Section */}
-                <form onSubmit={handlePasswordUpdate} className="bg-neutral-950 text-white rounded-none border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 space-y-6">
+                <form onSubmit={handlePasswordUpdate} className="bg-neutral-950 text-white rounded-2xl border-2 border-black shadow-none  p-6 space-y-6">
                   <div>
                     <h3 className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
                       <Lock className="w-4 h-4 text-neutral-400" /> Credentials & Password
@@ -460,7 +462,7 @@ export default function UserSettingsPage() {
                           value={currentPassword}
                           onChange={(e) => setCurrentPassword(e.target.value)}
                           placeholder="••••••••"
-                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-none pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
+                          className="w-full bg-neutral-900/60 border border-neutral-800 rounded-lg pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
                         />
                         <button
                           type="button"
@@ -482,7 +484,7 @@ export default function UserSettingsPage() {
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             placeholder="••••••••"
-                            className="w-full bg-neutral-900/60 border border-neutral-800 rounded-none pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
+                            className="w-full bg-neutral-900/60 border border-neutral-800 rounded-lg pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
                           />
                           <button
                             type="button"
@@ -503,7 +505,7 @@ export default function UserSettingsPage() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="••••••••"
-                            className="w-full bg-neutral-900/60 border border-neutral-800 rounded-none pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
+                            className="w-full bg-neutral-900/60 border border-neutral-800 rounded-lg pl-10 pr-10 py-3 text-sm text-white focus:ring-2 ring-neutral-700 outline-none transition"
                           />
                           <button
                             type="button"
@@ -521,7 +523,7 @@ export default function UserSettingsPage() {
                     <button
                       type="submit"
                       disabled={isUpdatingPassword}
-                      className="w-full cursor-pointer bg-white text-neutral-950 px-8 py-3 rounded-none font-black font-mono text-xs uppercase tracking-wider hover:bg-neutral-200 disabled:opacity-50 flex items-center justify-center gap-2 border border-black shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.4)] transition"
+                      className="w-full cursor-pointer bg-indigo-600 text-white px-8 py-3 rounded-xl font-black font-mono text-xs uppercase tracking-wider hover:bg-indigo-500 disabled:opacity-50 flex items-center justify-center gap-2 border border-indigo-500 shadow-lg shadow-indigo-500/30 transition"
                     >
                       {isUpdatingPassword ? (
                         <>
@@ -535,9 +537,9 @@ export default function UserSettingsPage() {
                 </form>
 
                 {/* Component 3: Danger Zone */}
-                <div className="bg-rose-950/30 text-white rounded-none border-2 border-rose-900 p-6 space-y-6 shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="bg-rose-950/30 text-white rounded-2xl border-2 border-rose-900 p-6 space-y-6 shadow-none ">
                   <div className="flex items-start gap-4">
-                    <div className="bg-rose-900/30 p-3 rounded-none border border-rose-800 text-red-800">
+                    <div className="bg-rose-900/30 p-3 rounded-lg border border-rose-800 text-red-800">
                       <ShieldAlert className="w-6 h-6" />
                     </div>
                     <div>
@@ -553,21 +555,21 @@ export default function UserSettingsPage() {
                   <form onSubmit={handleDeleteAccount} className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-rose-400">
-                        Type <span className="font-mono bg-red-900/30 px-1 py-0.5 rounded-none border border-red-800 text-red-800">DELETE</span> to confirm
+                        Type <span className="font-mono bg-red-900/30 px-1 py-0.5 rounded-lg border border-red-800 text-red-800">DELETE</span> to confirm
                       </label>
                       <input
                         type="text"
                         value={deleteInput}
                         onChange={(e) => setDeleteInput(e.target.value)}
                         placeholder="DELETE"
-                        className="w-full bg-neutral-900/60 border mt-2 border-rose-900 rounded-none px-4 py-3 text-sm text-white focus:ring-2 ring-rose-900 outline-none transition"
+                        className="w-full bg-neutral-900/60 border mt-2 border-rose-900 rounded-lg px-4 py-3 text-sm text-white focus:ring-2 ring-rose-900 outline-none transition"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isDeletingAccount || deleteInput !== "DELETE"}
-                      className="w-full cursor-pointer bg-rose-600 text-white px-8 py-3 rounded-none font-black font-mono text-xs uppercase tracking-wider hover:bg-rose-700 disabled:opacity-30 flex items-center justify-center gap-2 border border-rose-800 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.4)] transition"
+                      className="w-full cursor-pointer bg-rose-600 text-white px-8 py-3 rounded-xl font-black font-mono text-xs uppercase tracking-wider hover:bg-rose-500 disabled:opacity-30 flex items-center justify-center gap-2 border border-rose-500 shadow-lg shadow-rose-500/30 transition"
                     >
                       {isDeletingAccount ? (
                         <>
@@ -596,12 +598,12 @@ export default function UserSettingsPage() {
           onClick={() => setShowImagePicker(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-neutral-800 rounded-none shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] w-full max-w-3xl max-h-[80vh] overflow-hidden relative"
+            className="bg-neutral-950 border-2 border-neutral-800 rounded-2xl w-full max-w-3xl max-h-[80vh] overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-4 border-b border-neutral-800">
               <h2 className="text-lg font-black uppercase tracking-tighter text-white flex items-center gap-2">
-                <ImageIcon className="w-5 h-5 text-neutral-400" /> Select Profile Image
+                <ImageIcon className="w-5 h-5 text-neutral-400" /> Select Pfp Image
               </h2>
               <button
                 onClick={() => setShowImagePicker(false)}
@@ -618,7 +620,7 @@ export default function UserSettingsPage() {
                     key={imagePath}
                     onClick={() => handleImageSelect(imagePath)}
                     disabled={isUpdatingImage}
-                    className={`relative aspect-square rounded-none overflow-hidden border-2 transition-all hover:border-white ${
+                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all hover:border-white ${
                       personalInfo.profileImage === imagePath
                         ? 'border-emerald-500 ring-2 ring-emerald-500/50'
                         : 'border-neutral-800'
@@ -647,7 +649,7 @@ export default function UserSettingsPage() {
               <button
                 onClick={() => setShowImagePicker(false)}
                 disabled={isUpdatingImage}
-                className="px-6 py-2 rounded-none cursor-pointer border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
+                className="px-6 py-2 rounded-xl cursor-pointer border border-indigo-800 bg-indigo-900 text-indigo-300 hover:text-white font-black text-xs uppercase tracking-widest transition-colors disabled:opacity-50"
               >
                 Cancel
               </button>

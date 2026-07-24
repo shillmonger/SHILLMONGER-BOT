@@ -56,25 +56,25 @@ export default function UserMobileHeader({
         lg:hidden
         fixed top-0 left-0 right-0 z-40
         flex items-center justify-between
-        bg-neutral-950 text-white
-        border-b-2 border-black
-        px-4 py-3
+        bg-black
+        border-b border-indigo-900/50
+        px-4 py-2
       "
     >
       <button
         onClick={onLeftClick}
         aria-label="Open menu"
-        className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
+        className="rounded-lg text-indigo-300 p-1.5 border border-indigo-800 bg-indigo-900"
       >
         <Menu className="w-5 h-5" />
       </button>
-      <span className="text-lg font-black uppercase tracking-[0.2em]">
+      <span className="text-lg font-black uppercase tracking-[0.2em] text-indigo-300">
         {displayText}
       </span>
       <button
         onClick={onRightClick}
         aria-label="Open panel"
-        className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
+        className="rounded-lg text-indigo-300 p-1.5 border border-indigo-800 bg-indigo-900"
       >
         <Menu className="w-5 h-5" />
       </button>

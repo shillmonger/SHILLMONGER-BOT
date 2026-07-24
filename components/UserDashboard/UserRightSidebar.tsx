@@ -163,16 +163,16 @@ export default function UserRightSidebar({
   const SidebarContent = () => (
     <div className="space-y-6">
       {/* SECTION 1: Dynamic User Profile Details */}
-      <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
+      <div className="border border-indigo-900/50 p-4 bg-indigo-950/30 rounded-2xl space-y-4">
         <div className="flex items-center gap-4">
           {userDb?.profileImage ? (
             <img
               src={userDb.profileImage}
               alt={userDb.username}
-              className="w-15 h-15 border-2 border-neutral-700 object-cover shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]"
+              className="w-20 h-20 border-2 border-indigo-700 object-cover rounded-full"
             />
           ) : (
-            <div className="w-15 h-15 bg-neutral-800 border-2 border-neutral-700 flex items-center justify-center shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]">
+            <div className="w-20 h-20 bg-indigo-900 border-2 border-indigo-700 flex items-center justify-center rounded-full">
               <User className="w-6 h-6 text-neutral-400" />
             </div>
           )}
@@ -191,7 +191,7 @@ export default function UserRightSidebar({
           </div>
         </div>
 
-        <div className="border-t border-neutral-800/60 pt-3 space-y-2 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
+        <div className="border-t border-indigo-900/60 pt-3 space-y-2 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
           {/* <div className="flex items-center justify-between">
             <span className="text-neutral-500 flex items-center gap-1.5 font-semibold">
               <Mail className="w-3.5 h-3.5" /> Email
@@ -255,7 +255,7 @@ export default function UserRightSidebar({
               color: mt5Loading ? "neutral" : mt5Account?.status === 'connected' ? "emerald" : "red"
             },
           ].map((status, index) => (
-            <div key={index} className="border border-neutral-800 bg-neutral-900/20 p-2.5 flex flex-col justify-between">
+            <div key={index} className="border border-indigo-900/50 bg-indigo-950/20 p-2.5 flex flex-col justify-between rounded-xl">
               <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
               <div className="flex items-center gap-1.5">
                 {/* Change this line by adding flex-shrink-0 */}
@@ -275,7 +275,7 @@ export default function UserRightSidebar({
 
 
       {/* SECTION 3: Subscription */}
-      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
+      <div className="border border-neutral-800 rounded-xl p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Billing</h3>
         {subscriptionLoading ? (
           <div className="text-[10px] text-neutral-500">Loading...</div>
@@ -307,8 +307,8 @@ export default function UserRightSidebar({
         ) : (
           <div className="text-[10px] text-neutral-500">No active subscription</div>
         )}
-        <Link href="/user-dashboard/subscription">
-        <button className="w-full text-center py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+        <Link href="/user-dashboard/subscription" onClick={() => setSidebarOpen(false)}>
+        <button className="w-full text-center py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
           {subscription ? 'Manage Plan' : 'Upgrade Plan'}
         </button>
         </Link>
@@ -320,7 +320,7 @@ export default function UserRightSidebar({
 
 
       {/* SECTION 3: Connected MT5 Account */}
-      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
+      <div className="border border-neutral-800 rounded-xl p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">MT5 Terminal</h3>
         <div className="space-y-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Broker</span> <span>{mt5Loading ? '...' : mt5Account?.server?.split('-')[0] || 'N/A'}</span></div>
@@ -344,8 +344,8 @@ export default function UserRightSidebar({
             </span>
           </div>
         </div>
-        <Link href="/user-dashboard/mt5-connection">
-          <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+        <Link href="/user-dashboard/mt5-connection" onClick={() => setSidebarOpen(false)}>
+          <button className="w-full text-center py-2 border border-indigo-800 bg-indigo-900 hover:bg-indigo-800 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
             Manage MT5
           </button>
         </Link>
@@ -353,25 +353,25 @@ export default function UserRightSidebar({
 
 
       {/* SECTION 8: Quick Actions */}
-      <div className="space-y-2 pt-2 border-t border-neutral-900">
+      <div className="space-y-2 pt-2 border-t border-indigo-900/50">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
 
         <div className="flex flex-col gap-2">
-          <Link href="/user-dashboard/transactions">
-            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+          <Link href="/user-dashboard/transactions" onClick={() => setSidebarOpen(false)}>
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
               <History className="w-3.5 h-3.5 text-neutral-400" /> Transactions
             </button>
           </Link>
 
-          <Link href="/user-dashboard/account-setting">
-            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+          <Link href="/user-dashboard/account-setting" onClick={() => setSidebarOpen(false)}>
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
               <Settings className="w-3.5 h-3.5 text-neutral-400" /> Profile Setting
             </button>
           </Link>
 
           {userDb?.role === 'admin' && (
-            <Link href="/admin-dashboard/dashboard">
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
+            <Link href="/admin-dashboard/dashboard" onClick={() => setSidebarOpen(false)}>
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
                 <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
               </button>
             </Link>
@@ -385,9 +385,9 @@ export default function UserRightSidebar({
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-70 border-l border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[-4px_0_24px_rgba(0,0,0,0.5)]">
+      <aside className="hidden md:flex w-70 border-l border-indigo-900/50 h-screen sticky top-0 bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 flex-col shadow-[-4px_0_24px_rgba(79,70,229,0.15)]">
         {/* Header */}
-        <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
+        <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
           <div className="flex flex-col">
             <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
               BOT <span className="text-neutral-50 font-black">Automation</span>
@@ -404,10 +404,10 @@ export default function UserRightSidebar({
         </div>
 
         {/* Danger Action - Delete Account */}
-        <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 bg-neutral-950">
+        <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2 bg-neutral-950">
           <button
             onClick={() => setShowDeleteConfirm(true)}
-            className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+            className="flex items-center cursor-pointer w-full px-4 py-3 text-red-400 hover:bg-red-500/10 transition-all rounded-xl group"
           >
             <Trash2 className="w-5 h-5 mr-3 group-hover:scale-105 transition-transform" />
             <span className="text-xs font-black uppercase tracking-widest">
@@ -424,9 +424,9 @@ export default function UserRightSidebar({
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed top-0 left-0 w-full h-full bg-neutral-950 z-500 flex flex-col shadow-2xl lg:hidden">
+          <aside className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 z-[500] flex flex-col shadow-2xl lg:hidden">
             {/* Mobile Header */}
-            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
+            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
               <div className="flex flex-col">
                 <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
                   BOT<span className="text-neutral-50 font-black"> AUTOMATION</span>
@@ -436,7 +436,7 @@ export default function UserRightSidebar({
                 </p>
               </div>
               <button
-                className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
+                className="rounded-xl text-neutral-50 p-1 border border-indigo-800 bg-indigo-900"
                 onClick={() => setSidebarOpen(false)}
               >
                 <X className="w-5 h-5" />
@@ -449,13 +449,13 @@ export default function UserRightSidebar({
             </div>
 
             {/* Mobile Danger Action */}
-            <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 bg-neutral-950">
+            <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2 bg-neutral-950">
               <button
                 onClick={() => {
                   setSidebarOpen(false);
                   setShowDeleteConfirm(true);
                 }}
-                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-400 hover:bg-red-500/10 transition-all rounded-xl group"
               >
                 <Trash2 className="w-5 h-5 mr-3 group-hover:scale-105 transition-transform" />
                 <span className="text-xs font-black uppercase tracking-widest">
@@ -474,7 +474,7 @@ export default function UserRightSidebar({
           onClick={() => setShowDeleteConfirm(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-red-800 rounded-none shadow-[8px_8px_0px_0px_rgba(239,68,68,0.1)] w-full max-w-sm p-8 text-center relative animate-in fade-in zoom-in duration-200"
+            className="bg-neutral-950 border-2 border-red-800 rounded-2xl w-full max-w-sm p-8 text-center relative animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mx-auto w-12 h-12 bg-red-500/10 border border-red-500/30 flex items-center justify-center mb-4">
@@ -489,14 +489,14 @@ export default function UserRightSidebar({
             </p>
 
             {/* Countdown Progress Bar */}
-            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60">
+            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60 rounded-xl">
               <div className="flex justify-between text-[9px] text-neutral-400 mb-2 uppercase tracking-widest font-bold">
                 <span>Confirming destruction in...</span>
                 <span className="text-red-500 font-mono font-black">{countdown}s</span>
               </div>
-              <div className="w-full bg-neutral-900 border border-neutral-800 h-2 rounded-none overflow-hidden">
+              <div className="w-full bg-neutral-900 border border-neutral-800 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-red-500 h-full rounded-none transition-all duration-1000 ease-linear"
+                  className="bg-red-500 h-full rounded-full transition-all duration-1000 ease-linear"
                   style={{ width: `${(countdown / 10) * 100}%` }}
                 />
               </div>
@@ -508,13 +508,13 @@ export default function UserRightSidebar({
                   setShowDeleteConfirm(false);
                   setCountdown(10);
                 }}
-                className="flex-1 px-6 py-3 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-50 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
+                className="flex-1 px-6 py-3 rounded-xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-300 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteAccount}
-                className="flex-1 px-6 py-3 rounded-none bg-red-600 text-neutral-50 font-black text-xs uppercase tracking-widest hover:bg-red-700 transition-colors shadow-[3px_3px_0px_0px_rgba(239,68,68,0.2)] cursor-pointer"
+                className="flex-1 px-6 py-3 rounded-xl bg-red-600 text-white font-black text-xs uppercase tracking-widest hover:bg-red-500 transition-colors border border-red-500 cursor-pointer"
               >
                 Delete
               </button>

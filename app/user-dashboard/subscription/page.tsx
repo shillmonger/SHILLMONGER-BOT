@@ -191,7 +191,7 @@ export default function SubscriptionPage() {
                 Subscription
               </h1>
             </div>
-            <div className="hidden lg:block bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+            <div className="hidden lg:block bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right rounded-xl flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 Risk Engine
               </span>
@@ -208,14 +208,14 @@ export default function SubscriptionPage() {
             {accessPlans.map((plan, i) => (
               <Card 
                 key={i} 
-                className={`rounded-none bg-neutral-950 text-white border-2 shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between relative overflow-hidden ${
+                className={`rounded-2xl bg-neutral-950 text-white border-2 shadow-none  flex flex-col justify-between relative overflow-hidden ${
                   plan.popular ? "border-white ring-2 ring-black" : "border-black"
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                    <div className="bg-white text-neutral-950 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
+                    <div className="bg-white text-neutral-950 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
                       Most Popular
                     </div>
                   </div>
@@ -246,7 +246,7 @@ export default function SubscriptionPage() {
                   </div>
 
                   {/* Config Row */}
-                  <div className="p-3 bg-neutral-900 border border-neutral-800 flex justify-between items-center">
+                  <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-lg flex justify-between items-center">
                     <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest">Lot Size & Max Trades</span>
                     <span className={`font-mono text-sm font-black ${plan.accent}`}>
                       {plan.lotSize} &middot; {plan.maxTrades} max
@@ -259,7 +259,7 @@ export default function SubscriptionPage() {
                     <ul className="space-y-2">
                       {[...commonFeatures, ...plan.planFeatures].map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <div className="shrink-0 w-4 h-4 border border-neutral-800 bg-neutral-900 flex items-center justify-center mt-0.5">
+                          <div className="shrink-0 w-4 h-4 border border-neutral-800 bg-neutral-900 flex items-center justify-center mt-0.5 rounded-full">
                             <Check className={`w-3 h-3 stroke-[3] ${plan.accent}`} />
                           </div>
                           <span className="text-[11px] text-neutral-300 font-mono leading-tight">
@@ -271,7 +271,7 @@ export default function SubscriptionPage() {
                   </div>
 
                   {/* Important Note */}
-                  <div className="flex items-start gap-2 p-3 bg-neutral-900/60 border border-neutral-850">
+                  <div className="flex items-start gap-2 p-3 bg-neutral-900/60 border border-neutral-850 rounded-lg">
                     <Info className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${plan.accent}`} />
                     <p className="text-[10px] text-neutral-400 font-mono leading-relaxed">
                       {plan.note}
@@ -281,7 +281,7 @@ export default function SubscriptionPage() {
                   {/* CTA button (Matching your dashboard neobrutalist look) */}
                   <button
                     onClick={() => handleSelectPlan(plan)}
-                    className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3.5 rounded-none transition-all duration-300 flex items-center justify-center bg-white hover:bg-neutral-200 text-neutral-950 border border-black shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.4)]"
+                    className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-500 shadow-lg shadow-indigo-500/30"
                   >
                     Subscribe Now
                   </button>
@@ -294,7 +294,7 @@ export default function SubscriptionPage() {
           {/* ====================================================
               SECTION 3: DISCLAIMER CARD
               ==================================================== */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-2xl bg-neutral-950 text-white border-2 border-black shadow-none ">
             <CardContent className="px-4">
               <p className="text-[10px] text-neutral-500 leading-relaxed font-mono text-center">
                 <span className="font-black text-neutral-300 uppercase tracking-widest">Disclaimer: </span>
@@ -321,7 +321,7 @@ export default function SubscriptionPage() {
             </div>
 
             {/* Flat Brutalist Container Table */}
-            <div className="bg-neutral-950 border-2 border-black text-white rounded-none shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="bg-neutral-950 border-2 border-black text-white rounded-2xl shadow-none  overflow-hidden">
               {/* Header Row */}
               <div className="hidden md:grid grid-cols-3 border-b border-neutral-800 bg-neutral-900 p-4 text-[10px] font-black uppercase tracking-widest font-mono">
                 <div className="text-neutral-400">Metric</div>
@@ -382,7 +382,7 @@ export default function SubscriptionPage() {
           onClick={() => setShowModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-2xl max-h-[90vh] overflow-y-auto relative"
+            className="bg-neutral-950 border-2 border-white rounded-2xl w-full max-w-xl max-h-[90vh] overflow-y-auto relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -404,7 +404,7 @@ export default function SubscriptionPage() {
               </div>
 
               {/* Plan Summary */}
-              <div className="p-4 bg-neutral-900 border border-neutral-800">
+              <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-lg">
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Selected Plan</p>
@@ -428,7 +428,7 @@ export default function SubscriptionPage() {
                     </div>
                     <button
                       onClick={() => handleCopy("130844969", "Account number")}
-                      className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors"
+                      className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors rounded-lg"
                     >
                       <Copy className="w-4 h-4" />
                     </button>
@@ -440,7 +440,7 @@ export default function SubscriptionPage() {
                     </div>
                     <button
                       onClick={() => handleCopy("codelab042@gmail.com", "Account email")}
-                      className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors"
+                      className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors rounded-lg"
                     >
                       <Copy className="w-4 h-4" />
                     </button>
@@ -451,7 +451,7 @@ export default function SubscriptionPage() {
               {/* Transfer Instructions */}
               <div className="space-y-3">
                 <p className="text-[10px] font-black uppercase tracking-widest text-neutral-500">How to Transfer</p>
-                <div className="p-4 bg-neutral-900 border border-neutral-800 space-y-3">
+                <div className="p-4 bg-neutral-900 border border-neutral-800 space-y-3 rounded-lg">
                   <ol className="space-y-2 text-xs text-neutral-300 font-mono leading-relaxed list-decimal list-inside">
                     <li>Go to your Exness real account</li>
                     <li>Click on transfer button</li>
@@ -467,7 +467,7 @@ export default function SubscriptionPage() {
               {/* Screenshot Upload */}
               <div className="space-y-3">
                 <p className="text-[10px] font-black uppercase tracking-widest text-neutral-500">Upload Transfer Screenshot</p>
-                <div className="p-4 bg-neutral-900 border border-neutral-800">
+                <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-lg">
                   <input
                     type="file"
                     accept="image/*"
@@ -477,7 +477,7 @@ export default function SubscriptionPage() {
                   />
                   <label
                     htmlFor="screenshot-upload"
-                    className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-700 hover:border-neutral-500 cursor-pointer transition-colors"
+                    className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-neutral-700 hover:border-neutral-500 cursor-pointer transition-colors rounded-lg"
                   >
                     <Upload className="w-8 h-8 text-neutral-500 mb-2" />
                     <p className="text-xs text-neutral-400 text-center">
@@ -488,7 +488,7 @@ export default function SubscriptionPage() {
               </div>
 
               {/* Verification Info */}
-              <div className="p-4 bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
+              <div className="p-4 bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 rounded-lg">
                 <Info className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
                   <p className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">Verification Process</p>
@@ -502,7 +502,7 @@ export default function SubscriptionPage() {
               <button
                 onClick={handleSubmitTransfer}
                 disabled={isSubmitting || !screenshotFile}
-                className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-4 rounded-none transition-all duration-300 flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-white border border-emerald-500 shadow-[3px_3px_0px_0px_rgba(16,185,129,0.3)] hover:shadow-[4px_4px_0px_0px_rgba(16,185,129,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-4 rounded-xl transition-all duration-300 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-500 shadow-lg shadow-indigo-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

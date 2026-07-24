@@ -128,7 +128,7 @@ export default function TelegramSetupPage() {
               SECTION 2: SUCCESS ALERT
              ==================================================== */}
           {success && (
-            <div className="p-4 bg-emerald-500/10 border-2 border-emerald-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
+            <div className="p-4 bg-emerald-500/10 border-2 border-emerald-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500 rounded-lg">
               <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-black text-emerald-600 uppercase tracking-wider mb-0.5">
@@ -145,7 +145,7 @@ export default function TelegramSetupPage() {
               SECTION 3: ERROR ALERT
              ==================================================== */}
           {error && (
-            <div className="p-4 bg-red-500/10 border-2 border-red-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500">
+            <div className="p-4 bg-red-500/10 border-2 border-red-500/20 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-500 rounded-lg">
               <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-black text-red-600 uppercase tracking-wider mb-0.5">
@@ -161,7 +161,7 @@ export default function TelegramSetupPage() {
           {/* ====================================================
               SECTION 4: CONNECTION STATUS CARD
              ==================================================== */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-2xl bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <CardContent className="px-6 py-6 sm:px-8 sm:py-8">
               <div className="flex items-center justify-between mb-6 gap-3">
                 <div className="min-w-0">
@@ -172,7 +172,7 @@ export default function TelegramSetupPage() {
                     Current Telegram Link Status
                   </p>
                 </div>
-                <div className={`flex-shrink-0 px-3 py-1.5 border text-[10px] font-black uppercase tracking-widest whitespace-nowrap ${
+                <div className={`flex-shrink-0 px-3 py-1.5 border text-[10px] font-black uppercase tracking-widest whitespace-nowrap rounded-lg ${
                   isConnected 
                     ? "bg-[#229ED9]/10 text-[#4FC3F7] border-[#229ED9]/30" 
                     : "bg-neutral-800 text-neutral-400 border-neutral-700"
@@ -183,7 +183,7 @@ export default function TelegramSetupPage() {
 
               {!isConnected ? (
                 <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-4 bg-neutral-900/60 border border-neutral-800">
+                  <div className="flex items-center gap-4 p-4 bg-neutral-900/60 border border-neutral-800 rounded-lg">
                     <CircleOff className="w-7 h-7 text-red-400 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-bold text-white mb-1">
@@ -216,7 +216,7 @@ export default function TelegramSetupPage() {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {telegramData.username && (
-                      <div className="p-4 bg-neutral-900/60 border border-neutral-800">
+                      <div className="p-4 bg-neutral-900/60 border border-neutral-800 rounded-lg">
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Username
                         </p>
@@ -226,7 +226,7 @@ export default function TelegramSetupPage() {
                       </div>
                     )}
                     {telegramData.telegramId && (
-                      <div className="p-4 bg-neutral-900/60 border border-neutral-800">
+                      <div className="p-4 bg-neutral-900/60 border border-neutral-800 rounded-lg">
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Telegram ID
                         </p>
@@ -236,7 +236,7 @@ export default function TelegramSetupPage() {
                       </div>
                     )}
                     {telegramData.connectedDate && (
-                      <div className="p-4 bg-neutral-900/60 border border-neutral-800">
+                      <div className="p-4 bg-neutral-900/60 border border-neutral-800 rounded-lg">
                         <p className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest mb-2">
                           Connected Date
                         </p>
@@ -264,7 +264,7 @@ export default function TelegramSetupPage() {
                     <button
                       onClick={handleDisconnect}
                       disabled={isLoading}
-                      className="flex-1 px-6 py-3 border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-white font-black text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 px-6 py-3 border border-indigo-800 bg-indigo-900 text-indigo-300 hover:text-white font-black text-xs uppercase tracking-widest transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed rounded-xl"
                     >
                       Disconnect
                     </button>
@@ -310,10 +310,10 @@ export default function TelegramSetupPage() {
               ].map((item) => (
                 <Card 
                   key={item.step}
-                  className="rounded-none bg-neutral-950 text-white border-2 border-black hover:shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
+                  className="rounded-xl bg-neutral-950 text-white border-2 border-black hover:shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <CardContent className="px-4 py-4 sm:px-6 sm:py-4 text-center">
-                    <div className="w-9 h-9 bg-[#229ED9]/10 border-2 border-[#229ED9]/30 flex items-center justify-center mx-auto mb-3">
+                    <div className="w-9 h-9 bg-[#229ED9]/10 border-2 border-[#229ED9]/30 flex items-center justify-center mx-auto mb-3 rounded-lg">
                       <span className="text-sm font-black text-[#4FC3F7]">
                         {item.step}
                       </span>
