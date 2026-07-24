@@ -161,7 +161,7 @@ export default function TelegramSetupPage() {
           {/* ====================================================
               SECTION 4: CONNECTION STATUS CARD
              ==================================================== */}
-          <Card className="rounded-2xl bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-2xl bg-neutral-950 text-white border-2 border-black shadow-none">
             <CardContent className="px-6 py-6 sm:px-8 sm:py-8">
               <div className="flex items-center justify-between mb-6 gap-3">
                 <div className="min-w-0">
@@ -286,7 +286,7 @@ export default function TelegramSetupPage() {
                 {
                   step: 1,
                   icon: Link2,
-                  title: "Click Connect Telegram",
+                  title: "Click Connect TG",
                   description: "Initiate the connection process"
                 },
                 {
@@ -310,7 +310,7 @@ export default function TelegramSetupPage() {
               ].map((item) => (
                 <Card 
                   key={item.step}
-                  className="rounded-xl bg-neutral-950 text-white border-2 border-black hover:shadow-none lg:shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300"
+                  className="rounded-xl bg-neutral-950 text-white border-2 border-black hover:shadow-none"
                 >
                   <CardContent className="px-4 py-4 sm:px-6 sm:py-4 text-center">
                     <div className="w-9 h-9 bg-[#229ED9]/10 border-2 border-[#229ED9]/30 flex items-center justify-center mx-auto mb-3 rounded-lg">
