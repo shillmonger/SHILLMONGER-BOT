@@ -10,7 +10,7 @@ export default function HeroSection() {
   const navPills = [
     { label: "Automated", active: true },
     { label: "Exness", active: false },
-    { label: "Meta trader 5", active: false },
+    { label: "MT5", active: false },
   ];
 
   const bullets = [
@@ -19,8 +19,8 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative w-full bg-white pt-20 lg:pt-20 py-20 overflow-hidden">
-      <div className="mx-auto max-w-[1400px] px-3">
+    <section className="relative w-full bg-white pt-25 lg:pt-25 py-20 overflow-hidden">
+      <div className="mx-auto max-w-[1500px] px-3">
         {/* Top Nav Pills (Outside the purple card) */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -31,7 +31,7 @@ export default function HeroSection() {
           {navPills.map((pill) => (
             <button
               key={pill.label}
-              className={`shrink-0 rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
+              className={`shrink-0  cursor-pointer rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                 pill.active
                   ? "bg-[#ccff00] text-black shadow-sm"
                   : "bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300"
@@ -43,7 +43,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Main Hero Card Container */}
-        <div className="relative rounded-[2rem] bg-gradient-to-r from-[#2932e1] via-[#4842ee] to-[#6366f1] p-6 md:p-12 lg:p-10 lg:min-h-[550px] flex items-center">
+        <div className="relative rounded-[2rem] bg-gradient-to-r from-[#2932e1] via-[#4842ee] to-[#6366f1] px-4 py-6 md:p-12 lg:p-10 lg:min-h-[550px] flex items-center">
           
           {/* Subtle background glow effects inside the card */}
           <div className="pointer-events-none absolute left-1/3 top-1/2 -translate-y-1/2 h-[350px] w-[350px] rounded-full bg-blue-400/20 blur-[100px]" />
@@ -72,14 +72,14 @@ export default function HeroSection() {
               {/* CTA Buttons */}
 <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4 lg:gap-6">
   <Link href="/auth-page/register" className="w-full sm:w-auto">
-    <button className="w-full sm:w-auto rounded-2xl cursor-pointer bg-[#0d0d0d] px-7 py-4 text-sm font-semibold text-white shadow-xl transition-transform hover:scale-105 active:scale-95">
+    <button className="w-full sm:w-auto rounded-full cursor-pointer bg-[#0d0d0d] px-7 py-4 text-sm font-semibold text-white shadow-xl transition-transform hover:scale-105 active:scale-95">
       Start 5 days free trial
     </button>
   </Link>
 
   <Link
     href="/auth-page/login"
-    className="w-full sm:w-auto text-center rounded-2xl cursor-pointer bg-white px-7 py-4 text-sm font-semibold text-black shadow-xl transition-transform hover:scale-105 active:scale-95"
+    className="w-full sm:w-auto text-center rounded-full cursor-pointer bg-white px-7 py-4 text-sm font-semibold text-black shadow-xl transition-transform hover:scale-105 active:scale-95"
   >
     Sign in Account 
   </Link>
@@ -164,7 +164,7 @@ export default function HeroSection() {
                   </span>
                 </div>
 
-                <div className="rounded-lg bg-black text-white p-2 font-medium">
+                <div className="rounded-full bg-black text-white p-2 font-medium">
                   Trade #4: Breakout
                 </div>
 
@@ -180,7 +180,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="hidden lg:block lg:absolute lg:right-[15%] lg:-top-15 lg:-bottom-15 z-30 w-full max-w-[350px] mx-auto lg:mx-0 h-[550px] lg:h-auto rounded-[2rem] overflow-hidden flex flex-col justify-between"
+            className="hidden lg:block lg:absolute lg:right-[17%] lg:-top-15 lg:-bottom-15 z-30 w-full max-w-[350px] mx-auto lg:mx-0 h-[550px] lg:h-auto rounded-[2rem] overflow-hidden flex flex-col justify-between"
           >
             {/* Embedded Mockup Image */}
             <div className="relative w-full h-full">
@@ -195,13 +195,13 @@ export default function HeroSection() {
           </motion.div>
 
           {/* 3. Right Floating Overlay Stack */}
-          <div className="hidden lg:flex flex-col gap-4 absolute right-4 xl:right-8 top-12 z-40">
+          <div className="hidden lg:flex flex-col gap-4 absolute right-4 xl:right-20 top-12 z-40">
             {/* Top Floating Notification Card */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="w-[210px] rounded-full bg-white p-2 shadow-xl flex items-center gap-3 text-xs"
+              className="w-[210px] rounded-full bg-white p-1.5 shadow-xl flex items-center gap-3 text-xs"
             >
               <div className="h-10 w-10 relative rounded-full overflow-hidden shrink-0">
                 <Image
@@ -226,7 +226,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="hidden lg:block absolute right-[3%] bottom-[0px] z-40 w-[210px] rounded-2xl bg-white p-3 shadow-xl text-xs space-y-2"
+            className="hidden lg:block absolute right-[6%] bottom-[0px] z-40 w-[210px] rounded-2xl bg-white p-3 shadow-xl text-xs space-y-2"
           >
             <div className="flex items-center justify-between text-neutral-800 font-semibold">
               <span>Today's Stats</span>

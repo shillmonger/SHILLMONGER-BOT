@@ -8,7 +8,9 @@ import {
   Settings,
   BarChart3,
   Shield,
+  Send,
   CreditCard,
+  BadgeCheck,
 } from "lucide-react";
 
 export default function AdminNav() {
@@ -16,11 +18,11 @@ export default function AdminNav() {
   const basePath = "/admin-dashboard";
 
   const navItems = [
-    { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
+    { name: "home", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     { name: "Users", icon: Users, href: `${basePath}/users` },
-    { name: "Providers", icon: Shield, href: `${basePath}/providers` },
+    { name: "Sources", icon: Send, href: `${basePath}/providers` },
     { name: "Trades", icon: BarChart3, href: `${basePath}/trades` },
-    { name: "Payments", icon: CreditCard, href: `${basePath}/payments` },
+    { name: "Plans", icon: BadgeCheck, href: `${basePath}/subscription` },
     { name: "Settings", icon: Settings, href: `${basePath}/settings` },
   ];
 
@@ -34,10 +36,8 @@ export default function AdminNav() {
       className="
         fixed bottom-0 left-0 right-0 z-50 
         flex justify-around items-center 
-        bg-neutral-950 backdrop-blur-xl
-        py-2 pb-safe-bottom px-2
-        border-t-2 border-black
-        shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.3)] 
+        bg-black
+        py-2.5 pb-safe-bottom px-2
         lg:hidden select-none
       "
     >
@@ -50,18 +50,18 @@ export default function AdminNav() {
             href={href}
             className={`
               flex flex-col items-center transition-all duration-300
-              ${active ? "text-white scale-105" : "text-neutral-400 hover:text-white"}
+              ${active ? "text-indigo-300 scale-105" : "text-neutral-400 hover:text-indigo-300"}
             `}
           >
             <div
               className={`
                 flex items-center justify-center 
-                w-12 h-12 rounded-none mb-1.5 
+                w-12 h-12 rounded-xl mb-1.5 
                 transition-all duration-300
                 ${
                   active
-                    ? "bg-white text-neutral-950 shadow-lg shadow-black/20"
-                    : "bg-neutral-800/50"
+                    ? "bg-indigo-600 text-white"
+                    : "bg-indigo-900/20"
                 }
               `}
             >
@@ -73,7 +73,7 @@ export default function AdminNav() {
             <span 
               className={`
                 text-[9px] font-black tracking-[0.15em] uppercase transition-opacity duration-300
-                ${active ? "opacity-100" : "opacity-60"}
+                ${active ? "text-indigo-400 opacity-100" : "text-neutral-400 opacity-60"}
               `}
             >
               {name}

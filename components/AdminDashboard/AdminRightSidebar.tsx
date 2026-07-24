@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import {
   BadgeCheck,
-  CheckCircle2,
+  Scale,
   XCircle,
   Activity,
   Database,
@@ -14,7 +14,7 @@ import {
   Shield,
   Key,
   Bell,
-  RefreshCw,
+  User,
   Plus,
   Terminal,
   LayoutDashboard,
@@ -75,17 +75,17 @@ export default function UserRightSidebar({
   const SidebarContent = () => (
     <div className="space-y-6">
       {/* SECTION 1: Profile Summary */}
-      <div className="border border-neutral-800 p-4 bg-neutral-900/30 space-y-4">
+      <div className="border border-indigo-900/50 p-4 bg-indigo-950/30 rounded-2xl space-y-4">
         <div className="flex items-center gap-4">
           {userData?.profileImage ? (
             <img 
               src={userData.profileImage} 
               alt="Profile" 
-              className="w-15 h-15 border-2 border-neutral-700 object-cover shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]"
+              className="w-20 h-20 border border-indigo-700 object-cover rounded-xl"
             />
           ) : (
-            <div className="w-12 h-12 bg-neutral-800 border-2 border-neutral-700 flex items-center justify-center font-black text-lg text-neutral-50 uppercase shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)]">
-              {loading ? '...' : userData?.username?.substring(0, 2).toUpperCase() || 'US'}
+            <div className="w-20 h-20 bg-indigo-900 border border-indigo-700 flex items-center justify-center rounded-full">
+              <span className="text-xl font-black text-neutral-400 uppercase">{loading ? '...' : userData?.username?.substring(0, 2).toUpperCase() || 'US'}</span>
             </div>
           )}
           <div>
@@ -97,7 +97,7 @@ export default function UserRightSidebar({
             </h2>
           </div>
         </div>
-        <div className="space-y-1.5 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
+        <div className="border-t border-indigo-900/60 pt-3 space-y-2 text-[11px] text-neutral-400 uppercase tracking-widest font-bold">
           <div className="flex justify-between">
             <span className="text-neutral-500">Email</span>
             <span className="text-neutral-300">
@@ -118,7 +118,7 @@ export default function UserRightSidebar({
       </div>
 
       {/* SECTION 4: Telegram Source */}
-      <div className="border border-neutral-800 p-4 space-y-3 bg-neutral-900/10">
+      <div className="border border-neutral-800 rounded-xl p-4 space-y-3 bg-neutral-900/10">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Telegram Feeds</h3>
         <div className="space-y-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-300">
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Connected Groups</span> <span>4 Active</span></div>
@@ -127,29 +127,29 @@ export default function UserRightSidebar({
           <div className="flex justify-between"><span className="text-neutral-500 text-[10px]">Last Signal</span> <span className="font-mono text-neutral-400">14:32:01 UTC</span></div>
         </div>
         <Link href="/admin-dashboard/providers">
-        <button className="w-full text-center py-2 border border-neutral-800 bg-neutral-900 hover:bg-neutral-800 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
+        <button className="w-full text-center py-2 border border-indigo-800 bg-indigo-900 hover:bg-indigo-800 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
           Manage Telegram
         </button>
         </Link>
       </div>
 
       {/* SECTION 8: Quick Actions */}
-      <div className="space-y-2 pt-2 border-t border-neutral-900">
+      <div className="space-y-2 pt-2 border-t border-indigo-900/50">
         <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500">Operations</h3>
         <div className="flex flex-col gap-2">
         <Link href="#">
-        <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-          <Terminal className="w-3.5 h-3.5 text-neutral-400" /> View System Logs
+        <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-100 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
+          <Terminal className="w-3.5 h-3.5" /> View System Logs
         </button>
         </Link>
-        <Link href="/user-dashboard/lot-size">
-          <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-neutral-800 hover:bg-neutral-900 text-neutral-50 text-[10px] font-black uppercase tracking-widest transition-colors cursor-pointer">
-            <LayoutDashboard className="w-3.5 h-3.5" />Lot Size Management
+        <Link href="/admin-dashboard/lot-size">
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-100 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
+            <Scale className="w-3.5 h-3.5" />Lot Size Settings
           </button>
         </Link>
         <Link href="/user-dashboard/dashboard">
-          <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-neutral-50 hover:bg-neutral-200 text-neutral-950 text-[10px] font-black uppercase tracking-widest transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.15)] cursor-pointer">
-            <LayoutDashboard className="w-3.5 h-3.5" />Switch to User
+          <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
+            <User className="w-3.5 h-3.5" />Switch bck to User
           </button>
         </Link>
       </div>
@@ -160,9 +160,9 @@ export default function UserRightSidebar({
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-70 border-l border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[-4px_0_24px_rgba(0,0,0,0.5)]">
+      <aside className="hidden md:flex w-70 border-l border-indigo-900/50 h-screen sticky top-0 bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 flex-col shadow-[-4px_0_24px_rgba(79,70,229,0.15)]">
         {/* Header */}
-        <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
+        <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
           <div className="flex flex-col">
             <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
               ADMIN<span className="text-neutral-50 font-black"> SECTION</span>
@@ -179,14 +179,14 @@ export default function UserRightSidebar({
         </div>
 
         {/* Logout */}
-        <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2">
+        <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2">
           <button
             onClick={() => setShowLogoutConfirm(true)}
-            className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+            className="flex items-center cursor-pointer w-full px-4 py-3 text-red-400 hover:bg-red-500/10 transition-all rounded-xl group"
           >
-            <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
+            <LogOut className="w-5 h-5 mr-3 group-hover:scale-105 transition-transform" />
             <span className="text-xs font-black uppercase tracking-widest">
-              Logout My Account
+              Logout Admin
             </span>
           </button>
         </div>
@@ -199,9 +199,9 @@ export default function UserRightSidebar({
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed top-0 left-0 w-full h-full bg-neutral-950 z-500 flex flex-col shadow-2xl lg:hidden">
+          <aside className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 z-[500] flex flex-col shadow-2xl lg:hidden">
             {/* Mobile Header */}
-            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
+            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
               <div className="flex flex-col">
                 <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
                   SECURE<span className="text-neutral-50 font-black"> RISE</span>
@@ -211,7 +211,7 @@ export default function UserRightSidebar({
                 </p>
               </div>
               <button
-                className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
+                className="rounded-xl text-neutral-50 p-1 border border-indigo-800 bg-indigo-900"
                 onClick={() => setSidebarOpen(false)}
               >
                 <X className="w-5 h-5" />
@@ -224,17 +224,17 @@ export default function UserRightSidebar({
             </div>
 
             {/* Mobile Logout */}
-            <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2">
+            <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2">
               <button
                 onClick={() => {
                   setSidebarOpen(false);
                   setShowLogoutConfirm(true);
                 }}
-                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-400 hover:bg-red-500/10 transition-all rounded-xl group"
               >
-                <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
+                <LogOut className="w-5 h-5 mr-3 group-hover:scale-105 transition-transform" />
                 <span className="text-xs font-black uppercase tracking-widest">
-                  Logout My Account
+                  Logout Admin
                 </span>
               </button>
             </div>
@@ -249,7 +249,7 @@ export default function UserRightSidebar({
           onClick={() => setShowLogoutConfirm(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-neutral-800 rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-sm p-8 text-center relative"
+            className="bg-neutral-950 border-2 border-red-800 rounded-2xl w-full max-w-sm p-8 text-center relative"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-black uppercase tracking-tighter text-neutral-50 mb-2">
@@ -261,14 +261,14 @@ export default function UserRightSidebar({
             </p>
 
             {/* Countdown Progress Bar */}
-            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60">
+            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60 rounded-xl">
               <div className="flex justify-between text-[10px] text-neutral-400 mb-2 uppercase tracking-widest font-bold">
                 <span>Auto-closing in...</span>
                 <span>{countdown}s</span>
               </div>
-              <div className="w-full bg-neutral-850 border border-neutral-800 h-2.5 rounded-none overflow-hidden">
+              <div className="w-full bg-red-900 border border-red-800 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-neutral-50 h-full rounded-none transition-all duration-1000 ease-linear"
+                  className="bg-red-500 h-full rounded-full transition-all duration-1000 ease-linear"
                   style={{ width: `${(countdown / 10) * 100}%` }}
                 />
               </div>
@@ -280,7 +280,7 @@ export default function UserRightSidebar({
                   setShowLogoutConfirm(false);
                   setCountdown(10);
                 }}
-                className="flex-1 px-6 py-3 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-50 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
+                className="flex-1 px-6 py-3 rounded-xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-300 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Stay
               </button>
@@ -291,7 +291,7 @@ export default function UserRightSidebar({
                   setShowLogoutConfirm(false);
                   setCountdown(10);
                 }}
-                className="flex-1 px-6 py-3 rounded-none bg-neutral-50 text-neutral-950 font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer animate-pulse"
+                className="flex-1 px-6 py-3 rounded-xl bg-red-600 text-white font-black text-xs uppercase tracking-widest hover:bg-red-500 transition-colors border border-red-500 cursor-pointer animate-pulse"
               >
                 Exit
               </button>

@@ -43,10 +43,11 @@ export default function AdminDashboardLayout({
     flex-1
     min-w-0
     overflow-y-auto
-    px-4
-    pt-15
+    px-2
+    pt-20
     pb-30
-    lg:pt-0
+    lg:pt-10
+    lg:px-4
     lg:pb-0
     lg:max-h-screen
     scrollbar-hide

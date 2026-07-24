@@ -70,7 +70,7 @@ class MT5CopyTrader:
 
         # Handle backward compatibility for old database records
         master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
-        
+
         # Select TP based on number of TPs (same logic as master trader)
         # 1 TP: use TP[0]
         # 2-3 TPs: use last TP
@@ -86,6 +86,27 @@ class MT5CopyTrader:
                 tp_to_use = tps[-2]  # Second-to-last TP
         else:
             tp_to_use = None
+
+        # Handle SL - check if it's a dollar amount that needs conversion to price level
+        sl_price = master_trade.get("sl")
+        sl_dollar = master_trade.get("sl_dollar")
+        if sl_dollar is not None:
+            # Convert dollar amount to price level
+            # Formula: SL_price = Entry_price ± (Dollar_amount / (Lot_size * Tick_value))
+            symbol_info_tick = mt5.symbol_info_tick(symbol)
+            if symbol_info_tick:
+                tick_value = symbol_info_tick.trade_tick_value  # Value of 1 tick in account currency
+                if tick_value and tick_value > 0:
+                    price_distance = sl_dollar / (lot_size * tick_value)
+                    if trade_type == "BUY":
+                        sl_price = price - price_distance
+                    else:  # SELL
+                        sl_price = price + price_distance
+                    logger.info(f"Converted SL ${sl_dollar} to price level: {sl_price}")
+                else:
+                    logger.warning(f"Invalid tick_value for {symbol}, cannot convert SL")
+            else:
+                logger.warning(f"Cannot get tick info for {symbol}, cannot convert SL")
         
         request = {
             "action": trade_action,
@@ -93,7 +114,7 @@ class MT5CopyTrader:
             "volume": lot_size,
             "type": order_type,
             "price": price,
-            "sl": master_trade.get("sl"),
+            "sl": sl_price,
             "tp": tp_to_use,
             "deviation": 20,
             "magic": self.MAGIC_NUMBER,

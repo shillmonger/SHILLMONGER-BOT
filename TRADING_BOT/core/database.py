@@ -13,6 +13,7 @@ class Database:
         self.copy_jobs_collection = None
         self.mt5_accounts_collection = None
         self.lot_size_management_collection = None
+        self.position_limits_collection = None
 
     def connect(self):
         try:
@@ -24,6 +25,7 @@ class Database:
             self.copy_jobs_collection = self.db.copy_jobs
             self.mt5_accounts_collection = self.db.mt5accounts
             self.lot_size_management_collection = self.db.lotsizemanagements
+            self.position_limits_collection = self.db.positionlimits
             logger.success("Connected to MongoDB")
             return True
         except Exception as e:
@@ -258,6 +260,40 @@ class Database:
             return None
         except Exception as e:
             logger.error(f"Failed to get lot size for balance: {e}")
+            return None
+
+    # Position Limits Collection Methods
+    def get_active_position_limits(self):
+        """Get all active position limit rules sorted by min_balance"""
+        try:
+            rules = list(self.position_limits_collection.find({"active": True}).sort("min_balance", 1))
+            return rules
+        except Exception as e:
+            logger.error(f"Failed to get position limits: {e}")
+            return []
+
+    def get_max_positions_for_balance(self, balance):
+        """
+        Find the maximum number of positions allowed for a given balance.
+        Returns the max positions if a matching rule is found, None otherwise.
+        """
+        try:
+            rules = self.get_active_position_limits()
+            
+            for rule in rules:
+                min_balance = rule.get("min_balance")
+                max_balance = rule.get("max_balance")
+                max_positions = rule.get("max_positions")
+                
+                if min_balance is not None and max_balance is not None and max_positions is not None:
+                    if min_balance <= balance <= max_balance:
+                        logger.info(f"Position limit matched for balance ${balance}: ${min_balance}-${max_balance} -> {max_positions} positions")
+                        return max_positions
+            
+            logger.warning(f"No position limit found for balance ${balance}")
+            return None
+        except Exception as e:
+            logger.error(f"Failed to get max positions for balance: {e}")
             return None
 
 # Global database instance

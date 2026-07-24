@@ -113,11 +113,10 @@ class CopyEngine:
                 logger.info(f"User {login} using lot size: {lot_size}")
 
                 # For accounts with balance $10-$40, use fixed $5 stop loss
-                # Override the master trade's SL with fixed $5
-                original_sl = master_trade.get("sl")
+                # Pass as dollar amount to be converted to price level
                 if 10 <= balance <= 40:
-                    master_trade["sl"] = 5.0
-                    logger.info(f"User {login} balance in $10-$40 range. Using fixed SL: ${master_trade['sl']}")
+                    master_trade["sl_dollar"] = 5.0
+                    logger.info(f"User {login} balance in $10-$40 range. Using fixed SL: ${master_trade['sl_dollar']}")
 
                 # Execute copy trade
                 result = self.copy_trader.execute_copy_trade(master_trade, lot_size)

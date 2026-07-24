@@ -42,7 +42,7 @@ export default function Footer() {
   ];
 
   return (
-    <section className="relative mt-10 lg:mt-10 w-full text-neutral-50 font-sans lg:pb-4">
+    <section className="relative mt-0 lg:mt-10 w-full text-neutral-50 font-sans lg:pb-4">
       {/* Footer Outer Container with 10px Margin, Rounded Corners & Blue Theme */}
       <footer className="m-0 lg:mx-[20px] relative bg-indigo-800 border border-indigo-900/50 lg:rounded-4xl overflow-hidden shadow-2xl shadow-indigo-950/40">
         

@@ -5,6 +5,7 @@ from typing import Optional, Tuple
 from config import SYMBOL
 from core.logger import logger
 from core.models import TradingSignal
+from core.database import db
 
 
 class RiskManager:
@@ -26,9 +27,9 @@ class RiskManager:
     # ============================================================================
 
     # Maximum open trades based on account balance
-    MAX_TRADES_100_60 = 10   # $100 - $60 account
-    MAX_TRADES_50_30 = 5    # $50 - $30 account
-    MAX_TRADES_20_10 = 3    # $20 - $10 account
+    MAX_TRADES_60_PLUS = 2   # $60+ account
+    MAX_TRADES_30_59 = 1    # $30 - $59 account
+    MAX_TRADES_UNDER_30 = 1 # Under $30 account
 
     # Maximum lot size based on account balance
     MAX_LOT_SIZE_100_60 = 0.02  # $100 - $60 account
@@ -168,7 +169,7 @@ class RiskManager:
     def _check_trade_limits(self) -> bool:
         """
         Check if the number of open trades is within limits based on account balance.
-        
+
         Returns:
             True if within limits, False otherwise
         """
@@ -178,7 +179,7 @@ class RiskManager:
             return False
 
         balance = account_info.balance
-        
+
         # Get current open positions
         positions = mt5.positions_get()
         if positions is None:
@@ -186,13 +187,16 @@ class RiskManager:
         else:
             open_trades = len(positions)
 
-        # Determine max trades based on balance
-        if balance >= 60:
-            max_trades = self.MAX_TRADES_100_60
-        elif balance >= 30:
-            max_trades = self.MAX_TRADES_50_30
-        else:
-            max_trades = self.MAX_TRADES_20_10
+        # Get max trades from database based on balance
+        max_trades = db.get_max_positions_for_balance(balance)
+
+        # Fallback to hardcoded values if database returns None
+        if max_trades is None:
+            logger.warning("No position limit found in database, using fallback values")
+            if balance >= 60:
+                max_trades = self.MAX_TRADES_60_PLUS
+            else:
+                max_trades = self.MAX_TRADES_30_59  # Covers both $30-$59 and under $30
 
         logger.info(f"Balance: ${balance:.2f}, Open trades: {open_trades}/{max_trades}")
 

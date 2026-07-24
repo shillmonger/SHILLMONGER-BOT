@@ -23,7 +23,7 @@ import {
   CandlestickChart,
   ServerCog,
   Headset,
-  BarChart3,
+  BadgeCheck,
   BadgeQuestionMark,
   History,
   CreditCard,
@@ -102,7 +102,7 @@ export default function UserSidebar({
   const navItems: NavItem[] = [
     // === HOME ===
     { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-      { name: "Subscription", icon: Gem, href: `${basePath}/subscription` },
+      { name: "Subscription", icon: BadgeCheck, href: `${basePath}/subscription` },
     {
       name: "MetaTrader 5",
       icon: Unplug,

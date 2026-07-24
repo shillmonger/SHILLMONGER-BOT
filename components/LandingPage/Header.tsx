@@ -47,7 +47,7 @@ export default function Navbar() {
             : "bg-transparent py-2"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
           
           {/* Left: Logo & Brand Icon */}
           <Link href="/">
@@ -90,7 +90,7 @@ export default function Navbar() {
               </Link>
               
               <Link href="/auth-page/register">
-                <button className="rounded-xl bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#4338ca] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer">
+                <button className="rounded-full bg-gradient-to-r from-[#4f46e5] via-[#6366f1] to-[#4338ca] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-500/20 transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer">
                   Register
                 </button>
               </Link>
@@ -129,7 +129,7 @@ export default function Navbar() {
             </span>
             <button
               onClick={closeMobileMenu}
-              className="p-2 hover:bg-neutral-100 rounded-xl text-neutral-600 transition-colors cursor-pointer"
+              className="p-2 bg-neutral-100 rounded-full text-neutral-800 transition-colors cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -144,9 +144,9 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`flex items-center py-2 rounded-xl text-lg font-medium transition-colors cursor-pointer ${
+                  className={`flex items-center py-2 rounded-full text-lg font-medium transition-colors cursor-pointer ${
                     isActive
-                      ? "bg-indigo-50 text-indigo-600 font-semibold"
+                      ? "bg-indigo-50 text-indigo-600 font-semibold px-5"
                       : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                   }`}
                 >
@@ -161,7 +161,7 @@ export default function Navbar() {
             <Link href="/auth-page/login" className="w-full">
               <button
                 onClick={closeMobileMenu}
-                className="w-full py-3 border border-neutral-200 text-neutral-800 font-semibold rounded-2xl text-base cursor-pointer hover:bg-neutral-50 transition-all"
+                className="w-full py-3 border border-neutral-200 text-neutral-800 font-semibold rounded-full text-base cursor-pointer hover:bg-neutral-50 transition-all"
               >
                 Sign In
               </button>
@@ -170,7 +170,7 @@ export default function Navbar() {
             <Link href="/auth-page/register" className="w-full">
               <button
                 onClick={closeMobileMenu}
-                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white cursor-pointer py-3.5 font-semibold text-base rounded-2xl shadow-md shadow-indigo-500/20 transition-all hover:scale-[1.01] active:scale-95"
+                className="w-full bg-gradient-to-r from-[#4f46e5] to-[#6366f1] text-white cursor-pointer py-3.5 font-semibold text-base rounded-full shadow-md shadow-indigo-500/20 transition-all hover:scale-[1.01] active:scale-95"
               >
                 Register NOW
               </button>

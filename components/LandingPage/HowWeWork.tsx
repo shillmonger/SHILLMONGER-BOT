@@ -73,7 +73,7 @@ export default function WhyPlatformSection() {
           How It Works
         </h2>
 
-        <p className="text-neutral-500 text-sm md:text-base leading-relaxed">
+        <p className="text-neutral-500 text-base md:text-base leading-relaxed">
           A streamlined 6-step journey — from sign-up to subscription renewal with
           institutional-grade efficiency.
         </p>
@@ -103,7 +103,7 @@ export default function WhyPlatformSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="mt-2 flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4">
             <CarouselPrevious className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
             <CarouselNext className="static translate-y-0 w-10 h-10 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-200 rounded-full text-neutral-800 transition-all shadow-sm" />
           </div>
@@ -180,7 +180,7 @@ function StepCard({
       >
         {step.title}
       </h3>
-      <p className="text-xs md:text-sm text-neutral-500 leading-relaxed">
+      <p className="text-sm md:text-sm text-neutral-500 leading-relaxed">
         {step.desc}
       </p>
     </div>

@@ -4,22 +4,22 @@ import { useState, useEffect } from "react";
 import { Trash2, Plus, Loader2, AlertTriangle, Edit2, X } from "lucide-react";
 import { toast } from "sonner";
 
-interface LotSizeRule {
+interface PositionLimitRule {
   _id: string;
   min_balance: number;
   max_balance: number;
-  lot_size: number;
+  max_positions: number;
   active: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export default function LotSizePage() {
-  const [lotSizeRules, setLotSizeRules] = useState<LotSizeRule[]>([]);
+export default function PositionLimitsPage() {
+  const [positionLimits, setPositionLimits] = useState<PositionLimitRule[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [selectedRule, setSelectedRule] = useState<LotSizeRule | null>(null);
+  const [selectedRule, setSelectedRule] = useState<PositionLimitRule | null>(null);
   
   // Edit mode state
   const [isEditMode, setIsEditMode] = useState(false);
@@ -29,43 +29,43 @@ export default function LotSizePage() {
   const [formData, setFormData] = useState({
     min_balance: '',
     max_balance: '',
-    lot_size: ''
+    max_positions: ''
   });
   const [formLoading, setFormLoading] = useState(false);
 
   useEffect(() => {
-    fetchLotSizeRules();
+    fetchPositionLimits();
   }, []);
 
-  const fetchLotSizeRules = async () => {
+  const fetchPositionLimits = async () => {
     try {
-      const response = await fetch('/api/admin/lot-size');
+      const response = await fetch('/api/admin/position-limits');
       const data = await response.json();
       if (response.ok) {
-        setLotSizeRules(data.lotSizeRules);
+        setPositionLimits(data.positionLimits);
       } else {
-        toast.error('Failed to fetch lot size rules');
+        toast.error('Failed to fetch position limits');
       }
     } catch (error) {
       console.error('Fetch error:', error);
-      toast.error('Failed to fetch lot size rules');
+      toast.error('Failed to fetch position limits');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = (rule: LotSizeRule) => {
+  const handleDelete = (rule: PositionLimitRule) => {
     setSelectedRule(rule);
     setShowConfirmModal(true);
   };
 
-  const handleEdit = (rule: LotSizeRule) => {
+  const handleEdit = (rule: PositionLimitRule) => {
     setIsEditMode(true);
     setEditingRuleId(rule._id);
     setFormData({
       min_balance: rule.min_balance.toString(),
       max_balance: rule.max_balance.toString(),
-      lot_size: rule.lot_size.toString()
+      max_positions: rule.max_positions.toString()
     });
   };
 
@@ -75,7 +75,7 @@ export default function LotSizePage() {
     setFormData({
       min_balance: '',
       max_balance: '',
-      lot_size: ''
+      max_positions: ''
     });
   };
 
@@ -85,15 +85,15 @@ export default function LotSizePage() {
     setActionLoading(selectedRule._id);
 
     try {
-      const response = await fetch(`/api/admin/lot-size/${selectedRule._id}`, {
+      const response = await fetch(`/api/admin/position-limits/${selectedRule._id}`, {
         method: 'DELETE',
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Lot size rule deleted successfully');
-        fetchLotSizeRules();
+        toast.success('Position limit rule deleted successfully');
+        fetchPositionLimits();
       } else {
         toast.error(data.error || 'Failed to delete rule');
       }
@@ -112,9 +112,9 @@ export default function LotSizePage() {
     
     const minBalance = parseFloat(formData.min_balance);
     const maxBalance = parseFloat(formData.max_balance);
-    const lotSize = parseFloat(formData.lot_size);
+    const maxPositions = parseFloat(formData.max_positions);
 
-    if (isNaN(minBalance) || isNaN(maxBalance) || isNaN(lotSize)) {
+    if (isNaN(minBalance) || isNaN(maxBalance) || isNaN(maxPositions)) {
       toast.error('Please enter valid numbers');
       return;
     }
@@ -124,14 +124,19 @@ export default function LotSizePage() {
       return;
     }
 
+    if (maxPositions < 1) {
+      toast.error('Max positions must be at least 1');
+      return;
+    }
+
     setFormLoading(true);
 
     try {
-      let url = '/api/admin/lot-size';
+      let url = '/api/admin/position-limits';
       let method = 'POST';
 
       if (isEditMode && editingRuleId) {
-        url = `/api/admin/lot-size/${editingRuleId}`;
+        url = `/api/admin/position-limits/${editingRuleId}`;
         method = 'PUT';
       }
 
@@ -143,16 +148,16 @@ export default function LotSizePage() {
         body: JSON.stringify({
           min_balance: minBalance,
           max_balance: maxBalance,
-          lot_size: lotSize,
+          max_positions: maxPositions,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(isEditMode ? 'Lot size rule updated successfully' : 'Lot size rule created successfully');
+        toast.success(isEditMode ? 'Position limit rule updated successfully' : 'Position limit rule created successfully');
         handleCancelEdit();
-        fetchLotSizeRules();
+        fetchPositionLimits();
       } else {
         toast.error(data.error || 'Failed to save rule');
       }
@@ -170,10 +175,10 @@ export default function LotSizePage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl text-black font-black uppercase tracking-tighter mb-2">
-            Lot Size Management
+            Position Limits Management
           </h1>
           <p className="text-neutral-400 text-sm">
-            Create and manage lot size rules based on account balance
+            Create and manage position limit rules based on account balance
           </p>
         </div>
 
@@ -234,15 +239,15 @@ export default function LotSizePage() {
             </div>
             <div>
               <label className="block text-xs font-black uppercase tracking-wider text-neutral-500 mb-2">
-                Lot Size
+                Max Positions
               </label>
               <input
                 type="number"
-                step="0.01"
-                value={formData.lot_size}
-                onChange={(e) => setFormData({ ...formData, lot_size: e.target.value })}
+                step="1"
+                value={formData.max_positions}
+                onChange={(e) => setFormData({ ...formData, max_positions: e.target.value })}
                 className="w-full bg-neutral-950 border border-neutral-700 rounded-none px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
-                placeholder="0.01"
+                placeholder="1"
                 required
               />
             </div>
@@ -273,9 +278,9 @@ export default function LotSizePage() {
           <div className="flex items-center justify-center py-12">
             <Loader2 className="w-8 h-8 animate-spin text-neutral-500" />
           </div>
-        ) : lotSizeRules.length === 0 ? (
+        ) : positionLimits.length === 0 ? (
           <div className="text-center py-12 text-neutral-500">
-            No lot size rules found. Create your first rule above.
+            No position limit rules found. Create your first rule above.
           </div>
         ) : (
           <div className="bg-neutral-900 border border-neutral-800 rounded-none overflow-hidden">
@@ -290,7 +295,7 @@ export default function LotSizePage() {
                       Maximum Balance
                     </th>
                     <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
-                      Lot Size
+                      Max Positions
                     </th>
                     <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
                       Status
@@ -304,11 +309,11 @@ export default function LotSizePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {lotSizeRules.map((rule) => (
+                  {positionLimits.map((rule) => (
                     <tr key={rule._id} className="border-b border-neutral-800 hover:bg-neutral-800/50 transition-colors">
                       <td className="p-4 text-sm font-mono text-emerald-400">${rule.min_balance}</td>
                       <td className="p-4 text-sm font-mono text-emerald-400">${rule.max_balance}</td>
-                      <td className="p-4 text-sm font-mono text-white">{rule.lot_size}</td>
+                      <td className="p-4 text-sm font-mono text-white">{rule.max_positions}</td>
                       <td className="p-4">
                         <span className={`text-[9px] px-2 py-1 font-black border ${
                           rule.active 
@@ -369,14 +374,14 @@ export default function LotSizePage() {
                 </h2>
               </div>
               <p className="text-sm text-neutral-300">
-                Are you sure you want to delete this lot size rule?
+                Are you sure you want to delete this position limit rule?
               </p>
               <div className="bg-neutral-900 border border-neutral-800 p-3 rounded-none">
                 <p className="text-xs text-neutral-400">
                   <span className="font-bold text-white">Balance:</span> ${selectedRule.min_balance} - ${selectedRule.max_balance}
                 </p>
                 <p className="text-xs text-neutral-400">
-                  <span className="font-bold text-white">Lot Size:</span> {selectedRule.lot_size}
+                  <span className="font-bold text-white">Max Positions:</span> {selectedRule.max_positions}
                 </p>
               </div>
               <div className="flex gap-3 pt-4">

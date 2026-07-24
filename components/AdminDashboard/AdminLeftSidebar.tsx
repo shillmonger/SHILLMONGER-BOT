@@ -7,10 +7,12 @@ import { toast } from "sonner";
 import {
   LayoutDashboard,
   Radio,
-  CandlestickChart,
+  BadgeCheck,
   History,
+  CircleGauge,
   Gem,
-  Copy,
+  Scale,
+  Shield,
   Users,
   Send,
   ScreenShare,
@@ -93,16 +95,16 @@ export default function AdminSidebar({
   const navItems: NavItem[] = [
     // === MAIN ===
     { name: "Overview", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-    // { name: "Live Streams", icon: Radio, href: `${basePath}/live-signals` },
-    // { name: "Active Trades", icon: CandlestickChart, href: `${basePath}/open-trades` },
-    { name: "BOT Provider", icon: Send, href: `${basePath}/providers` },
-    { name: "Subscriptions", icon: Gem, href: `${basePath}/subscription` },
+    { name: "TG Provider", icon: Send, href: `${basePath}/providers` },
+    { name: "Subscriptions", icon: BadgeCheck, href: `${basePath}/subscription` },
     { name: "Master trades", icon: Server, href: `${basePath}/master-trades` },
     { name: "Copy jobs", icon: Tags, href: `${basePath}/copy-jobs` },
     { name: "Trade activity", icon: ScreenShare, href: `${basePath}/trade-activity` },
-    { name: "Lot size settings", icon: Copy, href: `${basePath}/lot-size` },
+    { name: "Lot size settings", icon: Scale, href: `${basePath}/lot-size` },
+    { name: "Position limits", icon: CircleGauge, href: `${basePath}/position-limits` },
 
-    // === MANAGEMENT ===
+    // === MANAGEMENT === userside
+    
     // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },
 
     // === ANALYTICS & MONITORING ===
@@ -135,13 +137,13 @@ export default function AdminSidebar({
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside 
-        className={`hidden md:flex border-r border-neutral-800 h-screen sticky top-0 bg-neutral-950 flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)] transition-all duration-300 relative ${
+      <aside
+        className={`hidden md:flex border-r border-indigo-900/50 h-screen sticky top-0 bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 flex-col shadow-[4px_0_24px_rgba(79,70,229,0.15)] transition-all duration-300 relative ${
           isCollapsed ? "w-20" : "w-65"
         }`}
       >
         {/* Header */}
-        <div className={`flex-shrink-0 flex items-center h-16 border-b border-neutral-800 transition-all duration-300 relative ${
+        <div className={`flex-shrink-0 flex items-center h-16 border-b border-indigo-900/50 transition-all duration-300 relative ${
           isCollapsed ? "justify-center px-2" : "justify-between px-6"
         }`}>
           <div className={`flex flex-col ${isCollapsed ? "items-center" : ""}`}>
@@ -158,7 +160,7 @@ export default function AdminSidebar({
           {/* Toggle Collapse Button */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="absolute -right-3 top-1/2 -translate-y-1/2 w-7 h-7 cursor-pointer bg-neutral-900 border border-neutral-800 rounded-none flex items-center justify-center text-neutral-300 hover:text-neutral-50 shadow-md hover:bg-neutral-850 transition-colors z-10"
+            className="absolute -right-3 top-1/2 -translate-y-1/2 w-7 h-7 cursor-pointer bg-indigo-900 border border-indigo-700 rounded-full flex items-center justify-center text-indigo-300 hover:text-white shadow-md hover:bg-indigo-800 transition-colors z-10"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
@@ -174,22 +176,22 @@ export default function AdminSidebar({
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`group flex items-center rounded-none border border-transparent transition-all duration-200 ${
-                    isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2.5"
+                  className={`group flex items-center rounded-xl border border-transparent transition-all duration-200 ${
+                    isCollapsed ? "justify-center px-2 py-3" : "px-4 py-2.5"
                   } ${
                     active
-                      ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                      : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                      ? "bg-indigo-600 text-white font-black border-indigo-500"
+                      : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                   }`}
                   title={isCollapsed ? item.name : undefined}
                 >
                   <item.icon
-                    className={`w-5 h-5 transition-transform ${isCollapsed ? "" : "mr-5"} ${
-                      active ? "scale-110" : "group-hover:scale-110"
-                    }`}
+                    className={`w-5 h-5 transition-transform flex-shrink-0 ${
+                      isCollapsed ? "" : "mr-5"
+                    } ${active ? "scale-110" : "group-hover:scale-110"}`}
                   />
                   {!isCollapsed && (
-                    <span className="text-[12px] font-black uppercase tracking-widest whitespace-nowrap">
+                    <span className="text-[12px] font-black uppercase tracking-widest whitespace-nowrap overflow-hidden">
                       {item.name}
                     </span>
                   )}
@@ -204,74 +206,65 @@ export default function AdminSidebar({
               <div key={item.name} className="flex flex-col">
                 <button
                   onClick={() => toggleGroup(item.name)}
-                  className={`group w-full flex items-center rounded-none transition-all duration-200 cursor-pointer ${
-                    isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2.5"
-                  } ${
+                  className={`group w-full flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
                     hasActiveChild
-                      ? "text-neutral-50 font-black"
-                      : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                      ? "text-indigo-300 font-black"
+                      : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                   }`}
-                  title={isCollapsed ? item.name : undefined}
                 >
                   <item.icon
-                    className={`w-5 h-5 transition-transform ${isCollapsed ? "" : "mr-5"} ${
+                    className={`w-5 h-5 mr-5 transition-transform ${
                       hasActiveChild ? "scale-110" : "group-hover:scale-110"
                     }`}
                   />
-                  {!isCollapsed && (
-                    <>
-                      <span className="flex-1 text-left text-[12px] font-black uppercase tracking-widest whitespace-nowrap">
-                        {item.name}
-                      </span>
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-300 ${
-                          isOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </>
-                  )}
+                  <span className="flex-1 text-left text-[12px] font-black uppercase tracking-widest whitespace-nowrap overflow-hidden">
+                    {item.name}
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
 
-                {!isCollapsed && (
-                  <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
-                    <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-neutral-800 space-y-1">
-                      {item.children.map((child) => {
-                        const childActive = pathname === child.href;
-                        return (
-                          <Link
-                            key={child.name}
-                            href={child.href}
-                            className={`group flex items-center gap-3 px-3 py-2 rounded-none border border-transparent transition-all duration-200 ${
-                              childActive
-                                ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                                 : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
+                  <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-indigo-800/50 space-y-1">
+                    {item.children.map((child) => {
+                      const childActive = pathname === child.href;
+                      return (
+                        <Link
+                          key={child.name}
+                          href={child.href}
+                          className={`group flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent transition-all duration-200 ${
+                            childActive
+                              ? "bg-indigo-600 text-white font-black border-indigo-500"
+                              : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
+                          }`}
+                        >
+                          <child.icon
+                            className={`w-4 h-4 flex-shrink-0 transition-transform ${
+                              childActive ? "scale-110" : "group-hover:scale-110"
                             }`}
-                          >
-                            <child.icon
-                              className={`w-4 h-4 flex-shrink-0 transition-transform ${
-                                childActive ? "scale-110" : "group-hover:scale-110"
-                              }`}
-                            />
-                            <span className="text-[11px] font-black uppercase tracking-widest whitespace-nowrap">
-                              {child.name}
-                            </span>
-                          </Link>
-                        );
-                      })}
-                    </div>
+                          />
+                          <span className="text-[11px] font-black uppercase tracking-widest">
+                            {child.name}
+                          </span>
+                        </Link>
+                      );
+                    })}
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
         </nav>
 
         {/* Footer Links */}
-        <div className={`flex-shrink-0 border-t border-neutral-800 py-2 space-y-1 ${isCollapsed ? "px-2" : "px-4"}`}>
+        <div className={`flex-shrink-0 border-t border-indigo-900/50 py-2 space-y-1 ${isCollapsed ? "px-2" : "px-4"}`}>
           {/* <Link
             href={`${basePath}/support`}
-            className={`flex items-center w-full text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group ${
-              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2"
+            className={`flex items-center w-full text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group ${
+              isCollapsed ? "justify-center px-2 py-3" : "px-4 py-2"
             }`}
             title={isCollapsed ? "Support" : undefined}
           >
@@ -285,8 +278,8 @@ export default function AdminSidebar({
 
           <Link
             href={`${basePath}/documentation`}
-            className={`flex items-center w-full text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group ${
-              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-2"
+            className={`flex items-center w-full text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group ${
+              isCollapsed ? "justify-center px-2 py-3" : "px-4 py-2"
             }`}
             title={isCollapsed ? "Documentation" : undefined}
           >
@@ -300,12 +293,12 @@ export default function AdminSidebar({
 
           <button
             onClick={() => setShowLogoutConfirm(true)}
-            className={`flex items-center cursor-pointer w-full text-red-500 hover:bg-red-500/10 transition-all rounded-none group ${
-              isCollapsed ? "justify-center px-0 py-3" : "px-4 py-3"
+            className={`flex items-center cursor-pointer w-full text-red-400 hover:bg-red-500/10 transition-all rounded-xl group ${
+              isCollapsed ? "justify-center py-3" : "px-4 py-3"
             }`}
             title={isCollapsed ? "Logout My Account" : undefined}
           >
-            <LogOut className={`w-5 h-5 group-hover:-translate-x-1 transition-transform ${isCollapsed ? "" : "mr-3"}`} />
+            <LogOut className={`w-5 h-5 transition-transform group-hover:-translate-x-0.5 ${isCollapsed ? "" : "mr-3"}`} />
             {!isCollapsed && (
               <span className="text-xs font-black uppercase tracking-widest whitespace-nowrap">
                 Logout Admin
@@ -322,9 +315,9 @@ export default function AdminSidebar({
             className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed top-0 left-0 w-full h-full bg-neutral-950 z-500 flex flex-col shadow-2xl lg:hidden">
+          <aside className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-indigo-950 via-neutral-950 to-neutral-950 z-[500] flex flex-col shadow-2xl lg:hidden">
             {/* Mobile Header */}
-            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-neutral-800">
+            <div className="flex-shrink-0 flex items-center justify-between h-16 px-6 border-b border-indigo-900/50">
               <div className="flex flex-col">
                 <h1 className="text-xl font-black uppercase tracking-tighter text-neutral-50">
                   SECURE<span className="text-neutral-50 font-black"> RISE</span>
@@ -334,7 +327,7 @@ export default function AdminSidebar({
                 </p>
               </div>
               <button
-                className="rounded-none text-neutral-50 p-1 border border-neutral-800 bg-neutral-900"
+                className="rounded-xl text-neutral-50 p-1 border border-indigo-800 bg-indigo-900"
                 onClick={() => setSidebarOpen(false)}
               >
                 <X className="w-5 h-5" />
@@ -350,10 +343,10 @@ export default function AdminSidebar({
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`group flex items-center px-4 py-2.5 rounded-none border border-transparent transition-all duration-200 ${
+                      className={`group flex items-center px-4 py-2.5 rounded-xl border border-transparent transition-all duration-200 ${
                         active
-                          ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                          : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                          ? "bg-indigo-600 text-white font-black border-indigo-500"
+                          : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                       }`}
                       onClick={() => setSidebarOpen(false)}
                     >
@@ -376,10 +369,10 @@ export default function AdminSidebar({
                   <div key={item.name} className="flex flex-col">
                     <button
                       onClick={() => toggleGroup(item.name)}
-                      className={`group w-full flex items-center px-4 py-2.5 rounded-none transition-all duration-200 cursor-pointer ${
+                      className={`group w-full flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
                         hasActiveChild
-                          ? "text-neutral-50 font-black"
-                          : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                          ? "text-indigo-300 font-black"
+                          : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                       }`}
                     >
                       <item.icon
@@ -398,17 +391,17 @@ export default function AdminSidebar({
                     </button>
 
                     <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
-                      <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-neutral-800 space-y-1">
+                      <div className="ml-4 mt-1 mb-1 pl-4 border-l-2 border-indigo-800/50 space-y-1">
                         {item.children.map((child) => {
                           const childActive = pathname === child.href;
                           return (
                             <Link
                               key={child.name}
                               href={child.href}
-                              className={`group flex items-center gap-3 px-3 py-2 rounded-none border border-transparent transition-all duration-200 ${
+                              className={`group flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent transition-all duration-200 ${
                                 childActive
-                                  ? "bg-neutral-50 text-neutral-950 font-black border-neutral-50 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.15)]"
-                                  : "text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50"
+                                  ? "bg-indigo-600 text-white font-black border-indigo-500 shadow-lg shadow-indigo-500/30"
+                                  : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
                               }`}
                               onClick={() => setSidebarOpen(false)}
                             >
@@ -431,10 +424,10 @@ export default function AdminSidebar({
             </nav>
 
             {/* Mobile Footer Links */}
-            <div className="flex-shrink-0 border-t border-neutral-800 px-4 py-2 space-y-1">
+            <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2 space-y-1">
               <Link
                 href={`${basePath}/support`}
-                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group"
                 onClick={() => setSidebarOpen(false)}
               >
                 <HelpCircle className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
@@ -445,7 +438,7 @@ export default function AdminSidebar({
 
               <Link
                 href={`${basePath}/documentation`}
-                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-neutral-900 hover:text-neutral-50 transition-all rounded-none group"
+                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group"
                 onClick={() => setSidebarOpen(false)}
               >
                 <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
@@ -459,7 +452,7 @@ export default function AdminSidebar({
                   setSidebarOpen(false);
                   setShowLogoutConfirm(true);
                 }}
-                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-500 hover:bg-red-500/10 transition-all rounded-none group"
+                className="flex items-center cursor-pointer w-full px-4 py-3 text-red-400 hover:bg-red-500/10 transition-all rounded-xl group"
               >
                 <LogOut className="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" />
                 <span className="text-xs font-black uppercase tracking-widest">
@@ -478,7 +471,7 @@ export default function AdminSidebar({
           onClick={() => setShowLogoutConfirm(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-neutral-800 rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-sm p-8 text-center relative"
+            className="bg-neutral-950 border-2 border-red-800 rounded-2xl w-full max-w-sm p-8 text-center relative"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-black uppercase tracking-tighter text-neutral-50 mb-2">
@@ -489,14 +482,14 @@ export default function AdminSidebar({
             </p>
 
             {/* Countdown Progress Bar */}
-            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60">
+            <div className="mb-6 border border-neutral-800 p-3 bg-neutral-900/60 rounded-xl">
               <div className="flex justify-between text-[10px] text-neutral-400 mb-2 uppercase tracking-widest font-bold">
                 <span>Auto-closing in...</span>
                 <span>{countdown}s</span>
               </div>
-              <div className="w-full bg-neutral-850 border border-neutral-800 h-2.5 rounded-none overflow-hidden">
+              <div className="w-full bg-red-900 border border-red-800 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-neutral-50 h-full rounded-none transition-all duration-1000 ease-linear"
+                  className="bg-red-500 h-full rounded-full transition-all duration-1000 ease-linear"
                   style={{ width: `${(countdown / 10) * 100}%` }}
                 />
               </div>
@@ -508,7 +501,7 @@ export default function AdminSidebar({
                   setShowLogoutConfirm(false);
                   setCountdown(10);
                 }}
-                className="flex-1 px-6 py-3 rounded-none border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-50 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
+                className="flex-1 px-6 py-3 rounded-xl border border-neutral-800 bg-neutral-900 text-neutral-400 hover:text-neutral-300 font-black text-xs uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Stay
               </button>
@@ -519,7 +512,7 @@ export default function AdminSidebar({
                   setShowLogoutConfirm(false);
                   setCountdown(10);
                 }}
-                className="flex-1 px-6 py-3 rounded-none bg-neutral-50 text-neutral-950 font-black text-xs uppercase tracking-widest hover:bg-neutral-200 transition-colors shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)] cursor-pointer animate-pulse"
+                className="flex-1 px-6 py-3 rounded-xl bg-red-600 text-white font-black text-xs uppercase tracking-widest hover:bg-red-500 transition-colors border border-red-500 cursor-pointer animate-pulse"
               >
                 Exit
               </button>

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import LotSizeManagement from '@/models/LotSizeManagement';
+import PositionLimit from '@/models/PositionLimit';
 import User from '@/models/User';
 
 export async function PUT(
@@ -43,10 +43,10 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { min_balance, max_balance, lot_size } = body;
+    const { min_balance, max_balance, max_positions } = body;
 
     // Validate input
-    if (!min_balance || !max_balance || !lot_size) {
+    if (!min_balance || !max_balance || !max_positions) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -60,8 +60,15 @@ export async function PUT(
       );
     }
 
+    if (max_positions < 1) {
+      return NextResponse.json(
+        { error: 'Max positions must be at least 1' },
+        { status: 400 }
+      );
+    }
+
     // Check for overlapping ranges (excluding current rule)
-    const overlappingRule = await LotSizeManagement.findOne({
+    const overlappingRule = await PositionLimit.findOne({
       _id: { $ne: id },
       $or: [
         { min_balance: { $lte: max_balance }, max_balance: { $gte: min_balance } }
@@ -75,26 +82,26 @@ export async function PUT(
       );
     }
 
-    // Update the lot size rule
-    const updatedRule = await LotSizeManagement.findByIdAndUpdate(
+    // Update the position limit rule
+    const updatedRule = await PositionLimit.findByIdAndUpdate(
       id,
-      { min_balance, max_balance, lot_size },
+      { min_balance, max_balance, max_positions },
       { new: true }
     );
 
     if (!updatedRule) {
       return NextResponse.json(
-        { error: 'Lot size rule not found' },
+        { error: 'Position limit rule not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json(
-      { message: 'Lot size rule updated successfully', rule: updatedRule },
+      { message: 'Position limit rule updated successfully', rule: updatedRule },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Update lot size rule error:', error);
+    console.error('Update position limit error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -140,22 +147,22 @@ export async function DELETE(
       );
     }
 
-    // Delete the lot size rule
-    const deletedRule = await LotSizeManagement.findByIdAndDelete(id);
+    // Delete the position limit rule
+    const deletedRule = await PositionLimit.findByIdAndDelete(id);
 
     if (!deletedRule) {
       return NextResponse.json(
-        { error: 'Lot size rule not found' },
+        { error: 'Position limit rule not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json(
-      { message: 'Lot size rule deleted successfully' },
+      { message: 'Position limit rule deleted successfully' },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Delete lot size rule error:', error);
+    console.error('Delete position limit error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

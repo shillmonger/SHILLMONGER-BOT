@@ -9,6 +9,7 @@ import {
   DatabasePlus,
   Wallet,
   Send,
+  BadgeCheck,
   Gem,
   Settings,
 } from "lucide-react";
@@ -19,7 +20,7 @@ export default function UserNav() {
 
   const navItems = [
     { name: "Home", icon: LayoutDashboard, href: `${basePath}/dashboard` },
-    { name: "Plans", icon: Gem, href: `${basePath}/subscription` },
+    { name: "Plans", icon: BadgeCheck, href: `${basePath}/subscription` },
     { name: "Sync MT5", icon: DatabasePlus, href: `${basePath}/mt5-connection` },
     { name: "Sync Tg", icon: Send, href: `${basePath}/tg-setup` },
     { name: "Predict", icon: ChartColumnBig, href: `#` },
