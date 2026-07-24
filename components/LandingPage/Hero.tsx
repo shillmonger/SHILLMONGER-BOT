@@ -93,7 +93,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="relative mx-auto h-[500px] w-full overflow-hidden lg:hidden"
+                className="relative mx-auto h-[600px] w-full overflow-hidden lg:hidden"
               >
                 <Image
                   src="/phone-half.png"
