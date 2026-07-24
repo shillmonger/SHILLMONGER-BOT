@@ -18,7 +18,7 @@ export default function UserMobileHeader({
   onRightClick,
   onNotificationClick,
   onProfileClick,
-  userAvatarUrl = "https://i.postimg.cc/L5wkcDJ6/cookie.png", // Replace with default or dynamic avatar URL
+  userAvatarUrl,
   hasUnreadNotifications = true,
 }: UserMobileHeaderProps) {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
