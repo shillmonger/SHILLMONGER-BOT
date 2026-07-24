@@ -9,8 +9,8 @@ import { Play, Plus, Check, MoreVertical } from "lucide-react";
 export default function HeroSection() {
   const navPills = [
     { label: "Automated", active: true },
-    { label: "EXNESS", active: false },
-    { label: "MT5", active: false },
+    { label: "Exness", active: false },
+    { label: "Meta trader 5", active: false },
   ];
 
   const bullets = [
@@ -26,12 +26,12 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-3 flex items-center gap-3 overflow-x-auto"
+          className="mb-3 flex items-center gap-2 overflow-x-auto"
         >
           {navPills.map((pill) => (
             <button
               key={pill.label}
-              className={`shrink-0 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
+              className={`shrink-0 rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                 pill.active
                   ? "bg-[#ccff00] text-black shadow-sm"
                   : "bg-white text-neutral-600 border border-neutral-200 hover:border-neutral-300"
@@ -88,36 +88,36 @@ export default function HeroSection() {
 
             {/* Right Column: Phone image on mobile, reserved breakout space on desktop */}
             <div className="lg:col-span-5 relative">
-              {/* Mobile / tablet inline image (hidden on lg where the breakout version takes over) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="relative mx-auto h-[600px] w-full overflow-hidden lg:hidden"
-              >
-                <Image
-                  src="/phone-half.png"
-                  alt="Phone Screen App Interface"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </motion.div>
+  {/* Mobile / tablet inline image (hidden on lg where the breakout version takes over) */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay: 0.2 }}
+    className="relative mx-auto h-[500px] w-full overflow-hidden lg:hidden"
+  >
+    <Image
+      src="/phone-half.png"
+      alt="Phone Screen App Interface"
+      fill
+      priority
+      className="object-cover object-top"
+    />
+  </motion.div>
 
-              {/* Mobile stat pills under the image */}
-              <div className="mt-5 flex flex-wrap justify-center gap-3 lg:hidden">
-                <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-semibold text-neutral-800 shadow-lg">
-                  <span className="h-2 w-2 rounded-full bg-[#ccff00]" />
-                  +45 pips • $320
-                </div>
-                <div className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-[11px] font-semibold text-black shadow-lg">
-                  Profit +$1,245.00
-                </div>
-              </div>
+  {/* Mobile stat pills under the image */}
+  <div className="mt-5 flex flex-wrap justify-center gap-3 lg:hidden">
+    <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-semibold text-neutral-800 shadow-lg">
+      <span className="h-2 w-2 rounded-full bg-[#ccff00]" />
+      +45 pips • $320
+    </div>
+    <div className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-[11px] font-semibold text-black shadow-lg">
+      Profit +$1,245.00
+    </div>
+  </div>
 
-              {/* Desktop-only reserved space for the absolute breakout phone frame */}
-              <div className="hidden lg:block h-[400px]" />
-            </div>
+  {/* Desktop-only reserved space for the absolute breakout phone frame */}
+  <div className="hidden lg:block h-[500px]" />
+</div>
 
           </div>
 
@@ -180,7 +180,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="hidden lg:block lg:absolute lg:right-[15%] lg:-top-15 lg:-bottom-15 z-30 w-full max-w-[330px] mx-auto lg:mx-0 h-[550px] lg:h-auto rounded-[2rem] overflow-hidden flex flex-col justify-between"
+            className="hidden lg:block lg:absolute lg:right-[15%] lg:-top-15 lg:-bottom-15 z-30 w-full max-w-[350px] mx-auto lg:mx-0 h-[550px] lg:h-auto rounded-[2rem] overflow-hidden flex flex-col justify-between"
           >
             {/* Embedded Mockup Image */}
             <div className="relative w-full h-full">
@@ -201,7 +201,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="w-[210px] rounded-2xl bg-white p-3 shadow-xl flex items-center gap-3 text-xs"
+              className="w-[210px] rounded-full bg-white p-2 shadow-xl flex items-center gap-3 text-xs"
             >
               <div className="h-10 w-10 relative rounded-full overflow-hidden shrink-0">
                 <Image
@@ -219,38 +219,38 @@ export default function HeroSection() {
                 <span className="text-[9px] text-neutral-400">9:45 AM</span>
               </div>
             </motion.div>
-
-            {/* Bottom Trading Stats Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-[210px] rounded-2xl bg-white p-3 shadow-xl text-xs space-y-2"
-            >
-              <div className="flex items-center justify-between text-neutral-800 font-semibold">
-                <span>Today's Stats</span>
-                <button className="flex items-center gap-0.5 text-[9px] border rounded-full px-2 py-0.5 text-neutral-500">
-                  <Plus className="h-2.5 w-2.5" /> View
-                </button>
-              </div>
-
-              <div className="rounded-xl border border-neutral-100 p-2 flex justify-between items-center">
-                <div>
-                  <p className="font-semibold text-neutral-800 text-[11px]">Total Trades</p>
-                  <p className="text-[9px] text-neutral-400">12 executed</p>
-                </div>
-                <MoreVertical className="h-3 w-3 text-neutral-400" />
-              </div>
-
-              <div className="rounded-xl bg-[#ccff00] p-2 flex justify-between items-center text-black">
-                <div>
-                  <p className="font-semibold text-[11px]">Profit</p>
-                  <p className="text-[9px] text-black/70">+$1,245.00</p>
-                </div>
-                <MoreVertical className="h-3 w-3 text-black/70" />
-              </div>
-            </motion.div>
           </div>
+
+          {/* Bottom Trading Stats Card - Positioned at bottom of phone image */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="hidden lg:block absolute right-[3%] bottom-[0px] z-40 w-[210px] rounded-2xl bg-white p-3 shadow-xl text-xs space-y-2"
+          >
+            <div className="flex items-center justify-between text-neutral-800 font-semibold">
+              <span>Today's Stats</span>
+              <button className="flex items-center gap-0.5 text-[9px] border rounded-full px-2 py-0.5 text-neutral-500">
+                <Plus className="h-2.5 w-2.5" /> View
+              </button>
+            </div>
+
+            <div className="rounded-xl border border-neutral-100 p-2 flex justify-between items-center">
+              <div>
+                <p className="font-semibold text-neutral-800 text-[11px]">Total Trades</p>
+                <p className="text-[9px] text-neutral-400">12 executed</p>
+              </div>
+              <MoreVertical className="h-3 w-3 text-neutral-400" />
+            </div>
+
+            <div className="rounded-xl bg-[#ccff00] p-2 flex justify-between items-center text-black">
+              <div>
+                <p className="font-semibold text-[11px]">Profit</p>
+                <p className="text-[9px] text-black/70">+$1,245.00</p>
+              </div>
+              <MoreVertical className="h-3 w-3 text-black/70" />
+            </div>
+          </motion.div>
 
         </div>
       </div>

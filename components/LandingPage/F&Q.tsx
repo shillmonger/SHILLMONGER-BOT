@@ -100,7 +100,7 @@ function FAQItem({ faq, isOpen, onClick }: { faq: any; isOpen: boolean; onClick:
     >
       <div className="w-full flex items-center justify-between p-5 text-left">
         <span
-          className={`text-sm md:text-base font-bold tracking-tight transition-colors ${
+          className={`text-base md:text-base font-bold tracking-tight transition-colors ${
             isOpen ? "text-indigo-950" : "text-neutral-800 group-hover:text-neutral-900"
           }`}
         >
@@ -122,7 +122,7 @@ function FAQItem({ faq, isOpen, onClick }: { faq: any; isOpen: boolean; onClick:
       {isOpen && (
         <div className="px-6 pb-6 pt-0" onClick={(e) => e.stopPropagation()}>
           <div className="h-[1px] bg-neutral-100 mb-4" />
-          <p className="text-neutral-500 text-xs md:text-sm leading-relaxed font-normal">
+          <p className="text-neutral-500 text-sm md:text-sm leading-relaxed font-normal">
             {faq.answer}
           </p>
         </div>

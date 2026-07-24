@@ -31,7 +31,7 @@ export default function ThemeAndScroll({ children }: ThemeAndScrollProps) {
         href="#"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-2 sm:bottom-8 sm:right-4 z-50 flex items-center justify-center w-12 h-12 rounded-full
+        className="fixed bottom-6 right-2 sm:bottom-8 sm:right-2 z-50 flex items-center justify-center w-12 h-12 rounded-xl
           bg-gradient-to-tr from-indigo-600 via-indigo-500 to-indigo-400 text-white shadow-lg shadow-indigo-500/25 transition-all duration-300 
           hover:shadow-xl hover:shadow-indigo-500/40 hover:scale-110 active:scale-95 cursor-pointer focus:outline-none ring-1 ring-white/20"
         aria-label="Join Telegram"
@@ -47,7 +47,7 @@ export default function ThemeAndScroll({ children }: ThemeAndScrollProps) {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="
-            fixed bottom-22 right-2 sm:bottom-24 sm:right-4 z-[50]          
+            fixed bottom-22 right-2 sm:bottom-24 sm:right-2 z-[50]          
             bg-white/90 backdrop-blur-md text-neutral-800 border border-neutral-200/80
             w-12 h-12 rounded-full
             flex items-center justify-center
