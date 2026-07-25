@@ -175,7 +175,7 @@ export default function ProvidersPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
       <main className="flex-grow flex items-center justify-center">
-        <div className="w-full max-w-7xl space-y-8 sm:px-6">
+        <div className="w-full max-w-7xl space-y-5">
           
           {/* Welcome Section */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-black pb-3">
