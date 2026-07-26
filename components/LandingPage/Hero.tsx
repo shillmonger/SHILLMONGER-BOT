@@ -205,7 +205,7 @@ export default function HeroSection() {
             >
               <div className="h-10 w-10 relative rounded-full overflow-hidden shrink-0">
                 <Image
-                  src="/pfp.png"
+                  src="/pfp1.png"
                   alt="Avatar"
                   fill
                   className="object-cover"

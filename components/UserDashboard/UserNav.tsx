@@ -19,11 +19,11 @@ export default function UserNav() {
   const basePath = "/user-dashboard";
 
   const navItems = [
-    { name: "Home", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     { name: "Plans", icon: BadgeCheck, href: `${basePath}/subscription` },
     { name: "Sync MT5", icon: DatabasePlus, href: `${basePath}/mt5-connection` },
+    { name: "Dashboard", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     { name: "Sync Tg", icon: Send, href: `${basePath}/tg-setup` },
-    { name: "Predict", icon: ChartColumnBig, href: `#` },
+    // { name: "Predict", icon: ChartColumnBig, href: `#` },
     { name: "Settings", icon: Settings, href: `${basePath}/account-setting` },
   ];
 
@@ -38,7 +38,7 @@ export default function UserNav() {
         fixed bottom-0 left-0 right-0 z-50 
         flex justify-around items-center 
         bg-black
-        py-2.5 pb-safe-bottom px-2
+        py-2.5 pb-safe-bottom px-1
         lg:hidden select-none
       "
     >
@@ -57,7 +57,7 @@ export default function UserNav() {
             <div
               className={`
                 flex items-center justify-center 
-                w-12 h-12 rounded-xl mb-1.5 
+                w-10 h-10 rounded-lg mb-1 
                 transition-all duration-300
                 ${
                   active
@@ -73,7 +73,7 @@ export default function UserNav() {
 
             <span 
               className={`
-                text-[9px] font-black tracking-[0.15em] uppercase transition-opacity duration-300
+                text-[8px] font-black tracking-[0.15em] uppercase transition-opacity duration-300
                 ${active ? "text-indigo-400 opacity-100" : "text-neutral-400 opacity-60"}
               `}
             >

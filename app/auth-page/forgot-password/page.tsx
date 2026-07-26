@@ -138,7 +138,7 @@ export default function ForgotPasswordPage() {
       <main className="flex-grow flex items-center justify-center px-4 py-16 md:py-24">
         <div className="w-full max-w-md">
           {/* Modern Card with rounded corners and indigo accents */}
-          <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
+          <Card className="rounded-4xl bg-white text-neutral-950 border border-neutral-200 shadow-2xl shadow-indigo-950/50 overflow-hidden">
             <CardContent className="p-0">
               <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
@@ -149,7 +149,7 @@ export default function ForgotPasswordPage() {
                       {step === 2 && "Verify Code"}
                       {step === 3 && "Reset Password"}
                     </h1>
-                    <p className="text-sm text-neutral-400 mt-2 leading-relaxed max-w-[280px] mx-auto">
+                    <p className="text-sm text-neutral-600 mt-2 leading-relaxed max-w-[280px] mx-auto">
                       {step === 1 && "Enter your email to receive a reset code."}
                       {step === 2 && "Enter the 4-digit code sent to your email."}
                       {step === 3 && "Enter and confirm your new password."}
@@ -161,7 +161,7 @@ export default function ForgotPasswordPage() {
                     <div className="grid gap-2">
                       <Label
                         htmlFor="email"
-                        className="text-xs font-semibold tracking-wide text-neutral-300"
+                        className="text-xs font-semibold tracking-wide text-neutral-700"
                       >
                         User Email
                       </Label>
@@ -169,7 +169,7 @@ export default function ForgotPasswordPage() {
                         id="email"
                         name="email"
                         type="email"
-                        className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="shillmonger@example.com"
                         required
                         disabled={isLoading}
@@ -189,7 +189,7 @@ export default function ForgotPasswordPage() {
                           value={digit}
                           onChange={(e) => handleOtpChange(idx, e.target.value)}
                           onKeyDown={(e) => handleKeyDown(idx, e)}
-                          className="w-16 h-16 text-center text-2xl font-bold rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus:border-indigo-500 outline-none transition-all"
+                          className="w-16 h-16 text-center text-2xl font-bold rounded-xl border border-neutral-300 bg-white text-neutral-950 focus:border-indigo-500 outline-none transition-all"
                           disabled={isLoading}
                           required
                         />
@@ -203,7 +203,7 @@ export default function ForgotPasswordPage() {
                       <div className="grid gap-2">
                         <Label
                           htmlFor="password"
-                          className="text-xs font-semibold tracking-wide text-neutral-300"
+                          className="text-xs font-semibold tracking-wide text-neutral-700"
                         >
                           New Password
                         </Label>
@@ -212,7 +212,7 @@ export default function ForgotPasswordPage() {
                             id="password"
                             name="password"
                             type={showPassword ? "text" : "password"}
-                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                             placeholder="••••••••"
                             required
                             disabled={isLoading}
@@ -220,7 +220,7 @@ export default function ForgotPasswordPage() {
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white focus:outline-none cursor-pointer"
+                            className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
                             tabIndex={-1}
                           >
                             {showPassword ? (
@@ -235,7 +235,7 @@ export default function ForgotPasswordPage() {
                       <div className="grid gap-2">
                         <Label
                           htmlFor="confirmPassword"
-                          className="text-xs font-semibold tracking-wide text-neutral-300"
+                          className="text-xs font-semibold tracking-wide text-neutral-700"
                         >
                           Confirm Password
                         </Label>
@@ -244,7 +244,7 @@ export default function ForgotPasswordPage() {
                             id="confirmPassword"
                             name="confirmPassword"
                             type={showConfirmPassword ? "text" : "password"}
-                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                             placeholder="••••••••"
                             required
                             disabled={isLoading}
@@ -252,7 +252,7 @@ export default function ForgotPasswordPage() {
                           <button
                             type="button"
                             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white focus:outline-none cursor-pointer"
+                            className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
                             tabIndex={-1}
                           >
                             {showConfirmPassword ? (
@@ -273,14 +273,14 @@ export default function ForgotPasswordPage() {
                           className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
                             agreedToTerms
                               ? "bg-indigo-600 border-indigo-600 text-white"
-                              : "border-neutral-700 bg-neutral-900 hover:border-neutral-500"
+                              : "border-neutral-300 bg-white hover:border-neutral-400"
                           }`}
                         >
                           {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
                         </button>
                         <Label 
                       htmlFor="terms" 
-                      className="text-xs font-semibold text-neutral-400 select-none leading-tight cursor-pointer"
+                      className="text-xs font-semibold text-neutral-600 select-none leading-tight cursor-pointer"
                     >
                       I agree to the{" "}
                       <Link href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">
@@ -295,7 +295,7 @@ export default function ForgotPasswordPage() {
                   <div className="relative pt-2">
                     <Button
                       type="submit"
-                      className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full h-12 rounded-full text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       disabled={isLoading || (step === 3 && !agreedToTerms)}
                     >
                       {isLoading ? (
@@ -313,7 +313,7 @@ export default function ForgotPasswordPage() {
                 </div>
 
                 {/* login link */}
-                  <div className="text-center text-sm font-semibold text-neutral-400 mt-5">
+                  <div className="text-center text-sm font-semibold text-neutral-600 mt-5">
                     Don&apos;t have an account?{" "}
                     <Link 
                       href="/auth-page/login" 

@@ -73,7 +73,7 @@ export default function SignupPage() {
       <main className="flex-grow flex items-center justify-center px-4 py-10 md:py-10">
         <div className="w-full max-w-md">
           {/* Modern Card with rounded corners and indigo accents */}
-          <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
+          <Card className="rounded-4xl bg-white text-neutral-950 border border-neutral-200 shadow-2xl shadow-indigo-950/50 overflow-hidden">
             <CardContent className="p-0">
               <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
@@ -82,7 +82,7 @@ export default function SignupPage() {
                     <h1 className="text-3xl font-extrabold tracking-tight">
                       Create Account
                     </h1>
-                    <p className="text-sm text-neutral-400 mt-2">
+                    <p className="text-sm text-neutral-600 mt-2">
                       Enter your details below to get started
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="name" 
-                      className="text-xs font-semibold tracking-wide text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-700"
                     >
                       Username
                     </Label>
@@ -99,7 +99,7 @@ export default function SignupPage() {
                       id="name"
                       name="name"
                       type="text"
-                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       placeholder="shillmonger"
                       required
                       disabled={isLoading}
@@ -110,7 +110,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="email" 
-                      className="text-xs font-semibold tracking-wide text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-700"
                     >
                       User Email
                     </Label>
@@ -118,7 +118,7 @@ export default function SignupPage() {
                       id="email"
                       name="email"
                       type="email"
-                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       placeholder="shillmonger@example.com"
                       required
                       disabled={isLoading}
@@ -129,7 +129,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="password" 
-                      className="text-xs font-semibold tracking-wide text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-700"
                     >
                       Password
                     </Label>
@@ -138,7 +138,7 @@ export default function SignupPage() {
                         id="password"
                         name="password"
                         type={showPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}
@@ -146,7 +146,7 @@ export default function SignupPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white focus:outline-none cursor-pointer"
+                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
                         tabIndex={-1}
                       >
                         {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
@@ -158,7 +158,7 @@ export default function SignupPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="confirmPassword" 
-                      className="text-xs font-semibold tracking-wide text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-700"
                     >
                       Confirm Password
                     </Label>
@@ -167,7 +167,7 @@ export default function SignupPage() {
                         id="confirmPassword"
                         name="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         placeholder="••••••••"
                         required
                         disabled={isLoading}
@@ -175,7 +175,7 @@ export default function SignupPage() {
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white focus:outline-none cursor-pointer"
+                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
                         tabIndex={-1}
                       >
                         {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
@@ -192,14 +192,14 @@ export default function SignupPage() {
                       className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
                         agreedToTerms 
                           ? "bg-indigo-600 border-indigo-600 text-white" 
-                          : "border-neutral-700 bg-neutral-900 hover:border-neutral-500"
+                          : "border-neutral-300 bg-white hover:border-neutral-400"
                       }`}
                     >
                       {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
                     </button>
                     <Label 
                       htmlFor="terms" 
-                      className="text-xs font-semibold text-neutral-400 select-none leading-tight cursor-pointer"
+                      className="text-xs font-semibold text-neutral-600 select-none leading-tight cursor-pointer"
                     >
                       I agree to the{" "}
                       <Link href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">
@@ -212,7 +212,7 @@ export default function SignupPage() {
                   <div className="relative pt-2">
                     <Button 
                       type="submit" 
-                      className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed" 
+                      className="w-full h-12 rounded-full text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed" 
                       disabled={isLoading || !agreedToTerms}
                     >
                       {isLoading ? (
@@ -227,8 +227,8 @@ export default function SignupPage() {
                   </div>
 
                   {/* Divider Line */}
-                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-800">
-                    <span className="relative z-10 bg-neutral-900 px-3 text-neutral-400">
+                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-200">
+                    <span className="relative z-10 bg-white px-3 text-neutral-500">
                       Or continue with
                     </span>
                   </div>
@@ -238,10 +238,10 @@ export default function SignupPage() {
                     {/* X (formerly Twitter) */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
-                        className="h-4 w-4"
+                        className="h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +254,7 @@ export default function SignupPage() {
                     {/* Google */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
                         className="h-5 w-5"
@@ -284,10 +284,10 @@ export default function SignupPage() {
                     {/* Facebook */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
-                        className="h-4 w-4"
+                        className="h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -299,7 +299,7 @@ export default function SignupPage() {
                   </div>
 
                   {/* Sign In link */}
-                  <div className="text-center text-sm font-semibold text-neutral-400 mt-2">
+                  <div className="text-center text-sm font-semibold text-neutral-600 mt-2">
                     Already have an account?{" "}
                     <Link 
                       href="/auth-page/login" 

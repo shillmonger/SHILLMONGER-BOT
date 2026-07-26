@@ -273,7 +273,7 @@ export default function UserSettingsPage() {
             {/* Header Banner */}
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b-2 border-black pb-3 mb-6">
               <div>
-                <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950">
+                <h1 className="text-2xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-0 lg:mb-2">
                   Account Settings
                 </h1>
                 <p className="text-sm text-neutral-600 font-semibold max-w-xl leading-relaxed">
@@ -293,7 +293,7 @@ export default function UserSettingsPage() {
                   </h3>
                   <div className="flex flex-col items-center text-center justify-center">
                     <div className="relative">
-                      <div className="relative w-40 h-40 flex items-center text-center justify-center rounded-2xl overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
+                      <div className="relative w-40 h-40 flex items-center text-center justify-center rounded-xl overflow-hidden border-2 border-neutral-800 bg-neutral-900 shadow-lg mb-4">
                         {personalInfo.profileImage ? (
                           <img 
                             src={personalInfo.profileImage} 
@@ -315,7 +315,7 @@ export default function UserSettingsPage() {
                       {personalInfo.username || "User Account"}
                     </h4>
                     <p className="text-xs text-neutral-400 font-mono">
-                      @{personalInfo.username || "username"}
+                      {personalInfo.email || "user@example.com"}
                     </p>
                   </div>
 
@@ -341,15 +341,15 @@ export default function UserSettingsPage() {
                       </span>
                     </div>
                     <div className="flex justify-between items-center text-xs">
-                      <span className="font-bold text-neutral-400 uppercase">Referral ID</span>
-                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-lg font-black uppercase border border-neutral-700 text-[10px]">
-                        {personalInfo.referralId || 'N/A'}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-neutral-400 uppercase">Total Referrals</span>
                       <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-lg font-black uppercase border border-neutral-700 text-[10px]">
                         {personalInfo.totalReferrals || 0}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="font-bold text-neutral-400 uppercase">Referral ID</span>
+                      <span className="bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded-lg font-black uppercase border border-neutral-700 text-[10px]">
+                        {personalInfo.referralId || 'N/A'}
                       </span>
                     </div>
                   </div>

@@ -187,7 +187,7 @@ export default function SubscriptionPage() {
                   Premium Bot Plans
                 </span>
               </div>
-              <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
+              <h1 className="text-2xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-0 lg:mb-2">
                 Subscription
               </h1>
             </div>

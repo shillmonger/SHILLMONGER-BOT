@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import MetaTrader5 as mt5
 from core.database import db
 from core.logger import logger
+from mt5.copy_connector import MT5CopyConnector
 
 
 class TradeMonitor:
@@ -13,6 +14,7 @@ class TradeMonitor:
 
     def __init__(self, connector):
         self.connector = connector
+        self.copy_connector = MT5CopyConnector()
         self.running = False
 
     def start(self):
@@ -20,15 +22,24 @@ class TradeMonitor:
         self.running = True
         logger.success("Trade Monitor started")
 
-        while self.running:
-            try:
-                self.check_closed_trades()
-                time.sleep(10)  # Check every 10 seconds
-            except Exception as e:
-                logger.error(f"Trade Monitor error: {e}")
-                import traceback
-                logger.error(traceback.format_exc())
-                time.sleep(5)
+        # Initialize copy connector for user account access
+        if not self.copy_connector.initialize():
+            logger.error("Failed to initialize MT5 Copy Engine terminal for trade monitoring")
+            return
+
+        try:
+            while self.running:
+                try:
+                    self.check_closed_trades()
+                    time.sleep(10)  # Check every 10 seconds
+                except Exception as e:
+                    logger.error(f"Trade Monitor error: {e}")
+                    import traceback
+                    logger.error(traceback.format_exc())
+                    time.sleep(5)
+        finally:
+            # Shutdown copy connector when stopping
+            self.copy_connector.shutdown()
 
     def stop(self):
         """Stop the trade monitor."""
@@ -151,61 +162,85 @@ class TradeMonitor:
             # Handle backward compatibility for old database records
             user_order_ticket = activity.get("user_order_ticket") or activity.get("user_ticket")
             user_entry_deal = activity.get("user_entry_deal")
+            user_id = activity.get("user_id")
             
-            logger.info(f"Processing user trade: Order={user_order_ticket}, Entry Deal={user_entry_deal}")
+            logger.info(f"Processing user trade: Order={user_order_ticket}, Entry Deal={user_entry_deal}, User ID={user_id}")
 
-            # Get user trade history
-            user_history = mt5.history_deals_get(from_time, datetime.utcnow())
+            # Get user's MT5 account credentials from database
+            user_account = db.mt5_accounts_collection.find_one({"userId": user_id, "status": "connected"})
             
-            if user_history and len(user_history) > 0:
-                # Find the user entry deal to get its position ID
-                user_entry_deal_obj = None
-                for deal in user_history:
-                    if deal.ticket == user_entry_deal:
-                        user_entry_deal_obj = deal
-                        logger.info(f"Found user entry deal: {deal.ticket}, Position ID: {deal.position_id}")
-                        break
+            if not user_account:
+                logger.warning(f"No connected MT5 account found for user {user_id}")
+                continue
+            
+            login = int(user_account["mt5Login"])
+            password = user_account["password"]
+            server = user_account["server"]
+            
+            # Connect to user account
+            if not self.copy_connector.connect(login, password, server):
+                logger.error(f"Failed to connect to user account {login}")
+                continue
+            
+            logger.info(f"Connected to user account {login} to retrieve trade history")
 
-                if not user_entry_deal_obj:
-                    logger.warning(f"User entry deal {user_entry_deal} not found in history")
-                    continue
+            try:
+                # Get user trade history from their account
+                user_history = mt5.history_deals_get(from_time, datetime.utcnow())
+                
+                if user_history and len(user_history) > 0:
+                    # Find the user entry deal to get its position ID
+                    user_entry_deal_obj = None
+                    for deal in user_history:
+                        if deal.ticket == user_entry_deal:
+                            user_entry_deal_obj = deal
+                            logger.info(f"Found user entry deal: {deal.ticket}, Position ID: {deal.position_id}")
+                            break
 
-                # Find all deals with the same position ID (entry + all closes)
-                user_position_id = user_entry_deal_obj.position_id
-                user_related_deals = []
-                for deal in user_history:
-                    if deal.position_id == user_position_id:
-                        user_related_deals.append(deal)
-                        logger.info(f"Found user related deal: {deal.ticket}, Type: {deal.type}, Profit: {deal.profit}")
+                    if not user_entry_deal_obj:
+                        logger.warning(f"User entry deal {user_entry_deal} not found in history")
+                        continue
 
-                if not user_related_deals:
-                    logger.warning(f"No deals found with user position ID {user_position_id}")
-                    continue
+                    # Find all deals with the same position ID (entry + all closes)
+                    user_position_id = user_entry_deal_obj.position_id
+                    user_related_deals = []
+                    for deal in user_history:
+                        if deal.position_id == user_position_id:
+                            user_related_deals.append(deal)
+                            logger.info(f"Found user related deal: {deal.ticket}, Type: {deal.type}, Profit: {deal.profit}")
 
-                user_total_profit = 0.0
-                user_total_commission = 0.0
-                user_total_swap = 0.0
+                    if not user_related_deals:
+                        logger.warning(f"No deals found with user position ID {user_position_id}")
+                        continue
 
-                for deal in user_related_deals:
-                    user_total_profit += deal.profit
-                    user_total_commission += deal.commission if hasattr(deal, 'commission') else 0
-                    user_total_swap += deal.swap if hasattr(deal, 'swap') else 0
+                    user_total_profit = 0.0
+                    user_total_commission = 0.0
+                    user_total_swap = 0.0
 
-                user_net_profit = user_total_profit + user_total_commission + user_total_swap
+                    for deal in user_related_deals:
+                        user_total_profit += deal.profit
+                        user_total_commission += deal.commission if hasattr(deal, 'commission') else 0
+                        user_total_swap += deal.swap if hasattr(deal, 'swap') else 0
 
-                logger.info(
-                    f"User trade {user_order_ticket} P&L: "
-                    f"Profit={user_total_profit:.2f}, Net={user_net_profit:.2f}"
-                )
+                    user_net_profit = user_total_profit + user_total_commission + user_total_swap
 
-                # Update trade activity
-                db.update_trade_activity(user_order_ticket, {
-                    "status": "CLOSED",
-                    "profit": user_net_profit
-                })
+                    logger.info(
+                        f"User trade {user_order_ticket} P&L: "
+                        f"Profit={user_total_profit:.2f}, Net={user_net_profit:.2f}"
+                    )
 
-                logger.success(
-                    f"User trade {user_order_ticket} closed | Net Profit: ${user_net_profit:.2f}"
-                )
-            else:
-                logger.warning(f"No history found for user trade {user_order_ticket}")
+                    # Update trade activity
+                    db.update_trade_activity(user_order_ticket, {
+                        "status": "CLOSED",
+                        "profit": user_net_profit
+                    })
+
+                    logger.success(
+                        f"User trade {user_order_ticket} closed | Net Profit: ${user_net_profit:.2f}"
+                    )
+                else:
+                    logger.warning(f"No history found for user trade {user_order_ticket}")
+            finally:
+                # Disconnect from user account
+                self.copy_connector.disconnect()
+                logger.info(f"Disconnected from user account {login}")

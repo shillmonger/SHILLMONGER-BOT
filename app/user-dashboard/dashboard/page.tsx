@@ -129,7 +129,7 @@ export default function DashboardPage() {
               <p className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-1">
                 {greeting},
               </p>
-              <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
+              <h1 className="text-2xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-0 lg:mb-2">
                 {userData?.username || 'Loading...'}
               </h1>
             </div>

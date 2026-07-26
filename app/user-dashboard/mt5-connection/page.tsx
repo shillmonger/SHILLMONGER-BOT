@@ -281,7 +281,7 @@ export default function MT5ConnectionPage() {
               <p className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-1">
                 SYSTEM configuration
               </p>
-              <h1 className="text-4xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-2">
+              <h1 className="text-2xl md:text-3xl font-mono font-black uppercase text-neutral-950 mb-0 lg:mb-2">
                 MT5 Connection
               </h1>
             </div>

@@ -55,7 +55,7 @@ export default function LoginPage() {
       <main className="flex-grow flex items-center justify-center px-4 py-10 md:py-10">
         <div className="w-full max-w-md">
           {/* Modern Card with rounded corners and indigo accents */}
-          <Card className="rounded-4xl bg-neutral-900 text-white border border-neutral-800 shadow-2xl shadow-indigo-950/50 overflow-hidden">
+          <Card className="rounded-4xl bg-white text-neutral-950 border border-neutral-200 shadow-2xl shadow-indigo-950/50 overflow-hidden">
             <CardContent className="p-0">
               <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
@@ -64,7 +64,7 @@ export default function LoginPage() {
                     <h1 className="text-3xl font-extrabold tracking-tight">
                       Welcome Back
                     </h1>
-                    <p className="text-sm text-neutral-400 mt-2">
+                    <p className="text-sm text-neutral-600 mt-2">
                       Login to your account
                     </p>
                   </div>
@@ -73,14 +73,14 @@ export default function LoginPage() {
                   <div className="grid gap-2">
                     <Label 
                       htmlFor="email" 
-                      className="text-xs font-semibold tracking-wide text-neutral-300"
+                      className="text-xs font-semibold tracking-wide text-neutral-700"
                     >
                       Email or Username
                     </Label>
                     <Input
                       id="email"
                       name="email"
-                      className="h-12 text-sm p-5 rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                      className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                       type="text"
                       placeholder="email or username"
                       disabled={isLoading}
@@ -93,13 +93,13 @@ export default function LoginPage() {
                     <div className="flex items-center justify-between">
                       <Label 
                         htmlFor="password" 
-                        className="text-xs font-semibold tracking-wide text-neutral-300"
+                        className="text-xs font-semibold tracking-wide text-neutral-700"
                       >
                         Password
                       </Label>
                       <Link
                         href="/auth-page/forgot-password"
-                        className="text-xs font-semibold text-neutral-400 hover:text-indigo-400 transition-colors"
+                        className="text-xs font-semibold text-indigo-400 transition-colors"
                       >
                         Forgot password?
                       </Link>
@@ -109,7 +109,7 @@ export default function LoginPage() {
                       <Input
                         id="password"
                         name="password"
-                        className="h-12 pr-12 p-5 text-sm rounded-xl border border-neutral-700 bg-neutral-950/50 text-white focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
+                        className="h-12 pr-12 p-5 text-sm rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
                         disabled={isLoading}
@@ -118,7 +118,7 @@ export default function LoginPage() {
                       <button
                         type="button"
                         onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white focus:outline-none cursor-pointer"
+                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
                         tabIndex={-1}
                       >
                         {showPassword ? (
@@ -134,7 +134,7 @@ export default function LoginPage() {
                   <div className="relative pt-2">
                     <Button
                       type="submit"
-                      className="w-full h-12 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all"
+                      className="w-full h-12 rounded-full text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all"
                       disabled={isLoading}
                     >
                       {isLoading ? (
@@ -149,8 +149,8 @@ export default function LoginPage() {
                   </div>
 
                   {/* Divider Line */}
-                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-800">
-                    <span className="relative z-10 bg-neutral-900 px-3 text-neutral-400">
+                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-200">
+                    <span className="relative z-10 bg-white px-3 text-neutral-500">
                       Or continue with
                     </span>
                   </div>
@@ -160,10 +160,10 @@ export default function LoginPage() {
                     {/* X (formerly Twitter) */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
-                        className="h-4 w-4"
+                        className="h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ export default function LoginPage() {
                     {/* Google */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
                         className="h-5 w-5"
@@ -206,10 +206,10 @@ export default function LoginPage() {
                     {/* Facebook */}
                     <Button
                       type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-neutral-900 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 transition-all"
+                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
                     >
                       <svg
-                        className="h-4 w-4"
+                        className="h-5 w-5"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ export default function LoginPage() {
                   </div>
 
                   {/* Register link */}
-                  <div className="text-center text-sm font-semibold text-neutral-400 mt-2">
+                  <div className="text-center text-sm font-semibold text-neutral-600 mt-2">
                     Don&apos;t have an account?{" "}
                     <Link 
                       href="/auth-page/register" 

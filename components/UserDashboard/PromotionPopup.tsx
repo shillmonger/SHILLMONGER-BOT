@@ -127,7 +127,7 @@ export default function PromotionPopup({ isOpen, onClose }: { isOpen: boolean; o
 
           {/* Action Button */}
           <Link href="#" onClick={onClose}>
-            <button className="w-full cursor-pointer bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-2xl shadow-lg shadow-indigo-600/30 transition-all duration-300 flex items-center justify-center gap-2">
+            <button className="w-full cursor-pointer bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold text-xs uppercase tracking-widest py-3.5 px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-2">
               Predict Gold Now
               <ArrowUpRight className="w-4 h-4" />
             </button>

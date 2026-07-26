@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Hero from "../components/LandingPage/Hero";
 import HowWeWork from "../components/LandingPage/HowWeWork";
 import FQ from "@/components/LandingPage/F&Q";
+import END from "../components/LandingPage/end";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Hero />
       <HowWeWork />
       <FQ />
+      <END />
     </div>
   );
 }

@@ -114,8 +114,6 @@ export default function UserMobileHeader({
       <div className="flex items-center gap-2.5">
         {/* Setting Icon Button */}
         <button
-          onClick={onNotificationClick || onRightClick}
-          aria-label="Setting"
           className="
             relative cursor-pointer p-2 rounded-xl
             bg-indigo-950/40 hover:bg-indigo-900/60
@@ -144,7 +142,7 @@ export default function UserMobileHeader({
             transition-all duration-200
           "
         >
-          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+          <div className="relative w-10 h-10 rounded-xl overflow-hidden">
             <img
               src={profileImage}
               alt="User Profile Avatar"
