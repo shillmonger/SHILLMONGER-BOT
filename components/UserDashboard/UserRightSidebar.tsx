@@ -169,7 +169,7 @@ export default function UserRightSidebar({
             <img
               src={userDb.profileImage}
               alt={userDb.username}
-              className="w-20 h-20 border border-indigo-700 object-cover rounded-xl"
+              className="w-20 h-20 border border-indigo-700 object-cover rounded-full"
             />
           ) : (
             <div className="w-20 h-20 bg-indigo-900 border border-indigo-700 flex items-center justify-center rounded-full">
@@ -255,7 +255,7 @@ export default function UserRightSidebar({
               color: mt5Loading ? "neutral" : mt5Account?.status === 'connected' ? "emerald" : "red"
             },
           ].map((status, index) => (
-            <div key={index} className="border border-indigo-900/50 bg-indigo-950/20 p-2.5 flex flex-col justify-between rounded-xl">
+            <div key={index} className="border border-indigo-900/50 bg-indigo-950/20 p-2.5 flex flex-col justify-between rounded-lg">
               <span className="text-[8px] font-black uppercase tracking-widest text-neutral-500 leading-tight mb-1">{status.label}</span>
               <div className="flex items-center gap-1.5">
                 {/* Change this line by adding flex-shrink-0 */}
@@ -308,7 +308,7 @@ export default function UserRightSidebar({
           <div className="text-[10px] text-neutral-500">No active subscription</div>
         )}
         <Link href="/user-dashboard/subscription" onClick={() => setSidebarOpen(false)}>
-        <button className="w-full text-center py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
+        <button className="w-full text-center py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-full cursor-pointer">
           {subscription ? 'Manage Plan' : 'Upgrade Plan'}
         </button>
         </Link>
@@ -345,7 +345,7 @@ export default function UserRightSidebar({
           </div>
         </div>
         <Link href="/user-dashboard/mt5-connection" onClick={() => setSidebarOpen(false)}>
-          <button className="w-full text-center py-2 border border-indigo-800 bg-indigo-900 hover:bg-indigo-800 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
+          <button className="w-full text-center py-2 border border-indigo-800 bg-indigo-900 hover:bg-indigo-800 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-full cursor-pointer">
             Manage MT5
           </button>
         </Link>
@@ -358,21 +358,21 @@ export default function UserRightSidebar({
 
         <div className="flex flex-col gap-2">
           <Link href="/user-dashboard/transactions" onClick={() => setSidebarOpen(false)}>
-            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
-              <History className="w-3.5 h-3.5 text-neutral-400" /> Transactions
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-full cursor-pointer">
+              Transactions
             </button>
           </Link>
 
           <Link href="/user-dashboard/account-setting" onClick={() => setSidebarOpen(false)}>
-            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
-              <Settings className="w-3.5 h-3.5 text-neutral-400" /> Profile Setting
+            <button className="w-full flex items-center justify-center gap-2 py-2.5 border border-indigo-800 hover:bg-indigo-900/30 text-indigo-300 text-[10px] font-black uppercase tracking-widest transition-colors rounded-full cursor-pointer">
+               Profile Setting
             </button>
           </Link>
 
           {userDb?.role === 'admin' && (
             <Link href="/admin-dashboard/dashboard" onClick={() => setSidebarOpen(false)}>
-              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-xl cursor-pointer">
-                <LayoutDashboard className="w-3.5 h-3.5" /> Switch to Admin
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-black uppercase tracking-widest transition-colors rounded-full cursor-pointer">
+                 Switch to Admin
               </button>
             </Link>
           )}

@@ -145,7 +145,7 @@ export default function DashboardPage() {
 
 
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
             {statsCards.map((card, index) => (
               <Card key={index} className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none ">
                 <CardContent className="px-5">

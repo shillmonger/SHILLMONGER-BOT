@@ -419,7 +419,7 @@ export default function UserSidebar({
                             <Link
                               key={child.name}
                               href={child.href}
-                              className={`group flex items-center gap-3 px-3 py-2 rounded-lg border border-transparent transition-all duration-200 ${
+                              className={`group flex items-center gap-3 px-3 py-2 rounded-full border border-transparent transition-all duration-200 ${
                                 childActive
                                   ? "bg-indigo-600 text-white font-black border-indigo-500 shadow-lg shadow-indigo-500/30"
                                   : "text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300"
