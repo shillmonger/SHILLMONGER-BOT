@@ -9,6 +9,7 @@ from pathlib import Path
 import asyncio
 import MetaTrader5 as mt5
 from pydantic import BaseModel
+from typing import Optional
 
 class MT5ValidationRequest(BaseModel):
     server: str
@@ -17,19 +18,19 @@ class MT5ValidationRequest(BaseModel):
 
 class CloseTradeRequest(BaseModel):
     ticket: int
-    user_id: str = None  # Optional: if provided, only close for specific user
+    user_id: Optional[str] = None  # Optional: if provided, only close for specific user
 
 class CloseAllTradesRequest(BaseModel):
-    user_id: str = None  # Optional: if provided, only close for specific user
-    symbol: str = None  # Optional: if provided, only close specific symbol
+    user_id: Optional[str] = None  # Optional: if provided, only close for specific user
+    symbol: Optional[str] = None  # Optional: if provided, only close specific symbol
 
 class CancelPendingRequest(BaseModel):
     ticket: int
-    user_id: str = None
+    user_id: Optional[str] = None
 
 class CancelAllPendingRequest(BaseModel):
-    user_id: str = None
-    symbol: str = None
+    user_id: Optional[str] = None
+    symbol: Optional[str] = None
 
 app = FastAPI(title="Shillmonger Bot API")
 
@@ -304,7 +305,7 @@ async def get_pending_orders():
                             "symbol": order.symbol,
                             "type": order.type,
                             "type_str": get_order_type_string(order.type),
-                            "volume": order.volume,
+                            "volume": order.volume_current,
                             "price": order.price,
                             "sl": order.sl,
                             "tp": order.tp,

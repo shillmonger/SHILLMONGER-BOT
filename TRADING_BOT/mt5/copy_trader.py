@@ -1,4 +1,5 @@
 import MetaTrader5 as mt5
+import time
 from core.logger import logger
 from core.models import TradeResult
 
@@ -12,6 +13,36 @@ class MT5CopyTrader:
 
     def __init__(self, connector):
         self.connector = connector
+
+    def get_valid_tick(self, symbol: str, max_retries: int = 3, retry_delay: float = 0.5):
+        """
+        Get valid tick data for a symbol with retries.
+        Returns None if unable to get valid tick data after retries.
+        """
+        for attempt in range(max_retries):
+            tick = mt5.symbol_info_tick(symbol)
+            
+            if tick is None:
+                if attempt < max_retries - 1:
+                    logger.warning(f"Tick data is None for {symbol}, retrying ({attempt + 1}/{max_retries})...")
+                    time.sleep(retry_delay)
+                    continue
+                else:
+                    return None
+            
+            # Check if prices are valid (non-zero)
+            if tick.ask > 0 and tick.bid > 0:
+                return tick
+            
+            if attempt < max_retries - 1:
+                logger.warning(f"Invalid tick prices for {symbol} (ask={tick.ask}, bid={tick.bid}), retrying ({attempt + 1}/{max_retries})...")
+                time.sleep(retry_delay)
+                continue
+            else:
+                logger.error(f"Invalid tick prices for {symbol} after {max_retries} retries (ask={tick.ask}, bid={tick.bid})")
+                return None
+        
+        return None
 
     def execute_copy_trade(self, master_trade, lot_size: float) -> TradeResult:
         """
@@ -41,12 +72,12 @@ class MT5CopyTrader:
                     message=f"Unable to select {symbol}."
                 )
 
-        tick = mt5.symbol_info_tick(symbol)
+        tick = self.get_valid_tick(symbol)
 
         if tick is None:
             return TradeResult(
                 success=False,
-                message="Unable to obtain market price."
+                message="Unable to obtain valid market price after retries."
             )
 
         # Determine order type and price based on master trade

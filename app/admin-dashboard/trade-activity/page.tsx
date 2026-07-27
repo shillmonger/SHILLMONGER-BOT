@@ -102,22 +102,22 @@ export default function TradeActivityPage() {
   };
 
   return (
-    <div className="text-white">
+    <div className="bg-white text-neutral-950 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl text-black font-black uppercase tracking-tighter mb-2">
+            <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">
               Trade Activity
             </h1>
-            <p className="text-neutral-400 text-sm">
+            <p className="text-neutral-500 text-sm">
               View and manage all user trade activities
             </p>
           </div>
           <button
             onClick={handleDeleteAll}
             disabled={loading || tradeActivities.length === 0 || deletingAll}
-            className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-none transition-all duration-300 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white border border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white border border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {deletingAll ? (
               <>
@@ -143,12 +143,12 @@ export default function TradeActivityPage() {
             No trade activities found
           </div>
         ) : (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-none overflow-hidden">
+          <div className="bg-neutral-950 border-2 border-black rounded-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-950">
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       User ID
                     </th>
                     <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
@@ -192,27 +192,27 @@ export default function TradeActivityPage() {
                 <tbody>
                   {tradeActivities.map((trade) => (
                     <tr key={trade._id} className="border-b border-neutral-800 hover:bg-neutral-800/50 transition-colors">
-                      <td className="p-4 text-sm font-mono">{trade.user_id}</td>
-                      <td className="p-4 text-sm font-mono">{trade.master_order_ticket}</td>
-                      <td className="p-4 text-sm font-mono">{trade.user_order_ticket || '—'}</td>
-                      <td className="p-4 text-sm font-bold">{trade.symbol}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.user_id}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.master_order_ticket}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.user_order_ticket || '—'}</td>
+                      <td className="p-4 text-sm font-bold text-white">{trade.symbol}</td>
                       <td className={`p-4 text-sm font-black ${getTypeColor(trade.type)}`}>{trade.type}</td>
-                      <td className="p-4 text-sm font-mono">{trade.entry?.toFixed(2) || '—'}</td>
-                      <td className="p-4 text-sm font-mono">{trade.lot?.toFixed(2) || '—'}</td>
-                      <td className="p-4 text-sm font-mono">{trade.sl?.toFixed(2) || '—'}</td>
-                      <td className="p-4 text-sm font-mono text-xs">{trade.tp?.join(', ') || '—'}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.entry?.toFixed(2) || '—'}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.lot?.toFixed(2) || '—'}</td>
+                      <td className="p-4 text-sm font-mono text-white">{trade.sl?.toFixed(2) || '—'}</td>
+                      <td className="p-4 text-sm font-mono text-xs text-white">{trade.tp?.join(', ') || '—'}</td>
                       <td className="p-4">
-                        <span className={`text-[9px] px-2 py-1 font-black border ${getStatusColor(trade.status)}`}>
+                        <span className={`text-[9px] px-2 py-1 font-black border rounded-full ${getStatusColor(trade.status)}`}>
                           {trade.status}
                         </span>
                       </td>
                       <td className={`p-4 text-sm font-mono ${trade.profit != null && trade.profit >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                         {trade.profit != null ? `${trade.profit >= 0 ? '+' : ''}${trade.profit.toFixed(2)}` : '—'}
                       </td>
-                      <td className="p-4 text-sm text-neutral-400">
+                      <td className="p-4 text-sm text-white">
                         {trade.created_at ? new Date(trade.created_at).toLocaleDateString() : '—'}
                       </td>
-                      <td className="p-4 text-sm text-neutral-400">
+                      <td className="p-4 text-sm text-white">
                         {trade.closed_at ? new Date(trade.closed_at).toLocaleDateString() : '—'}
                       </td>
                     </tr>
@@ -231,7 +231,7 @@ export default function TradeActivityPage() {
           onClick={() => setShowConfirmModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-md relative"
+            className="bg-neutral-950 border-2 border-black rounded-xl shadow-none w-full max-w-md relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 space-y-4">
@@ -247,13 +247,13 @@ export default function TradeActivityPage() {
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={() => setShowConfirmModal(false)}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDeleteAll}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
                 >
                   Confirm
                 </button>

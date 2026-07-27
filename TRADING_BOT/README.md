@@ -170,8 +170,8 @@ Copy-Item -Path "C:\Program Files\MetaTrader 5" -Destination "C:\Program Files\M
 1. Launch `C:\Program Files\MT5_Validator\terminal64.exe`
 2. Close any login dialogs (will be used programmatically)
 3. Enable "Allow algorithmic trading" in Tools → Options → Expert Advisors
-4. Enable "Disable algorithmic trading when the account has been changed"
-5. Enable "Disable algorithmic trading when the profile has been changed"
+4. Don't Enable "Disable algorithmic trading when the account has been changed"
+5. Don't Enable "Disable algorithmic trading when the profile has been changed"
 6. Enable "Allow DLL imports"
 7. Enable "Allow WebRequest" for required URLs
 8. No permanent login required - used for temporary validation only

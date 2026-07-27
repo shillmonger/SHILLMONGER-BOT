@@ -83,22 +83,22 @@ export default function CopyJobsPage() {
   };
 
   return (
-    <div className="text-white">
+    <div className="bg-white text-neutral-950 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl text-black font-black uppercase tracking-tighter mb-2">
+            <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">
               Copy Jobs
             </h1>
-            <p className="text-neutral-400 text-sm">
+            <p className="text-neutral-500 text-sm">
               View and manage all copy job execution records
             </p>
           </div>
           <button
             onClick={handleDeleteAll}
             disabled={loading || copyJobs.length === 0 || deletingAll}
-            className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-none transition-all duration-300 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white border border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white border border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {deletingAll ? (
               <>
@@ -124,12 +124,12 @@ export default function CopyJobsPage() {
             No copy jobs found
           </div>
         ) : (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-none overflow-hidden">
+          <div className="bg-neutral-950 border-2 border-black rounded-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-950">
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Master Ticket
                     </th>
                     <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
@@ -152,18 +152,18 @@ export default function CopyJobsPage() {
                 <tbody>
                   {copyJobs.map((job) => (
                     <tr key={job._id} className="border-b border-neutral-800 hover:bg-neutral-800/50 transition-colors">
-                      <td className="p-4 text-sm font-mono">{job.master_order_ticket}</td>
+                      <td className="p-4 text-sm font-mono text-white">{job.master_order_ticket}</td>
                       <td className="p-4">
-                        <span className={`text-[9px] px-2 py-1 font-black border ${getStateColor(job.state)}`}>
+                        <span className={`text-[9px] px-2 py-1 font-black border rounded-full ${getStateColor(job.state)}`}>
                           {job.state}
                         </span>
                       </td>
                       <td className="p-4 text-sm font-mono text-emerald-400">{job.users_processed}</td>
                       <td className="p-4 text-sm font-mono text-rose-400">{job.users_failed}</td>
-                      <td className="p-4 text-sm text-neutral-400">
+                      <td className="p-4 text-sm text-white">
                         {new Date(job.started_at).toLocaleString()}
                       </td>
-                      <td className="p-4 text-sm text-neutral-400">
+                      <td className="p-4 text-sm text-white">
                         {job.finished_at ? new Date(job.finished_at).toLocaleString() : '—'}
                       </td>
                     </tr>
@@ -182,7 +182,7 @@ export default function CopyJobsPage() {
           onClick={() => setShowConfirmModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-md relative"
+            className="bg-neutral-950 border-2 border-black rounded-xl shadow-none w-full max-w-md relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 space-y-4">
@@ -198,13 +198,13 @@ export default function CopyJobsPage() {
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={() => setShowConfirmModal(false)}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDeleteAll}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
                 >
                   Confirm
                 </button>

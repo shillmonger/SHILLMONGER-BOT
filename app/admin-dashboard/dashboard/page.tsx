@@ -21,7 +21,7 @@ export default function AdminDashboardPage() {
       label: "Total Users",
       icon: Users,
       iconColor: "text-neutral-400",
-      value: "1,247",
+      value: "0.00",
       valueColor: "text-white",
       subtitle: "Registered Accounts",
     },
@@ -29,7 +29,7 @@ export default function AdminDashboardPage() {
       label: "Total Revenue",
       icon: DollarSign,
       iconColor: "text-emerald-400",
-      value: "$45,230.00",
+      value: "0.00",
       valueColor: "text-emerald-400",
       subtitle: "This Month",
     },
@@ -37,7 +37,7 @@ export default function AdminDashboardPage() {
       label: "Active Trades",
       icon: Activity,
       iconColor: "text-neutral-400",
-      value: "342",
+      value: "0.00",
       valueColor: "text-white",
       subtitle: "Across All Users",
     },
@@ -81,7 +81,7 @@ export default function AdminDashboardPage() {
                 Dashboard Overview
               </h1>
             </div>
-            <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex-shrink-0">
+            <div className="bg-neutral-950 text-white border-2 border-black px-4 py-2 text-right shadow-none rounded-xl flex-shrink-0">
               <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 block">
                 System Time
               </span>
@@ -94,7 +94,7 @@ export default function AdminDashboardPage() {
           {/* Statistics Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {adminStats.map((card, index) => (
-              <Card key={index} className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <Card key={index} className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
                 <CardContent className="px-5">
                   <div className="flex justify-between items-start mb-4">
                     <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400">
@@ -114,7 +114,7 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* System Status Card */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
             <CardContent className="px-6 space-y-6">
               <div className="border-b border-neutral-800 pb-3 flex items-center justify-between">
                 <h2 className="text-lg font-black uppercase tracking-tighter">
@@ -136,12 +136,12 @@ export default function AdminDashboardPage() {
                 ].map((row, index) => (
                   <div 
                     key={index} 
-                    className="flex items-center justify-between p-3 bg-neutral-900/60 border border-neutral-800/80"
+                    className="flex items-center justify-between p-3 bg-neutral-900/60 border border-neutral-800/80 rounded-xl"
                   >
                     <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-400">
                       {row.label}
                     </span>
-                    <span className={`text-[10px] font-black uppercase px-2 py-0.5 border ${
+                    <span className={`text-[10px] font-black uppercase px-2 py-0.5 border rounded-full ${
                       row.positive === true 
                         ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
                         : "bg-red-500/10 text-red-400 border-red-500/20"
@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
           </Card>
 
           {/* Recent Alerts */}
-          <Card className="rounded-none bg-neutral-950 text-white border-2 border-black shadow-none lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+          <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none">
             <CardContent className="px-6">
               <div className="border-b border-neutral-800 pb-3 mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-black uppercase tracking-tighter">
@@ -173,7 +173,7 @@ export default function AdminDashboardPage() {
                 ].map((alert, index) => (
                   <div 
                     key={index} 
-                    className="flex items-center justify-between p-3 bg-neutral-900/40 border border-neutral-800"
+                    className="flex items-center justify-between p-3 bg-neutral-900/40 border border-neutral-800 rounded-xl"
                   >
                     <span className="text-xs font-semibold text-neutral-300">
                       {alert.message}

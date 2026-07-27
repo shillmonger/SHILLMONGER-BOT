@@ -10,7 +10,7 @@ import {
   BadgeCheck,
   History,
   CircleGauge,
-  Gem,
+  ShieldCogCorner,
   Scale,
   Shield,
   Users,
@@ -97,26 +97,14 @@ export default function AdminSidebar({
     { name: "Overview", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     { name: "TG Provider", icon: Send, href: `${basePath}/providers` },
     { name: "Subscriptions", icon: BadgeCheck, href: `${basePath}/subscription` },
-    { name: "MT5 Accounts", icon: BadgeCheck, href: `${basePath}/mt5-accounts` },
-    { name: "Trades Actions", icon: BadgeCheck, href: `${basePath}/trades-actions` },
+    { name: "MT5 Accounts", icon: Users, href: `${basePath}/mt5-accounts` },
+    { name: "Trades Actions", icon: History, href: `${basePath}/trades-actions` },
+    { name: "Stop lose", icon: ShieldCogCorner, href: `${basePath}/stop-loss` },
     { name: "Master trades", icon: Server, href: `${basePath}/master-trades` },
     { name: "Copy jobs", icon: Tags, href: `${basePath}/copy-jobs` },
     { name: "Trade activity", icon: ScreenShare, href: `${basePath}/trade-activity` },
     { name: "Lot size settings", icon: Scale, href: `${basePath}/lot-size` },
     { name: "Position limits", icon: CircleGauge, href: `${basePath}/position-limits` },
-    { name: "Stop lose", icon: CircleGauge, href: `${basePath}/stop-loss` },
-
-    // === MANAGEMENT === userside
-    
-    // { name: "User Directory", icon: UserRound, href: `${basePath}/subscribers` },
-
-    // === ANALYTICS & MONITORING ===
-    // { name: "Platform Growth", icon: BarChart3, href: `${basePath}/analytics` },
-    // { name: "System Audit Logs", icon: ScrollText, href: `${basePath}/activity-logs` },
-
-    // === SYSTEM ===
-    // { name: "Core Server Cluster", icon: Server, href: `${basePath}/system-status` },
-    // { name: "Global Settings", icon: Settings, href: `${basePath}/settings` },
   ];
 
   // Auto-expand groups containing active pathnames
@@ -428,28 +416,6 @@ export default function AdminSidebar({
 
             {/* Mobile Footer Links */}
             <div className="flex-shrink-0 border-t border-indigo-900/50 px-4 py-2 space-y-1">
-              <Link
-                href={`${basePath}/support`}
-                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <HelpCircle className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                <span className="text-[12px] font-black uppercase tracking-widest">
-                  Support
-                </span>
-              </Link>
-
-              <Link
-                href={`${basePath}/documentation`}
-                className="flex items-center w-full px-4 py-2 text-neutral-400 hover:bg-indigo-900/30 hover:text-indigo-300 transition-all rounded-xl group"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <FileText className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                <span className="text-[12px] font-black uppercase tracking-widest">
-                  Documentation
-                </span>
-              </Link>
-
               <button
                 onClick={() => {
                   setSidebarOpen(false);

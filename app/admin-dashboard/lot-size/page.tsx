@@ -165,20 +165,20 @@ export default function LotSizePage() {
   };
 
   return (
-    <div className="text-white">
+    <div className="bg-white text-neutral-950 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl text-black font-black uppercase tracking-tighter mb-2">
+          <h1 className="text-3xl font-black uppercase tracking-tighter mb-2">
             Lot Size Management
           </h1>
-          <p className="text-neutral-400 text-sm">
+          <p className="text-neutral-500 text-sm">
             Create and manage lot size rules based on account balance
           </p>
         </div>
 
         {/* Create Form */}
-        <div className="bg-neutral-900 border border-neutral-800 rounded-none p-6 mb-8">
+        <div className="bg-neutral-950 border-2 border-black rounded-xl p-6 mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-black uppercase tracking-tighter flex items-center gap-2">
               {isEditMode ? (
@@ -197,7 +197,7 @@ export default function LotSizePage() {
               <button
                 type="button"
                 onClick={handleCancelEdit}
-                className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white border border-neutral-700 transition-colors"
+                className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white border border-neutral-700 transition-colors rounded-xl"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -213,7 +213,7 @@ export default function LotSizePage() {
                 step="0.01"
                 value={formData.min_balance}
                 onChange={(e) => setFormData({ ...formData, min_balance: e.target.value })}
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-none px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
                 placeholder="10"
                 required
               />
@@ -227,7 +227,7 @@ export default function LotSizePage() {
                 step="0.01"
                 value={formData.max_balance}
                 onChange={(e) => setFormData({ ...formData, max_balance: e.target.value })}
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-none px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
                 placeholder="49"
                 required
               />
@@ -241,7 +241,7 @@ export default function LotSizePage() {
                 step="0.01"
                 value={formData.lot_size}
                 onChange={(e) => setFormData({ ...formData, lot_size: e.target.value })}
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-none px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
+                className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-white transition-colors"
                 placeholder="0.01"
                 required
               />
@@ -250,7 +250,7 @@ export default function LotSizePage() {
               <button
                 type="submit"
                 disabled={formLoading}
-                className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 px-6 rounded-none transition-all duration-300 flex items-center justify-center gap-2 bg-white hover:bg-neutral-200 text-black border border-white disabled:opacity-50 disabled:cursor-not-allowed"
+                className="cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 bg-white hover:bg-neutral-200 text-neutral-950 border border-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {formLoading ? (
                   <>
@@ -278,12 +278,12 @@ export default function LotSizePage() {
             No lot size rules found. Create your first rule above.
           </div>
         ) : (
-          <div className="bg-neutral-900 border border-neutral-800 rounded-none overflow-hidden">
+          <div className="bg-neutral-950 border-2 border-black rounded-xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-950">
-                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
+                    <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-400">
                       Minimum Balance
                     </th>
                     <th className="text-left p-4 text-[10px] font-black uppercase tracking-widest text-neutral-500">
@@ -310,7 +310,7 @@ export default function LotSizePage() {
                       <td className="p-4 text-sm font-mono text-emerald-400">${rule.max_balance}</td>
                       <td className="p-4 text-sm font-mono text-white">{rule.lot_size}</td>
                       <td className="p-4">
-                        <span className={`text-[9px] px-2 py-1 font-black border ${
+                        <span className={`text-[9px] px-2 py-1 font-black border rounded-full ${
                           rule.active 
                             ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' 
                             : 'bg-neutral-500/10 text-neutral-500 border-neutral-500/20'
@@ -325,14 +325,14 @@ export default function LotSizePage() {
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleEdit(rule)}
-                            className="cursor-pointer p-2 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 border border-blue-500/20 transition-colors"
+                            className="cursor-pointer p-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors rounded-xl"
                           >
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(rule)}
                             disabled={actionLoading === rule._id}
-                            className="cursor-pointer p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 transition-colors disabled:opacity-50"
+                            className="cursor-pointer p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 transition-colors disabled:opacity-50 rounded-xl"
                           >
                             {actionLoading === rule._id ? (
                               <Loader2 className="w-4 h-4 animate-spin" />
@@ -358,7 +358,7 @@ export default function LotSizePage() {
           onClick={() => setShowConfirmModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-white rounded-none shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] w-full max-w-md relative"
+            className="bg-neutral-950 border-2 border-black rounded-xl shadow-none w-full max-w-md relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 space-y-4">
@@ -371,7 +371,7 @@ export default function LotSizePage() {
               <p className="text-sm text-neutral-300">
                 Are you sure you want to delete this lot size rule?
               </p>
-              <div className="bg-neutral-900 border border-neutral-800 p-3 rounded-none">
+              <div className="bg-neutral-900 border border-neutral-800 p-3 rounded-xl">
                 <p className="text-xs text-neutral-400">
                   <span className="font-bold text-white">Balance:</span> ${selectedRule.min_balance} - ${selectedRule.max_balance}
                 </p>
@@ -382,13 +382,13 @@ export default function LotSizePage() {
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={() => setShowConfirmModal(false)}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-neutral-800 hover:bg-neutral-700 text-white border border-neutral-700"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-none transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
+                  className="flex-1 cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3 rounded-xl transition-all duration-300 flex items-center justify-center bg-red-500 hover:bg-red-600 text-white border border-red-500"
                 >
                   Delete
                 </button>
