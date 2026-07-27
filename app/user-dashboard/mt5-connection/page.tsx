@@ -136,11 +136,7 @@ export default function MT5ConnectionPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!telegramConnected) {
-      toast.error('Please connect your Telegram account first');
-      return;
-    }
-    if (!telegramUsername || !server || !mt5Login || !tradingPassword) return;
+    if (!server || !mt5Login || !tradingPassword) return;
     if (serverError) return;
 
     setIsConnecting(true);
@@ -335,7 +331,7 @@ export default function MT5ConnectionPage() {
                             onClick={() => handleAccountTypeChange('demo')}
                             className={`flex-1 py-3 px-4 rounded-xl font-mono font-black text-xs uppercase tracking-wider transition-all border-2 ${
                               accountType === 'demo'
-                                ? 'bg-emerald-500 text-white border-emerald-500 shadow-[3px_3px_0px_0px_rgba(16,185,129,0.3)]'
+                                ? 'bg-emerald-500 text-white border-emerald-500'
                                 : 'bg-neutral-900 text-neutral-400 border-neutral-800 hover:border-neutral-600'
                             }`}
                           >
@@ -359,11 +355,10 @@ export default function MT5ConnectionPage() {
                         {/* Telegram Username Input */}
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 flex items-center gap-1.5">
-                            <Send className="h-3 w-3" /> TG Username
+                            <Send className="h-3 w-3" /> TG Username (Optional)
                           </label>
                           <input 
                             type="text" 
-                            required
                             placeholder="e.g. shillmonger_trades"
                             value={telegramUsername}
                             onChange={(e) => setTelegramUsername(e.target.value)}
@@ -470,7 +465,9 @@ export default function MT5ConnectionPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="p-3 bg-neutral-900/60 border border-neutral-800/80 rounded-lg">
                         <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest block mb-1">Telegram User</span>
-                        <span className="text-sm font-bold font-mono text-white">@{activeDetails?.telegramUsername}</span>
+                        <span className="text-sm font-bold font-mono text-white">
+                          {activeDetails?.telegramUsername ? `@${activeDetails.telegramUsername}` : 'Not connected'}
+                        </span>
                       </div>
                       <div className="p-3 bg-neutral-900/60 border border-neutral-800/80 rounded-lg">
                         <span className="text-[9px] font-bold text-neutral-500 uppercase tracking-widest block mb-1">MT5 Server</span>
@@ -547,7 +544,7 @@ export default function MT5ConnectionPage() {
                         <History className="h-5 w-5 text-neutral-400" />
                         Previous Accounts
                       </h2>
-                      <span className="text-[9px] font-black uppercase tracking-wider bg-neutral-800 text-neutral-400 border border-neutral-700 px-2 py-0.5">
+                      <span className="text-[9px] font-black uppercase rounded-full tracking-wider bg-neutral-800 text-neutral-400 border border-neutral-700 px-2 py-0.5">
                         {allAccounts.filter(acc => acc.status === 'disconnected' || acc.status === 'expired').length} ACCOUNTS
                       </span>
                       </div>
@@ -562,7 +559,7 @@ export default function MT5ConnectionPage() {
                             >
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
-                                  <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 ${
+                                  <span className={`text-[9px] font-black rounded-full uppercase tracking-wider px-2 py-0.5 ${
                                     account.status === 'expired' 
                                       ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' 
                                       : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
@@ -584,7 +581,7 @@ export default function MT5ConnectionPage() {
                               {account.status === 'disconnected' ? (
                                 <button
                                   onClick={() => handleReconnect(account)}
-                                  className="px-4 py-2 rounded-xl cursor-pointer bg-indigo-600 text-white font-black text-xs uppercase tracking-wider hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-500/30"
+                                  className="px-4 py-2 rounded-full cursor-pointer bg-indigo-600 text-white font-black text-xs uppercase tracking-wider hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-500/30"
                                 >
                                   Reconnect
                                 </button>
@@ -669,7 +666,7 @@ export default function MT5ConnectionPage() {
           onClick={() => setShowDisconnectModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-rose-900 rounded-2xl shadow-[8px_8px_0px_0px_rgba(239,68,68,0.2)] w-full max-w-md p-6 relative"
+            className="bg-neutral-950 border-2 border-rose-900 rounded-2xl w-full max-w-md p-6 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -701,7 +698,7 @@ export default function MT5ConnectionPage() {
               </button>
               <button
                 onClick={confirmDisconnect}
-                className="flex-1 px-4 py-3 cursor-pointer rounded-xl bg-rose-600 text-white font-black text-xs uppercase tracking-widest hover:bg-rose-700 transition-colors shadow-[3px_3px_0px_0px_rgba(239,68,68,0.3)]"
+                className="flex-1 px-4 py-3 cursor-pointer rounded-xl bg-rose-600 text-white font-black text-xs uppercase tracking-widest hover:bg-rose-700 transition-colors"
               >
                 Disconnect
               </button>
@@ -717,7 +714,7 @@ export default function MT5ConnectionPage() {
           onClick={() => setShowReconnectModal(false)}
         >
           <div
-            className="bg-neutral-950 border-2 border-emerald-900 rounded-2xl shadow-[8px_8px_0px_0px_rgba(16,185,129,0.2)] w-full max-w-md p-6 relative"
+            className="bg-neutral-950 border-2 border-emerald-900 rounded-2xl w-full max-w-md p-6 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button

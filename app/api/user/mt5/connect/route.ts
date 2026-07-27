@@ -49,9 +49,9 @@ export async function POST(request: NextRequest) {
       accountType 
     } = body;
 
-    if (!telegramUsername || !server || !mt5Login || !password || !accountType) {
+    if (!server || !mt5Login || !password || !accountType) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: 'Server, MT5 Login, Password, and Account Type are required' },
         { status: 400 }
       );
     }
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
       // If account exists but is disconnected, update it to connected
       const updateData: any = {
         status: 'connected',
-        telegramUsername,
+        telegramUsername: telegramUsername || null,
         server,
         password,
         accountType,
@@ -176,7 +176,7 @@ export async function POST(request: NextRequest) {
     // Prepare account data based on type
     const accountData: any = {
       userId: decoded.userId,
-      telegramUsername,
+      telegramUsername: telegramUsername || null,
       server,
       mt5Login,
       password, // Note: In production, this should be encrypted

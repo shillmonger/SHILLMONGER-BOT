@@ -122,13 +122,26 @@ export default function UserMobileHeader({
             transition-all duration-200 active:scale-95
           "
         >
-          <Settings className="w-5 h-5" />
+          <Bell className="w-5 h-5" />
           {hasUnreadNotifications && (
             <span className="absolute top-1.5 right-1.5 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
           )}
+        </button>
+        {/* Settings Icon Button */}
+        <button
+        onClick={onProfileClick || onRightClick}
+          className="
+            relative cursor-pointer p-2 rounded-xl
+            bg-indigo-950/40 hover:bg-indigo-900/60
+            border border-indigo-800/50
+            text-white
+            transition-all duration-200 active:scale-95
+          "
+        >
+          <Settings className="w-5 h-5" />
         </button>
 
         {/* User Profile Avatar */}

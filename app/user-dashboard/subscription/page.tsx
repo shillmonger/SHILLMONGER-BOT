@@ -215,7 +215,7 @@ export default function SubscriptionPage() {
                 {/* Popular Badge */}
                 {plan.popular && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20">
-                    <div className="bg-white text-neutral-950 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
+                    <div className="bg-white text-neutral-950 text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,0.4)]">
                       Most Popular
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export default function SubscriptionPage() {
                         Acc. Size: {plan.accountSize}
                       </span>
                     </div>
-                    <span className={`text-[9px] font-mono font-black uppercase px-2 py-0.5 border ${plan.accentBg} ${plan.accent}`}>
+                    <span className={`text-[9px] font-mono font-black rounded-full uppercase px-2 py-0.5 border ${plan.accentBg} ${plan.accent}`}>
                       Target: {plan.targetLabel}
                     </span>
                   </div>
@@ -281,7 +281,7 @@ export default function SubscriptionPage() {
                   {/* CTA button (Matching your dashboard neobrutalist look) */}
                   <button
                     onClick={() => handleSelectPlan(plan)}
-                    className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-500 shadow-lg shadow-indigo-500/30"
+                    className="w-full cursor-pointer font-black font-mono text-xs uppercase tracking-wider py-3.5 rounded-full transition-all duration-300 flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-500 shadow-lg shadow-indigo-500/30"
                   >
                     Subscribe Now
                   </button>
@@ -294,7 +294,7 @@ export default function SubscriptionPage() {
           {/* ====================================================
               SECTION 3: DISCLAIMER CARD
               ==================================================== */}
-          <Card className="rounded-2xl bg-neutral-950 text-white border-2 border-black shadow-none ">
+          <Card className="rounded-xl bg-neutral-950 text-white border-2 border-black shadow-none ">
             <CardContent className="px-4">
               <p className="text-[10px] text-neutral-500 leading-relaxed font-mono text-center">
                 <span className="font-black text-neutral-300 uppercase tracking-widest">Disclaimer: </span>

@@ -60,7 +60,7 @@ export default function LoginPage() {
           <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
 
           <Link href="/">
-            <div className="relative z-10 w-30 h-30">
+            <div className="relative z-10 w-20 h-20">
             <Image
               src="/logo.png"
               alt="Logo"
