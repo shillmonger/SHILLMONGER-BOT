@@ -66,7 +66,7 @@ export default function TradesActionsPage() {
     setLoading(true);
     try {
       // Fetch open trades
-      const tradesResponse = await fetch('http://localhost:8000/api/trades/open');
+      const tradesResponse = await fetch('/api/admin/trades/open');
       const tradesData = await tradesResponse.json();
       if (tradesResponse.ok) {
         setOpenTrades(tradesData);
@@ -75,7 +75,7 @@ export default function TradesActionsPage() {
       }
 
       // Fetch pending orders
-      const pendingResponse = await fetch('http://localhost:8000/api/trades/pending');
+      const pendingResponse = await fetch('/api/admin/trades/pending');
       const pendingData = await pendingResponse.json();
       if (pendingResponse.ok) {
         setPendingOrders(pendingData.pending_orders || []);
@@ -93,7 +93,7 @@ export default function TradesActionsPage() {
   const closeTrade = async (ticket: number, userId?: string) => {
     setActionLoading(`close-${ticket}`);
     try {
-      const response = await fetch('http://localhost:8000/api/trades/close', {
+      const response = await fetch('/api/admin/trades/close', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticket, user_id: userId }),
@@ -117,7 +117,7 @@ export default function TradesActionsPage() {
   const cancelPendingOrder = async (ticket: number, userId?: string) => {
     setActionLoading(`cancel-${ticket}`);
     try {
-      const response = await fetch('http://localhost:8000/api/trades/cancel-pending', {
+      const response = await fetch('/api/admin/trades/cancel-pending', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticket, user_id: userId }),
@@ -152,7 +152,7 @@ export default function TradesActionsPage() {
     if (confirmAction === 'close-all') {
       setActionLoading('close-all');
       try {
-        const response = await fetch('http://localhost:8000/api/trades/close-all', {
+        const response = await fetch('/api/admin/trades/close-all', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -177,7 +177,7 @@ export default function TradesActionsPage() {
     } else if (confirmAction === 'cancel-all') {
       setActionLoading('cancel-all');
       try {
-        const response = await fetch('http://localhost:8000/api/trades/cancel-all-pending', {
+        const response = await fetch('/api/admin/trades/cancel-all-pending', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
