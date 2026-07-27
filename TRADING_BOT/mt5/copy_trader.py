@@ -150,21 +150,23 @@ class MT5CopyTrader:
         sl_dollar = master_trade.get("sl_dollar")
         if sl_dollar is not None:
             # Convert dollar amount to price level
-            # Formula: SL_price = Entry_price ± (Dollar_amount / (Lot_size * Tick_value))
+            # Formula: price_distance = (sl_dollar * trade_tick_size) / (trade_tick_value * lot_size)
             symbol_info_data = mt5.symbol_info(symbol)
             if symbol_info_data:
-                tick_value = symbol_info_data.trade_tick_value  # Value of 1 tick in account currency
-                logger.info(f"SL Conversion - sl_dollar: ${sl_dollar}, lot_size: {lot_size}, tick_value: {tick_value}, current_price: {price}")
-                if tick_value and tick_value > 0:
-                    price_distance = sl_dollar / (lot_size * tick_value)
-                    logger.info(f"SL Conversion - calculated price_distance: {price_distance}")
+                tick_size = symbol_info_data.trade_tick_size
+                tick_value = symbol_info_data.trade_tick_value
+                logger.info(f"SL Conversion - Entry: {price}, Lot: {lot_size}, SL Dollar: ${sl_dollar}, Tick Size: {tick_size}, Tick Value: {tick_value}")
+                if tick_value and tick_value > 0 and tick_size and tick_size > 0:
+                    ticks = sl_dollar / (tick_value * lot_size)
+                    price_distance = ticks * tick_size
+                    logger.info(f"SL Conversion - Ticks: {ticks}, Price Distance: {price_distance}")
                     if trade_type == "BUY":
                         sl_price = price - price_distance
                     else:  # SELL
                         sl_price = price + price_distance
-                    logger.info(f"Converted SL ${sl_dollar} to price level: {sl_price}")
+                    logger.info(f"SL Conversion - Calculated SL Price: {sl_price}")
                 else:
-                    logger.warning(f"Invalid tick_value for {symbol}, cannot convert SL")
+                    logger.warning(f"Invalid tick_value or tick_size for {symbol}, cannot convert SL")
             else:
                 logger.warning(f"Cannot get symbol info for {symbol}, cannot convert SL")
 

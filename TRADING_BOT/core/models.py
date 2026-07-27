@@ -20,6 +20,7 @@ class TradingSignal:
     entry_high: Optional[float] = None  # High entry for ranges
     entry_low: Optional[float] = None  # Low entry for ranges
     stop_loss: float = 0.0
+    sl_dollar: Optional[float] = None  # Stop loss in dollar amount (to be converted to price level)
 
     take_profits: List[float] = field(default_factory=list)
 

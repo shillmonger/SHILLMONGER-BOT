@@ -307,5 +307,94 @@ class Database:
             logger.error(f"Failed to get max positions for balance: {e}")
             return None
 
+    # Stop Loss Management Collection Methods
+    def get_active_stop_loss_rules(self):
+        """Get all active stop loss rules sorted by min_balance"""
+        try:
+            rules = list(self.stop_loss_management_collection.find({"active": True}).sort("min_balance", 1))
+            return rules
+        except Exception as e:
+            logger.error(f"Failed to get stop loss rules: {e}")
+            return []
+
+    def get_stop_loss_for_balance(self, balance):
+        """
+        Find the stop loss amount for a given balance.
+        Returns the stop loss amount if a matching rule is found, None otherwise.
+        """
+        try:
+            rules = self.get_active_stop_loss_rules()
+            
+            for rule in rules:
+                min_balance = rule.get("min_balance")
+                max_balance = rule.get("max_balance")
+                stop_loss = rule.get("stop_loss")
+                
+                if min_balance is not None and max_balance is not None and stop_loss is not None:
+                    if min_balance <= balance <= max_balance:
+                        logger.info(f"Stop loss rule matched for balance ${balance}: ${min_balance}-${max_balance} -> ${stop_loss}")
+                        return stop_loss
+            
+            logger.warning(f"No stop loss rule found for balance ${balance}")
+            return None
+        except Exception as e:
+            logger.error(f"Failed to get stop loss for balance: {e}")
+            return None
+
+    def get_all_open_trades(self):
+        """Get all open trades from both master_trades and trade_activity collections"""
+        try:
+            # Get open master trades
+            master_trades = list(self.master_trades_collection.find({"status": "OPEN"}))
+            
+            # Get open trade activities (user trades)
+            trade_activities = list(self.trade_activity_collection.find({"status": "OPEN"}))
+            
+            # Get user account info for display
+            user_accounts = {}
+            for activity in trade_activities:
+                user_id = activity.get("user_id")
+                if user_id and user_id not in user_accounts:
+                    account = self.mt5_accounts_collection.find_one({"userId": user_id})
+                    if account:
+                        user_accounts[user_id] = {
+                            "mt5Login": account.get("mt5Login"),
+                            "server": account.get("server")
+                        }
+            
+            # Attach user account info to trade activities
+            for activity in trade_activities:
+                user_id = activity.get("user_id")
+                if user_id in user_accounts:
+                    activity["account_info"] = user_accounts[user_id]
+                else:
+                    activity["account_info"] = None
+            
+            return {
+                "master_trades": master_trades,
+                "trade_activities": trade_activities
+            }
+        except Exception as e:
+            logger.error(f"Failed to get all open trades: {e}")
+            return {"master_trades": [], "trade_activities": []}
+
+    def get_mt5_accounts_for_trades(self):
+        """Get all MT5 accounts with their credentials for trade management"""
+        try:
+            accounts = list(self.mt5_accounts_collection.find({"status": "connected", "canTrade": True}))
+            # Return only necessary fields
+            return [
+                {
+                    "userId": str(acc.get("userId")),
+                    "mt5Login": acc.get("mt5Login"),
+                    "password": acc.get("password"),
+                    "server": acc.get("server")
+                }
+                for acc in accounts
+            ]
+        except Exception as e:
+            logger.error(f"Failed to get MT5 accounts for trades: {e}")
+            return []
+
 # Global database instance
 db = Database()

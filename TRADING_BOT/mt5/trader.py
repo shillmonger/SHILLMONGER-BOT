@@ -173,13 +173,69 @@ class MT5Trader:
         else:
             tp_to_use = signal.take_profits[-2]  # Second-to-last TP
 
+        # Handle SL - check if it's a dollar amount that needs conversion to price level
+        sl_price = signal.stop_loss
+        sl_dollar = getattr(signal, 'sl_dollar', None)
+        if sl_dollar is not None:
+            # Convert dollar amount to price level
+            # Formula: price_distance = (sl_dollar * trade_tick_size) / (trade_tick_value * lot_size)
+            symbol_info_data = mt5.symbol_info(symbol)
+            if symbol_info_data:
+                tick_size = symbol_info_data.trade_tick_size
+                tick_value = symbol_info_data.trade_tick_value
+                logger.info(f"SL Conversion - Entry: {price}, Lot: {lot_size}, SL Dollar: ${sl_dollar}, Tick Size: {tick_size}, Tick Value: {tick_value}")
+                if tick_value and tick_value > 0 and tick_size and tick_size > 0:
+                    ticks = sl_dollar / (tick_value * lot_size)
+                    price_distance = ticks * tick_size
+                    logger.info(f"SL Conversion - Ticks: {ticks}, Price Distance: {price_distance}")
+                    if signal.direction == "BUY":
+                        sl_price = price - price_distance
+                    else:  # SELL
+                        sl_price = price + price_distance
+                    logger.info(f"SL Conversion - Calculated SL Price: {sl_price}")
+                else:
+                    logger.warning(f"Invalid tick_value or tick_size for {symbol}, cannot convert SL")
+            else:
+                logger.warning(f"Cannot get symbol info for {symbol}, cannot convert SL")
+
+        # Validate and adjust SL/TP to meet minimum stop level requirements
+        symbol_info_data = mt5.symbol_info(symbol)
+        if symbol_info_data:
+            # Get minimum stop level from symbol
+            stops_level = symbol_info_data.trade_stops_level  # Minimum distance in points
+            point = symbol_info_data.point  # Value of one point
+            min_distance = stops_level * point if stops_level > 0 else 0
+
+            if min_distance > 0:
+                # Validate SL
+                if sl_price is not None:
+                    if signal.direction == "BUY":
+                        if price - sl_price < min_distance:
+                            logger.warning(f"SL too close to entry for {symbol}. Adjusting to minimum distance.")
+                            sl_price = price - min_distance
+                    else:  # SELL
+                        if sl_price - price < min_distance:
+                            logger.warning(f"SL too close to entry for {symbol}. Adjusting to minimum distance.")
+                            sl_price = price + min_distance
+
+                # Validate TP
+                if tp_to_use is not None:
+                    if signal.direction == "BUY":
+                        if tp_to_use - price < min_distance:
+                            logger.warning(f"TP too close to entry for {symbol}. Adjusting to minimum distance.")
+                            tp_to_use = price + min_distance
+                    else:  # SELL
+                        if price - tp_to_use < min_distance:
+                            logger.warning(f"TP too close to entry for {symbol}. Adjusting to minimum distance.")
+                            tp_to_use = price - min_distance
+
         request = {
             "action": trade_action,
             "symbol": symbol,
             "volume": lot_size,
             "type": order_type,
             "price": price,
-            "sl": signal.stop_loss,
+            "sl": sl_price,
             "tp": tp_to_use,
             "deviation": 20,
             "magic": self.MAGIC_NUMBER,

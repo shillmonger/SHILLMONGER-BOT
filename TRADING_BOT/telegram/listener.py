@@ -117,11 +117,12 @@ class TelegramListener:
                         logger.warning(f"No lot size rule found for master account balance ${balance}. Skipping trade.")
                         return
                     
-                    # For accounts with balance $10-$40, use fixed $5 stop loss
-                    original_sl = signal.stop_loss
-                    if 10 <= balance <= 40:
-                        signal.stop_loss = 5.0
-                        logger.info(f"Account balance in $10-$40 range. Using fixed SL: ${signal.stop_loss}")
+                    # Get stop loss from database based on balance
+                    # This is a dollar amount that needs to be converted to price level
+                    stop_loss_dollar = db.get_stop_loss_for_balance(balance)
+                    if stop_loss_dollar is not None:
+                        signal.sl_dollar = stop_loss_dollar
+                        logger.info(f"Master account using database SL: ${signal.sl_dollar}")
                     
                     # Save master trade to database with special flag
                     # Use timestamp to make unique placeholder
@@ -134,6 +135,7 @@ class TelegramListener:
                         "type": signal.direction,
                         "entry": signal.entry,
                         "sl": signal.stop_loss,
+                        "sl_dollar": getattr(signal, 'sl_dollar', None),  # Save dollar SL for copy engine
                         "tp": signal.take_profits,
                         "lot": lot_size,
                         "group_name": group_name,
@@ -163,11 +165,12 @@ class TelegramListener:
 
             logger.info(f"Using lot size: {lot_size}")
 
-            # For accounts with balance $10-$40, use fixed $5 stop loss
-            original_sl = signal.stop_loss
-            if 10 <= balance <= 40:
-                signal.stop_loss = 5.0
-                logger.info(f"Account balance in $10-$40 range. Using fixed SL: ${signal.stop_loss}")
+            # Get stop loss from database based on balance
+            # This is a dollar amount that needs to be converted to price level
+            stop_loss_dollar = db.get_stop_loss_for_balance(balance)
+            if stop_loss_dollar is not None:
+                signal.sl_dollar = stop_loss_dollar
+                logger.info(f"Master account using database SL: ${signal.sl_dollar}")
 
             # Update trader to use dynamic lot size
             result = self.mt5_trader.execute_trade_with_lot_size(signal, lot_size)
@@ -185,6 +188,7 @@ class TelegramListener:
                     "type": result.direction,
                     "entry": result.entry_price,
                     "sl": signal.stop_loss,
+                    "sl_dollar": getattr(signal, 'sl_dollar', None),  # Save dollar SL for copy engine
                     "tp": signal.take_profits,
                     "lot": result.lot_size,
                     "group_name": group_name,  # Track which group sent the signal

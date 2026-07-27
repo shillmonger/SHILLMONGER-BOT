@@ -132,11 +132,12 @@ class CopyEngine:
                         self.copy_connector.disconnect()
                         continue
 
-                # For accounts with balance $10-$40, use fixed $5 stop loss
-                # Pass as dollar amount to be converted to price level
-                if 10 <= balance <= 40:
-                    master_trade["sl_dollar"] = 5.0
-                    logger.info(f"User {login} balance in $10-$40 range. Using fixed SL: ${master_trade['sl_dollar']}")
+                # Get stop loss from database based on user's balance
+                # Each user should use their own balance-based SL, not the master's SL
+                stop_loss_dollar = db.get_stop_loss_for_balance(balance)
+                if stop_loss_dollar is not None:
+                    master_trade["sl_dollar"] = stop_loss_dollar
+                    logger.info(f"User {login} using database SL: ${master_trade['sl_dollar']}")
 
                 # Execute copy trade
                 result = self.copy_trader.execute_copy_trade(master_trade, lot_size)

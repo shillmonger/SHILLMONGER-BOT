@@ -47,6 +47,8 @@ class EntryParser:
         re.compile(r'\b(BUY|SELL)\s+BETWEEN\s+(\d+(?:\.\d+)?)\s+AND\s+(\d+(?:\.\d+)?)', re.IGNORECASE),
         # BUY 4072 TO 4068, SELL 4072 TO 4068
         re.compile(r'\b(BUY|SELL)\s+(\d+(?:\.\d+)?)\s+TO\s+(\d+(?:\.\d+)?)', re.IGNORECASE),
+        # BUY LIMIT 4080:4078, SELL LIMIT 4080:4078 (colon separator for range)
+        re.compile(r'\b(BUY|SELL)\s+LIMIT\s+(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)', re.IGNORECASE),
         # BUY 4072.4071 (dot separator for range)
         re.compile(r'\b(BUY|SELL)\s+(\d+(?:\.\d+)?)\.(\d+(?:\.\d+)?)', re.IGNORECASE),
         # BUY 4072 / 4068 (slash separator)

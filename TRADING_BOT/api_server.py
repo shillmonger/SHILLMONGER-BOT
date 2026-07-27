@@ -15,6 +15,22 @@ class MT5ValidationRequest(BaseModel):
     login: str
     password: str
 
+class CloseTradeRequest(BaseModel):
+    ticket: int
+    user_id: str = None  # Optional: if provided, only close for specific user
+
+class CloseAllTradesRequest(BaseModel):
+    user_id: str = None  # Optional: if provided, only close for specific user
+    symbol: str = None  # Optional: if provided, only close specific symbol
+
+class CancelPendingRequest(BaseModel):
+    ticket: int
+    user_id: str = None
+
+class CancelAllPendingRequest(BaseModel):
+    user_id: str = None
+    symbol: str = None
+
 app = FastAPI(title="Shillmonger Bot API")
 
 # Add CORS middleware
@@ -228,3 +244,475 @@ PASSWORD LENGTH = {len(request.password)}
             "success": False,
             "error": str(e)
         }
+
+@app.get("/api/trades/open")
+async def get_open_trades():
+    """
+    Get all open trades from master_trades and trade_activity collections
+    """
+    try:
+        trades = db.get_all_open_trades()
+        return trades
+    except Exception as e:
+        logger.error(f"Failed to get open trades: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/trades/pending")
+async def get_pending_orders():
+    """
+    Get all pending orders from all active MT5 accounts
+    """
+    try:
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
+            return {
+                "success": False,
+                "error": "MT5 validator terminal not initialized. Please restart the server."
+            }
+
+        accounts = db.get_mt5_accounts_for_trades()
+        all_pending_orders = []
+
+        for account in accounts:
+            try:
+                login = int(account["mt5Login"])
+                password = account["password"]
+                server = account["server"]
+                user_id = account["userId"]
+
+                # Login to user account
+                authorized = mt5.login(
+                    login=login,
+                    password=password,
+                    server=server
+                )
+
+                if not authorized:
+                    logger.error(f"Failed to login to account {login}")
+                    continue
+
+                # Get pending orders
+                orders = mt5.orders_get()
+                if orders:
+                    for order in orders:
+                        all_pending_orders.append({
+                            "ticket": order.ticket,
+                            "user_id": user_id,
+                            "mt5_login": login,
+                            "server": server,
+                            "symbol": order.symbol,
+                            "type": order.type,
+                            "type_str": get_order_type_string(order.type),
+                            "volume": order.volume,
+                            "price": order.price,
+                            "sl": order.sl,
+                            "tp": order.tp,
+                            "comment": order.comment,
+                            "time_setup": order.time_setup,
+                            "expiration": order.time_expiration
+                        })
+
+                # Logout
+                mt5.login(login=0, password="", server="")
+
+            except Exception as e:
+                logger.error(f"Error getting pending orders for account {account['mt5Login']}: {e}")
+                try:
+                    mt5.login(login=0, password="", server="")
+                except:
+                    pass
+
+        return {"pending_orders": all_pending_orders}
+
+    except Exception as e:
+        logger.error(f"Failed to get pending orders: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+def get_order_type_string(order_type):
+    """Convert MT5 order type to readable string"""
+    type_map = {
+        mt5.ORDER_TYPE_BUY_LIMIT: "BUY_LIMIT",
+        mt5.ORDER_TYPE_SELL_LIMIT: "SELL_LIMIT",
+        mt5.ORDER_TYPE_BUY_STOP: "BUY_STOP",
+        mt5.ORDER_TYPE_SELL_STOP: "SELL_STOP",
+        mt5.ORDER_TYPE_BUY_STOP_LIMIT: "BUY_STOP_LIMIT",
+        mt5.ORDER_TYPE_SELL_STOP_LIMIT: "SELL_STOP_LIMIT"
+    }
+    return type_map.get(order_type, f"UNKNOWN_{order_type}")
+
+@app.post("/api/trades/close")
+async def close_trade(request: CloseTradeRequest):
+    """
+    Close a specific trade by ticket number
+    """
+    try:
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
+            return {
+                "success": False,
+                "error": "MT5 validator terminal not initialized. Please restart the server."
+            }
+
+        # Find which account has this trade
+        accounts = db.get_mt5_accounts_for_trades()
+        
+        for account in accounts:
+            if request.user_id and account["userId"] != request.user_id:
+                continue
+
+            try:
+                login = int(account["mt5Login"])
+                password = account["password"]
+                server = account["server"]
+
+                # Login to user account
+                authorized = mt5.login(
+                    login=login,
+                    password=password,
+                    server=server
+                )
+
+                if not authorized:
+                    logger.error(f"Failed to login to account {login}")
+                    continue
+
+                # Get the position
+                position = mt5.positions_get(ticket=request.ticket)
+                if position and len(position) > 0:
+                    position = position[0]
+                    
+                    # Close the position
+                    close_request = {
+                        "action": mt5.TRADE_ACTION_DEAL,
+                        "symbol": position.symbol,
+                        "volume": position.volume,
+                        "type": mt5.ORDER_TYPE_SELL if position.type == mt5.POSITION_TYPE_BUY else mt5.ORDER_TYPE_BUY,
+                        "position": request.ticket,
+                        "price": mt5.symbol_info_tick(position.symbol).bid if position.type == mt5.POSITION_TYPE_BUY else mt5.symbol_info_tick(position.symbol).ask,
+                        "deviation": 20,
+                        "magic": position.magic,
+                        "comment": "Manual close via admin",
+                        "type_time": mt5.ORDER_TIME_GTC,
+                        "type_filling": mt5.ORDER_FILLING_IOC,
+                    }
+
+                    result = mt5.order_send(close_request)
+
+                    if result and result.retcode == mt5.TRADE_RETCODE_DONE:
+                        # Update database
+                        db.update_trade_activity(request.ticket, {
+                            "status": "CLOSED",
+                            "profit": position.profit
+                        })
+                        
+                        logger.success(f"Trade {request.ticket} closed successfully")
+                        mt5.login(login=0, password="", server="")
+                        return {"success": True, "message": f"Trade {request.ticket} closed successfully"}
+                    else:
+                        error_msg = f"Failed to close trade: {result.comment if result else 'Unknown error'}"
+                        logger.error(error_msg)
+                        mt5.login(login=0, password="", server="")
+                        return {"success": False, "error": error_msg}
+
+                # Logout
+                mt5.login(login=0, password="", server="")
+
+            except Exception as e:
+                logger.error(f"Error closing trade on account {account['mt5Login']}: {e}")
+                try:
+                    mt5.login(login=0, password="", server="")
+                except:
+                    pass
+
+        return {"success": False, "error": f"Trade {request.ticket} not found"}
+
+    except Exception as e:
+        logger.error(f"Failed to close trade: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/trades/close-all")
+async def close_all_trades(request: CloseAllTradesRequest):
+    """
+    Close all open trades, optionally filtered by user_id or symbol
+    """
+    try:
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
+            return {
+                "success": False,
+                "error": "MT5 validator terminal not initialized. Please restart the server."
+            }
+
+        accounts = db.get_mt5_accounts_for_trades()
+        total_closed = 0
+        total_failed = 0
+        errors = []
+
+        for account in accounts:
+            if request.user_id and account["userId"] != request.user_id:
+                continue
+
+            try:
+                login = int(account["mt5Login"])
+                password = account["password"]
+                server = account["server"]
+
+                # Login to user account
+                authorized = mt5.login(
+                    login=login,
+                    password=password,
+                    server=server
+                )
+
+                if not authorized:
+                    logger.error(f"Failed to login to account {login}")
+                    total_failed += 1
+                    continue
+
+                # Get all positions
+                positions = mt5.positions_get()
+                if positions:
+                    for position in positions:
+                        if request.symbol and position.symbol != request.symbol:
+                            continue
+
+                        try:
+                            close_request = {
+                                "action": mt5.TRADE_ACTION_DEAL,
+                                "symbol": position.symbol,
+                                "volume": position.volume,
+                                "type": mt5.ORDER_TYPE_SELL if position.type == mt5.POSITION_TYPE_BUY else mt5.ORDER_TYPE_BUY,
+                                "position": position.ticket,
+                                "price": mt5.symbol_info_tick(position.symbol).bid if position.type == mt5.POSITION_TYPE_BUY else mt5.symbol_info_tick(position.symbol).ask,
+                                "deviation": 20,
+                                "magic": position.magic,
+                                "comment": "Bulk close via admin",
+                                "type_time": mt5.ORDER_TIME_GTC,
+                                "type_filling": mt5.ORDER_FILLING_IOC,
+                            }
+
+                            result = mt5.order_send(close_request)
+
+                            if result and result.retcode == mt5.TRADE_RETCODE_DONE:
+                                # Update database
+                                db.update_trade_activity(position.ticket, {
+                                    "status": "CLOSED",
+                                    "profit": position.profit
+                                })
+                                total_closed += 1
+                            else:
+                                total_failed += 1
+                                error_msg = f"Failed to close {position.ticket}: {result.comment if result else 'Unknown'}"
+                                errors.append(error_msg)
+                                logger.error(error_msg)
+
+                        except Exception as e:
+                            total_failed += 1
+                            errors.append(f"Error closing {position.ticket}: {str(e)}")
+                            logger.error(f"Error closing position {position.ticket}: {e}")
+
+                # Logout
+                mt5.login(login=0, password="", server="")
+
+            except Exception as e:
+                total_failed += 1
+                errors.append(f"Error on account {login}: {str(e)}")
+                logger.error(f"Error processing account {login}: {e}")
+                try:
+                    mt5.login(login=0, password="", server="")
+                except:
+                    pass
+
+        logger.success(f"Close all trades completed: {total_closed} closed, {total_failed} failed")
+        return {
+            "success": True,
+            "message": f"Closed {total_closed} trades, {total_failed} failed",
+            "closed": total_closed,
+            "failed": total_failed,
+            "errors": errors
+        }
+
+    except Exception as e:
+        logger.error(f"Failed to close all trades: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/trades/cancel-pending")
+async def cancel_pending_order(request: CancelPendingRequest):
+    """
+    Cancel a specific pending order by ticket number
+    """
+    try:
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
+            return {
+                "success": False,
+                "error": "MT5 validator terminal not initialized. Please restart the server."
+            }
+
+        accounts = db.get_mt5_accounts_for_trades()
+
+        for account in accounts:
+            if request.user_id and account["userId"] != request.user_id:
+                continue
+
+            try:
+                login = int(account["mt5Login"])
+                password = account["password"]
+                server = account["server"]
+
+                # Login to user account
+                authorized = mt5.login(
+                    login=login,
+                    password=password,
+                    server=server
+                )
+
+                if not authorized:
+                    logger.error(f"Failed to login to account {login}")
+                    continue
+
+                # Get the order
+                order = mt5.orders_get(ticket=request.ticket)
+                if order and len(order) > 0:
+                    order = order[0]
+                    
+                    # Cancel the order
+                    cancel_request = {
+                        "action": mt5.TRADE_ACTION_REMOVE,
+                        "order": request.ticket,
+                        "symbol": order.symbol,
+                        "volume": order.volume,
+                        "type": order.type,
+                        "price": order.price,
+                        "comment": "Manual cancel via admin",
+                    }
+
+                    result = mt5.order_send(cancel_request)
+
+                    if result and result.retcode == mt5.TRADE_RETCODE_DONE:
+                        logger.success(f"Order {request.ticket} cancelled successfully")
+                        mt5.login(login=0, password="", server="")
+                        return {"success": True, "message": f"Order {request.ticket} cancelled successfully"}
+                    else:
+                        error_msg = f"Failed to cancel order: {result.comment if result else 'Unknown error'}"
+                        logger.error(error_msg)
+                        mt5.login(login=0, password="", server="")
+                        return {"success": False, "error": error_msg}
+
+                # Logout
+                mt5.login(login=0, password="", server="")
+
+            except Exception as e:
+                logger.error(f"Error cancelling order on account {account['mt5Login']}: {e}")
+                try:
+                    mt5.login(login=0, password="", server="")
+                except:
+                    pass
+
+        return {"success": False, "error": f"Order {request.ticket} not found"}
+
+    except Exception as e:
+        logger.error(f"Failed to cancel pending order: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/trades/cancel-all-pending")
+async def cancel_all_pending_orders(request: CancelAllPendingRequest):
+    """
+    Cancel all pending orders, optionally filtered by user_id or symbol
+    """
+    try:
+        # Check if terminal is initialized
+        if mt5.terminal_info() is None:
+            logger.error("MT5 validator terminal not initialized")
+            return {
+                "success": False,
+                "error": "MT5 validator terminal not initialized. Please restart the server."
+            }
+
+        accounts = db.get_mt5_accounts_for_trades()
+        total_cancelled = 0
+        total_failed = 0
+        errors = []
+
+        for account in accounts:
+            if request.user_id and account["userId"] != request.user_id:
+                continue
+
+            try:
+                login = int(account["mt5Login"])
+                password = account["password"]
+                server = account["server"]
+
+                # Login to user account
+                authorized = mt5.login(
+                    login=login,
+                    password=password,
+                    server=server
+                )
+
+                if not authorized:
+                    logger.error(f"Failed to login to account {login}")
+                    total_failed += 1
+                    continue
+
+                # Get all pending orders
+                orders = mt5.orders_get()
+                if orders:
+                    for order in orders:
+                        if request.symbol and order.symbol != request.symbol:
+                            continue
+
+                        try:
+                            cancel_request = {
+                                "action": mt5.TRADE_ACTION_REMOVE,
+                                "order": order.ticket,
+                                "symbol": order.symbol,
+                                "volume": order.volume,
+                                "type": order.type,
+                                "price": order.price,
+                                "comment": "Bulk cancel via admin",
+                            }
+
+                            result = mt5.order_send(cancel_request)
+
+                            if result and result.retcode == mt5.TRADE_RETCODE_DONE:
+                                total_cancelled += 1
+                            else:
+                                total_failed += 1
+                                error_msg = f"Failed to cancel {order.ticket}: {result.comment if result else 'Unknown'}"
+                                errors.append(error_msg)
+                                logger.error(error_msg)
+
+                        except Exception as e:
+                            total_failed += 1
+                            errors.append(f"Error cancelling {order.ticket}: {str(e)}")
+                            logger.error(f"Error cancelling order {order.ticket}: {e}")
+
+                # Logout
+                mt5.login(login=0, password="", server="")
+
+            except Exception as e:
+                total_failed += 1
+                errors.append(f"Error on account {login}: {str(e)}")
+                logger.error(f"Error processing account {login}: {e}")
+                try:
+                    mt5.login(login=0, password="", server="")
+                except:
+                    pass
+
+        logger.success(f"Cancel all pending orders completed: {total_cancelled} cancelled, {total_failed} failed")
+        return {
+            "success": True,
+            "message": f"Cancelled {total_cancelled} orders, {total_failed} failed",
+            "cancelled": total_cancelled,
+            "failed": total_failed,
+            "errors": errors
+        }
+
+    except Exception as e:
+        logger.error(f"Failed to cancel all pending orders: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
