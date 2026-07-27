@@ -3,9 +3,9 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Eye, EyeOff, ArrowLeft, Loader2, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
@@ -134,212 +134,239 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
-      <main className="flex-grow flex items-center justify-center px-4 py-16 md:py-24">
-        <div className="w-full max-w-md">
-          {/* Modern Card with rounded corners and indigo accents */}
-          <Card className="rounded-4xl bg-white text-neutral-950 border border-neutral-200 shadow-2xl shadow-indigo-950/50 overflow-hidden">
-            <CardContent className="p-0">
-              <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-6">
-                  {/* Header Section */}
-                  <div className="flex flex-col items-center text-center">
-                    <h1 className="text-3xl font-extrabold tracking-tight">
-                      {step === 1 && "Forgot Password"}
-                      {step === 2 && "Verify Code"}
-                      {step === 3 && "Reset Password"}
-                    </h1>
-                    <p className="text-sm text-neutral-600 mt-2 leading-relaxed max-w-[280px] mx-auto">
-                      {step === 1 && "Enter your email to receive a reset code."}
-                      {step === 2 && "Enter the 4-digit code sent to your email."}
-                      {step === 3 && "Enter and confirm your new password."}
-                    </p>
-                  </div>
+    <div className="min-h-screen w-full flex items-center justify-center bg-white p-0 md:p-6">
+      <div className="w-full md:h-auto md:max-w-5xl flex flex-col md:flex-row bg-white md:rounded-[2rem] md:shadow-2xl md:shadow-indigo-950/20 md:border md:border-neutral-200 overflow-hidden">
+        {/* Left Panel - gradient hero, hidden on mobile */}
+        <div className="hidden md:flex relative w-1/2 flex-col justify-between p-8 m-3 rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-950 via-indigo-600 to-indigo-200">
+          {/* soft blurred blobs for depth */}
+          <div className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-indigo-400/40 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
 
-                  {/* STEP 1: EMAIL */}
-                  {step === 1 && (
-                    <div className="grid gap-2">
-                      <Label
-                        htmlFor="email"
-                        className="text-xs font-semibold tracking-wide text-neutral-700"
-                      >
-                        User Email
-                      </Label>
+          <Link href="/">
+            <div className="relative z-10 w-30 h-30">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              fill
+              className="object-contain w-full"
+            />
+            </div>
+          </Link>
+
+          <div className="relative z-10 text-white">
+            <p className="text-sm font-medium text-indigo-100 mb-2">
+              You can easily
+            </p>
+            <h2 className="text-2xl font-bold leading-snug">
+              {step === 1 && "Recover your account in seconds"}
+              {step === 2 && "Verify your identity"}
+              {step === 3 && "Set a new secure password"}
+            </h2>
+          </div>
+        </div>
+
+        {/* Right Panel - form */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 md:px-10 py-10">
+          <div className="w-full max-w-sm mx-auto">
+            {/* Logo, shown on mobile only since left panel is hidden */}
+            <Link href="/">
+              <div className="md:hidden h-20 w-20 relative mb-2">
+                <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+              </div>
+            </Link>
+
+            <h1 className="text-2xl font-extrabold tracking-tight text-neutral-950">
+              {step === 1 && "Forgot Password"}
+              {step === 2 && "Verify Code"}
+              {step === 3 && "Reset Password"}
+            </h1>
+            <p className="text-sm text-neutral-600 mt-2 mb-8 leading-relaxed">
+              {step === 1 && "Enter your email to receive a reset code."}
+              {step === 2 && "Enter the 4-digit code sent to your email."}
+              {step === 3 && "Enter and confirm your new password."}
+            </p>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {/* STEP 1: EMAIL */}
+              {step === 1 && (
+                <div className="grid gap-2">
+                  <Label
+                    htmlFor="email"
+                    className="text-sm font-semibold text-neutral-800"
+                  >
+                    Your email
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                    disabled={isLoading}
+                    className="h-12 text-sm px-4 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                  />
+                </div>
+              )}
+
+              {/* STEP 2: OTP BOXES */}
+              {step === 2 && (
+                <div className="flex justify-between gap-3 py-2">
+                  {otp.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      ref={otpRefs[idx]}
+                      type="text"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleOtpChange(idx, e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(idx, e)}
+                      className="w-16 h-16 text-center text-2xl font-bold rounded-xl border border-neutral-300 bg-white text-neutral-950 focus:border-indigo-500 outline-none transition-all"
+                      disabled={isLoading}
+                      required
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* STEP 3: NEW PASSWORD & TERMS CHECKBOX */}
+              {step === 3 && (
+                <div className="flex flex-col gap-4">
+                  <div className="grid gap-2">
+                    <Label
+                      htmlFor="password"
+                      className="text-sm font-semibold text-neutral-800"
+                    >
+                      New Password
+                    </Label>
+                    <div className="relative">
                       <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                        placeholder="shillmonger@example.com"
+                        id="password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
                         required
                         disabled={isLoading}
+                        className="h-12 pr-12 px-4 text-sm rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-5 w-5" />
+                        ) : (
+                          <Eye className="h-5 w-5" />
+                        )}
+                      </button>
                     </div>
-                  )}
+                  </div>
 
-                  {/* STEP 2: OTP BOXES */}
-                  {step === 2 && (
-                    <div className="flex justify-between gap-3 py-2">
-                      {otp.map((digit, idx) => (
-                        <input
-                          key={idx}
-                          ref={otpRefs[idx]}
-                          type="text"
-                          maxLength={1}
-                          value={digit}
-                          onChange={(e) => handleOtpChange(idx, e.target.value)}
-                          onKeyDown={(e) => handleKeyDown(idx, e)}
-                          className="w-16 h-16 text-center text-2xl font-bold rounded-xl border border-neutral-300 bg-white text-neutral-950 focus:border-indigo-500 outline-none transition-all"
-                          disabled={isLoading}
-                          required
-                        />
-                      ))}
+                  <div className="grid gap-2">
+                    <Label
+                      htmlFor="confirmPassword"
+                      className="text-sm font-semibold text-neutral-800"
+                    >
+                      Confirm Password
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        required
+                        disabled={isLoading}
+                        className="h-12 pr-12 px-4 text-sm rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
+                        tabIndex={-1}
+                      >
+                        {showConfirmPassword ? (
+                          <EyeOff className="h-5 w-5" />
+                        ) : (
+                          <Eye className="h-5 w-5" />
+                        )}
+                      </button>
                     </div>
-                  )}
+                  </div>
 
-                  {/* STEP 3: NEW PASSWORD & TERMS CHECKBOX */}
-                  {step === 3 && (
-                    <div className="flex flex-col gap-4">
-                      <div className="grid gap-2">
-                        <Label
-                          htmlFor="password"
-                          className="text-xs font-semibold tracking-wide text-neutral-700"
-                        >
-                          New Password
-                        </Label>
-                        <div className="relative">
-                          <Input
-                            id="password"
-                            name="password"
-                            type={showPassword ? "text" : "password"}
-                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                            placeholder="••••••••"
-                            required
-                            disabled={isLoading}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
-                            tabIndex={-1}
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-5 w-5" />
-                            ) : (
-                              <Eye className="h-5 w-5" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="grid gap-2">
-                        <Label
-                          htmlFor="confirmPassword"
-                          className="text-xs font-semibold tracking-wide text-neutral-700"
-                        >
-                          Confirm Password
-                        </Label>
-                        <div className="relative">
-                          <Input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type={showConfirmPassword ? "text" : "password"}
-                            className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                            placeholder="••••••••"
-                            required
-                            disabled={isLoading}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
-                            tabIndex={-1}
-                          >
-                            {showConfirmPassword ? (
-                              <EyeOff className="h-5 w-5" />
-                            ) : (
-                              <Eye className="h-5 w-5" />
-                            )}
-                          </button>
-                        </div>
-                      </div>
-
-                      {/* Terms and Conditions Checkmark */}
-                      <div className="flex items-start gap-3 mt-2">
-                        <button
-                          type="button"
-                          id="terms"
-                          onClick={() => setAgreedToTerms(!agreedToTerms)}
-                          className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
-                            agreedToTerms
-                              ? "bg-indigo-600 border-indigo-600 text-white"
-                              : "border-neutral-300 bg-white hover:border-neutral-400"
-                          }`}
-                        >
-                          {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
-                        </button>
-                        <Label 
-                      htmlFor="terms" 
+                  {/* Terms checkbox */}
+                  <div className="flex items-start gap-3">
+                    <button
+                      type="button"
+                      id="terms"
+                      onClick={() => setAgreedToTerms(!agreedToTerms)}
+                      className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
+                        agreedToTerms
+                          ? "bg-indigo-600 border-indigo-600 text-white"
+                          : "border-neutral-300 bg-white hover:border-neutral-400"
+                      }`}
+                    >
+                      {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                    </button>
+                    <Label
+                      htmlFor="terms"
                       className="text-xs font-semibold text-neutral-600 select-none leading-tight cursor-pointer"
                     >
                       I agree to the{" "}
-                      <Link href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">
+                      <Link href="#" className="text-indigo-500 hover:text-indigo-400 transition-colors">
                         Terms and Condition
                       </Link>
                     </Label>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Primary Action Button */}
-                  <div className="relative pt-2">
-                    <Button
-                      type="submit"
-                      className="w-full h-12 rounded-full text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isLoading || (step === 3 && !agreedToTerms)}
-                    >
-                      {isLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Processing...
-                        </>
-                      ) : step === 3 ? (
-                        "Reset Password"
-                      ) : (
-                        "Continue"
-                      )}
-                    </Button>
                   </div>
                 </div>
+              )}
 
-                {/* login link */}
-                  <div className="text-center text-sm font-semibold text-neutral-600 mt-5">
-                    Don&apos;t have an account?{" "}
-                    <Link 
-                      href="/auth-page/login" 
-                      className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
-                    >
-                      Sign in
-                    </Link>
-                  </div>
-              </form>
-            </CardContent>
-          </Card>
+              {/* Submit */}
+              <Button
+                type="submit"
+                disabled={isLoading || (step === 3 && !agreedToTerms)}
+                className="w-full h-12 mt-1 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : step === 3 ? (
+                  "Reset Password"
+                ) : (
+                  "Continue"
+                )}
+              </Button>
 
-          {/* Legal Footer Info */}
-          <div className="mt-8 text-center text-xs font-semibold text-neutral-500 leading-relaxed">
+              {/* Sign In link */}
+              <div className="text-center text-sm font-medium text-neutral-600 mt-2">
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/auth-page/login"
+                  className="font-semibold text-indigo-500 hover:text-indigo-400 transition-colors"
+                >
+                  Sign in
+                </Link>
+              </div>
+            </form>
+          </div>
+
+          {/* Legal footer */}
+          <div className="w-full max-w-sm mx-auto mt-8 text-center text-xs font-medium text-neutral-400 leading-relaxed">
             By clicking continue, you agree to our{" "}
-            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
+            <Link href="#" className="font-semibold text-neutral-500 hover:text-neutral-700 transition-colors">
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
+            <Link href="#" className="font-semibold text-neutral-500 hover:text-neutral-700 transition-colors">
               Privacy Policy
             </Link>
             .
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

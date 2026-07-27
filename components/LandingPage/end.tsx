@@ -25,7 +25,7 @@ export default function ProfileCTASection() {
     <section className="relative w-full bg-white py-20">
       <div className="mx-auto max-w-[1400px] px-3 md:px-6">
         {/* Main Card Wrapper — NOTE: no overflow-hidden here anymore */}
-        <div className="relative rounded-[2rem] bg-gradient-to-r from-[#2932e1] via-[#4842ee] to-[#6366f1] pt-32 pb-16 px-6 md:px-12 text-center text-white shadow-2xl">
+        <div className="relative rounded-[2rem] bg-gradient-to-r from-indigo-950 via-indigo-600 to-indigo-950 pt-32 pb-16 px-6 md:px-12 text-center text-white shadow-2xl">
 
           {/* Clipped inner layer — only the glow blobs live here */}
           <div className="absolute inset-0 rounded-[2rem] overflow-hidden pointer-events-none">

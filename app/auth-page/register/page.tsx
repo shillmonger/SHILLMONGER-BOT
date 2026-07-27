@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Eye, EyeOff, Loader2, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -69,264 +69,291 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-neutral-950 font-sans">
-      <main className="flex-grow flex items-center justify-center px-4 py-10 md:py-10">
-        <div className="w-full max-w-md">
-          {/* Modern Card with rounded corners and indigo accents */}
-          <Card className="rounded-4xl bg-white text-neutral-950 border border-neutral-200 shadow-2xl shadow-indigo-950/50 overflow-hidden">
-            <CardContent className="p-0">
-              <form className="px-5 py-5 md:px-7" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-6">
-                  {/* Title Header */}
-                  <div className="flex flex-col items-center text-center">
-                    <h1 className="text-3xl font-extrabold tracking-tight">
-                      Create Account
-                    </h1>
-                    <p className="text-sm text-neutral-600 mt-2">
-                      Enter your details below to get started
-                    </p>
-                  </div>
+    <div className="min-h-screen w-full flex items-center justify-center bg-white p-0 md:p-6">
+      <div className="w-full md:h-auto md:max-w-5xl flex flex-col md:flex-row bg-white md:rounded-[2rem] md:shadow-2xl md:shadow-indigo-950/20 md:border md:border-neutral-200 overflow-hidden">
+        {/* Left Panel - gradient hero, hidden on mobile */}
+        <div className="hidden md:flex relative w-1/2 flex-col justify-between p-8 m-3 rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-950 via-indigo-600 to-indigo-200">
+          {/* soft blurred blobs for depth */}
+          <div className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-indigo-400/40 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-0 right-0 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
 
-                  {/* Input - Username */}
-                  <div className="grid gap-2">
-                    <Label 
-                      htmlFor="name" 
-                      className="text-xs font-semibold tracking-wide text-neutral-700"
-                    >
-                      Username
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                      placeholder="shillmonger"
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
+          <Link href="/">
+            <div className="relative z-10 w-30 h-30">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              fill
+              className="object-contain w-full"
+            />
+            </div>
+          </Link>
 
-                  {/* Input - User Email */}
-                  <div className="grid gap-2">
-                    <Label 
-                      htmlFor="email" 
-                      className="text-xs font-semibold tracking-wide text-neutral-700"
-                    >
-                      User Email
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      className="h-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                      placeholder="shillmonger@example.com"
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
+          <div className="relative z-10 text-white">
+            <p className="text-sm font-medium text-indigo-100 mb-2">
+              You can easily
+            </p>
+            <h2 className="text-2xl font-bold leading-snug">
+              Create your account and start your journey
+            </h2>
+          </div>
+        </div>
 
-                  {/* Input - Password */}
-                  <div className="grid gap-2">
-                    <Label 
-                      htmlFor="password" 
-                      className="text-xs font-semibold tracking-wide text-neutral-700"
-                    >
-                      Password
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                        placeholder="••••••••"
-                        required
-                        disabled={isLoading}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
-                        tabIndex={-1}
-                      >
-                        {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                      </button>
-                    </div>
-                  </div>
+        {/* Right Panel - form */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-6 sm:px-10 md:px-10 py-10">
+          <div className="w-full max-w-sm mx-auto">
+            {/* Logo, shown on mobile only since left panel is hidden */}
+            <Link href="/">
+              <div className="md:hidden h-20 w-20 relative mb-2">
+                <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+              </div>
+            </Link>
+            
 
-                  {/* Input - Confirm Password */}
-                  <div className="grid gap-2">
-                    <Label 
-                      htmlFor="confirmPassword" 
-                      className="text-xs font-semibold tracking-wide text-neutral-700"
-                    >
-                      Confirm Password
-                    </Label>
-                    <div className="relative">
-                      <Input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type={showConfirmPassword ? "text" : "password"}
-                        className="h-12 pr-12 text-sm p-5 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-500"
-                        placeholder="••••••••"
-                        required
-                        disabled={isLoading}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
-                        tabIndex={-1}
-                      >
-                        {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                      </button>
-                    </div>
-                  </div>
+            <h1 className="text-2xl font-extrabold tracking-tight text-neutral-950">
+              Create Account
+            </h1>
+            <p className="text-sm text-neutral-600 mt-2 mb-8">
+              Enter your details below to get started
+            </p>
 
-                  {/* Terms and Conditions Checkbox */}
-                  <div className="flex items-start gap-3 mt-1">
-                    <button
-                      type="button"
-                      id="terms"
-                      onClick={() => setAgreedToTerms(!agreedToTerms)}
-                      className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
-                        agreedToTerms 
-                          ? "bg-indigo-600 border-indigo-600 text-white" 
-                          : "border-neutral-300 bg-white hover:border-neutral-400"
-                      }`}
-                    >
-                      {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
-                    </button>
-                    <Label 
-                      htmlFor="terms" 
-                      className="text-xs font-semibold text-neutral-600 select-none leading-tight cursor-pointer"
-                    >
-                      I agree to the{" "}
-                      <Link href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">
-                        Terms and Condition
-                      </Link>
-                    </Label>
-                  </div>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {/* Username */}
+              <div className="grid gap-2">
+                <Label
+                  htmlFor="name"
+                  className="text-sm font-semibold text-neutral-800"
+                >
+                  Username
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="shillmonger"
+                  disabled={isLoading}
+                  required
+                  className="h-12 text-sm px-4 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                />
+              </div>
 
-                  {/* Primary Call to Action Button */}
-                  <div className="relative pt-2">
-                    <Button 
-                      type="submit" 
-                      className="w-full h-12 rounded-full text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed" 
-                      disabled={isLoading || !agreedToTerms}
-                    >
-                      {isLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Creating account...
-                        </>
-                      ) : (
-                        "Create Account"
-                      )}
-                    </Button>
-                  </div>
+              {/* Email */}
+              <div className="grid gap-2">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-neutral-800"
+                >
+                  Your email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  disabled={isLoading}
+                  required
+                  className="h-12 text-sm px-4 rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                />
+              </div>
 
-                  {/* Divider Line */}
-                  <div className="relative text-center text-xs font-semibold my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-200">
-                    <span className="relative z-10 bg-white px-3 text-neutral-500">
-                      Or continue with
-                    </span>
-                  </div>
-
-                  {/* Social Sign-In Row */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {/* X (formerly Twitter) */}
-                    <Button
-                      type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.637 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 6.932 6.064-6.932zM17.61 20.644h2.039L6.486 3.24H4.298z" />
-                      </svg>
-                      <span className="sr-only">Continue with X</span>
-                    </Button>
-
-                    {/* Google */}
-                    <Button
-                      type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        viewBox="0 0 48 48"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill="#FFC107"
-                          d="M43.611 20.083H42V20H24v8h11.303C33.655 32.657 29.207 36 24 36c-6.627 0-12-5.373-12-12S17.373 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.27 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"
-                        />
-                        <path
-                          fill="#FF3D00"
-                          d="M6.306 14.691l6.571 4.819C14.655 16.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.27 4 24 4c-7.682 0-14.348 4.337-17.694 10.691z"
-                        />
-                        <path
-                          fill="#4CAF50"
-                          d="M24 44c5.104 0 9.799-1.957 13.355-5.145l-6.169-5.22C29.125 35.091 26.673 36 24 36c-5.186 0-9.623-3.326-11.283-7.946l-6.52 5.025C9.505 39.556 16.227 44 24 44z"
-                        />
-                        <path
-                          fill="#1976D2"
-                          d="M43.611 20.083H42V20H24v8h11.303c-1.058 2.996-3.202 5.379-6.117 6.635l6.169 5.22C38.999 36.564 44 31 44 24c0-1.341-.138-2.65-.389-3.917z"
-                        />
-                      </svg>
-                      <span className="sr-only">Continue with Google</span>
-                    </Button>
-
-                    {/* Facebook */}
-                    <Button
-                      type="button"
-                      className="h-12 rounded-xl cursor-pointer bg-white hover:bg-neutral-50 text-neutral-950 border border-neutral-300 hover:border-neutral-400 transition-all"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                      </svg>
-                      <span className="sr-only">Continue with Facebook</span>
-                    </Button>
-                  </div>
-
-                  {/* Sign In link */}
-                  <div className="text-center text-sm font-semibold text-neutral-600 mt-2">
-                    Already have an account?{" "}
-                    <Link 
-                      href="/auth-page/login" 
-                      className="font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
-                    >
-                      Sign in
-                    </Link>
-                  </div>
+              {/* Password */}
+              <div className="grid gap-2">
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-semibold text-neutral-800"
+                >
+                  Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    disabled={isLoading}
+                    required
+                    className="h-12 pr-12 px-4 text-sm rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
                 </div>
-              </form>
-            </CardContent>
-          </Card>
+              </div>
 
-          {/* Legal Footer Info */}
-          <div className="mt-8 text-center text-xs font-semibold text-neutral-500 leading-relaxed">
+              {/* Confirm Password */}
+              <div className="grid gap-2">
+                <Label
+                  htmlFor="confirmPassword"
+                  className="text-sm font-semibold text-neutral-800"
+                >
+                  Confirm Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    disabled={isLoading}
+                    required
+                    className="h-12 pr-12 px-4 text-sm rounded-xl border border-neutral-300 bg-white text-neutral-950 focus-visible:ring-0 focus-visible:border-indigo-500 placeholder:text-neutral-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-3 flex items-center text-neutral-500 hover:text-neutral-950 focus:outline-none cursor-pointer"
+                    tabIndex={-1}
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Terms checkbox */}
+              <div className="flex items-start gap-3">
+                <button
+                  type="button"
+                  id="terms"
+                  onClick={() => setAgreedToTerms(!agreedToTerms)}
+                  className={`h-5 w-5 shrink-0 rounded-md border transition-all flex items-center justify-center cursor-pointer ${
+                    agreedToTerms
+                      ? "bg-indigo-600 border-indigo-600 text-white"
+                      : "border-neutral-300 bg-white hover:border-neutral-400"
+                  }`}
+                >
+                  {agreedToTerms && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                </button>
+                <Label
+                  htmlFor="terms"
+                  className="text-xs font-semibold text-neutral-600 select-none leading-tight cursor-pointer"
+                >
+                  I agree to the{" "}
+                  <Link href="#" className="text-indigo-500 hover:text-indigo-400 transition-colors">
+                    Terms and Condition
+                  </Link>
+                </Label>
+              </div>
+
+              {/* Submit */}
+              <Button
+                type="submit"
+                disabled={isLoading || !agreedToTerms}
+                className="w-full h-12 mt-1 rounded-xl text-sm font-semibold cursor-pointer bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-950/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Creating account...
+                  </>
+                ) : (
+                  "Create Account"
+                )}
+              </Button>
+
+              {/* Divider */}
+              <div className="relative text-center text-xs font-medium my-1 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-neutral-200">
+                <span className="relative z-10 bg-white px-3 text-neutral-400">
+                  or continue with
+                </span>
+              </div>
+
+              {/* Social row */}
+              <div className="grid grid-cols-3 gap-3">
+                <Button
+                  type="button"
+                  className="h-11 rounded-xl cursor-pointer bg-neutral-100 hover:bg-neutral-200 text-neutral-950 border border-neutral-200 transition-all"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.847h-7.406l-5.8-7.584-6.637 7.584H.474l8.6-9.83L0 1.153h7.594l5.243 6.932 6.064-6.932zM17.61 20.644h2.039L6.486 3.24H4.298z" />
+                  </svg>
+                  <span className="sr-only">Continue with X</span>
+                </Button>
+
+                <Button
+                  type="button"
+                  className="h-11 rounded-xl cursor-pointer bg-neutral-100 hover:bg-neutral-200 text-neutral-950 border border-neutral-200 transition-all"
+                >
+                  <svg className="h-4 w-4" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fill="#FFC107"
+                      d="M43.611 20.083H42V20H24v8h11.303C33.655 32.657 29.207 36 24 36c-6.627 0-12-5.373-12-12S17.373 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.27 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"
+                    />
+                    <path
+                      fill="#FF3D00"
+                      d="M6.306 14.691l6.571 4.819C14.655 16.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.27 4 24 4c-7.682 0-14.348 4.337-17.694 10.691z"
+                    />
+                    <path
+                      fill="#4CAF50"
+                      d="M24 44c5.104 0 9.799-1.957 13.355-5.145l-6.169-5.22C29.125 35.091 26.673 36 24 36c-5.186 0-9.623-3.326-11.283-7.946l-6.52 5.025C9.505 39.556 16.227 44 24 44z"
+                    />
+                    <path
+                      fill="#1976D2"
+                      d="M43.611 20.083H42V20H24v8h11.303c-1.058 2.996-3.202 5.379-6.117 6.635l6.169 5.22C38.999 36.564 44 31 44 24c0-1.341-.138-2.65-.389-3.917z"
+                    />
+                  </svg>
+                  <span className="sr-only">Continue with Google</span>
+                </Button>
+
+                <Button
+                  type="button"
+                  className="h-11 rounded-xl cursor-pointer bg-neutral-100 hover:bg-neutral-200 text-neutral-950 border border-neutral-200 transition-all"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                  <span className="sr-only">Continue with Facebook</span>
+                </Button>
+              </div>
+
+              {/* Sign In link */}
+              <div className="text-center text-sm font-medium text-neutral-600 mt-2">
+                Already have an account?{" "}
+                <Link
+                  href="/auth-page/login"
+                  className="font-semibold text-indigo-500 hover:text-indigo-400 transition-colors"
+                >
+                  Sign in
+                </Link>
+              </div>
+            </form>
+          </div>
+
+          {/* Legal footer */}
+          <div className="w-full max-w-sm mx-auto mt-8 text-center text-xs font-medium text-neutral-400 leading-relaxed">
             By clicking continue, you agree to our{" "}
-            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
+            <Link href="#" className="font-semibold text-neutral-500 hover:text-neutral-700 transition-colors">
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="#" className="font-semibold text-neutral-400 hover:text-neutral-300 transition-colors">
+            <Link href="#" className="font-semibold text-neutral-500 hover:text-neutral-700 transition-colors">
               Privacy Policy
             </Link>
             .
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
