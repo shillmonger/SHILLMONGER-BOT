@@ -23,6 +23,9 @@ export interface IMT5Account extends Document {
   equity?: number;
   currency?: string;
   
+  // Trading permission
+  canTrade: boolean;
+  
   connectedAt: Date;
   lastCheck?: Date;
 }
@@ -101,6 +104,12 @@ const MT5AccountSchema: Schema = new Schema({
   currency: {
     type: String,
     default: 'USD'
+  },
+  
+  // Trading permission
+  canTrade: {
+    type: Boolean,
+    default: true
   },
   
   connectedAt: {

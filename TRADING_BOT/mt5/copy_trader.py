@@ -51,22 +51,80 @@ class MT5CopyTrader:
 
         # Determine order type and price based on master trade
         trade_type = master_trade["type"].upper()
+        order_type_from_db = master_trade.get("order_type", "MARKET").upper()
+        entry_price = master_trade.get("entry")
         
-        if trade_type == "BUY":
-            order_type = mt5.ORDER_TYPE_BUY
-            price = tick.ask
-            trade_action = mt5.TRADE_ACTION_DEAL
-            type_filling = mt5.ORDER_FILLING_IOC
-        elif trade_type == "SELL":
-            order_type = mt5.ORDER_TYPE_SELL
-            price = tick.bid
-            trade_action = mt5.TRADE_ACTION_DEAL
-            type_filling = mt5.ORDER_FILLING_IOC
+        # Handle different order types
+        if order_type_from_db == "MARKET":
+            # Market order - execute immediately
+            if trade_type == "BUY":
+                order_type = mt5.ORDER_TYPE_BUY
+                price = tick.ask
+                trade_action = mt5.TRADE_ACTION_DEAL
+                type_filling = mt5.ORDER_FILLING_IOC
+            else:  # SELL
+                order_type = mt5.ORDER_TYPE_SELL
+                price = tick.bid
+                trade_action = mt5.TRADE_ACTION_DEAL
+                type_filling = mt5.ORDER_FILLING_IOC
+        elif order_type_from_db == "BUY_LIMIT":
+            # Buy Limit order
+            order_type = mt5.ORDER_TYPE_BUY_LIMIT
+            price = entry_price
+            trade_action = mt5.TRADE_ACTION_PENDING
+            type_filling = mt5.ORDER_FILLING_RETURN
+        elif order_type_from_db == "SELL_LIMIT":
+            # Sell Limit order
+            order_type = mt5.ORDER_TYPE_SELL_LIMIT
+            price = entry_price
+            trade_action = mt5.TRADE_ACTION_PENDING
+            type_filling = mt5.ORDER_FILLING_RETURN
+        elif order_type_from_db == "BUY_STOP":
+            # Buy Stop order
+            order_type = mt5.ORDER_TYPE_BUY_STOP
+            price = entry_price
+            trade_action = mt5.TRADE_ACTION_PENDING
+            type_filling = mt5.ORDER_FILLING_RETURN
+        elif order_type_from_db == "SELL_STOP":
+            # Sell Stop order
+            order_type = mt5.ORDER_TYPE_SELL_STOP
+            price = entry_price
+            trade_action = mt5.TRADE_ACTION_PENDING
+            type_filling = mt5.ORDER_FILLING_RETURN
+        elif order_type_from_db == "PENDING":
+            # Legacy PENDING - auto-detect based on entry price vs current price
+            trade_action = mt5.TRADE_ACTION_PENDING
+            price = entry_price
+            
+            if trade_type == "BUY":
+                if entry_price <= tick.ask:
+                    # Entry below current price → BUY LIMIT
+                    order_type = mt5.ORDER_TYPE_BUY_LIMIT
+                else:
+                    # Entry above current price → BUY STOP
+                    order_type = mt5.ORDER_TYPE_BUY_STOP
+            else:  # SELL
+                if entry_price >= tick.bid:
+                    # Entry above current price → SELL LIMIT
+                    order_type = mt5.ORDER_TYPE_SELL_LIMIT
+                else:
+                    # Entry below current price → SELL STOP
+                    order_type = mt5.ORDER_TYPE_SELL_STOP
+            
+            type_filling = mt5.ORDER_FILLING_RETURN
         else:
-            return TradeResult(
-                success=False,
-                message=f"Unknown trade type: {trade_type}"
-            )
+            # Fallback to MARKET if order_type is unknown
+            logger.warning(f"Unknown order_type '{order_type_from_db}', defaulting to MARKET")
+            if trade_type == "BUY":
+                order_type = mt5.ORDER_TYPE_BUY
+                price = tick.ask
+                trade_action = mt5.TRADE_ACTION_DEAL
+                type_filling = mt5.ORDER_FILLING_IOC
+            else:  # SELL
+                order_type = mt5.ORDER_TYPE_SELL
+                price = tick.bid
+                trade_action = mt5.TRADE_ACTION_DEAL
+                type_filling = mt5.ORDER_FILLING_IOC
 
         # Handle backward compatibility for old database records
         master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
@@ -93,11 +151,13 @@ class MT5CopyTrader:
         if sl_dollar is not None:
             # Convert dollar amount to price level
             # Formula: SL_price = Entry_price ± (Dollar_amount / (Lot_size * Tick_value))
-            symbol_info_tick = mt5.symbol_info_tick(symbol)
-            if symbol_info_tick:
-                tick_value = symbol_info_tick.trade_tick_value  # Value of 1 tick in account currency
+            symbol_info_data = mt5.symbol_info(symbol)
+            if symbol_info_data:
+                tick_value = symbol_info_data.trade_tick_value  # Value of 1 tick in account currency
+                logger.info(f"SL Conversion - sl_dollar: ${sl_dollar}, lot_size: {lot_size}, tick_value: {tick_value}, current_price: {price}")
                 if tick_value and tick_value > 0:
                     price_distance = sl_dollar / (lot_size * tick_value)
+                    logger.info(f"SL Conversion - calculated price_distance: {price_distance}")
                     if trade_type == "BUY":
                         sl_price = price - price_distance
                     else:  # SELL
@@ -106,8 +166,39 @@ class MT5CopyTrader:
                 else:
                     logger.warning(f"Invalid tick_value for {symbol}, cannot convert SL")
             else:
-                logger.warning(f"Cannot get tick info for {symbol}, cannot convert SL")
-        
+                logger.warning(f"Cannot get symbol info for {symbol}, cannot convert SL")
+
+        # Validate and adjust SL/TP to meet minimum stop level requirements
+        symbol_info_data = mt5.symbol_info(symbol)
+        if symbol_info_data:
+            # Get minimum stop level from symbol
+            stops_level = symbol_info_data.trade_stops_level  # Minimum distance in points
+            point = symbol_info_data.point  # Value of one point
+            min_distance = stops_level * point if stops_level > 0 else 0
+
+            if min_distance > 0:
+                # Validate SL
+                if sl_price is not None:
+                    if trade_type == "BUY":
+                        if price - sl_price < min_distance:
+                            logger.warning(f"SL too close to entry for {symbol}. Adjusting to minimum distance.")
+                            sl_price = price - min_distance
+                    else:  # SELL
+                        if sl_price - price < min_distance:
+                            logger.warning(f"SL too close to entry for {symbol}. Adjusting to minimum distance.")
+                            sl_price = price + min_distance
+
+                # Validate TP
+                if tp_to_use is not None:
+                    if trade_type == "BUY":
+                        if tp_to_use - price < min_distance:
+                            logger.warning(f"TP too close to entry for {symbol}. Adjusting to minimum distance.")
+                            tp_to_use = price + min_distance
+                    else:  # SELL
+                        if price - tp_to_use < min_distance:
+                            logger.warning(f"TP too close to entry for {symbol}. Adjusting to minimum distance.")
+                            tp_to_use = price - min_distance
+
         request = {
             "action": trade_action,
             "symbol": symbol,

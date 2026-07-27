@@ -97,6 +97,7 @@ export default function AdminSidebar({
     { name: "Overview", icon: LayoutDashboard, href: `${basePath}/dashboard` },
     { name: "TG Provider", icon: Send, href: `${basePath}/providers` },
     { name: "Subscriptions", icon: BadgeCheck, href: `${basePath}/subscription` },
+    { name: "MT5 Accounts", icon: BadgeCheck, href: `${basePath}/mt5-accounts` },
     { name: "Master trades", icon: Server, href: `${basePath}/master-trades` },
     { name: "Copy jobs", icon: Tags, href: `${basePath}/copy-jobs` },
     { name: "Trade activity", icon: ScreenShare, href: `${basePath}/trade-activity` },

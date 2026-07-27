@@ -97,6 +97,51 @@ class TelegramListener:
 
             if not risk_valid:
                 logger.warning(risk_reason)
+                
+                # If rejected due to position limit, still save to database for copy engine
+                # Other users may not have reached their limit
+                if "Maximum open trades limit reached" in risk_reason:
+                    logger.info("Master account at position limit, but saving trade for copy engine")
+                    
+                    # Get account balance from MT5
+                    account_info = self.mt5_connector.get_account_info()
+                    if account_info is None:
+                        logger.error("Failed to get account info")
+                        return
+                    
+                    balance = account_info.get("balance", 0)
+                    
+                    # Get lot size from database based on balance
+                    lot_size = db.get_lot_size_for_balance(balance)
+                    if lot_size is None:
+                        logger.warning(f"No lot size rule found for master account balance ${balance}. Skipping trade.")
+                        return
+                    
+                    # For accounts with balance $10-$40, use fixed $5 stop loss
+                    original_sl = signal.stop_loss
+                    if 10 <= balance <= 40:
+                        signal.stop_loss = 5.0
+                        logger.info(f"Account balance in $10-$40 range. Using fixed SL: ${signal.stop_loss}")
+                    
+                    # Save master trade to database with special flag
+                    # Use timestamp to make unique placeholder
+                    from datetime import datetime
+                    timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+                    trade_data = {
+                        "master_order_ticket": f"NO_MASTER_{signal.symbol}_{signal.direction}_{timestamp}",  # Unique placeholder
+                        "master_entry_deal": None,
+                        "symbol": signal.symbol,
+                        "type": signal.direction,
+                        "entry": signal.entry,
+                        "sl": signal.stop_loss,
+                        "tp": signal.take_profits,
+                        "lot": lot_size,
+                        "group_name": group_name,
+                        "order_type": signal.order_type,  # Store the order type (MARKET, BUY_LIMIT, etc.)
+                        "not_executed_on_master": True,  # Flag to indicate not executed on master
+                    }
+                    db.save_master_trade(trade_data)
+                    logger.info("Trade saved to database for copy engine (not executed on master)")
                 return
 
             logger.success("Risk Checks Passed")
@@ -143,6 +188,7 @@ class TelegramListener:
                     "tp": signal.take_profits,
                     "lot": result.lot_size,
                     "group_name": group_name,  # Track which group sent the signal
+                    "order_type": signal.order_type,  # Store the order type (MARKET, BUY_LIMIT, etc.)
                 }
                 db.save_master_trade(trade_data)
             else:

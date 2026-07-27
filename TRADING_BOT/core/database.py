@@ -168,6 +168,15 @@ class Database:
             logger.error(f"Failed to get user trade activity: {e}")
             return []
 
+    def get_open_positions_count_for_user(self, user_id):
+        """Count the number of open positions for a specific user"""
+        try:
+            count = self.trade_activity_collection.count_documents({"user_id": user_id, "status": "OPEN"})
+            return count
+        except Exception as e:
+            logger.error(f"Failed to count open positions for user {user_id}: {e}")
+            return 0
+
     # Copy Jobs Collection Methods
     def create_copy_job(self, master_order_ticket):
         """Create a new copy job"""

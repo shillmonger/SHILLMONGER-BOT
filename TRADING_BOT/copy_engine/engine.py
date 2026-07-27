@@ -60,7 +60,12 @@ class CopyEngine:
         # Handle backward compatibility for old database records
         master_order_ticket = master_trade.get("master_order_ticket") or master_trade.get("master_ticket")
         
-        logger.info(f"Processing copy job for master trade: {master_order_ticket}")
+        # If trade was not executed on master, use a placeholder
+        if master_order_ticket is None:
+            master_order_ticket = f"NO_MASTER_{master_trade.get('symbol')}_{master_trade.get('type')}"
+            logger.info(f"Processing copy job for trade not executed on master: {master_order_ticket}")
+        else:
+            logger.info(f"Processing copy job for master trade: {master_order_ticket}")
 
         # Create copy job record
         job_id = db.create_copy_job(master_order_ticket)
@@ -112,6 +117,21 @@ class CopyEngine:
 
                 logger.info(f"User {login} using lot size: {lot_size}")
 
+                # Check if user has reached their position limit
+                max_positions = db.get_max_positions_for_balance(balance)
+                if max_positions is not None:
+                    open_positions = db.get_open_positions_count_for_user(user_id)
+                    logger.info(f"User {login} has {open_positions}/{max_positions} open positions")
+                    
+                    if open_positions >= max_positions:
+                        logger.warning(
+                            f"User {login} skipped - Maximum open trades limit reached "
+                            f"({open_positions}/{max_positions})"
+                        )
+                        users_failed += 1
+                        self.copy_connector.disconnect()
+                        continue
+
                 # For accounts with balance $10-$40, use fixed $5 stop loss
                 # Pass as dollar amount to be converted to price level
                 if 10 <= balance <= 40:
@@ -160,7 +180,8 @@ class CopyEngine:
             "finished_at": None  # Will be set by database
         })
 
-        # Mark master trade as copied
+        # Mark master trade as copied even if all users failed
+        # This prevents infinite retry loop when all accounts are at their limits
         db.mark_master_trade_copied(master_order_ticket)
 
         logger.success(
