@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 const PYTHON_API_URL = process.env.PYTHON_API_URL || 'http://localhost:8000';
@@ -23,25 +24,35 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Forward request to Python backend
-    const response = await fetch(`${PYTHON_API_URL}/api/trades/cancel-pending`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+    // Try to call Python backend to cancel pending order (requires MT5 connection)
+    try {
+      const response = await fetch(`${PYTHON_API_URL}/api/trades/cancel-pending`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
+      if (!response.ok) {
+        return NextResponse.json(
+          { error: data.error || 'Failed to cancel pending order' },
+          { status: response.status }
+        );
+      }
+
+      return NextResponse.json(data, { status: 200 });
+    } catch (fetchError) {
+      // Python backend not available
+      console.error('Python backend not available for cancelling pending order:', fetchError);
       return NextResponse.json(
-        { error: data.error || 'Failed to cancel pending order' },
-        { status: response.status }
+        { error: 'Python bot not running - cannot cancel order. Please start the bot.' },
+        { status: 503 }
       );
     }
-
-    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error('Cancel pending order error:', error);
     return NextResponse.json(

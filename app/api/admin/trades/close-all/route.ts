@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 const PYTHON_API_URL = process.env.PYTHON_API_URL || 'http://localhost:8000';
@@ -23,25 +24,35 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
 
-    // Forward request to Python backend
-    const response = await fetch(`${PYTHON_API_URL}/api/trades/close-all`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+    // Try to call Python backend to close all trades (requires MT5 connection)
+    try {
+      const response = await fetch(`${PYTHON_API_URL}/api/trades/close-all`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(30000), // 30 second timeout for bulk operations
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
+      if (!response.ok) {
+        return NextResponse.json(
+          { error: data.error || 'Failed to close all trades' },
+          { status: response.status }
+        );
+      }
+
+      return NextResponse.json(data, { status: 200 });
+    } catch (fetchError) {
+      // Python backend not available
+      console.error('Python backend not available for closing all trades:', fetchError);
       return NextResponse.json(
-        { error: data.error || 'Failed to close all trades' },
-        { status: response.status }
+        { error: 'Python bot not running - cannot close trades. Please start the bot.' },
+        { status: 503 }
       );
     }
-
-    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.error('Close all trades error:', error);
     return NextResponse.json(

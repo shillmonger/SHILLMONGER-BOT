@@ -79,6 +79,9 @@ export default function TradesActionsPage() {
       const pendingData = await pendingResponse.json();
       if (pendingResponse.ok) {
         setPendingOrders(pendingData.pending_orders || []);
+        if (pendingData.warning) {
+          toast.warning(pendingData.warning);
+        }
       } else {
         toast.error('Failed to fetch pending orders');
       }
@@ -100,11 +103,15 @@ export default function TradesActionsPage() {
       });
 
       const data = await response.json();
-      if (data.success) {
+      if (response.ok) {
         toast.success(data.message);
         fetchData();
       } else {
-        toast.error(data.error || 'Failed to close trade');
+        if (response.status === 503) {
+          toast.error(data.error || 'Python bot not running - cannot close trade');
+        } else {
+          toast.error(data.error || 'Failed to close trade');
+        }
       }
     } catch (error) {
       console.error('Close trade error:', error);
@@ -124,11 +131,15 @@ export default function TradesActionsPage() {
       });
 
       const data = await response.json();
-      if (data.success) {
+      if (response.ok) {
         toast.success(data.message);
         fetchData();
       } else {
-        toast.error(data.error || 'Failed to cancel order');
+        if (response.status === 503) {
+          toast.error(data.error || 'Python bot not running - cannot cancel order');
+        } else {
+          toast.error(data.error || 'Failed to cancel order');
+        }
       }
     } catch (error) {
       console.error('Cancel order error:', error);
@@ -162,11 +173,15 @@ export default function TradesActionsPage() {
         });
 
         const data = await response.json();
-        if (data.success) {
+        if (response.ok) {
           toast.success(data.message);
           fetchData();
         } else {
-          toast.error(data.error || 'Failed to close all trades');
+          if (response.status === 503) {
+            toast.error(data.error || 'Python bot not running - cannot close trades');
+          } else {
+            toast.error(data.error || 'Failed to close all trades');
+          }
         }
       } catch (error) {
         console.error('Close all error:', error);
@@ -187,11 +202,15 @@ export default function TradesActionsPage() {
         });
 
         const data = await response.json();
-        if (data.success) {
+        if (response.ok) {
           toast.success(data.message);
           fetchData();
         } else {
-          toast.error(data.error || 'Failed to cancel all orders');
+          if (response.status === 503) {
+            toast.error(data.error || 'Python bot not running - cannot cancel orders');
+          } else {
+            toast.error(data.error || 'Failed to cancel all orders');
+          }
         }
       } catch (error) {
         console.error('Cancel all error:', error);
