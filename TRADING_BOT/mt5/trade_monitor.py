@@ -167,7 +167,7 @@ class TradeMonitor:
             logger.info(f"Processing user trade: Order={user_order_ticket}, Entry Deal={user_entry_deal}, User ID={user_id}")
 
             # Get user's MT5 account credentials from database
-            user_account = db.mt5_accounts_collection.find_one({"userId": user_id, "status": "connected"})
+            user_account = db.mt5_accounts_collection.find_one({"userId": user_id, "status": "connected", "canTrade": True})
             
             if not user_account:
                 logger.warning(f"No connected MT5 account found for user {user_id}")

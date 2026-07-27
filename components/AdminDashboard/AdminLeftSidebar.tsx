@@ -103,6 +103,7 @@ export default function AdminSidebar({
     { name: "Trade activity", icon: ScreenShare, href: `${basePath}/trade-activity` },
     { name: "Lot size settings", icon: Scale, href: `${basePath}/lot-size` },
     { name: "Position limits", icon: CircleGauge, href: `${basePath}/position-limits` },
+    { name: "Stop lose", icon: CircleGauge, href: `${basePath}/stop-loss` },
 
     // === MANAGEMENT === userside
     

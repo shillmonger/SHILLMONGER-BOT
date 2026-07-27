@@ -14,6 +14,7 @@ class Database:
         self.mt5_accounts_collection = None
         self.lot_size_management_collection = None
         self.position_limits_collection = None
+        self.stop_loss_management_collection = None
 
     def connect(self):
         try:
@@ -26,6 +27,7 @@ class Database:
             self.mt5_accounts_collection = self.db.mt5accounts
             self.lot_size_management_collection = self.db.lotsizemanagements
             self.position_limits_collection = self.db.positionlimits
+            self.stop_loss_management_collection = self.db.stoplossmanagements
             logger.success("Connected to MongoDB")
             return True
         except Exception as e:
@@ -209,7 +211,7 @@ class Database:
     def get_active_mt5_accounts(self):
         """Get all active MT5 accounts for copying"""
         try:
-            accounts = list(self.mt5_accounts_collection.find({"status": "connected"}))
+            accounts = list(self.mt5_accounts_collection.find({"status": "connected", "canTrade": True}))
             return accounts
         except Exception as e:
             logger.error(f"Failed to get active MT5 accounts: {e}")
